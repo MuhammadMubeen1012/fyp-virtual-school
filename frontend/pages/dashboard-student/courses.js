@@ -5,10 +5,7 @@ const Courses = () => {
     return (
         <DashboardLayout>
 
-
             Courses Will be here....
-
-
 
 
         </DashboardLayout>

@@ -13,16 +13,16 @@ const Sidebar = () => {
 
         {
             id: 1,
-            name: "My Class",
-            icon: <span className="material-icons-sharp">person_outline</span>,
-            link: "/dashboard-student/my-class"
+            name: "Courses",
+            icon: <span className="material-icons-sharp">receipt_long</span>,
+            link: "/dashboard-student/courses"
         },
 
         {
             id: 2,
-            name: "Courses",
-            icon: <span className="material-icons-sharp">receipt_long</span>,
-            link: "/dashboard-student/courses"
+            name: "Learning Paths",
+            icon: <span className="material-icons-sharp">person_outline</span>,
+            link: "/dashboard-student/learning-paths"
         },
 
         {
@@ -48,9 +48,9 @@ const Sidebar = () => {
 
         {
             id: 6,
-            name: "Reports",
-            icon: <span className="material-icons-sharp">report_gmailerrorred</span>,
-            link: "/dashboard-student/reports"
+            name: "Grades",
+            icon: <span className="material-icons-sharp">grade</span>,
+            link: "/dashboard-student/grades"
         },
 
         {

@@ -1,12 +1,18 @@
 import React from 'react';
 import DashboardLayout from "../../components/_App/DashboardLayout";
 
-const Assignments = () => {
+const Courses = () => {
     return (
         <DashboardLayout>
-            Assignments will be added here...
+
+
+            Grades Will be here....
+
+
+
+
         </DashboardLayout>
     );
 };
 
-export default Assignments;
+export default Courses;
