@@ -1,0 +1,36 @@
+{
+  "name": "nodejs-backend-ekschool",
+  "version": "1.0.0",
+  "description": "Virtual School Backend using NodeJS, Express and MongoDB",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "SET NODE_ENV=DEVELOPMENT& nodemon server.js",
+    "prod": "SET NODE_ENV=PRODUCTION& nodemon server.js",
+    "seeder": "node utils/seeder.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MuhammadMubeen1012/nodejs-backend-EK-School.git"
+  },
+  "author": "MuhammadMubeen1012",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MuhammadMubeen1012/nodejs-backend-EK-School/issues"
+  },
+  "homepage": "https://github.com/MuhammadMubeen1012/nodejs-backend-EK-School#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^6.9.2",
+    "nodemailer": "^6.9.1",
+    "validator": "^13.9.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
