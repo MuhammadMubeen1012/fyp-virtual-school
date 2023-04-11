@@ -1,8 +1,8 @@
 import React, {useEffect, useMemo, useState} from 'react';
 import {useRouter} from "next/router";
 import Link from "next/link";
-import Sidebar from "../../components/_App/Sidebar";
-import DashboardLayout from "../../components/_App/DashboardLayout";
+import SidebarStudent from "../../components/Dashboard/Sidebar/SidebarStudent";
+import LayoutStudent from "../../components/Dashboard/Layout/LayoutStudent";
 
 const Index = () => {
 
@@ -11,7 +11,7 @@ const Index = () => {
 
     return (
         <>
-            <DashboardLayout>
+            <LayoutStudent>
 
 
                 {/*=============== Start of main ================= */}
@@ -260,7 +260,7 @@ const Index = () => {
 
 
 
-            </DashboardLayout>
+            </LayoutStudent>
 
 
         </>

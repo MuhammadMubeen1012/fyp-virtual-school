@@ -2,62 +2,64 @@ import React, {useMemo, useState} from 'react';
 import Link from "next/link";
 import {useRouter} from "next/router";
 
-const Sidebar = () => {
+const SidebarAdmin = () => {
+
     const sidebar = [
         {
             id: 0,
             name: "Home",
             icon: <span className="material-icons-sharp">dashboard</span>,
-            link: "/dashboard-student"
+            link: "/dashboard-admin"
         },
 
         {
             id: 1,
-            name: "Courses",
+            name: "Students",
             icon: <span className="material-icons-sharp">receipt_long</span>,
-            link: "/dashboard-student/courses"
+            link: "/dashboard-admin/students"
         },
 
         {
             id: 2,
-            name: "Learning Paths",
+            name: "Teachers",
             icon: <span className="material-icons-sharp">person_outline</span>,
-            link: "/dashboard-student/learning-paths"
+            link: "/dashboard-admin/teachers"
         },
 
         {
             id: 3,
-            name: "Instructors",
+            name: "Classes",
             icon: <span className="material-icons-sharp">emoji_people</span>,
-            link: "/dashboard-student/instructors"
+            link: "/dashboard-admin/classes"
         },
 
         {
             id: 4,
-            name: "Messages",
+            name: "Attendance",
             icon: <span className="material-icons-sharp">mail_outline</span>,
-            link: "/dashboard-student/messages"
+            link: "/dashboard-admin/attendance"
         },
 
         {
             id: 5,
-            name: "Assignments",
+            name: "Notice Board",
             icon: <span className="material-icons-sharp">inventory</span>,
-            link: "/dashboard-student/assignments"
+            link: "/dashboard-admin/notice-board"
         },
 
         {
             id: 6,
-            name: "Grades",
+            name: "Requests",
             icon: <span className="material-icons-sharp">grade</span>,
-            link: "/dashboard-student/grades"
+            link: "/dashboard-admin/requests"
         },
 
+
         {
-            id: 7,
+            id: 8,
             name: "Logout",
             icon: <span className="material-icons-sharp">logout</span>,
-            link: "/dashboard-student/logout"
+            link: "/dashboard-admin/logout"
         },
     ];
 
@@ -78,7 +80,7 @@ const Sidebar = () => {
 
                 <div className="top">
                     <div className="logo">
-                        <h1>Student Dashboard</h1>
+                        <h1>Admin Dashboard</h1>
                     </div>
                     <div className={`hamburger pt-0`} id={"close-btn"} onClick={ () => setToggle(!toggle) } >
                         <span className="material-icons-sharp fs-2 pt-3">close</span>
@@ -121,4 +123,4 @@ const Sidebar = () => {
     );
 };
 
-export default Sidebar;
+export default SidebarAdmin;

@@ -1,14 +1,14 @@
 import React from 'react';
-import DashboardLayout from "../../components/_App/DashboardLayout";
+import LayoutStudent from "../../components/Dashboard/Layout/LayoutStudent";
 
 const Courses = () => {
     return (
-        <DashboardLayout>
+        <LayoutStudent>
 
             Courses Will be here....
 
 
-        </DashboardLayout>
+        </LayoutStudent>
     );
 };
 

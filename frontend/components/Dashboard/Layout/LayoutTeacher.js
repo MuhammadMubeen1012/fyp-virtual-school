@@ -1,11 +1,11 @@
 import React from 'react';
-import Sidebar from "./Sidebar";
+import SidebarTeacher from "../Sidebar/SidebarTeacher";
 
-const DashboardLayout = ({children}) => {
+const LayoutTeacher = ({children}) => {
     return (
         <div className={"container-dashboard"}>
 
-            <Sidebar />
+            <SidebarTeacher />
 
             <>
                 {children}
@@ -16,4 +16,4 @@ const DashboardLayout = ({children}) => {
     );
 };
 
-export default DashboardLayout;
+export default LayoutTeacher;

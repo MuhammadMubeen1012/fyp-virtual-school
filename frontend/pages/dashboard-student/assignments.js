@@ -1,11 +1,11 @@
 import React from 'react';
-import DashboardLayout from "../../components/_App/DashboardLayout";
+import LayoutStudent from "../../components/Dashboard/Layout/LayoutStudent";
 
 const Assignments = () => {
     return (
-        <DashboardLayout>
+        <LayoutStudent>
             Assignments will be added here...
-        </DashboardLayout>
+        </LayoutStudent>
     );
 };
 
