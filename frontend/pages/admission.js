@@ -26,7 +26,7 @@ const Admission = () => {
                 <div className="container">
                     <div className="row">
 
-                        <Nav fill variant="tabs" defaultActiveKey="/home">
+                        <Nav fill variant="tabs" defaultActiveKey="">
                             <Nav.Item onClick={() => setTabSelection(0)}>
                                 <Nav.Link href="#">Teacher</Nav.Link>
 

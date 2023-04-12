@@ -1,7 +1,7 @@
 import React from 'react';
 import SidebarAdmin from "../Sidebar/SidebarAdmin";
 
-const LayoutStudent = ({children}) => {
+const LayoutAdmin = ({children}) => {
     return (
         <div className={"container-dashboard"}>
 
@@ -16,4 +16,4 @@ const LayoutStudent = ({children}) => {
     );
 };
 
-export default LayoutStudent;
+export default LayoutAdmin;
