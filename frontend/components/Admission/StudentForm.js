@@ -99,6 +99,7 @@ const StudentForm = () => {
                     </div>
 
                 </form>
+
             </div>
 
         </div>

@@ -44,15 +44,6 @@ const Index = () => {
                                     <h1>3</h1>
                                 </div>
 
-                                {/*<div className="progress">*/}
-                                {/*    <svg>*/}
-                                {/*        <circle cx={"38"} cy={"38"} r={"36"}></circle>*/}
-                                {/*    </svg>*/}
-
-                                {/*    <div className="number">*/}
-                                {/*        <p>68%</p>*/}
-                                {/*    </div>*/}
-                                {/*</div>*/}
                             </div>
 
                         </div>
@@ -66,15 +57,6 @@ const Index = () => {
                                     <h1>8</h1>
                                 </div>
 
-                                {/*<div className="progress">*/}
-                                {/*    <svg>*/}
-                                {/*        <circle cx={"38"} cy={"38"} r={"36"}></circle>*/}
-                                {/*    </svg>*/}
-
-                                {/*    <div className="number">*/}
-                                {/*        <p>62%</p>*/}
-                                {/*    </div>*/}
-                                {/*</div>*/}
                             </div>
 
                         </div>
@@ -87,6 +69,7 @@ const Index = () => {
 
                 {/* ============= start of Courses ================= */}
                     <div className="courses-table">
+
                     <h2>Courses</h2>
                     <table>
                         <thead>

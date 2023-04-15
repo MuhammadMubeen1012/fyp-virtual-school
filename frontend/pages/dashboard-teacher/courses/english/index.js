@@ -14,7 +14,13 @@ const Index = () => {
                 {/* ============= Start of Courses ================= */}
                 <div className="courses-table">
 
-                    <h2>English</h2>
+                    <div style={{display: "flex", justifyContent: "space-between"}}>
+                        <h2>Courses</h2>
+                        <div>
+                            <button>Create</button>
+                            <button>Edit</button>
+                        </div>
+                    </div>
                     <table>
                         <thead>
                         <tr>
@@ -28,6 +34,7 @@ const Index = () => {
                             <th>01</th>
                             <td>Introduction</td>
                             <Link href={"/dashboard-teacher/courses/english/unit-01"} className="primary ">Details</Link>
+
                         </tr>
 
                         <tr>

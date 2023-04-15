@@ -15,6 +15,7 @@ const Index = () => {
                 <div className="courses-table">
 
                     <h2>Courses</h2>
+
                     <table>
                         <thead>
                         <tr>
