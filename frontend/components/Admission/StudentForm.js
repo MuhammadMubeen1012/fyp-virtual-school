@@ -2,7 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 import {useRouter} from "next/router";
 import swal from "@sweetalert/with-react";
-import {Form} from "react-bootstrap";
 
 const StudentForm = () => {
 
@@ -13,7 +12,7 @@ const StudentForm = () => {
         e.preventDefault();
 
         swal({
-            text: "Student's Admission Test",
+            text: "Teacher's Admission Test",
             buttons: {
                 test: {
                     text: "Take Test",
@@ -22,14 +21,7 @@ const StudentForm = () => {
             },
             content: (
                 <div>
-                    <ol style={{textAlign: "left"}}>
-                        <li>You will have 15 mins for the quiz.</li>
-                        <li>You can't exit from Quiz while you're playing.</li>
-                        <li>Each Question carry equal marks.</li>
-                    </ol>
-
-
-
+                    test details will be here...
                 </div>
             )
         })
@@ -53,7 +45,7 @@ const StudentForm = () => {
             <div className="login-form">
                 <h2>Student Admission</h2>
 
-                <Form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label>First Name</label>
                         <input type="text" className="form-control" placeholder="First Name" />
@@ -84,7 +76,7 @@ const StudentForm = () => {
                         <input type="number" className="form-control" placeholder="Father NIC" />
                     </div>
 
-                    <Form.Select name="" id="" className="nice-select option">
+                    <select name="" id="" className="nice-select option">
                         <option className={"option nice-select"} value="">Class 1</option>
                         <option className={"option"}  value="">Class 2</option>
                         <option className={"option"}  value="">Class 3</option>
@@ -95,29 +87,18 @@ const StudentForm = () => {
                         <option className={"option"}  value="">Class 8</option>
                         <option className={"option"}  value="">Class 9</option>
                         <option className={"option"}  value="">Class 10</option>
-                    </Form.Select><br/>
+                    </select>
 
+                    <button type="submit">Log In</button>
 
-                    <div className="form-group">
-                        <label>B-Form</label>
-                        <input type="button" value="Upload Photo"/>
+                    <div className={"mx-auto pt-3"}>Don't have an account?
+                        <a style={{
+                            color: "#fe4a55",
+                            paddingLeft: "0.5rem",
+                        }} href="/register">Sign up</a>
                     </div>
 
-                    <div className="form-group">
-                        <label>Father CNIC</label>
-                        <input type="button" value="Upload Photo"/>
-                    </div>
-
-                    <div className="form-group">
-                        <label>Passport Size Photo</label>
-                        <input type="button" value="Upload Photo"/>
-                    </div>
-
-                    <button type="submit">Submit</button>
-
-
-
-                </Form>
+                </form>
 
             </div>
 

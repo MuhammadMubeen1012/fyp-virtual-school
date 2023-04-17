@@ -1,20 +1,82 @@
 import React from 'react';
 import Link from 'next/link';
+import axios from 'axios';
 
 const   LoginForm = () => {
+    const [email, setEmail] = React.useState('');
+    const [password, setPassword] = React.useState('');
+
+
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const data = {
+            email,
+            password
+        };
+
+        axios.defaults.baseURL = 'http://localhost:3000';
+        axios.defaults.headers.post['Content-Type'] = 'application/json';
+        axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+        axios.defaults.headers.post['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept';
+        axios.defaults.headers.post['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS';
+
+        axios.post('http://localhost:7000/api/v1/signin', data,{
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+            }
+        }).then(response => {
+            console.log(response);
+            //token
+            if(response.data.success){
+                const token = response.data.token;
+                let user = response.data.user;
++
+                //set token to local storage
+                localStorage.setItem('token', token);
+                localStorage.setItem('user', JSON.stringify(user));
+
+                user = JSON.parse(localStorage.getItem('user'));
+
+                if (user.role === 'admin') {
+                    window.location.href = '/admin/dashboard'; //redirect to admin dashboard
+                    
+                } else if (user.role === 'user'){
+                    
+                }
+            }
+            
+        }).catch(error => {
+            console.log(error);
+        });
+
+        // console.log(data);
+        // axios.post('/api/login', data)
+        //     .then(response => {
+        //         console.log(response);
+        //     })
+        //     .catch(error => {
+        //         console.log(error);
+        //     });
+    }
     return (
         <div className="login-form">
             <h2>Login</h2>
 
-            <form>
+            <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label>Username or email</label>
-                    <input type="text" className="form-control" placeholder="Username or email" />
+                    <input type="text" className="form-control" placeholder="Username or email"
+                            onChange={(e) => setEmail(e.target.value)}
+                     />
                 </div>
 
                 <div className="form-group">
                     <label>Password</label>
-                    <input type="password" className="form-control" placeholder="Password" />
+                    <input type="password" className="form-control" placeholder="Password" 
+                            onChange={(e) => setPassword(e.target.value)}
+                    />
                 </div>
 
                 <div className="row align-items-center">
