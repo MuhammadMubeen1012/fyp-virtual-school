@@ -1,0 +1,659 @@
+:root{
+    --color-primary: #fe4a55;
+    --color-danger: rgba(255, 119, 130, 0.88);
+    --color-success: #41f1b6;
+    --color-warning: #ffbb55;
+    --color-white: #fff;
+    --color-info-dark: #7d8da1;
+    --color-info-light: #dce1eb;
+    --color-dark: #363949;
+    --color-light: rgba(132, 139, 200, 0.18);
+    --color-primary-variant: #111e88;
+    --color-dark-variant: #677483;
+    --color-background: #f6f6f9;
+
+
+    --card-border-radius: 2rem;
+    --border-radius-1: 0.4rem;
+    --border-radius-2: 0.8rem;
+    --border-radius-3: 1.2rem;
+
+
+    --card-padding: 1.8rem;
+    --padding-1: 1.2rem;
+
+    --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
+
+.profile-photo{
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.text-muted{
+    color: var(--color-info-dark);
+}
+
+a{
+    color: var(--color-dark);
+}
+
+p{
+    color: var(--color-info-dark);
+}
+
+b{
+    color: var(--color-primary);
+}
+h1{
+    font-weight: 800;
+    font-size: 1.8rem;
+}
+h2{
+    font-size: 1.4rem;
+}
+h3{
+    font-size: 0.87rem;
+}
+h4{
+    font-size: 0.8rem;
+}
+h5{
+    font-size: 0.77rem;
+}
+small{
+    font-size: 0.75rem;;
+}
+
+.primary{
+    color: var(--color-primary);
+}
+
+.danger{
+    color: var(--color-primary);
+}
+
+.success{
+    color: var(--color-success);
+}
+
+.warning{
+    color: var(--color-warning);
+}
+
+.container-dashboard{
+    display: grid;
+    max-width: 100vw;
+    margin: 0 auto;
+    gap: 1.8rem;
+    grid-template-columns: 14rem auto 23rem;
+}
+
+
+aside{
+    height: 100vh;
+    /*width: 15%;*/
+}
+
+aside .top{
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-inline: auto;
+
+}
+
+aside .logo{
+    display: flex;
+    gap: 0.8rem;
+    margin-inline: auto;
+    padding-top: 1.2rem;
+
+}
+
+
+
+aside .close.toggle{
+    cursor: pointer;
+    /*display: none;*/
+
+}
+
+
+/*============================*/
+/* SIDEBAR */
+/*============================*/
+aside .sidebar{
+    background: white;
+    display: flex;
+    flex-direction: column;
+    height: 86vh;
+    position: relative;
+    top: 2rem;
+
+}
+
+aside h1{
+    /*font-weight: 500;*/
+    text-align: center;
+}
+
+aside a{
+    display: flex;
+    color: var(--color-info-dark);
+    margin-left: 2rem;
+    gap: 1rem;
+    align-items: center;
+    position: relative;
+    height: 3.7rem;
+    transition: all 300ms ease;
+    text-align: center;
+}
+
+
+aside .sidebar .link span{
+    font-size: 1.6rem;
+    transition: all 0.3s ease;
+}
+
+aside .sidebar h3{
+    text-align: center;
+    margin-top: 5px;
+}
+
+aside .sidebar .link:last-child{
+    position: absolute;
+    bottom: 2rem;
+    width: 100%;
+}
+
+.active{
+    background: var(--color-light);
+    color: var(--color-primary);
+    margin-left: 0;
+}
+
+aside .sidebar .link.active::before{
+    content: "";
+    width: 6px;
+    height: 100%;
+    background: var(--color-primary);
+}
+
+aside .sidebar .link.active span{
+    color: var(--color-primary);
+    margin-left: calc(1rem - 3px);
+}
+
+aside .sidebar .link:hover{
+    color: var(--color-primary);
+}
+
+aside .sidebar .link:hover span{
+    margin-left: 1rem;
+}
+
+
+/*=============================*/
+/* Main */
+/*==============================*/
+main {
+    padding-block: 1rem;
+}
+
+
+
+main .insights{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    /*padding-inline: 1rem;*/
+    /*margin-inline: 0.5rem;*/
+}
+
+main .insights > div{
+    background: var(--color-white);
+    padding: 0.65rem;
+    /*padding-inline: 0.25rem;*/
+    /*margin-inline: 0.25rem;*/
+    border-radius: var(--card-border-radius);
+    margin-top: 1rem;
+    box-shadow: var(--box-shadow);
+    transition: all 0.3s ease;
+}
+
+main .insights > div:hover{
+    box-shadow: none;
+}
+
+main .insights > div span{
+    background: var(--color-warning);
+    padding: 0.5rem;
+    border-radius: 50%;
+    color: var(--color-white);
+    font-size: 1.5rem;
+}
+
+main .insights > div.course-progress span{
+    background: var(--color-danger);
+}
+
+main .insights > div.certification span{
+    background: var(--color-success);
+}
+
+main .insights > div .middle{
+    /*border: 2px solid red;*/
+    padding: 0 0.1rem 0 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+main .insights > div .middle .left{
+    /*border: 2px solid red;*/
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    /*width: max-content;*/
+}
+main .insights > div .middle .progress{
+    /*flex: 1 1 100%;*/
+}
+
+main .insights h3{
+    margin: 1rem 0 0.6rem;
+    font-size: 1rem;
+}
+
+main .insights .progress{
+    position: relative;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+}
+
+main .insights svg{
+    width: 7rem;
+    height: 7rem;
+}
+
+main .insights svg circle{
+    fill: none;
+    stroke: var(--color-primary);
+    stroke-width: 14;
+    stroke-linecap: round;
+    transform: translate(5px, 5px);
+    stroke-dasharray: 110;
+    stroke-dashoffset: 92;
+}
+
+main .insights .course-completed svg circle{
+    stroke-dashoffset: -30;
+    stroke-dasharray: 200;
+}
+
+
+main .insights .course-progress svg circle{
+    stroke-dashoffset: 30;
+    stroke-dasharray: 110;
+}
+
+main .insights .certification svg circle{
+    stroke-dashoffset: 35;
+    stroke-dasharray: 110;
+}
+
+
+
+main .insights .progress .number{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+main .insights small{
+    margin-top: 1.3rem;
+    display: block;
+}
+
+
+
+
+/*======== Courses Table ==========*/
+main .courses-table{
+    margin-top: 2rem;
+}
+
+main .courses-table h2{
+    margin-bottom: 0.8rem;
+}
+
+
+main .courses-table table{
+    background: var(--color-white);
+    width: 100%;
+    border-radius: var(--card-border-radius);
+
+    padding: var(--card-padding);
+    text-align: center;
+    box-shadow: var(--box-shadow);
+    transition: all 0.3s ease;
+
+}
+
+main .courses-table table:hover{
+    box-shadow: none;
+}
+
+main table tbody td{
+    height: 2.8rem;
+    border-bottom: 1px solid var(--color-light);
+    color: var(--color-dark-variant);
+}
+
+tr:last-child td{
+    border: none;
+}
+
+main .courses-table a{
+    text-align: center;
+    display: block;
+    margin: 1rem auto;
+    color: var(--color-primary);
+}
+
+
+
+/*==============================*/
+/*Right*/
+/*===============================*/
+.right{
+    margin-top: 1.4rem;
+}
+
+.right .top{
+    display: flex;
+    justify-content: end;
+    /*gap: 2rem;*/
+    background: gray;
+}
+
+.right .top button{
+    display: none;
+}
+
+.right .recent-updates{
+    margin-top: 1rem;
+}
+
+.right .recent-updates h2{
+    margin-bottom: 0.8rem;
+}
+
+.recent-updates .updates{
+    background: var(--color-white);
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--box-shadow);
+    transition: all 0.3s ease;
+}
+
+.recent-updates .updates:hover{
+    box-shadow: none;
+}
+
+.updates .update{
+    display: grid;
+    grid-template-columns: 2rem auto;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+
+/*============================*/
+/*Upcoming Events*/
+/*============================*/
+.right .upcoming-events{
+    margin-top: 2rem;
+}
+
+.right .upcoming-events h2{
+    margin-bottom: 0.8rem;
+}
+
+.right .upcoming-events .item{
+    background: var(--color-white);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.7rem;
+    padding: 1.4rem var(--card-padding);
+    border-radius: var(--border-radius-3);
+    box-shadow: var(--box-shadow);
+    transition: all 0.3s ease;
+}
+
+.right .upcoming-events .item:hover{
+    box-shadow: none;
+}
+
+.right .upcoming-events .item .right{
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin: 0;
+    width: 100%;
+}
+
+.right .upcoming-events .item .icon{
+    padding: 0.6rem;
+    color: var(--color-white);
+    border-radius: 50%;
+    background: var(--color-primary);
+    display: flex;
+}
+
+
+.right .upcoming-events .item.offline .icon{
+    background: var(--color-danger);
+}
+
+.hamburger{
+    display: none;
+}
+
+/*=======================================================*/
+/* Media Queries @1200px */
+/*=======================================================*/
+@media screen and (max-width: 1300px){
+
+    .container-dashboard{
+        width: 94%;
+        grid-template-columns: 7rem auto 23rem;
+    }
+
+    aside .logo h1{
+        font-size: 1.25rem;
+    }
+
+    aside .sidebar h3{
+        /*width: 5.6rem;*/
+        display: none;
+    }
+
+    aside .sidebar .link:last-child{
+        position: relative;
+        top: 2rem;
+    }
+
+    main .insights{
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    main .courses-table{
+        width: 94%;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 2rem 0 0 8.8rem;
+    }
+
+    main .courses-table table{
+        width: 83vw;
+    }
+
+    main table thead tr th:first-child,
+    main table thead tr th:last-child{
+        display: none;
+    }
+
+    main table tbody tr td:first-child,
+    main table tbody tr td:last-child{
+        display: none;
+    }
+
+}
+
+
+
+/*=======================================================*/
+/* Media Queries @768px */
+/*=======================================================*/
+@media screen and (max-width: 768px){
+    .container-dashboard{
+        width: 100%;
+        grid-template-columns: 1fr;
+    }
+
+    aside{
+        position: fixed;
+        left: -100%;
+        background: var(--color-white);
+        width: 18rem;
+        z-index: 3;
+        box-shadow: 1rem 3rem 4rem var(--color-light);
+        height: 100vh;
+        padding-right: var(--card-padding);
+        /*display: none;*/
+        /*transition: display 0.3s ease;*/
+        animation: showMenu 400ms ease forwards;
+    }
+
+    @keyframes showMenu {
+        to{
+            left: 0;
+        }
+    }
+
+    aside.toggle{
+        display: none;
+    }
+
+
+    aside .logo{
+        margin-left: 1rem;
+    }
+    aside .logo h2{
+        display: inline;
+    }
+    aside .sidebar h3{
+        display: inline;
+    }
+    aside .sidebar .link{
+        width: 100%;
+        height: 3.4rem;
+    }
+    aside .sidebar .link:last-child{
+        /*position: absolute;*/
+        /*bottom: 5rem;*/
+    }
+
+    .hamburger{
+        display: inline-block;
+        padding-left: 0.75rem;
+        padding-top: 1rem;
+    }
+
+    aside .close{
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    main{
+        /*margin-top: 1rem;*/
+        padding: 0 1rem;
+    }
+    main .courses-table{
+        position: relative;
+        margin: 3rem 0 0 0;
+        width: 100%;
+    }
+    main .courses-table table{
+        width: 100%;
+        margin: 0;
+    }
+    .right{
+        width: 94%;
+        margin: 0 auto 4rem;
+    }
+    .right .top{
+        position: fixed;
+        top: 0;
+        left: 0;
+        align-items: center;
+        padding: 0 0.8rem;
+        height: 4.6rem;
+        background: var(--color-white);
+        width: 100%;
+        margin: 0;
+        z-index: 2;
+        box-shadow: 0 1rem 1rem var(--color-light);
+    }
+
+    .right .top .theme-toggler{
+        width: 4.4rem;
+        position: absolute;
+        left: 66%;
+    }
+
+    .right .profile .info{
+        display: none;
+    }
+
+    .right .top button{
+        display: inline-block;
+        background: transparent;
+        cursor: pointer;
+        color: var(--color-dark);
+        position: absolute;
+        left: 1rem;
+    }
+
+    .right .top button span{
+        font-size: 2rem;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
