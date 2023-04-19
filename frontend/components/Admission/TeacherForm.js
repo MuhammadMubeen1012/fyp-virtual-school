@@ -2,6 +2,7 @@ import React from "react";
 import swal from '@sweetalert/with-react'
 import {useRouter} from "next/router";
 import Quiz from "../../pages/quiz";
+import {Form} from "react-bootstrap";
 
 
 const   TeacherForm = () => {
@@ -22,7 +23,14 @@ const   TeacherForm = () => {
             },
             content: (
                 <div>
-                    test details will be here...
+                    <ol style={{textAlign: "left"}}>
+                        <li>You will have 15 mins for the quiz.</li>
+                        <li>You can't exit from Quiz while you're playing.</li>
+                        <li>Each Question carry equal marks.</li>
+                    </ol>
+
+
+
                 </div>
             )
         })
@@ -39,6 +47,7 @@ const   TeacherForm = () => {
             })
 
     }
+
 
     return (
         <div className="mx-auto col-lg-6 col-md-12 mt-5 ">
@@ -82,19 +91,48 @@ const   TeacherForm = () => {
                         <input type="number" className="form-control" placeholder="Father NIC Number" />
                     </div>
 
+
+                    <label style={{fontWeight:"bold"}}>Select any three courses</label>
+                    <div className="">
+                        <input type="checkbox" value={"English"} name="course1" id="course1"/>
+                        <label htmlFor="course1">English</label><br/>
+
+                        <input type="checkbox" value={"Urdu"} name="course2" id="course2"/>
+                        <label htmlFor="course2">Urdu</label><br/>
+
+                        <input type="checkbox" value={"Math"} name="course3" id="course3"/>
+                        <label htmlFor="course3">Math</label><br/>
+
+                        <input type="checkbox" value={"Science"} name="course4" id="course4"/>
+                        <label htmlFor="course4">Science</label><br/>
+
+                        <input type="checkbox" value={"History"} name="course5" id="course5"/>
+                        <label htmlFor="course5">History</label><br/>
+
+                        <input type="checkbox" value={"Drawing"} name="course6" id="course6"/>
+                        <label htmlFor="course6">Drawing</label><br/>
+
+                    </div><br/>
+
+
                     <div className="form-group">
-                        <select name="" id="" className="nice-select option">
-                            <option className={"option nice-select"} value="">Web Engineering</option>
-                            <option className={"option"}  value="">Enterprise Application Development</option>
-                            <option className={"option"}  value="">Blockchain</option>
-                        </select>
+                        <label>CNIC</label>
+                        <input type="button" value="Upload Photo"/>
+                    </div>
+
+                    <div className="form-group">
+                        <label>Last Qualification Certificate</label>
+                        <input type="button" value="Upload Photo"/>
+                    </div>
+
+                    <div className="form-group">
+                        <label>Passport Size Photo</label>
+                        <input type="button" value="Upload Photo"/>
                     </div>
 
 
-                    <button
 
-                        type="submit"
-                    >
+                    <button type="submit">
                         Submit
                     </button>
 
