@@ -16,10 +16,13 @@ exports.signup = catchAsyncError(async (req, res, next) => {
     name,
     email,
     password,
-  });
+  }).then((user) => {console.log(user)
+  res.send("success")
+  sendToken(user, 200, res);
+  }).catch((err) => {console.log(err)});
 
   //token in response
-  sendToken(user, 200, res);
+
 });
 
 // @description add admin
@@ -46,6 +49,7 @@ exports.addAdmin = catchAsyncError(async (req, res, next) => {
 exports.signin = catchAsyncError(async (req, res, next) => {
   //getting email and password from req
   const { email, password } = req.body;
+  console.log(email, password);
 
   //checking if it is not empty
   if (!email || !password) {
@@ -55,19 +59,25 @@ exports.signin = catchAsyncError(async (req, res, next) => {
   //finding/fetch user from DB
   //select is use becuase in our model select is false, we have to use select and +
   const user = await User.findOne({ email }).select("+password");
+  console.log("================ user request ===================")
+  console.log(user);
 
   //checking if user is not find
   if (!user) {
-    return next(new ErrorHandler("Invalid email or password"));
+    // return next(new ErrorHandler("Invalid email or password"));
+    return res.send("failed")
   }
 
   //on finding user match the password
   const isPasswordMatched = await user.matchPassword(password);
+  console.log("================ user password ===================")
+  console.log(isPasswordMatched);
 
   //matching the password
   if (!isPasswordMatched) {
     return next(new ErrorHandler("Invalid password! Try again", 401));
   }
+  res.send("success");
 
   sendToken(user, 200, res);
 });

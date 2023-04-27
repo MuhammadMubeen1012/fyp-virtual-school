@@ -117,17 +117,17 @@ const   TeacherForm = () => {
 
                     <div className="form-group">
                         <label>CNIC</label>
-                        <input type="button" value="Upload Photo"/>
+                        <input type="file" name="cnic" id={"cnic"} />
                     </div>
 
                     <div className="form-group">
                         <label>Last Qualification Certificate</label>
-                        <input type="button" value="Upload Photo"/>
+                        <input type="file" name={"last-qualification"} id={"last-qualification"} />
                     </div>
 
                     <div className="form-group">
                         <label>Passport Size Photo</label>
-                        <input type="button" value="Upload Photo"/>
+                        <input type="file" name={"last-qualification"} id={"last-qualification"} />
                     </div>
 
 

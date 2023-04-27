@@ -19,6 +19,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const Index = () => {
 	return (
 		<>
+		
 
 			<Home />
 
