@@ -65,23 +65,18 @@ const teacherAdmissionSchema = new mongoose.Schema({
     min: [13, "Your NIC number must be equal to 13"],
   },
 
-  class: {
-    type: Number,
+  classroom: {
+    type: [mongoose.Schema.Types.ObjectId],
     required: [true, "Please select class you want to teach in"],
-    enum: {
-      // predefined classes
-      values: [1, 2, 3, 4, 5],
-      message: "Please select class for teaching",
-    },
   },
   courses: {
-    type: [String],
+    type: [mongoose.Schema.Types.ObjectId],
     required: [true, "Please select max three courses you want to teach"],
-    enum: {
-      // predefined courses
-      values: ["English", "Urdu", "Pakistan Studies", "Computer", "Maths"],
-      message: "Please select minimum 3 course for teaching",
-    },
+    // enum: {
+    //   // predefined courses
+    //   values: ["English", "Urdu", "Pakistan Studies", "Computer", "Maths"],
+    //   message: "Please select minimum 3 course for teaching",
+    // },
   },
   bForm: {
     public_id: {

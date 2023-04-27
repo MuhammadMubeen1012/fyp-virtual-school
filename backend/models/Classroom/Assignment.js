@@ -44,6 +44,10 @@ const assignmentSchema = new mongoose.Schema({
     type: [mongoose.Schema.Types.ObjectId],
     ref: "Submission",
   },
+  isSubmitted: {
+    type: Boolean,
+    default: false,
+  },
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
     required: [true, "please provide teacher Id"],

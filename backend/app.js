@@ -14,11 +14,27 @@ app.use(cookieParser());
 const user = require("./routes/user");
 const admission = require("./routes/admission");
 const announcement = require("./routes/announcementRoutes");
+const academicYear = require("./routes/Classroom/academicYearRoutes");
+const classroom = require("./routes/Classroom/classroomRoutes");
+const course = require("./routes/Classroom/courseRoutes");
+const lesson = require("./routes/Classroom/lessonRoutes");
+const event = require("./routes/Classroom/eventRoutes");
+const quiz = require("./routes/Classroom/quizRoutes");
+const assignment = require("./routes/Classroom/assignmentRoutes");
+const exam = require("./routes/Classroom/examRoutes");
 
 //using api imported routes
 app.use("/api/v1", user);
 app.use("/api/v1", admission);
 app.use("/api/v1", announcement);
+app.use("/api/v1", academicYear);
+app.use("/api/v1", classroom);
+app.use("/api/v1", course);
+app.use("/api/v1", lesson);
+app.use("/api/v1", event);
+app.use("/api/v1", quiz);
+app.use("/api/v1", assignment);
+app.use("/api/v1", exam);
 
 //using middleware to handle errors
 app.use(errorMiddleware);

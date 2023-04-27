@@ -14,9 +14,9 @@ const courseSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "teacher",
   },
-  class: {
+  classroom: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Class",
+    ref: "Classroom",
   },
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,

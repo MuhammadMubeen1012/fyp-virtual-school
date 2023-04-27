@@ -3,6 +3,8 @@ const Teacher = require("../models/teacher");
 const User = require("../models/user");
 const Questions = require("../models/admissionTest");
 const catchAsyncError = require("../middlewares/catchAsyncErrors");
+const catchAsyncErrors = require("../middlewares/catchAsyncErrors");
+const { findById } = require("../models/Classroom/Classroom");
 
 //route /api/v1/student/admissionData
 exports.addStudent = catchAsyncError(async (req, res, next) => {
@@ -156,3 +158,50 @@ exports.submitAndAssessTeacherTest = catchAsyncError(async (req, res, next) => {
     });
   }
 });
+
+// @desc enroll student in class based on the class selection in the form
+// @route PUT /enroll/student/:classID
+exports.enrollStudentInClass = catchAsyncErrors(async (req, res, next) => {
+  //we have class object
+  const classRoom = await findById(req.params);
+  //user to enrolled in the class
+  const user = await User.findOne(req.user._id);
+
+  classRoom.students.push(user._id);
+
+  classRoom.save();
+
+  res.status(200).json({
+    success: true,
+    message: "Successfully enrolled in the class",
+  });
+});
+
+// @desc enroll student in class based on the class selection in the form
+// @route PUT /enroll/teacher/:classID
+exports.enrollTeacherInClassAndCourses = catchAsyncErrors(
+  async (req, res, next) => {
+    //we have class object
+    const classRoom = await Classroom.findById(req.params);
+    //user to enrolled in the class
+    const user = await User.findOne(req.user._id);
+
+    classRoom.teachers.push(user._id);
+
+    classRoom.save();
+
+    //add teacher to all such selected courses
+    for (let i = 0; i < req.body.courses.length; i++) {
+      const course = Course.findById(req.body.courses[i]);
+
+      course.teacher = user._id;
+    }
+
+    await course.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Successfully enrolled in the class and courses",
+    });
+  }
+);

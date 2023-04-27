@@ -58,14 +58,9 @@ const studentAdmissionSchema = new mongoose.Schema({
     required: [true, "Please enter your father's NIC number"],
     min: [13, "Your NIC number must be equal to 13"],
   },
-  class: {
-    type: Number,
+  classroom: {
+    type: mongoose.Schema.Types.ObjectId,
     required: [true, "Please select class you want to enrolled in"],
-    enum: {
-      // predefined classes
-      values: [1, 2, 3, 4, 5],
-      message: "Please select class for admission",
-    },
   },
   bForm: {
     public_id: {

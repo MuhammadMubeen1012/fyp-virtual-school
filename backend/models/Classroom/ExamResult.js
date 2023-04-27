@@ -17,9 +17,9 @@ const examResultSchema = new mongoose.Schema({
     ref: "Course",
     required: true,
   },
-  class: {
+  classroom: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Class",
+    ref: "Classroom",
     required: true,
   },
   academicYear: {

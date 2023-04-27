@@ -11,6 +11,10 @@ const quizSchema = new mongoose.Schema({
     required: [true, "Please enter description"],
     maxlength: [100, "Quiz description cannot exceed 100 charachters"],
   },
+  lesson: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Lesson",
+  },
   questions: [
     {
       question: {

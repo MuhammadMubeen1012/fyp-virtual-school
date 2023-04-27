@@ -18,7 +18,6 @@ const lessonSchema = new mongoose.Schema({
   content: [
     {
       type: String,
-      required: true,
       default: "No content",
     },
   ],
