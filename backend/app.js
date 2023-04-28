@@ -21,6 +21,7 @@ const lesson = require("./routes/Classroom/lessonRoutes");
 const event = require("./routes/Classroom/eventRoutes");
 const quiz = require("./routes/Classroom/quizRoutes");
 const assignment = require("./routes/Classroom/assignmentRoutes");
+const assignmentSubmission = require("./routes/Classroom/submissionRoutes");
 const exam = require("./routes/Classroom/examRoutes");
 const attendance = require("./routes/Attendance/attendanceRoutes");
 
@@ -35,6 +36,7 @@ app.use("/api/v1", lesson);
 app.use("/api/v1", event);
 app.use("/api/v1", quiz);
 app.use("/api/v1", assignment);
+app.use("/api/v1", assignmentSubmission);
 app.use("/api/v1", exam);
 app.use("/api/v1", attendance);
 

@@ -44,11 +44,18 @@ const submissionSchema = new mongoose.Schema({
       true,
       "please Provide id of the Student who submitted the assignment",
     ],
-    ref: "student",
+    ref: "user",
   },
   submittedAt: {
     type: Date,
     default: Date.now(),
+  },
+  obtainedMarks: {
+    type: Number,
+  },
+  isOverDue: {
+    type: Boolean,
+    default: false,
   },
 });
 module.exports = mongoose.model("Submission", submissionSchema);
