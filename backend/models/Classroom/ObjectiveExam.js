@@ -21,10 +21,10 @@ const objectiveExamSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
-      isCorrect: {
-        type: Boolean,
-        default: false,
-      },
+      // isCorrect: {
+      //   type: Boolean,
+      //   default: false,
+      // },
     },
   ],
 });

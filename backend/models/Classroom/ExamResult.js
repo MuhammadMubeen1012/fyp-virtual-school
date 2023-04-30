@@ -7,9 +7,9 @@ const examResultSchema = new mongoose.Schema({
     ref: "student",
     required: true,
   },
-  exam: {
+  submission: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Exam",
+    ref: "ExamSubmission",
     required: true,
   },
   course: {
@@ -29,15 +29,10 @@ const examResultSchema = new mongoose.Schema({
   },
   isPublished: {
     type: Boolean,
-    required: true,
     default: false,
   },
-  position: {
-    type: Number,
-    required: true,
-  },
   percentage: {
-    type: NumberDecimal,
+    type: mongoose.Types.Decimal128,
     required: true,
   },
   status: {
@@ -45,15 +40,14 @@ const examResultSchema = new mongoose.Schema({
     enum: ["passed", "failed"],
     required: true,
   },
-  passingMarks: {
-    type: Number,
-    default: 50,
-    required: true,
-  },
   obtainedMarks: {
     type: Number,
     default: 0,
     required: true,
+  },
+  feedback: {
+    type: String,
+    default: "No feedback",
   },
 });
 
