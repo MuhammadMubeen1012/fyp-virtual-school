@@ -3,7 +3,7 @@ import LayoutStudent from "../../../../components/Dashboard/Layout/LayoutStudent
 import Link from "next/link";
 import {Button, Card, Nav} from "react-bootstrap";
 
-const Unit01 = () => {
+const Slug = () => {
 
     const [eventKey, setEventKey] = useState(0);
 
@@ -199,4 +199,4 @@ const Unit01 = () => {
     );
 };
 
-export default Unit01;
+export default Slug;

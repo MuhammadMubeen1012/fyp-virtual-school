@@ -3,7 +3,7 @@ import Link from "next/link";
 import {Button, Dropdown, Form, Modal, Nav} from "react-bootstrap";
 import LayoutTeacher from "../../../../components/Dashboard/Layout/LayoutTeacher";
 
-const Unit01 = () => {
+const Slug = () => {
     const [modal, setModal] = useState({
         item: 0,
         active: false,
@@ -384,4 +384,4 @@ const Unit01 = () => {
     );
 };
 
-export default Unit01;
+export default Slug;
