@@ -7,22 +7,26 @@ const objectiveExamSchema = new mongoose.Schema({
     ref: "Exam",
     required: true,
   },
-  question: {
-    type: String,
-    required: true,
-  },
-  questionOptions: {
-    type: [String],
-    required: true,
-  },
-  questionAnswer: {
-    type: String,
-    required: true,
-  },
-  isCorrect: {
-    type: Boolean,
-    default: false,
-  },
+  questions: [
+    {
+      question: {
+        type: String,
+        required: true,
+      },
+      questionOptions: {
+        type: [String],
+        required: true,
+      },
+      questionAnswer: {
+        type: String,
+        required: true,
+      },
+      // isCorrect: {
+      //   type: Boolean,
+      //   default: false,
+      // },
+    },
+  ],
 });
 
 module.exports = mongoose.model("ObjectiveExam", objectiveExamSchema);

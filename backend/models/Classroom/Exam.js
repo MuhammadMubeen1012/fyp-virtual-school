@@ -15,9 +15,9 @@ const examSchema = new mongoose.Schema({
     ref: "Course",
     required: true,
   },
-  class: {
+  classroom: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Class",
+    ref: "Classroom",
     required: true,
   },
   passMarks: {
@@ -44,7 +44,7 @@ const examSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
-  examTime: {
+  startTime: {
     type: String,
     required: true,
   },
@@ -55,9 +55,14 @@ const examSchema = new mongoose.Schema({
     default: "pending",
   },
   examSection: {
-    type: String,
-    required: true,
-    enum: ["subjective", "objective"],
+    isObjective: {
+      type: Boolean,
+      default: false,
+    },
+    isSubjective: {
+      type: Boolean,
+      default: false,
+    },
   },
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,

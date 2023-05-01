@@ -7,14 +7,14 @@ const subjectiveExamSchema = new mongoose.Schema({
     ref: "Exam",
     required: true,
   },
-  question: {
-    type: String,
-    required: true,
-  },
-  answer: {
-    type: String,
-    required: true,
-  },
+  parts: [
+    {
+      question: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
 });
 
 module.exports = mongoose.model("SubjectiveExam", subjectiveExamSchema);
