@@ -1,106 +1,228 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import LayoutTeacher from "../../components/Dashboard/Layout/LayoutTeacher";
+import axios from "axios";
+import Cookies from "js-cookie";
+import {main} from "@cloudinary/url-gen/qualifiers/videoCodecProfile";
+import Link from "next/link";
 
-const Index = () => {
+function Index(effect, deps) {
+    // api/v1/teacher
+    // api/v1/course/courseId
+
+
+    // const user = localStorage.getItem('user');
+    const [user, setUser] = useState({});
+    const [bForm, setBForm] = useState({});
+    const [photo, setPhoto] = useState({});
+    const [degreeProof, setDegreeProof] = useState({});
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [fatherName, setFatherName] = useState('');
+    const [age, setAge] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [personalNIC, setPersonalNIC] = useState('');
+    const [fatherNIC, setFatherNIC] = useState('');
+    const [classroom, setClassroom] = useState([]);
+    const [courses, setCourses] = useState([]);
+    const [mainCourses, setMainCourses] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [numberOfStudents, setNumberOfStudents] = useState(0);
+    const getCourses = () => {
+        Promise.all(courses.map((course) => {
+            return axios.get(`http://localhost:7000/api/v1/course/${course}`,
+                {
+                    headers: {
+                        Authorization: `${Cookies.get('token')}`
+                    }
+                })
+        })).then((res) => {
+            setMainCourses(res.map((r) => {
+                return r.data.course;
+            }));
+        });
+    }
+
+    const getTeacher = () => {
+        axios.get(`http://localhost:7000/api/v1/teacher`, {
+            headers: {
+                Authorization: `${Cookies.get('token')}`
+            }
+        }).then(async (res) => {
+            console.log(res.data.teacher);
+            const {
+                bForm,
+                photo,
+                degreeProof,
+                user,
+                firstName,
+                lastName,
+                fatherName,
+                age,
+                phoneNumber,
+                personalNIC,
+                fatherNIC,
+                classroom,
+                courses: c
+            } = res.data.teacher;
+            setBForm(bForm);
+            setPhoto(photo);
+            setDegreeProof(degreeProof);
+            setUser(user);
+            setFirstName(firstName);
+            setLastName(lastName);
+            setFatherName(fatherName);
+            setAge(age);
+            setPhoneNumber(phoneNumber);
+            setPersonalNIC(personalNIC);
+            setFatherNIC(fatherNIC);
+            setClassroom(classroom);
+            setCourses(c);
+            getClassrooms(classroom);
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+
+
+    const getClassrooms = (classrooms) => {
+        Promise.all(classrooms.map((classId) => {
+            return axios.get(`http://localhost:7000/api/v1/classroom/${classId}`, {
+                headers: {
+                    Authorization: `${Cookies.get('token')}`
+                }
+            })
+        })).then(res => {
+            console.log(res);
+
+            setClassroom(res.map((r) => {
+                console.log(r.data.classrooms);
+                return r.data.classrooms
+            }));
+        })
+    }
+
+    useEffect(() => {
+        if (classroom.length > 0) {
+            console.log('Classroom ', classroom);
+            if (classroom[0].students)
+                setNumberOfStudents(classroom.map((croom) => {
+                    if (croom.students) {
+                        return croom.students.length
+                    }
+                }).reduce((a, b) => a + b, 0));
+
+        }
+    }, [classroom]);
+
+
+    useEffect(() => {
+        getTeacher();
+        getCourses()
+
+    }, []);
+
+    useEffect(() => {
+        if (courses.length > 0) {
+            getCourses();
+        }
+    }, [courses]);
+    useEffect(() => {
+        if (mainCourses.length > 0) {
+            setLoading(true);
+        }
+    }, [mainCourses]);
+
     return (
         <LayoutTeacher>
 
             {/*=============== Start of main ================= */}
-            <main >
+            <main>
                 <h1>Overview</h1>
 
                 {/* ============ Start of insights ============== */}
 
-                    <div className="insights">
+                <div className="insights">
 
-                        {/*course completed*/}
-                        <div className="course-completed">
-                            <span className="material-icons-sharp">person_outline</span>
-                            <div className="middle">
-                                <div className="left">
-                                    <h3>Total Students</h3>
-                                    <h1>81</h1>
-                                </div>
-
-                                {/*<div className="progress">*/}
-                                {/*    <svg>*/}
-                                {/*        <circle cx={"38"} cy={"38"} r={"36"}></circle>*/}
-                                {/*    </svg>*/}
-
-                                {/*    <div className="number">*/}
-                                {/*        <p>81%</p>*/}
-                                {/*    </div>*/}
-                                {/*</div>*/}
+                    {/*course completed*/}
+                    <div className="course-completed">
+                        <span className="material-icons-sharp">person_outline</span>
+                        <div className="middle">
+                            <div className="left">
+                                <h3>Total Students</h3>
+                                <h1>{numberOfStudents}</h1>
                             </div>
 
+                            {/*<div className="progress">*/}
+                            {/*    <svg>*/}
+                            {/*        <circle cx={"38"} cy={"38"} r={"36"}></circle>*/}
+                            {/*    </svg>*/}
+
+                            {/*    <div className="number">*/}
+                            {/*        <p>81%</p>*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
                         </div>
 
-                        {/*course progress*/}
-                        <div className="course-progress">
-                            <span className="material-icons-sharp">analytics</span>
-                            <div className="middle">
-                                <div className="left">
-                                    <h3>Your Courses</h3>
-                                    <h1>3</h1>
-                                </div>
+                    </div>
 
-                            </div>
-
-                        </div>
-
-                        {/*Certification*/}
-                        <div className="certification">
-                            <span className="material-icons-sharp">analytics</span>
-                            <div className="middle">
-                                <div className="left">
-                                    <h3>Your Classes</h3>
-                                    <h1>8</h1>
-                                </div>
-
+                    {/*course progress*/}
+                    <div className="course-progress">
+                        <span className="material-icons-sharp">analytics</span>
+                        <div className="middle">
+                            <div className="left">
+                                <h3>Your Courses</h3>
+                                <h1>{mainCourses.length}</h1>
                             </div>
 
                         </div>
 
                     </div>
 
+                    {/*Certification*/}
+                    <div className="certification">
+                        <span className="material-icons-sharp">analytics</span>
+                        <div className="middle">
+                            <div className="left">
+                                <h3>Your Classes</h3>
+                                <h1>{classroom.length}</h1>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
                 {/*============ END of insights =================== */}
 
 
-
                 {/* ============= start of Courses ================= */}
-                    <div className="courses-table">
+                <div className="courses-table">
 
                     <h2>Courses</h2>
                     <table>
                         <thead>
                         <tr>
                             <th>Course Title</th>
-                            <th>Lessons Completed</th>
-                            <th>Duration</th>
+                            <th>Lessons</th>
+                            <th>Details</th>
                         </tr>
                         </thead>
 
                         <tbody>
-                        <tr>
-                            <td>Human Computer Interaction</td>
-                            <td>18/40 (48%)</td>
-                            <td>10h 13m 28s</td>
 
-                            <td className="primary">Details</td>
-                        </tr>
+                        {loading && mainCourses.map((course, index) => {
+                            console.log('000----------------', course);
+                            return (
+                                <tr key={index}>
+                                    <td>{course.name}</td>
+                                    <td>{course.lessons.length}</td>
+                                    <td><Link href={'#'}>click here</Link></td>
+                                </tr>
+                            )
+                        })
+                        }
 
-                        <tr>
-                            <td>Project Management</td>
-                            <td>7/35 (20%)</td>
-                            <td>20h 30m 0s</td>
-                            <td className="primary">Details</td>
-                        </tr>
-                        <tr>
-                            <td>Software Engineering</td>
-                            <td>21/23 (97%)</td>
-                            <td>15hr 10m 0s</td>
-                            <td className="primary">Details</td>
-                        </tr>
 
                         </tbody>
                     </table>
@@ -114,13 +236,12 @@ const Index = () => {
             {/*=============== End Of Main  ==================*/}
 
 
-
             {/*============= start of Right side*/}
             <div className="right">
 
                 <div className="profile">
                     <div className="info">
-                        <p>Hey, <b>Teacher</b></p>
+                        <p>Hey, <b>{firstName} {lastName}</b></p>
                     </div>
                 </div>
 
@@ -159,7 +280,6 @@ const Index = () => {
                         </div>
 
 
-
                         <div className="update">
                             <div className="profile-photo">
                                 <h3>- SE</h3>
@@ -172,7 +292,6 @@ const Index = () => {
                                 <small className="text-muted">2 Minutes Ago</small>
                             </div>
                         </div>
-
 
 
                     </div>
@@ -192,10 +311,9 @@ const Index = () => {
             {/*============= End of left Side*/}
 
 
-
-
         </LayoutTeacher>
     );
-};
+}
+;
 
 export default Index;
