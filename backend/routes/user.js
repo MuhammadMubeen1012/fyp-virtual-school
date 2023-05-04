@@ -9,6 +9,8 @@ const {
   forgotPassword,
   resetPassword,
   addAdmin,
+  getStudentByUserID,
+  getTeacherByUserID,
 } = require("../controllers/userController");
 const { isAuthenticatedUser } = require("../middlewares/auth");
 
@@ -19,5 +21,7 @@ router.route("/me").get(isAuthenticatedUser, loggedInUser);
 router.route("/password/forgot").post(forgotPassword);
 router.route("/password/reset/:token").put(resetPassword);
 router.route("/addAdmin").post(addAdmin);
+router.route("/student").get(isAuthenticatedUser, getStudentByUserID);
+router.route("/teacher").get(isAuthenticatedUser, getTeacherByUserID);
 
 module.exports = router;

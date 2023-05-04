@@ -4,6 +4,9 @@ const sendToken = require("../utils/jwtToken");
 const ErrorHandler = require("../utils/errorHandler");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
+const catchAsyncErrors = require("../middlewares/catchAsyncErrors");
+const Teacher = require("../models/teacher");
+const Student = require("../models/student");
 
 //function - signup user
 //route - /api/v1/signup
@@ -192,4 +195,38 @@ exports.resetPassword = catchAsyncError(async (req, res, next) => {
 
   //update the token for the next authentication with the new password
   sendToken(user, 200, res);
+});
+
+exports.getStudentByUserID = catchAsyncErrors(async (req, res, next) => {
+  const student = await Student.findOne({ user: req.user._id });
+
+  if (student) {
+    res.status(200).json({
+      success: true,
+      student: student,
+    });
+  } else {
+    res.status(400).json({
+      success: false,
+      message: "No data found with this user",
+    });
+  }
+});
+
+exports.getTeacherByUserID = catchAsyncErrors(async (req, res, next) => {
+  // const user = await User.findOne(req.user._id);
+
+  const teacher = await Teacher.findOne({ user: req.user._id });
+
+  if (teacher) {
+    res.status(200).json({
+      success: true,
+      teacher: teacher,
+    });
+  } else {
+    res.status(400).json({
+      success: false,
+      message: "No data found with this user",
+    });
+  }
 });
