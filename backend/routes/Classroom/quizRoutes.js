@@ -13,23 +13,21 @@ const {
 } = require("../../controllers/Classroom/quizController");
 
 //routes
-router.route("/quiz/:lessonID").post(isAuthenticatedUser, isAdmin, createQuiz);
+router.route("/quiz/:lessonID").post(isAuthenticatedUser, createQuiz);
 router
   .route("/quiz/questions/:id")
-  .put(isAuthenticatedUser, isAdmin, addQuestionsToTheQuiz);
+  .put(isAuthenticatedUser, addQuestionsToTheQuiz);
 
-router
-  .route("/quiz/:lessonID")
-  .get(isAuthenticatedUser, isAdmin, getQuizByLessonID);
+router.route("/quiz/:lessonID").get(isAuthenticatedUser, getQuizByLessonID);
 
-router.route("/quiz/:quizID").delete(isAuthenticatedUser, isAdmin, deleteQuiz);
+router.route("/quiz/:quizID").delete(isAuthenticatedUser, deleteQuiz);
 
-router.route("/quiz/:id").put(isAuthenticatedUser, isAdmin, updateQuizDetails);
+router.route("/quiz/:id").put(isAuthenticatedUser, updateQuizDetails);
 router
   .route("/quiz/questions/:quizID")
-  .delete(isAuthenticatedUser, isAdmin, deleteQuizQuestions);
+  .delete(isAuthenticatedUser, deleteQuizQuestions);
 
 router
   .route("/quiz/questions/update/:quizID")
-  .put(isAuthenticatedUser, isAdmin, updateQuizQuestions);
+  .put(isAuthenticatedUser, updateQuizQuestions);
 module.exports = router;

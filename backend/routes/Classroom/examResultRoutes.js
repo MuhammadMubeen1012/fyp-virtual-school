@@ -9,20 +9,16 @@ const {
   getResultByCourse,
 } = require("../../controllers/Classroom/examResultController");
 
-router
-  .route("/result/exam/:courseID")
-  .post(isAuthenticatedUser, isAdmin, compileResult);
+router.route("/result/exam/:courseID").post(isAuthenticatedUser, compileResult);
 
-router
-  .route("/result/exam/:courseID")
-  .put(isAuthenticatedUser, isAdmin, publishResult);
+router.route("/result/exam/:courseID").put(isAuthenticatedUser, publishResult);
 
 router
   .route("/result/exam/student/:studentID")
-  .get(isAuthenticatedUser, isAdmin, getResultByStudent);
+  .get(isAuthenticatedUser, getResultByStudent);
 
 router
   .route("/result/exam/course/:courseID")
-  .get(isAuthenticatedUser, isAdmin, getResultByCourse);
+  .get(isAuthenticatedUser, getResultByCourse);
 
 module.exports = router;

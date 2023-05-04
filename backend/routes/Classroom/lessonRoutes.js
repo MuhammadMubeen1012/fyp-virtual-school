@@ -18,27 +18,25 @@ const {
 } = require("../../controllers/Classroom/lessonController");
 
 //routes
-router.route("/lesson/:id").post(isAuthenticatedUser, isAdmin, createLesson);
+router.route("/lesson/:id").post(isAuthenticatedUser, createLesson);
 router
   .route("/lesson/create/content/:id")
-  .put(isAuthenticatedUser, isAdmin, createContent);
+  .put(isAuthenticatedUser, createContent);
 
-router.route("/lesson/:id").put(isAuthenticatedUser, isAdmin, updateLesson);
+router.route("/lesson/:id").put(isAuthenticatedUser, updateLesson);
 router
   .route("/lesson/update/content/:id")
-  .put(isAuthenticatedUser, isAdmin, updateContent);
+  .put(isAuthenticatedUser, updateContent);
 
-router.route("/lesson/:id").delete(isAuthenticatedUser, isAdmin, deleteLesson);
+router.route("/lesson/:id").delete(isAuthenticatedUser, deleteLesson);
 router
   .route("/lesson/delete/content/:id")
-  .delete(isAuthenticatedUser, isAdmin, deleteContent);
+  .delete(isAuthenticatedUser, deleteContent);
 
-router
-  .route("/lesson/:id")
-  .get(isAuthenticatedUser, isAdmin, getLessonsByCourseID);
+router.route("/lesson/:id").get(isAuthenticatedUser, getLessonsByCourseID);
 
 router
   .route("/lesson/content/:id")
-  .get(isAuthenticatedUser, isAdmin, getcontentByLessonID);
+  .get(isAuthenticatedUser, getcontentByLessonID);
 
 module.exports = router;

@@ -10,20 +10,14 @@ const {
 } = require("../../controllers/Classroom/academicYearController");
 
 //routes
-router
-  .route("/academicYear")
-  .post(isAuthenticatedUser, isAdmin, createAcademicYear);
+router.route("/academicYear").post(isAuthenticatedUser, createAcademicYear);
 
-router
-  .route("/academicYear")
-  .get(isAuthenticatedUser, isAdmin, getAcademicYears);
+router.route("/academicYear").get(isAuthenticatedUser, getAcademicYears);
 
-router
-  .route("/academicYear/:id")
-  .put(isAuthenticatedUser, isAdmin, updateAcademicYear);
+router.route("/academicYear/:id").put(isAuthenticatedUser, updateAcademicYear);
 
 router
   .route("/academicYear/:id")
-  .delete(isAuthenticatedUser, isAdmin, deleteAcademicYear);
+  .delete(isAuthenticatedUser, deleteAcademicYear);
 
 module.exports = router;

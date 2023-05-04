@@ -10,7 +10,7 @@ exports.submitAssignment = catchAsyncErrors(async (req, res, next) => {
   //passing hardcoded ID as it is only for student to submit asisgnment when it is login,
   //in production mode, use req.user._id
 
-  const student = await Student.findOne({ user: "64061f80c1d1638f3086c6a7" });
+  const student = await Student.findOne({ user: req.user._id });
   console.log(Student);
   const data = req.body;
   let isOverDue = false;
@@ -25,13 +25,14 @@ exports.submitAssignment = catchAsyncErrors(async (req, res, next) => {
     assignment: assignment._id,
     fileName: data.fileName,
     fileLink: data.fileLink,
-    submittedBy: "64061f80c1d1638f3086c6a7",
-    submittedByName: "Mubeen",
+    submittedBy: student.user,
+    submittedByName: student.firstName,
     isOverDue: isOverDue,
   });
 
   if (submission) {
     assignment.submissions.push(submission._id);
+    assignment.save();
 
     res.status(200).json({
       success: true,

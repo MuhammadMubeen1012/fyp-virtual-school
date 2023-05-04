@@ -12,21 +12,21 @@ const {
 
 router
   .route("/submission/:assignmentID")
-  .post(isAuthenticatedUser, isAdmin, submitAssignment);
+  .post(isAuthenticatedUser, submitAssignment);
 router
   .route("/submission/:assignmentID")
-  .put(isAuthenticatedUser, isAdmin, updateSubmission);
+  .put(isAuthenticatedUser, updateSubmission);
 
 router
   .route("/submission/:assignmentID")
-  .get(isAuthenticatedUser, isAdmin, getSubmissionByAssignment);
+  .get(isAuthenticatedUser, getSubmissionByAssignment);
 
 router
   .route("/submissions/:assignmentID")
-  .get(isAuthenticatedUser, isAdmin, getAllSubmissions);
+  .get(isAuthenticatedUser, getAllSubmissions);
 
 router
   .route("/grade/submission/:assignmentID/:studentID")
-  .put(isAuthenticatedUser, isAdmin, gradeSubmission);
+  .put(isAuthenticatedUser, gradeSubmission);
 
 module.exports = router;

@@ -11,18 +11,18 @@ const {
 
 router
   .route("/assignment/:lessonID")
-  .post(isAuthenticatedUser, isAdmin, createAssignment);
+  .post(isAuthenticatedUser, createAssignment);
 
 router
   .route("/assignment/update/:assignmentID")
-  .put(isAuthenticatedUser, isAdmin, updateAssignment);
+  .put(isAuthenticatedUser, updateAssignment);
 
 router
   .route("/assignment/delete/:assignmentID")
-  .delete(isAuthenticatedUser, isAdmin, deleteAssignment);
+  .delete(isAuthenticatedUser, deleteAssignment);
 
 router
   .route("/assignment/:lessonID")
-  .get(isAuthenticatedUser, isAdmin, getAssignmentsByLesson);
+  .get(isAuthenticatedUser, getAssignmentsByLesson);
 
 module.exports = router;

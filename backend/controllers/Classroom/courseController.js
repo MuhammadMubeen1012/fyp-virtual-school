@@ -1,6 +1,7 @@
 const catchAsyncErrors = require("../../middlewares/catchAsyncErrors");
 const Course = require("../../models/Classroom/Course");
 const Classroom = require("../../models/Classroom/Classroom");
+const Teacher = require("../../models/teacher");
 
 // @features
 // create, updateCourse, deleteCourse, getCourseByID
@@ -103,4 +104,23 @@ exports.deleteCourse = catchAsyncErrors(async (req, res, next) => {
   res.status(200).json({
     success: true,
   });
+});
+
+// @def get teacher by id
+// @param GET /teacher/:teacherID
+exports.getTeacherByID = catchAsyncErrors(async (req, res, next) => {
+  const teacher = await Teacher.findById(req.params.teacherID);
+
+  console.log(teacher);
+
+  if (teacher) {
+    res.status(200).json({
+      success: true,
+      teacher: teacher,
+    });
+  } else {
+    res.status(200).json({
+      success: false,
+    });
+  }
 });

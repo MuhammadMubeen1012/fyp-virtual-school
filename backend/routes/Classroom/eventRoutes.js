@@ -15,17 +15,13 @@ const {
 } = require("../../controllers/Classroom/eventController");
 
 //id > lesson ID
-router.route("/event/:id").post(isAuthenticatedUser, isAdmin, createEvent);
+router.route("/event/:id").post(isAuthenticatedUser, createEvent);
 
-router.route("/event/:id").put(isAuthenticatedUser, isAdmin, updateEvent);
+router.route("/event/:id").put(isAuthenticatedUser, updateEvent);
 
-router.route("/event/:id").delete(isAuthenticatedUser, isAdmin, deleteEvent);
+router.route("/event/:id").delete(isAuthenticatedUser, deleteEvent);
 
-router
-  .route("/event/:lessonID")
-  .get(isAuthenticatedUser, isAdmin, getEventByLessonID);
+router.route("/event/:lessonID").get(isAuthenticatedUser, getEventByLessonID);
 
-router
-  .route("/events/:classID")
-  .get(isAuthenticatedUser, isAdmin, getAllEvents);
+router.route("/events/:classID").get(isAuthenticatedUser, getAllEvents);
 module.exports = router;

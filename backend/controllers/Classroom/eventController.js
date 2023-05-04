@@ -27,6 +27,11 @@ exports.createEvent = catchAsyncErrors(async (req, res, next) => {
     createdBy: req.user._id,
   });
 
+  if (event) {
+    lesson.event.push(event._id);
+    await lesson.save();
+  }
+
   res.status(200).json({
     success: true,
     message: "Event created successfully",

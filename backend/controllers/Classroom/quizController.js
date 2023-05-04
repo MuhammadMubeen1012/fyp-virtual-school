@@ -21,6 +21,11 @@ exports.createQuiz = catchAsyncErrors(async (req, res, next) => {
     lesson: lesson._id,
   });
 
+  if (quiz) {
+    lesson.quizes.push(quiz._id);
+    await lesson.save();
+  }
+
   res.status(200).json({
     success: true,
     message: "Quiz created successfully",

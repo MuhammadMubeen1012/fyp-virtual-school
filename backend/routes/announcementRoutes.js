@@ -18,11 +18,11 @@ const {
 //routes
 router
   .route("/admins/announcements")
-  .post(isAuthenticatedUser, isAdmin, createAnnouncement);
+  .post(isAuthenticatedUser, createAnnouncement);
 
 router
   .route("/teachers/announcements")
-  .post(isAuthenticatedUser, isTeacher, createAnnouncement);
+  .post(isAuthenticatedUser, createAnnouncement);
 
 router.route("/announcements").get(isAuthenticatedUser, getAnnouncements);
 

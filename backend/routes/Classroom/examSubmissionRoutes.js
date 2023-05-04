@@ -13,23 +13,21 @@ const {
   gradeExamSubmission,
 } = require("../../controllers/Classroom/examSubmissionController");
 
-router
-  .route("/submit/exam/:examID")
-  .post(isAuthenticatedUser, isAdmin, submitExam);
+router.route("/submit/exam/:examID").post(isAuthenticatedUser, submitExam);
 
 // GET /submit/exam/:studentID
 router
   .route("/submit/exam/:studentID")
-  .get(isAuthenticatedUser, isAdmin, getSubmissionByStudent);
+  .get(isAuthenticatedUser, getSubmissionByStudent);
 
 // @route GET /submit/exam/:examID
 router
   .route("/submit/exam/:examID")
-  .get(isAuthenticatedUser, isAdmin, getSubmissionsByExam);
+  .get(isAuthenticatedUser, getSubmissionsByExam);
 
 // @route PUT /grade/exam/:studentID
 router
   .route("/grade/exam/:studentID")
-  .put(isAuthenticatedUser, isAdmin, gradeExamSubmission);
+  .put(isAuthenticatedUser, gradeExamSubmission);
 
 module.exports = router;

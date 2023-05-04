@@ -14,32 +14,26 @@ const {
 } = require("../../controllers/Classroom/classController");
 
 //routes
-router.route("/classroom").post(isAuthenticatedUser, isAdmin, createClassroom);
+router.route("/classroom").post(isAuthenticatedUser, createClassroom);
 router
   .route("/academicYear/classrooms/:id")
-  .get(isAuthenticatedUser, isAdmin, getClassroomsByAcademicYear);
-router
-  .route("/classroom/:id")
-  .get(isAuthenticatedUser, isAdmin, getClassroomByID);
+  .get(isAuthenticatedUser, getClassroomsByAcademicYear);
+router.route("/classroom/:id").get(isAuthenticatedUser, getClassroomByID);
 
-router
-  .route("/classroom/:id")
-  .put(isAuthenticatedUser, isAdmin, updateClassroom);
+router.route("/classroom/:id").put(isAuthenticatedUser, updateClassroom);
 
-router
-  .route("/classroom/:id")
-  .delete(isAuthenticatedUser, isAdmin, deleteClassroom);
+router.route("/classroom/:id").delete(isAuthenticatedUser, deleteClassroom);
 
 router
   .route("/classroom/students/:id")
-  .get(isAuthenticatedUser, isAdmin, getStudentsByClass);
+  .get(isAuthenticatedUser, getStudentsByClass);
 
 router
   .route("/classroom/teachers/:id")
-  .get(isAuthenticatedUser, isAdmin, getTeachersByClass);
+  .get(isAuthenticatedUser, getTeachersByClass);
 
 router
   .route("/classroom/courses/:id")
-  .get(isAuthenticatedUser, isAdmin, getCoursesByClass);
+  .get(isAuthenticatedUser, getCoursesByClass);
 
 module.exports = router;

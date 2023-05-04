@@ -71,6 +71,10 @@ const quizSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  totalMarks: {
+    type: Number,
+    default: 0,
+  },
 });
 
 module.exports = mongoose.model("Quiz", quizSchema);

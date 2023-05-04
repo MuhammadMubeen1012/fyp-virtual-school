@@ -14,7 +14,7 @@ const {
 
 router
   .route("/attendance/:courseID")
-  .post(isAuthenticatedUser, isAdmin, createAttendance);
+  .post(isAuthenticatedUser, createAttendance);
 
 // //test routes
 // router
@@ -23,22 +23,22 @@ router
 
 router
   .route("/attendance/:attendanceID")
-  .get(isAuthenticatedUser, isAdmin, viewAttendance);
+  .get(isAuthenticatedUser, viewAttendance);
 
 router
   .route("/attendance/:attendanceID")
-  .put(isAuthenticatedUser, isAdmin, saveAttendance);
+  .put(isAuthenticatedUser, saveAttendance);
 
 router
   .route("/attendance/course/:courseID")
-  .get(isAuthenticatedUser, isAdmin, getAttendanceByCourse);
+  .get(isAuthenticatedUser, getAttendanceByCourse);
 
 router
   .route("/attendance/:courseID/:studentID")
-  .get(isAuthenticatedUser, isAdmin, getAttendanceByCourseAndStudent);
+  .get(isAuthenticatedUser, getAttendanceByCourseAndStudent);
 
 router
   .route("/attendance/update/:attendanceID")
-  .put(isAuthenticatedUser, isAdmin, updateAttendance);
+  .put(isAuthenticatedUser, updateAttendance);
 
 module.exports = router;

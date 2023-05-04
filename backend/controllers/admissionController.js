@@ -2,6 +2,8 @@ const Student = require("../models/student");
 const Teacher = require("../models/teacher");
 const User = require("../models/user");
 const Questions = require("../models/admissionTest");
+const Classroom = require("../models/Classroom/Classroom");
+const Course = require("../models/Classroom/Course");
 const catchAsyncError = require("../middlewares/catchAsyncErrors");
 const catchAsyncErrors = require("../middlewares/catchAsyncErrors");
 const { findById } = require("../models/Classroom/Classroom");
@@ -18,7 +20,7 @@ exports.addStudent = catchAsyncError(async (req, res, next) => {
     age: data.age,
     phoneNumber: data.phoneNumber,
     fatherNIC: data.fatherNIC,
-    class: data.class,
+    classroom: data.classroom,
     bForm: data.bForm,
     photo: data.photo,
     testResult: data.testResult,
@@ -43,7 +45,7 @@ exports.addTeacher = catchAsyncError(async (req, res, next) => {
     phoneNumber: data.phoneNumber,
     personalNIC: data.personalNIC,
     fatherNIC: data.fatherNIC,
-    class: data.class,
+    classroom: data.classroom,
     courses: data.courses,
     bForm: data.bForm,
     photo: data.photo,
@@ -163,17 +165,17 @@ exports.submitAndAssessTeacherTest = catchAsyncError(async (req, res, next) => {
 // @route PUT /enroll/student/:classID
 exports.enrollStudentInClass = catchAsyncErrors(async (req, res, next) => {
   //we have class object
-  const classRoom = await findById(req.params);
+  const classRoom = await Classroom.findById(req.params.classID);
   //user to enrolled in the class
   const user = await User.findOne(req.user._id);
 
   classRoom.students.push(user._id);
 
-  classRoom.save();
+  await classRoom.save();
 
   res.status(200).json({
     success: true,
-    message: "Successfully enrolled in the class",
+    message: `Successfully enrolled in the class named ${classRoom.name}`,
   });
 });
 
@@ -182,22 +184,20 @@ exports.enrollStudentInClass = catchAsyncErrors(async (req, res, next) => {
 exports.enrollTeacherInClassAndCourses = catchAsyncErrors(
   async (req, res, next) => {
     //we have class object
-    const classRoom = await Classroom.findById(req.params);
+    const classRoom = await Classroom.findById(req.params.classID);
     //user to enrolled in the class
     const user = await User.findOne(req.user._id);
 
     classRoom.teachers.push(user._id);
 
-    classRoom.save();
+    await classRoom.save();
 
     //add teacher to all such selected courses
     for (let i = 0; i < req.body.courses.length; i++) {
-      const course = Course.findById(req.body.courses[i]);
-
+      const course = await Course.findById(req.body.courses[i]);
       course.teacher = user._id;
+      await course.save();
     }
-
-    await course.save();
 
     res.status(200).json({
       success: true,

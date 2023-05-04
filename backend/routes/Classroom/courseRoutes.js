@@ -7,15 +7,16 @@ const {
   getCourseByCourseID,
   updateCourse,
   deleteCourse,
+  getTeacherByID,
 } = require("../../controllers/Classroom/courseController");
 
 //routes
-router.route("/course").post(isAuthenticatedUser, isAdmin, createCourse);
-router
-  .route("/course/:id")
-  .get(isAuthenticatedUser, isAdmin, getCourseByCourseID);
-router.route("/course/:id").put(isAuthenticatedUser, isAdmin, updateCourse);
+router.route("/course").post(isAuthenticatedUser, createCourse);
+router.route("/course/:id").get(isAuthenticatedUser, getCourseByCourseID);
+router.route("/course/:id").put(isAuthenticatedUser, updateCourse);
 
-router.route("/course/:id").delete(isAuthenticatedUser, isAdmin, deleteCourse);
+router.route("/course/:id").delete(isAuthenticatedUser, deleteCourse);
+
+router.route("/teacher/:teacherID").get(isAuthenticatedUser, getTeacherByID);
 
 module.exports = router;

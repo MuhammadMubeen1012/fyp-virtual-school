@@ -7,6 +7,8 @@ const {
   getTestQuestions,
   submitAndAssessTeacherTest,
   submitAndAssessStudentTest,
+  enrollStudentInClass,
+  enrollTeacherInClassAndCourses,
 } = require("../controllers/admissionController");
 const { isAuthenticatedUser } = require("../middlewares/auth");
 
@@ -24,5 +26,13 @@ router
 router
   .route("/admission/teacher/submit/test")
   .post(isAuthenticatedUser, submitAndAssessTeacherTest);
+
+router
+  .route("/enroll/student/:classID")
+  .put(isAuthenticatedUser, enrollStudentInClass);
+
+router
+  .route("/enroll/teacher/:classID")
+  .put(isAuthenticatedUser, enrollTeacherInClassAndCourses);
 
 module.exports = router;

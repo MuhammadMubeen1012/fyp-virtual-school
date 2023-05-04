@@ -19,6 +19,11 @@ exports.createLesson = catchAsyncErrors(async (req, res, next) => {
     course: course._id,
   });
 
+  if (lesson) {
+    course.lessons.push(lesson._id);
+    await course.save();
+  }
+
   res.status(200).json({
     success: true,
     message: "Lesson created successfully",
@@ -30,6 +35,9 @@ exports.createLesson = catchAsyncErrors(async (req, res, next) => {
 exports.createContent = catchAsyncErrors(async (req, res, next) => {
   const lesson = await Lesson.findById(req.params.id);
   const data = req.body;
+
+  console.log(lesson);
+  // console.log(lesson.content);
 
   lesson.content.push(data.content);
 
