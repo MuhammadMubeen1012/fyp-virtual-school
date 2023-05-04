@@ -15,7 +15,6 @@ const RegisterForm = () => {
             password, // password: password
         };
 
-        // console.log();
 
         axios.defaults.baseURL = 'http://localhost:3000';
         axios.defaults.headers.post['Content-Type'] = 'application/json';

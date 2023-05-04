@@ -1,6 +1,6 @@
 import React from 'react';
-import LayoutStudent from "../../../components/Dashboard/Layout/LayoutStudent";
 import Link from "next/link";
+import LayoutStudent from "../../../components/Dashboard/Layout/LayoutStudent";
 
 const Index = () => {
     return (

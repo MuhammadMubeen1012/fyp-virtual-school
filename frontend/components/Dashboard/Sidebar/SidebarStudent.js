@@ -1,4 +1,4 @@
-import React, {useMemo, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import Link from "next/link";
 import {useRouter} from "next/router";
 
@@ -60,21 +60,23 @@ const SidebarStudent = () => {
             link: "/dashboard-student/logout"
         },
     ];
-
-
     const router = useRouter();
+
     const activeMenu = useMemo(
         () => sidebar.find(menu => menu.link === router.pathname),
         [router.pathname]
     );
 
-    const [toggleHamdburger, setToggleHamburger] = useState(true);
-    const [sidebarClick, setSidebarClick] = useState(sidebar);
+    const [toggleHamburger, setToggleHamburger] = useState(true);
+
+    useEffect(() => {
+
+    }, [ activeMenu]);
 
 
     return (
         <div className={"container-dashboard"}>
-            <aside className={` ${toggleHamdburger ? "toggle animated  " : "" } `}>
+            <aside className={` ${toggleHamburger ? "toggle animated  " : "" } `}>
 
                 <div className="top">
                     <div className="logo">
@@ -95,10 +97,15 @@ const SidebarStudent = () => {
                                 href={item.link}
                                 key={index}
                             >
-                                <a className={`link `}>
+
+                                <a className={`link ${activeMenu.id === item.id ? "active" : "" } `}
+
+                                >
                                     <span className="material-icons-sharp">{item.icon}</span>
                                     <h3>{item.name}</h3>
                                 </a>
+
+
 
                             </Link>
 
@@ -113,7 +120,7 @@ const SidebarStudent = () => {
             <div
                 className={`hamburger`}
                 id={"close-btn"}
-                onClick={ () => setToggleHamburger(!toggleHamdburger) }
+                onClick={ () => setToggleHamburger(!toggleHamburger) }
             >
                 <span className="material-icons-sharp fs-1 ">menu</span>
             </div>

@@ -95,7 +95,7 @@ const Sidebar = () => {
                                 href={item.link}
                                 key={index}
                             >
-                                <a className={`link `}>
+                                <a className={`link  `}>
                                     <span className="material-icons-sharp">{item.icon}</span>
                                     <h3>{item.name}</h3>
                                 </a>

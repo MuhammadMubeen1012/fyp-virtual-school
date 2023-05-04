@@ -6,131 +6,48 @@ import {Form} from "react-bootstrap";
 import {fetch} from "@cloudinary/url-gen/qualifiers/source";
 import axios from "axios";
 import toast, {Toaster} from "react-hot-toast";
+import Cookies from 'js-cookie';
 
 
 const TeacherForm = () => {
-
-    const [formData, setFormData] = useState({
-        user: '642f9b80bfd5ce948e4c2006',
-        firstName: '',
-        lastName: '',
-        fatherName: '',
-        age: '',
-        phoneNumber: '',
-        personalNIC: '',
-        fatherNIC: '',
-        class: '',
-        course: '',
-        bForm: {
-            public_id: '',
-            url: '',
-        },
-        photo: {
-            public_id: '',
-            url: '',
-        },
-        degreeProof: {
-            public_id: '',
-            url: '',
-        }
-    });
-    const [addCourses, setAddCourses] = useState([]);
-
-    const [image, setImage] = useState('');
-    const [imageTwo, setImageTwo] = useState('');
-    const [imageThree, setImageThree] = useState('');
-    const [allImages, setAllImages] = useState({
-        bForm: {
-            public_id: '',
-            url: '',
-        },
-        photo: {
-            public_id: '',
-            url: '',
-        },
-        degreeProof: {
-            public_id: '',
-            url: '',
-        }
-    });
-    const [imgData, setImgData] = useState({
-        public_id: '',
-        url: '',
-    });
-
-    const [imageArray, setImageArray] = useState([]);
-    const [newForm, setNewForm] = useState(null);
-
-    const router = useRouter();
-
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [fatherName, setFatherName] = useState("");
+    const [age, setAge] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [personalNIC, setPersonalNIC] = useState("");
+    const [fatherNIC, setFatherNIC] = useState("");
+    const [courses, setCourses] = useState([]);
+    const [classroom, setClassroom] = useState("");
+    const [image1, setImage1] = useState();
+    const [image2, setImage2] = useState();
+    const [image3, setImage3] = useState();
 
 
     useEffect(() => {
 
-        const {bForm, photo, degreeProof} = allImages;
-
-        setFormData(prevState => ({
-            ...prevState,
-            course: addCourses,
-            bForm,
-            photo,
-            degreeProof
-        }))
-
-        // console.log(formData)
-
-    }, [addCourses, imgData, imageArray, allImages]);
-
-    useEffect( () => {
-        // console.log(imgData);
-        if (imgData.url !== ""){
-            setImageArray([...imageArray,imgData])
-        }
-    }, [ imgData ]);
-
-    useEffect(() => {
-        // console.log(imageArray)
-
-        setAllImages(prevState => ({
-            ...prevState,
-            bForm: imageArray[0],
-            photo: imageArray[1],
-            degreeProof: imageArray[2],
-        }))
-
-
-    }, [imageArray]);
-
-    useEffect(() => {
-
-
-    }, [formData]);
+    }, [image1, image2, image3, courses]);
 
 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // await uploadImage(image);
-        // await uploadImage(imageTwo);
-        // await uploadImage(imageThree);
-        //
-        //
-        // await console.log("Inside handle Submit " + formData.firstName);
-        // await console.log("Inside handle Submit " + formData);
-        // await console.log("Inside handle Submit " + newForm);
+        console.log("Image One" + image1);
+        console.log("Image Two" + image2);
 
-        //
-        //
+
         axios.defaults.baseURL = 'http://localhost:3000';
         axios.defaults.headers.post['Content-Type'] = 'application/json';
         axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
         axios.defaults.headers.post['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept';
         axios.defaults.headers.post['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS';
 
-        const data = {
-            "user": "642f9b80bfd5ce948e4c2006",
-            "firstName": "Muhammad",
+        const {_id} = JSON.parse( localStorage.getItem('user') );
+
+        const dummyData = {
+            "user": _id,
+            "firstName": "Muhammad" ,
             "lastName": "Mubeen",
             "fatherName": "Yaseen",
             "age": 28,
@@ -139,39 +56,56 @@ const TeacherForm = () => {
             "fatherNIC": 4550400000000,
             "class": 1,
             "course": ["English", "Urdu", "Pakistan Studies"],
-            "bForm": {
-                "public_id": "products/dsvbpny402gelwugv2le",
-                "url": "https://res.cloudinary.com/bookit/image/upload/v1608062030/products/dsvbpny402gelwugv2le.jpg"
+            "bForm":  {
+                "public_id" : "products/dsvbpny402gelwugv2le",
+                "url" : "https://res.cloudinary.com/bookit/image/upload/v1608062030/products/dsvbpny402gelwugv2le.jpg"
             },
             "photo": {
-                "public_id": "products/dsvbpny402gelwugv2le",
-                "url": "https://res.cloudinary.com/bookit/image/upload/v1608062030/products/dsvbpny402gelwugv2le.jpg"
+                "public_id" : "products/dsvbpny402gelwugv2le",
+                "url" : "https://res.cloudinary.com/bookit/image/upload/v1608062030/products/dsvbpny402gelwugv2le.jpg"
             },
             "degreeProof": {
-                "public_id": "products/dsvbpny402gelwugv2le",
-                "url": "https://res.cloudinary.com/bookit/image/upload/v1608062030/products/dsvbpny402gelwugv2le.jpg"
+                "public_id" : "products/dsvbpny402gelwugv2le",
+                "url" : "https://res.cloudinary.com/bookit/image/upload/v1608062030/products/dsvbpny402gelwugv2le.jpg"
             }
         }
+        const data = {
+            "user": _id,
+            "firstName":firstName,
+            "lastName":lastName,
+            "fatherName":fatherName,
+            "age": age,
+            "phoneNumber":phoneNumber,
+            "personalNIC":personalNIC,
+            "fatherNIC":fatherNIC,
+            "course":courses,
+            "class":classroom,
+            "bForm": image1,
+            "photo": image2,
+            "degreeProof": image3
 
-        // const newData = JSON.parse(data);
-        // console.log(newData);
-
-        try{
-            const res = await axios.post('http://localhost:7000/api/v1/admission/teacher/data', data,{
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
-                }
-            });
-
-            console.log(res);
-            console.log("Registered Successfully");
-            toast.success("Registered Successfully");
-
-        }catch (error) {
-            console.log(error);
         }
 
+
+        try {
+            const res = axios.post('http://localhost:7000/api/v1/admission/teacher/data',dummyData , {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Authorization': `${Cookies.get('token')}`
+                }
+            }).then((res) => {
+                console.log(res);
+                console.log("Registered Successfully");
+                toast.success("Registered Successfully");
+            })
+
+
+        } catch (error) {
+            let cookie = Cookies.get('token');
+            console.log("Errror ", cookie);
+            console.log(error);
+        }
 
 
         // swal({
@@ -208,37 +142,20 @@ const TeacherForm = () => {
         //     })
 
 
-
     }
 
 
-
-    const handleChange = (e) => {
-        const name = e.target.name;
-        const value = e.target.value;
-
-        setFormData((prev) => {
-            return{
-                ...prev,
-                [name] : value
-            }
-        })
-    }
     const handleCheckbox = (e) => {
         const value = e.target.value;
         const checked = e.target.checked;
 
-        // console.log(value, checked);
-
-        if (checked){
-            // jo checked hain un ko array me store karna hai
-            setAddCourses([
-                ...addCourses,
+        if (checked) {
+            setCourses([
+                ...courses,
                 value
             ]);
-        }else{
-            // unchecked values k elawa sub return karna [checked ones]
-            setAddCourses(addCourses.filter((course) => course !== value ))  // return all checked values
+        } else {
+            setCourses(courses.filter((course) => course !== value))
         }
 
 
@@ -252,57 +169,12 @@ const TeacherForm = () => {
 
     }
 
-    const handleImageOne = async (e) => {
-        console.log(e.target.files);
-        setImage(e.target.files[0]);
-    }
-
-    const handleImageTwo = async (e) => {
-        console.log(e.target.files);
-        setImageTwo(e.target.files[0]);
-    }
-
-    const handleImageThree = (e) => {
-        console.log(e.target.files);
-        setImageThree(e.target.files[0]);
-    }
-
-
-    const uploadImage = async (image) => {
-        const formData = new FormData();
-        formData.append("file", image);
-        formData.append("upload_preset", "ek-school");
-        formData.append("cloud_name", "dwb6ne3uj");
-
-
-        try{
-            const res = await axios.post('https://api.cloudinary.com/v1_1/dwb6ne3uj/image/upload', formData);
-            const data = await res.data;
-            const {public_id, url} = data;
-
-            // console.log("full object" + data);
-            // console.log( "img id" +  data.public_id)
-            // console.log("url" + data.url);
-
-            setImgData(prev => ({
-                ...prev,
-                public_id,
-                url
-            }))
-
-        }
-        catch(error){
-            console.log(error);
-        }
-    }
-
 
     return (
         <div className="mx-auto col-lg-6 col-md-12 mt-5 ">
 
-            {JSON.stringify(formData)}
 
-            <Toaster />
+            <Toaster/>
             <div className="login-form">
                 <h2>Teacher Admission</h2>
 
@@ -310,68 +182,68 @@ const TeacherForm = () => {
                     <div className="form-group">
                         <label>First Name</label>
                         <input type="text"
-                               onChange={handleChange}
+                               onChange={(e)=>{setFirstName(e.target.value)}}
                                name={"firstName"}
-                               value={formData.firstName}
-                               className="form-control" placeholder="First Name" />
+                               value={firstName}
+                               className="form-control" placeholder="First Name"/>
                     </div>
 
                     <div className="form-group">
                         <label>Last Name</label>
                         <input type="text"
-                               onChange={handleChange}
+                               onChange={(e)=>{setLastName(e.target.value)}}
                                name={"lastName"}
-                               value={formData.lastName}
-                               className="form-control" placeholder="Last Name" />
+                               value={lastName}
+                               className="form-control" placeholder="Last Name"/>
                     </div>
 
                     <div className="form-group">
                         <label>Father Name</label>
                         <input type="text"
-                               onChange={handleChange}
+                               onChange={(e) => {setFatherName(e.target.value)} }
                                name={"fatherName"}
-                               value={formData.fatherName}
-                               className="form-control" placeholder="Father Name" />
+                               value={fatherName}
+                               className="form-control" placeholder="Father Name"/>
                     </div>
 
                     <div className="form-group">
                         <label>Phone</label>
                         <input type="text"
-                               onChange={handleChange}
+                               onChange={(e) => {setPhoneNumber(e.target.value)} }
                                name={"phoneNumber"}
-                               value={formData.phoneNumber}
-                               className="form-control" placeholder="Phone Number" />
+                               value={phoneNumber}
+                               className="form-control" placeholder="Phone Number"/>
                     </div>
 
                     <div className="form-group">
                         <label>Age</label>
                         <input type="number"
-                               onChange={handleChange}
+                               onChange={(e) => {setAge(e.target.value)} }
                                name={"age"}
-                               value={formData.age}
-                               className="form-control" placeholder="Age" />
+                               value={age}
+                               className="form-control" placeholder="Age"/>
                     </div>
 
                     <div className="form-group">
                         <label>Personal NIC Number</label>
                         <input type="text"
-                               onChange={handleChange}
+                               onChange={(e) => {setPersonalNIC(e.target.value)} }
                                name={"personalNIC"}
-                               value={formData.personalNIC}
-                               className="form-control" placeholder="Personal NIC Number" />
+                               value={personalNIC}
+                               className="form-control" placeholder="Personal NIC Number"/>
                     </div>
 
                     <div className="form-group">
                         <label>Father NIC Number</label>
                         <input type="text"
-                               onChange={handleChange}
+                               onChange={(e) => {setFatherNIC(e.target.value)}}
                                name={"fatherNIC"}
-                               value={formData.fatherNIC}
-                               className="form-control" placeholder="Father NIC Number" />
+                               value={fatherNIC}
+                               className="form-control" placeholder="Father NIC Number"/>
                     </div>
 
 
-                    <label style={{fontWeight:"bold"}}>Select any three courses</label>
+                    <label style={{fontWeight: "bold"}}>Select any three courses</label>
                     <div className="">
                         <input type="checkbox"
                                onChange={handleCheckbox}
@@ -403,48 +275,98 @@ const TeacherForm = () => {
                                value={"Drawing"} name="courses" id="course6"/>
                         <label htmlFor="course6">Drawing</label><br/>
 
-                    </div><br/>
-
+                    </div>
+                    <br/>
                     <Form.Select
-                        value={formData.class}
-                        onChange={handleDropdownChange}
-                        name="" id="" className="nice-select option">
+                        value={classroom}
+                        onChange={(e) => {
+                            setClassroom( e.target.value)
+                        }}
+                        name="classroom" id="" className="nice-select option">
                         <option className={"option nice-select"} value="">___Select Class___</option>
-                        <option className={"option"}  value="1">Class 1</option>
-                        <option className={"option"}  value="2">Class 2</option>
-                        <option className={"option"}  value="3">Class 3</option>
-                        <option className={"option"}  value="4">Class 4</option>
-                        <option className={"option"}  value="5">Class 5</option>
-                        <option className={"option"}  value="6">Class 6</option>
-                        <option className={"option"}  value="7">Class 7</option>
-                        <option className={"option"}  value="8">Class 8</option>
-                        <option className={"option"}  value="9">Class 9</option>
-                        <option className={"option"}  value="10">Class 10</option>
+                        <option className={"option"} value="1">Class 1</option>
+                        <option className={"option"} value="2">Class 2</option>
+                        <option className={"option"} value="3">Class 3</option>
+                        <option className={"option"} value="4">Class 4</option>
+                        <option className={"option"} value="5">Class 5</option>
+                        <option className={"option"} value="6">Class 6</option>
+                        <option className={"option"} value="7">Class 7</option>
+                        <option className={"option"} value="8">Class 8</option>
+                        <option className={"option"} value="9">Class 9</option>
+                        <option className={"option"} value="10">Class 10</option>
                     </Form.Select><br/>
 
 
                     <div className="form-group">
                         <label>CNIC</label>
                         <input type="file"
-                               onChange={handleImageOne}
+                               onChange={(e) => {
+                                   const image = e.target.files[0]
+                                   const formData = new FormData();
+                                   formData.append("file", image);
+                                   formData.append("upload_preset", "testing");
+                                   formData.append("cloud_name", "dwb6ne3uj");
+                                   try {
+                                       axios.post('https://api.cloudinary.com/v1_1/dwb6ne3uj/image/upload', formData).then((res) => {
+                                           setImage1({public_id: res.data.public_id, url: res.data.url})
+
+                                           console.log(res)
+                                       })
+
+
+                                   } catch (error) {
+                                       console.log(error);
+                                   }
+                               }}
                                accept={"image/*"}
-                               name="cnic" id={"cnic"} />
+                               name="cnic" id={"cnic"}/>
                     </div>
 
                     <div className="form-group">
                         <label>Last Qualification Certificate</label>
                         <input type="file"
-                               onChange={handleImageTwo}
+                               onChange={(e) => {
+                                   const image = e.target.files[0]
+                                   const formData = new FormData();
+                                   formData.append("file", image);
+                                   formData.append("upload_preset", "testing");
+                                   formData.append("cloud_name", "dwb6ne3uj");
+                                   try {
+                                       axios.post('https://api.cloudinary.com/v1_1/dwb6ne3uj/image/upload', formData).then((res) => {
+                                           setImage2({public_id: res.data.public_id, url: res.data.url})
+
+                                           console.log(res)
+
+                                       })
+                                   } catch (error) {
+                                       console.log(error);
+                                   }
+                               }}
                                accept={"image/*"}
-                               name={"last-qualification"} id={"last-qualification"} />
+                               name={"last-qualification"} id={"last-qualification"}/>
                     </div>
 
                     <div className="form-group">
                         <label>Passport Size Photo</label>
                         <input type="file"
-                               onChange={handleImageThree}
+                               onChange={(e) => {
+                                   const image = e.target.files[0]
+                                   const formData = new FormData();
+                                   formData.append("file", image);
+                                   formData.append("upload_preset", "testing");
+                                   formData.append("cloud_name", "dwb6ne3uj");
+                                   try {
+                                       axios.post('https://api.cloudinary.com/v1_1/dwb6ne3uj/image/upload', formData).then((res) => {
+                                           setImage3({public_id: res.data.public_id, url: res.data.url})
+
+                                           console.log(res)
+                                       })
+                                   } catch (error) {
+                                       console.log(error);
+                                   }
+                               }}
                                accept={"image/*"}
-                               name={"passport-photo"} id={"passport-photo"} />
+                               name={"passport-photo"} id={"passport-photo"}/>
                     </div>
 
                     <button type="submit">

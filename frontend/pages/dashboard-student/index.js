@@ -1,10 +1,56 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useMemo, useState} from 'react';
 import {useRouter} from "next/router";
 import Link from "next/link";
 import SidebarStudent from "../../components/Dashboard/Sidebar/SidebarStudent";
 import LayoutStudent from "../../components/Dashboard/Layout/LayoutStudent";
+import axios from "axios";
+import Cookies from "js-cookie";
+import {set} from "@cloudinary/url-gen/actions/variable";
 
 const Index = () => {
+
+    const [userIdFromLocalStorage, setUserIdFromLocalStorage] = useState("");
+
+
+
+    const fetchData = async () => {
+        try {
+            const res = await axios.get('http://localhost:7000/api/v1/academicYear/classrooms/6433b54f4f2a795f64ae7ce7', {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Authorization': `${Cookies.get('token')}`
+                }
+            })
+            const data = await res.data.classrooms;
+            console.log(data);
+
+
+            const userId = JSON.parse(localStorage.getItem("user"))
+            console.log(userId._id);
+
+            // const check = data.classrooms.map((item, idx) => {
+            //     if (item._id === userId){
+            //         return item;
+            //     }
+            //     return null;
+            // })
+
+            // console.log(check);
+
+
+
+        } catch (e) {
+            console.log(e, "error");
+        }
+
+    }
+
+
+    useLayoutEffect(() => {
+        fetchData();
+
+    }, []);
 
 
 
@@ -12,7 +58,6 @@ const Index = () => {
     return (
         <>
             <LayoutStudent>
-
 
                 {/*=============== Start of main ================= */}
                 <main>

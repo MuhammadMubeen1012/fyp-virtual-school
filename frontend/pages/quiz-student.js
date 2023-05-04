@@ -34,8 +34,12 @@ const QuizStudent = () => {
         axios.defaults.headers.post['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept';
         axios.defaults.headers.post['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS';
 
+        const dummyData = {
+            "answers": ["Option01","Option01","Option01","Option01","Option01","Option01","Option01","Option01","Option01","Option01"]
+        }
+
         try{
-            const res = await axios.post('http://localhost:7000/api/v1/admission/student/submit/test', answers,{
+            const res = await axios.post('http://localhost:7000/api/v1/admission/student/submit/test', dummyData,{
                 headers: {
                     'Content-Type': 'application/json',
                     'Access-Control-Allow-Origin': '*'

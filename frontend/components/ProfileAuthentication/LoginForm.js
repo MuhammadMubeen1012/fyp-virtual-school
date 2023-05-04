@@ -3,12 +3,18 @@ import Link from 'next/link';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 
-const LoginForm = () => {
+const
+    LoginForm = () => {
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
 
     const router = useRouter();
 
+    const saveToCookie = (token) => {
+        const cookieName = "token"
+        document.cookie = `${cookieName}=${token}`
+
+    }
 
 
     const handleSubmit = (e) => {
@@ -26,19 +32,25 @@ const LoginForm = () => {
 
 
         try {
-
-            axios.get('http://localhost:7000/api/v1/signin', data, {
+            axios.post('http://localhost:7000/api/v1/signin', data, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Access-Control-Allow-Origin': '*'
                 }
             }).then(response => {
                 console.log(response);
-                router.push("/admission")
-                //token
+                // router.push("/admission")
+                // token
                 if (response.data.success) {
                     const token = response.data.token;
                     let user = response.data.user;
+
+                    // console.log(token);
+
+                    saveToCookie(token);
+
+
+
 
                     //set token to local storage
                     localStorage.setItem('token', token);
@@ -46,16 +58,18 @@ const LoginForm = () => {
 
                     user = JSON.parse(localStorage.getItem('user'));
 
-                    if (user.role === 'admin') {
-                        router.push("/admin/dashboard"); //redirect to admin dashboard
-                    } else if (user.role === 'user') {
-                        router.push("/user/dashboard")
-                    }
-                    else if (user.role === "teacher"){
-                        router.push("/teacher/dashboard")
-                    }
-                    else if (user.role === 'user'){
+                    if (user.isRegistered === false){
                         router.push('/admission')
+                    }
+                    else if (user.isRegistered === true){
+                        if (user.role === 'admin') {
+                            router.push("/dashboard-admin"); //redirect to admin dashboard
+                        } else if (user.role === 'student') {
+                            router.push("/dashboard-student")
+                        }
+                        else if (user.role === "teacher"){
+                            router.push("/dashboard-teacher")
+                        }
                     }
                 }
 
@@ -64,17 +78,6 @@ const LoginForm = () => {
         } catch (e) {
             console.log(e, "error");
         }
-
-
-
-        // console.log(data);
-        // axios.post('/api/login', data)
-        //     .then(response => {
-        //         console.log(response);
-        //     })
-        //     .catch(error => {
-        //         console.log(error);
-        //     });
     }
     return (
         <div className="login-form">

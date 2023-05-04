@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9b86c9f-0b89-4563-ba11-369d16e7ec77" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/components/ProfileAuthentication/LoginForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/components/ProfileAuthentication/LoginForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/components/ProfileAuthentication/RegisterForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/components/ProfileAuthentication/RegisterForm.js" afterDir="false" />
-    </list>
+    <list default="true" id="d9b86c9f-0b89-4563-ba11-369d16e7ec77" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -99,7 +95,7 @@
       <workItem from="1682469305337" duration="6339000" />
       <workItem from="1682562740434" duration="10280000" />
       <workItem from="1682652751832" duration="30108000" />
-      <workItem from="1682909993062" duration="7200000" />
+      <workItem from="1682909993062" duration="7427000" />
     </task>
     <servers />
   </component>
