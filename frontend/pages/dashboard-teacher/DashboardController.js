@@ -25,7 +25,7 @@ export const getTeacher = async () => {
 }
 
 export const getClassrooms = async (classroomsLinks) => {
-    const res = await Promise.all(classrooms.map((classId) => {
+    const res = await Promise.all(classroomsLinks.map((classId) => {
         return axios.get(`http://localhost:7000/api/v1/classroom/${classId}`, {
             headers: {
                 Authorization: `${Cookies.get('token')}`
