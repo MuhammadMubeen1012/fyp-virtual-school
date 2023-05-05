@@ -1,5 +1,8 @@
 const catchAsyncErrors = require("../../middlewares/catchAsyncErrors");
 const Classroom = require("../../models/Classroom/Classroom");
+const Teacher = require("../../models/teacher");
+const Student = require("../../models/student");
+const Course = require("../../models/Classroom/Course");
 
 //features:
 /**
@@ -105,56 +108,136 @@ exports.deleteClassroom = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// @desc get Students by class
-// @route GET /classroom/students/:classroomID
+// // @desc get Students by class
+// // @route GET /classroom/students/:classroomID
+// exports.getStudentsByClass = catchAsyncErrors(async (req, res, next) => {
+//   const classrooms = await Classroom.findById(req.params.id);
+
+//   if (classrooms) {
+//     res.status(200).json({
+//       success: true,
+//       message: "Students",
+//       students: classrooms.students,
+//     });
+//   } else {
+//     return next(
+//       new ErrorHandler(`Classroom does not found with id: ${req.params.id}`)
+//     );
+//   }
+// });
+
+// // @desc get teachers by class
+// // @route GET /classroom/teachers/:classroomID
+// exports.getTeachersByClass = catchAsyncErrors(async (req, res, next) => {
+//   const classrooms = await Classroom.findById(req.params.id);
+
+//   if (classrooms) {
+//     res.status(200).json({
+//       success: true,
+//       message: "Teachers",
+//       teachers: classrooms.teachers,
+//     });
+//   } else {
+//     return next(
+//       new ErrorHandler(`Classroom does not found with id: ${req.params.id}`)
+//     );
+//   }
+// });
+
+// // @desc get teachers by class
+// // @route GET /classroom/courses/:classroomID
+// exports.getCoursesByClass = catchAsyncErrors(async (req, res, next) => {
+//   const classrooms = await Classroom.findById(req.params.id);
+
+//   if (classrooms) {
+//     res.status(200).json({
+//       success: true,
+//       message: "Courses",
+//       courses: classrooms.courses,
+//     });
+//   } else {
+//     return next(
+//       new ErrorHandler(`Classroom does not found with id: ${req.params.id}`)
+//     );
+//   }
+// });
+
 exports.getStudentsByClass = catchAsyncErrors(async (req, res, next) => {
-  const classrooms = await Classroom.findById(req.params.id);
+  const classroom = await Classroom.findById(req.params.classID);
+  const students = classroom.students;
+  // console.log(students);
+  const data = [];
 
-  if (classrooms) {
+  if (classroom && students) {
+    for (let student of students) {
+      const std = await Student.findOne({ user: student });
+      // console.log(std);
+      data.push(std);
+    }
+  }
+
+  if (data.length > 0) {
     res.status(200).json({
       success: true,
-      message: "Students",
-      students: classrooms.students,
+      students: data,
     });
   } else {
-    return next(
-      new ErrorHandler(`Classroom does not found with id: ${req.params.id}`)
-    );
+    res.status(200).json({
+      success: false,
+      students: [],
+    });
   }
 });
 
-// @desc get teachers by class
-// @route GET /classroom/teachers/:classroomID
 exports.getTeachersByClass = catchAsyncErrors(async (req, res, next) => {
-  const classrooms = await Classroom.findById(req.params.id);
+  const classroom = await Classroom.findById(req.params.classID);
+  const teachers = classroom.teachers;
 
-  if (classrooms) {
+  const data = [];
+
+  if (classroom && teachers) {
+    for (let teacher of teachers) {
+      const tchr = await Teacher.findOne({ user: teacher });
+      // console.log(std);
+      data.push(tchr);
+    }
+  }
+
+  if (data.length > 0) {
     res.status(200).json({
       success: true,
-      message: "Teachers",
-      teachers: classrooms.teachers,
+      teachers: data,
     });
   } else {
-    return next(
-      new ErrorHandler(`Classroom does not found with id: ${req.params.id}`)
-    );
+    res.status(200).json({
+      success: false,
+      teachers: [],
+    });
   }
 });
 
-// @desc get teachers by class
-// @route GET /classroom/courses/:classroomID
 exports.getCoursesByClass = catchAsyncErrors(async (req, res, next) => {
-  const classrooms = await Classroom.findById(req.params.id);
+  const classroom = await Classroom.findById(req.params.classID);
+  const courses = classroom.courses;
+  const data = [];
 
-  if (classrooms) {
+  if (classroom && courses) {
+    for (let course of courses) {
+      const crs = await Course.findById(course);
+      // console.log(std);
+      data.push(crs);
+    }
+  }
+
+  if (data.length > 0) {
     res.status(200).json({
       success: true,
-      message: "Courses",
-      courses: classrooms.courses,
+      courses: data,
     });
   } else {
-    return next(
-      new ErrorHandler(`Classroom does not found with id: ${req.params.id}`)
-    );
+    res.status(200).json({
+      success: false,
+      courses: [],
+    });
   }
 });
