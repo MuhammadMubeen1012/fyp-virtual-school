@@ -1,15 +1,28 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import LayoutAdmin from "../../components/Dashboard/Layout/LayoutAdmin";
 import Link from "next/link";
+import {getClassroomsByAcademicYear} from "./DashboardController";
 
 const DashboardAdmin = () => {
+    const [classrooms, setClassrooms] = React.useState([]);
+    const [loading, setLoading] = React.useState(false);
+    useEffect(() => {
+        if (classrooms.length === 0) {
+            getClassroomsByAcademicYear().then(r => setClassrooms(r));
+        }
+    }, []);
+    useEffect(() => {
+        if (classrooms.length !== 0 && loading === false) {
+            setLoading(true);
+        }
+    }, [classrooms]);
+
     return (
         <LayoutAdmin>
 
             {/*=============== Start of main ================= */}
-            <main >
+            <main>
                 <h1>Overview</h1>
-
 
 
                 {/* ============ Start of insights ============== */}
@@ -97,38 +110,29 @@ const DashboardAdmin = () => {
                             <th>Classroom</th>
                             <th>No. of Students</th>
                             <th>No. of Teachers</th>
+                            <th>Details</th>
                         </tr>
                         </thead>
 
                         <tbody>
-                        <tr>
-                            <td>Class 06</td>
-                            <td>45</td>
-                            <td>5</td>
-
-                            <Link href={"/dashboard-teacher/courses/english"} className="primary ">Details</Link>
-                        </tr>
-
-                        <tr>
-                            <td>Class 07</td>
-                            <td>35</td>
-                            <td>4</td>
-                            <td className="primary">Details</td>
-                        </tr>
-                        <tr>
-                            <td>Class 08</td>
-                            <td>50</td>
-                            <td>5</td>
-                            <td className="primary">Details</td>
-                        </tr>
-
-
+                        {
+                            loading ?
+                                classrooms.map((classroom) => {
+                                    return (
+                                        <tr key={classroom._id}>
+                                            <td>{classroom.name}</td>
+                                            <td>{classroom.students.length}</td>
+                                            <td>{classroom.teachers.length}</td>
+                                            <td className="primary">Details</td>
+                                        </tr>
+                                    )
+                                }) : ""
+                        }
+                        
                         </tbody>
                     </table>
 
                 </div>
-
-
 
 
             </main>
@@ -136,7 +140,7 @@ const DashboardAdmin = () => {
 
 
             {/*============= start of Right side*/}
-            <div className="right"  >
+            <div className="right">
 
                 <div className="profile">
                     <div className="info">
@@ -181,7 +185,6 @@ const DashboardAdmin = () => {
                         </div>
 
 
-
                         <div className="update">
                             <div className="profile-photo">
                                 <h3>- E</h3>
@@ -194,7 +197,6 @@ const DashboardAdmin = () => {
 
                             </div>
                         </div>
-
 
 
                     </div>
@@ -217,7 +219,6 @@ const DashboardAdmin = () => {
 
                         </div>
                     </div>
-
 
 
                     <div className="item offline">
