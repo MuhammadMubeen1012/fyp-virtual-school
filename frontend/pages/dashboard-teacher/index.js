@@ -4,12 +4,14 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import {main} from "@cloudinary/url-gen/qualifiers/videoCodecProfile";
 import Link from "next/link";
+import {getClassrooms, getCourses, getTeacher} from "./DashboardController";
 
 function Index(effect, deps) {
     // api/v1/teacher
     // api/v1/course/courseId
 
 
+    // const user = localStorage.getItem('user');
     const [user, setUser] = useState({});
     const [bForm, setBForm] = useState({});
     const [photo, setPhoto] = useState({});
@@ -26,29 +28,16 @@ function Index(effect, deps) {
     const [mainCourses, setMainCourses] = useState([]);
     const [loading, setLoading] = useState(false);
     const [numberOfStudents, setNumberOfStudents] = useState(0);
-    const getCourses = () => {
-        Promise.all(courses.map((course) => {
-            return axios.get(`http://localhost:7000/api/v1/course/${course}`,
-                {
-                    headers: {
-                        Authorization: `${Cookies.get('token')}`
-                    }
-                })
-        })).then((res) => {
-            // console.log("GETTTTT Courses", res.data.course);
+    const getMainCourses = () => {
+        getCourses(courses).then((res) => {
             setMainCourses(res.map((r) => {
                 return r.data.course;
             }));
         });
     }
 
-    const getTeacher = () => {
-        axios.get(`http://localhost:7000/api/v1/teacher`, {
-            headers: {
-                Authorization: `${Cookies.get('token')}`
-            }
-        }).then(async (res) => {
-            console.log(res.data.teacher);
+    const getTeacherObj = () => {
+        getTeacher().then((res) => {
             const {
                 bForm,
                 photo,
@@ -63,7 +52,7 @@ function Index(effect, deps) {
                 fatherNIC,
                 classroom,
                 courses: c
-            } = res.data.teacher;
+            } = res;
             setBForm(bForm);
             setPhoto(photo);
             setDegreeProof(degreeProof);
@@ -77,52 +66,39 @@ function Index(effect, deps) {
             setFatherNIC(fatherNIC);
             setClassroom(classroom);
             setCourses(c);
-            getClassrooms(classroom);
-        }).catch((err) => {
-            console.log(err);
+            getClassroomsObjects(classroom);
+
         })
     }
 
-    const getClassrooms = (classrooms) => {
-        Promise.all(classrooms.map((classId) => {
-            return axios.get(`http://localhost:7000/api/v1/classroom/${classId}`, {
-                headers: {
-                    Authorization: `${Cookies.get('token')}`
-                }
-            })
-        })).then(res => {
-            console.log(res);
 
-            setClassroom(res.map((r) => {
-                console.log(r.data.classrooms);
-                return r.data.classrooms
-            }));
-        })
+    const getClassroomsObjects = (classrooms) => {
+        getClassrooms(classrooms).then((res) => {
+            setClassroom(res);
+        });
     }
 
     useEffect(() => {
         if (classroom.length > 0) {
             console.log('Classroom ', classroom);
-            // if (classroom[0].students)
-                setNumberOfStudents(classroom.map((croom) => {
-                    if (croom.students) {
-                        return croom.students.length
-                    }
-                }).reduce((a, b) => a + b, 0));
+            if (classroom[0].students) setNumberOfStudents(classroom.map((croom) => {
+                if (croom.students) {
+                    return croom.students.length
+                }
+            }).reduce((a, b) => a + b, 0));
 
         }
     }, [classroom]);
 
 
     useEffect(() => {
-        getTeacher();
-        getCourses();
-
+        getTeacherObj();
+        getMainCourses()
     }, []);
 
     useEffect(() => {
         if (courses.length > 0) {
-            getCourses();
+            getMainCourses();
         }
     }, [courses]);
     useEffect(() => {
@@ -131,188 +107,182 @@ function Index(effect, deps) {
         }
     }, [mainCourses]);
 
-    return (
-        <LayoutTeacher>
+    return (<LayoutTeacher>
 
-            {/*=============== Start of main ================= */}
-            <main>
-                <h1>Overview</h1>
+        {/*=============== Start of main ================= */}
+        <main>
+            <h1>Overview</h1>
 
-                {/* ============ Start of insights ============== */}
+            {/* ============ Start of insights ============== */}
 
-                <div className="insights">
+            <div className="insights">
 
-                    {/*course completed*/}
-                    <div className="course-completed">
-                        <span className="material-icons-sharp">person_outline</span>
-                        <div className="middle">
-                            <div className="left">
-                                <h3>Total Students</h3>
-                                <h1>{numberOfStudents}</h1>
-                            </div>
-
-                            {/*<div className="progress">*/}
-                            {/*    <svg>*/}
-                            {/*        <circle cx={"38"} cy={"38"} r={"36"}></circle>*/}
-                            {/*    </svg>*/}
-
-                            {/*    <div className="number">*/}
-                            {/*        <p>81%</p>*/}
-                            {/*    </div>*/}
-                            {/*</div>*/}
+                {/*course completed*/}
+                <div className="course-completed">
+                    <span className="material-icons-sharp">person_outline</span>
+                    <div className="middle">
+                        <div className="left">
+                            <h3>Total Students</h3>
+                            <h1>{numberOfStudents}</h1>
                         </div>
 
+                        {/*<div className="progress">*/}
+                        {/*    <svg>*/}
+                        {/*        <circle cx={"38"} cy={"38"} r={"36"}></circle>*/}
+                        {/*    </svg>*/}
+
+                        {/*    <div className="number">*/}
+                        {/*        <p>81%</p>*/}
+                        {/*    </div>*/}
+                        {/*</div>*/}
                     </div>
 
-                    {/*course progress*/}
-                    <div className="course-progress">
-                        <span className="material-icons-sharp">analytics</span>
-                        <div className="middle">
-                            <div className="left">
-                                <h3>Your Courses</h3>
-                                <h1>{mainCourses.length}</h1>
-                            </div>
+                </div>
 
-                        </div>
-
-                    </div>
-
-                    {/*Certification*/}
-                    <div className="certification">
-                        <span className="material-icons-sharp">analytics</span>
-                        <div className="middle">
-                            <div className="left">
-                                <h3>Your Classes</h3>
-                                <h1>{classroom.length}</h1>
-                            </div>
-
+                {/*course progress*/}
+                <div className="course-progress">
+                    <span className="material-icons-sharp">analytics</span>
+                    <div className="middle">
+                        <div className="left">
+                            <h3>Your Courses</h3>
+                            <h1>{mainCourses.length}</h1>
                         </div>
 
                     </div>
 
                 </div>
 
-                {/*============ END of insights =================== */}
-
-
-                {/* ============= start of Courses ================= */}
-                <div className="courses-table">
-
-                    <h2>Courses</h2>
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>Course Title</th>
-                            <th>Lessons</th>
-                            <th>Details</th>
-                        </tr>
-                        </thead>
-
-                        <tbody>
-
-                        {loading && mainCourses.map((course, index) => {
-                            console.log('000----------------', course);
-                            return (
-                                <tr key={index}>
-                                    <td>{course.name}</td>
-                                    <td>{course.lessons.length}</td>
-                                    <td><Link href={'#'}>click here</Link></td>
-                                </tr>
-                            )
-                        })
-                        }
-
-
-                        </tbody>
-                    </table>
-
-                    <a href="#">Show All</a>
-
-                </div>
-                {/* ============= End of Courses  ================== */}
-
-            </main>
-            {/*=============== End Of Main  ==================*/}
-
-
-            {/*============= start of Right side*/}
-            <div className="right">
-
-                <div className="profile">
-                    <div className="info">
-                        <p>Hey, <b>{firstName} {lastName}</b></p>
-                    </div>
-                </div>
-
-
-                {/*start of recent Updates*/}
-                <div className="recent-updates">
-                    <h2>Upcoming Activities</h2>
-                    <div className="updates">
-
-
-                        <div className="update">
-                            <div className="profile-photo">
-                                <h3>- UX</h3>
-                            </div>
-
-                            <div className="message">
-                                <p>
-                                    Assignment due 20 March
-                                </p>
-                                <small className="text-muted">2 Minutes Ago</small>
-                            </div>
+                {/*Certification*/}
+                <div className="certification">
+                    <span className="material-icons-sharp">analytics</span>
+                    <div className="middle">
+                        <div className="left">
+                            <h3>Your Classes</h3>
+                            <h1>{classroom.length}</h1>
                         </div>
-
-
-                        <div className="update">
-                            <div className="profile-photo">
-                                <h3>- SEO</h3>
-                            </div>
-
-                            <div className="message">
-                                <p>
-                                    Assignment due 21 March
-                                </p>
-                                <small className="text-muted">2 Minutes Ago</small>
-                            </div>
-                        </div>
-
-
-                        <div className="update">
-                            <div className="profile-photo">
-                                <h3>- SE</h3>
-                            </div>
-
-                            <div className="message">
-                                <p>
-                                    Assignment due 25 March
-                                </p>
-                                <small className="text-muted">2 Minutes Ago</small>
-                            </div>
-                        </div>
-
 
                     </div>
-                </div>
-                {/*end of recent updates*/}
-
-
-                {/*============= start of Upcoming Events*/}
-                <div className="upcoming-events">
-                    <h2>Notice Board</h2>
 
                 </div>
-                {/*============= end of Upcoming Events*/}
-
 
             </div>
-            {/*============= End of left Side*/}
+
+            {/*============ END of insights =================== */}
 
 
-        </LayoutTeacher>
-    );
-}
-;
+            {/* ============= start of Courses ================= */}
+            <div className="courses-table">
+
+                <h2>Courses</h2>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Course Title</th>
+                        <th>Lessons</th>
+                        <th>Details</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    {loading && mainCourses.map((course, index) => {
+                        console.log('000----------------', course);
+                        return (<tr key={index}>
+                            <td>{course.name}</td>
+                            <td>{course.lessons.length}</td>
+                            <td><Link href={'#'}>click here</Link></td>
+                        </tr>)
+                    })}
+
+
+                    </tbody>
+                </table>
+
+                <a href="#">Show All</a>
+
+            </div>
+            {/* ============= End of Courses  ================== */}
+
+        </main>
+        {/*=============== End Of Main  ==================*/}
+
+
+        {/*============= start of Right side*/}
+        <div className="right">
+
+            <div className="profile">
+                <div className="info">
+                    <p>Hey, <b>{firstName} {lastName}</b></p>
+                </div>
+            </div>
+
+
+            {/*start of recent Updates*/}
+            <div className="recent-updates">
+                <h2>Upcoming Activities</h2>
+                <div className="updates">
+
+
+                    <div className="update">
+                        <div className="profile-photo">
+                            <h3>- UX</h3>
+                        </div>
+
+                        <div className="message">
+                            <p>
+                                Assignment due 20 March
+                            </p>
+                            <small className="text-muted">2 Minutes Ago</small>
+                        </div>
+                    </div>
+
+
+                    <div className="update">
+                        <div className="profile-photo">
+                            <h3>- SEO</h3>
+                        </div>
+
+                        <div className="message">
+                            <p>
+                                Assignment due 21 March
+                            </p>
+                            <small className="text-muted">2 Minutes Ago</small>
+                        </div>
+                    </div>
+
+
+                    <div className="update">
+                        <div className="profile-photo">
+                            <h3>- SE</h3>
+                        </div>
+
+                        <div className="message">
+                            <p>
+                                Assignment due 25 March
+                            </p>
+                            <small className="text-muted">2 Minutes Ago</small>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            {/*end of recent updates*/}
+
+
+            {/*============= start of Upcoming Events*/}
+            <div className="upcoming-events">
+                <h2>Notice Board</h2>
+
+            </div>
+            {/*============= end of Upcoming Events*/}
+
+
+        </div>
+        {/*============= End of left Side*/}
+
+
+    </LayoutTeacher>);
+};
 
 export default Index;
