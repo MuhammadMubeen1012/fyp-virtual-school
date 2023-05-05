@@ -10,6 +10,18 @@ import {set} from "@cloudinary/url-gen/actions/variable";
 const Index = () => {
 
     const [userIdFromLocalStorage, setUserIdFromLocalStorage] = useState("");
+    const [courses, setCourses] = useState([]);
+    const [age, setAge] = useState();
+    const [bForm, setBForm] = useState();
+    const [classroom, setClassroom] = useState();
+    const [fatherNIC, setFatherNIC] = useState();
+    const [fatherName, setFatherName] = useState();
+    const [firstName, setFirstName] = useState();
+    const [lastName, setLastName] = useState();
+    const [phoneNumber, setPhoneNumber] = useState();
+    const [photo, setPhoto] = useState();
+    const [mainCourses, setMainCourses] = useState([]);
+
 
 
 
@@ -22,8 +34,8 @@ const Index = () => {
                     'Authorization': `${Cookies.get('token')}`
                 }
             })
-            const data = await res.data.classrooms;
-            console.log(data);
+            // const data = await res.data.classrooms;
+            // console.log(data);
 
 
             const userId = JSON.parse(localStorage.getItem("user"))
@@ -46,13 +58,84 @@ const Index = () => {
 
     }
 
+    const getStudent = () => {
+        axios.get(`http://localhost:7000/api/v1/student`, {
+            headers: {
+                Authorization: `${Cookies.get('token')}`
+            }
+        }).then(async (res) => {
+            console.log( "Student Data: ", res.data.student);
+            const {
+                age,
+                bForm,
+                classroom,
+                fatherNIC,
+                fatherName,
+                firstName,
+                lastName,
+                phoneNumber,
+                photo,
+                courses: c,
+            } = res.data.student;
+            setBForm(bForm);
+            setPhoto(photo);
+            setFirstName(firstName);
+            setLastName(lastName);
+            setFatherName(fatherName);
+            setAge(age);
+            setPhoneNumber(phoneNumber);
+            setFatherNIC(fatherNIC);
+            setClassroom(classroom);
 
-    useLayoutEffect(() => {
-        fetchData();
+            getClassroomDetails(classroom);
+
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+
+    const getClassroomDetails = (classroom) => {
+
+        axios.get(`http://localhost:7000/api/v1/classroom/${classroom}`,
+            {
+                headers: {
+                    Authorization: `${Cookies.get('token')}`
+                }
+            }).then((res) => {
+
+                const {courses} = res.data.classrooms;
+                console.log("Classroom Detail: ",courses)
+                setCourses(courses);
+                // console.log(res.data)
+                getCourses(courses);
+        })
+
+    }
+
+
+    const getCourses = (courses) => {
+
+        courses.map(course => {
+            axios.get(`http://localhost:7000/api/v1/course/${course}`, {
+                headers: {
+                    Authorization: `${Cookies.get('token')}`
+                }
+            }).then(res => {
+                console.log("Courses:  ", res.data.course);
+                setMainCourses(prevState => ([...prevState, res.data.course]));
+            })
+        })
+    }
+
+
+
+    useEffect( () => {
+         getStudent();
+         // getClassroomDetails();
+         // getCourses();
+
 
     }, []);
-
-
 
 
     return (
@@ -72,7 +155,7 @@ const Index = () => {
                             <div className="middle">
                                 <div className="left">
                                     <h3>Course Completed</h3>
-                                    <h1>81</h1>
+                                    <h1>{courses.length}</h1>
                                 </div>
 
                                 <div className="progress">
@@ -81,7 +164,7 @@ const Index = () => {
                                     </svg>
 
                                     <div className="number">
-                                        <p>81%</p>
+                                        <p>0%</p>
                                     </div>
                                 </div>
                             </div>
@@ -94,7 +177,7 @@ const Index = () => {
                             <div className="middle">
                                 <div className="left">
                                     <h3>Courses In Progress</h3>
-                                    <h1>68</h1>
+                                    <h1>{courses.length}</h1>
                                 </div>
 
                                 <div className="progress">
@@ -103,7 +186,7 @@ const Index = () => {
                                     </svg>
 
                                     <div className="number">
-                                        <p>68%</p>
+                                        <p>0%</p>
                                     </div>
                                 </div>
                             </div>
@@ -116,7 +199,7 @@ const Index = () => {
                             <div className="middle">
                                 <div className="left">
                                     <h3>Certification Earned</h3>
-                                    <h1>62</h1>
+                                    <h1>0</h1>
                                 </div>
 
                                 <div className="progress">
@@ -125,13 +208,12 @@ const Index = () => {
                                     </svg>
 
                                     <div className="number">
-                                        <p>62%</p>
+                                        <p>3%</p>
                                     </div>
                                 </div>
                             </div>
 
                         </div>
-
 
                     </div>
                     {/*======== end of Insights */}
@@ -145,42 +227,20 @@ const Index = () => {
                                 <tr>
                                     <th>Course Title</th>
                                     <th>Lessons Completed</th>
-                                    <th>Duration</th>
-                                    <th>Instructor</th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                                <tr>
-                                    <td>UX Design Certificate</td>
-                                    <td>18/40 (48%)</td>
-                                    <td>10h 13m 28s</td>
-                                    <td>Dr. Ahsan</td>
-                                    <td className="primary">Details</td>
-                                </tr>
-
-                                <tr>
-                                    <td>SEO Experts from Zero</td>
-                                    <td>21/23 (97%)</td>
-                                    <td>8hr 15m 10s</td>
-                                    <td>Dr. Ahmed</td>
-                                    <td className="primary">Details</td>
-                                </tr>
-                                <tr>
-                                    <td>Project Management</td>
-                                    <td>7/35 (20%)</td>
-                                    <td>20h 30m 0s</td>
-                                    <td>Dr. Ghulam</td>
-                                    <td className="primary">Details</td>
-                                </tr>
-                                <tr>
-                                    <td>Software Engineering</td>
-                                    <td>21/23 (97%)</td>
-                                    <td>15hr 10m 0s</td>
-                                    <td>Dr. Ajmal</td>
-                                    <td className="primary">Details</td>
-                                </tr>
-
+                            {mainCourses.map((course, index) => {
+                                return (
+                                    <tr key={index}>
+                                        <td>{course.name}</td>
+                                        <td>{course.lessons.length}</td>
+                                        <td><Link href={'#'}>click here</Link></td>
+                                    </tr>
+                                )
+                                })
+                            }
                             </tbody>
                         </table>
 
@@ -194,12 +254,15 @@ const Index = () => {
 
 
 
+
+
+
                 {/*============= start of Right side*/}
                 <div className="right">
 
                     <div className="profile">
                         <div className="info">
-                            <p>Hey, <b>Student</b></p>
+                            <p>Hey, <b>{firstName} {lastName} </b></p>
                         </div>
 
                         <div className="profile-photo">

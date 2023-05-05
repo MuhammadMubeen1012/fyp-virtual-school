@@ -10,7 +10,6 @@ function Index(effect, deps) {
     // api/v1/course/courseId
 
 
-    // const user = localStorage.getItem('user');
     const [user, setUser] = useState({});
     const [bForm, setBForm] = useState({});
     const [photo, setPhoto] = useState({});
@@ -36,6 +35,7 @@ function Index(effect, deps) {
                     }
                 })
         })).then((res) => {
+            // console.log("GETTTTT Courses", res.data.course);
             setMainCourses(res.map((r) => {
                 return r.data.course;
             }));
@@ -83,7 +83,6 @@ function Index(effect, deps) {
         })
     }
 
-
     const getClassrooms = (classrooms) => {
         Promise.all(classrooms.map((classId) => {
             return axios.get(`http://localhost:7000/api/v1/classroom/${classId}`, {
@@ -104,7 +103,7 @@ function Index(effect, deps) {
     useEffect(() => {
         if (classroom.length > 0) {
             console.log('Classroom ', classroom);
-            if (classroom[0].students)
+            // if (classroom[0].students)
                 setNumberOfStudents(classroom.map((croom) => {
                     if (croom.students) {
                         return croom.students.length
@@ -117,7 +116,7 @@ function Index(effect, deps) {
 
     useEffect(() => {
         getTeacher();
-        getCourses()
+        getCourses();
 
     }, []);
 
