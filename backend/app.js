@@ -1,16 +1,16 @@
 const express = require("express");
-const cors = require("cors");
 const app = express();
-app.use(cors('*'));
 const cookieParser = require("cookie-parser");
 //errors middle wares
 const errorMiddleware = require("./middlewares/errors");
+const cors = require("cors");
 
 //express.json() is a built in middleware function in Express starting
 //from v4.16.0. It parses incoming JSON requests and puts the parsed data in req.body.
 // Without `express.json()`, `req.body` is undefined.
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors());
 
 //Importing api routes
 const user = require("./routes/user");

@@ -26,40 +26,88 @@ exports.compileCourseResult = catchAsyncErrors(async (req, res, next) => {
   let quizResult;
 
   let courseResult;
-  let resultObtainedMarks;
-  let resultTotalmarks;
-  let resultGrade;
+  let resultObtainedMarks = 0;
+  let resultTotalmarks = 0;
+  let resultGrade = "";
 
   for (let student of students) {
     //for getting grades
-    examResult = await ExamResult.findOne({ student: student._id });
-    assignmentResult = await Submission.findOne({ submittedBy: student.user });
-    quizResult = await quizSubmission.findOne({ studentID: student._id });
+    quizResult = await quizSubmission.findOne({ studentID: student });
+    // console.log("Quiz", quizResult.obtainedMarks);
+    examResult = await ExamResult.findOne({ student: student });
+    // console.log("Exam", examResult.obtainedMarks);
+    assignmentResult = await Submission.findOne({ submittedBy: student });
+    // console.log("Assignment", assignmentResult.obtainedMarks);
+
+    //till here we can get the obtained marks by the student.
+
     //for total marks
     examSubmission = await ExamSubmission.findById(examResult.submission);
+    // console.log(examSubmission);
     exam = await Exam.findById(examSubmission.examId);
+    //console.log(exam);
     assignment = await Assignment.findById(assignmentResult.assignment);
+    //console.log(assignment);
     quiz = await Quiz.findById(quizResult.quizID);
+    //console.log(quiz);
 
-    //compiling marks?
+    // //compiling marks?
+    resultObtainedMarks += quizResult.obtainedMarks;
+    resultObtainedMarks += examResult.obtainedMarks;
+    resultObtainedMarks += assignmentResult.obtainedMarks;
+
     resultTotalmarks += exam.totalMarks;
     resultTotalmarks += assignment.totalMarks;
     resultTotalmarks += quiz.totalMarks;
 
-    console.log(resultTotalmarks);
+    if (resultTotalmarks && resultObtainedMarks) {
+      if ((resultObtainedMarks / resultTotalmarks) * 100 > 80) {
+        resultGrade = "A";
+      } else if ((resultObtainedMarks / resultTotalmarks) * 100 > 70) {
+        resultGrade = "B";
+      } else if ((resultObtainedMarks / resultTotalmarks) * 100 > 60) {
+        resultGrade = "C";
+      } else if ((resultObtainedMarks / resultTotalmarks) * 100 > 50) {
+        resultGrade = "D";
+      } else {
+        resultGrade = "F";
+      }
+    }
 
-    // courseResult = await CourseResult.create({
-    //   course: course._id,
-    //   classroom: classroom._id,
-    //   student: student._id,
-    //   academicYear: classroom.academicYear,
-    //   createdBy: req.user._id,
-    //   obtainedMarks: resultObtainedMarks,
-    //   totalMarks: resultTotalmarks,
-    //   grade: resultGrade,
-    // });
+    let assignmentGrade = {
+      obtainedMarks: assignmentResult.obtainedMarks,
+      totalMarks: assignment.totalMarks,
+    };
 
-    // console.log(courseResult);
+    let quizGrade = {
+      obtainedMarks: quizResult.obtainedMarks,
+      totalMarks: quiz.totalMarks,
+    };
+
+    let examGrade = {
+      obtainedMarks: examResult.obtainedMarks,
+      totalMarks: exam.totalMarks,
+    };
+
+    // console.log("Result Grade", resultGrade);
+
+    if (resultGrade && resultObtainedMarks && resultTotalmarks) {
+      courseResult = await CourseResult.create({
+        course: course._id,
+        classroom: classroom._id,
+        student: student,
+        academicYear: classroom.academicYear,
+        createdBy: req.user._id,
+        obtainedMarks: resultObtainedMarks,
+        totalMarks: resultTotalmarks,
+        assignmentGrade: assignmentGrade,
+        quizGrade: quizGrade,
+        examGrade: examGrade,
+        grade: resultGrade,
+      });
+
+      console.log(courseResult);
+    }
   }
 
   res.status(200).json({
@@ -71,28 +119,50 @@ exports.compileCourseResult = catchAsyncErrors(async (req, res, next) => {
 // @def get results by courses
 // @route GET /results/:courseID
 exports.getResultsByCourse = catchAsyncErrors(async (req, res, next) => {
-  res.status(200).json({
-    success: true,
-    message: "Results retrieved successfully",
-  });
+  const courseResult = await CourseResult.find({ course: req.params.courseID });
+
+  if (courseResult) {
+    res.status(200).json({
+      success: true,
+      message: "Results retrieved successfully",
+      courseResult: courseResult,
+    });
+  }
 });
 
 // @def get result by student and course
 // @route GET /result/:courseID/:studentID
 exports.getResultByStudentAndCourse = catchAsyncErrors(
   async (req, res, next) => {
-    res.status(200).json({
-      success: true,
-      result: "Result",
+    const courseResult = await CourseResult.findOne({
+      course: req.params.courseID,
+      student: req.params.studentID,
     });
+
+    if (courseResult) {
+      res.status(200).json({
+        success: true,
+        message: "Result retrieved successfully",
+        courseResult: courseResult,
+      });
+    }
   }
 );
 
 // @def publish Result
-// @route GET /result/:courseID
+// @route PUT /result/:courseID
 exports.publishResult = catchAsyncErrors(async (req, res, next) => {
-  res.status(200).json({
-    success: true,
-    message: "Result published successfully",
-  });
+  const courseResult = await CourseResult.find({ course: req.params.courseID });
+
+  if (courseResult) {
+    for (let result of courseResult) {
+      result.isLive = true;
+      await result.save();
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Result published successfully",
+    });
+  }
 });

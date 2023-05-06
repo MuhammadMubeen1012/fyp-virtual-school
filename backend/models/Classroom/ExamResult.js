@@ -4,7 +4,7 @@ const validator = require("validator");
 const examResultSchema = new mongoose.Schema({
   student: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "student",
+    ref: "user",
     required: true,
   },
   submission: {

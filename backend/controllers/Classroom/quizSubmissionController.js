@@ -22,7 +22,7 @@ exports.submitQuiz = catchAsyncErrors(async (req, res, next) => {
     quizSubmission = await QuizSubmission.create({
       course: course._id,
       quizID: quiz._id,
-      studentID: student._id,
+      studentID: student.user,
       quizAnswers: data.quizAnswers,
     });
   } else {
