@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9b86c9f-0b89-4563-ba11-369d16e7ec77" name="Changes" comment="Teacher DashboardController.js and Courses CoursesController.js implemented">
-      <change afterPath="$PROJECT_DIR$/frontend/pages/dashboard-admin/DashboardController.js" afterDir="false" />
+    <list default="true" id="d9b86c9f-0b89-4563-ba11-369d16e7ec77" name="Changes" comment="Done Teacher Dashboard">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-admin/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-admin/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/DashboardController.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/DashboardController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/components/Dashboard/Sidebar/SidebarTeacher.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/components/Dashboard/Sidebar/SidebarTeacher.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/courses/english/unit-01.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/courses/english/unit-01.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/styles/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/styles/style.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,7 +127,7 @@
       <workItem from="1682652751832" duration="30108000" />
       <workItem from="1682909993062" duration="7427000" />
       <workItem from="1683214888667" duration="10271000" />
-      <workItem from="1683272392423" duration="7483000" />
+      <workItem from="1683272392423" duration="3957000" />
     </task>
     <task id="LOCAL-00001" summary="Done Teacher Dashboard">
       <created>1683225338573</created>
@@ -135,14 +136,7 @@
       <option name="project" value="LOCAL" />
       <updated>1683225338573</updated>
     </task>
-    <task id="LOCAL-00002" summary="Teacher DashboardController.js and Courses CoursesController.js implemented">
-      <created>1683276636393</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1683276636394</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -150,7 +144,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Done Teacher Dashboard" />
-    <MESSAGE value="Teacher DashboardController.js and Courses CoursesController.js implemented" />
-    <option name="LAST_COMMIT_MESSAGE" value="Teacher DashboardController.js and Courses CoursesController.js implemented" />
+    <option name="LAST_COMMIT_MESSAGE" value="Done Teacher Dashboard" />
   </component>
 </project>

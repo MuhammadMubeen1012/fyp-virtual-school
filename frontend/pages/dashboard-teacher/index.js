@@ -93,7 +93,7 @@ function Index(effect, deps) {
 
     useEffect(() => {
         getTeacherObj();
-        getMainCourses()
+        getMainCourses();
     }, []);
 
     useEffect(() => {
