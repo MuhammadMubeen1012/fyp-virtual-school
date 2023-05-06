@@ -12,7 +12,7 @@ const Slug = () => {
 
     return (
         <LayoutTeacher>
-            {/*=============== Start of Main ================= */}
+            {/* =============== Start of Main ================= */}
 
             <main>
 
