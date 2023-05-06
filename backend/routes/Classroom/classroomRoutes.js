@@ -36,4 +36,8 @@ router
   .route("/classroom/courses/:id")
   .get(isAuthenticatedUser, getCoursesByClass);
 
+router.route("/students/:classID").get(isAuthenticatedUser, getStudentsByClass);
+router.route("/teachers/:classID").get(isAuthenticatedUser, getTeachersByClass);
+router.route("/courses/:classID").get(isAuthenticatedUser, getCoursesByClass);
+
 module.exports = router;
