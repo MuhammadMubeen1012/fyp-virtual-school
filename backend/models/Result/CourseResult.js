@@ -35,7 +35,7 @@ const courseResultSchema = new mongoose.Schema({
   },
   grade: {
     type: String,
-    enum: ["A", "B", "C", "D"],
+    enum: ["A", "B", "C", "D", "F"],
   },
   assignmentGrade: {
     obtainedMarks: {

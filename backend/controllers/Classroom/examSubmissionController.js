@@ -8,13 +8,13 @@ const Student = require("../../models/student");
 // @route /submit/exam/:examID
 exports.submitExam = catchAsyncErrors(async (req, res, next) => {
   const exam = await Exam.findById(req.params.examID);
-  const student = await Student.findOne({ user: "64061f80c1d1638f3086c6a7" });
+  const student = await Student.findOne({ user: req.user._id });
 
   const data = req.body;
 
   if (exam && student) {
     const examSubmission = await ExamSubmission.create({
-      studentId: student._id,
+      studentId: student.user,
       examId: exam._id,
       subjectiveAnswers: data.subjectiveAnswers,
       objectiveAnswers: data.objectiveAnswers,
@@ -74,8 +74,8 @@ exports.getSubmissionsByExam = catchAsyncErrors(async (req, res, next) => {
 // @def grade exam submission
 // @route PUT /grade/exam/:studentID
 exports.gradeExamSubmission = catchAsyncErrors(async (req, res, next) => {
-  const student = await Student.findOne({ user: "64061f80c1d1638f3086c6a7" });
-  const submission = await ExamSubmission.findOne({ studentId: student._id });
+  const student = await Student.findOne({ user: req.user._id });
+  const submission = await ExamSubmission.findOne({ studentId: student.user });
   const objectiveExam = await ObjectiveExam.findOne({
     exam: submission.examId,
   });

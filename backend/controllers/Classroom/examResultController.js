@@ -23,6 +23,7 @@ exports.compileResult = catchAsyncErrors(async (req, res, next) => {
 
   for (let i = 0; i < students.length; i++) {
     submission = await ExamSubmission.findOne({ studentId: students[i] });
+    console.log(submission);
     percentage = (submission.obtainedMarks / exam.totalMarks) * 100;
 
     if (percentage > 50) {

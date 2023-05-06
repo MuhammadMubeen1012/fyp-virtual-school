@@ -45,9 +45,22 @@ const examSchema = new mongoose.Schema({
     required: true,
   },
   startTime: {
-    type: String,
-    required: true,
+    hours: {
+      type: Number,
+      default: 0,
+    },
+
+    minutes: {
+      type: Number,
+      default: 0,
+    },
+
+    seconds: {
+      type: Number,
+      default: 0,
+    },
   },
+
   examStatus: {
     type: String,
     required: true,
