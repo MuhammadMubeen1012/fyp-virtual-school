@@ -7,7 +7,7 @@ const classroomResultSchema = new mongoose.Schema({
   },
   student: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "student",
+    ref: "user",
   },
   academicYear: {
     type: mongoose.Schema.Types.ObjectId,
@@ -15,7 +15,7 @@ const classroomResultSchema = new mongoose.Schema({
   },
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "teacher",
+    ref: "user",
   },
   isLive: {
     type: Boolean,
@@ -33,7 +33,7 @@ const classroomResultSchema = new mongoose.Schema({
     type: String,
     enum: ["A", "B", "C", "D"],
   },
-  courses: [
+  coursesResults: [
     {
       courseResult: {
         type: mongoose.Schema.Types.ObjectId,
