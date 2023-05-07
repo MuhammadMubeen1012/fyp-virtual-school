@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 import LayoutStudent from "../../../../components/Dashboard/Layout/LayoutStudent";
 import Link from "next/link";
-import {Button, Card, Nav} from "react-bootstrap";
+import {Button, Card, Form, Modal, Nav} from "react-bootstrap";
 
 const Unit01 = () => {
 
     const [eventKey, setEventKey] = useState(0);
+    const [assignmentModal, setAssignmentModal] = useState(false);
 
     return (
         <LayoutStudent>
@@ -102,7 +103,19 @@ const Unit01 = () => {
                                                 <Card.Text>
                                                     Description
                                                 </Card.Text>
-                                                <Button variant="primary">Open</Button>
+
+                                                <div>
+                                                    <Button variant="primary">Open</Button>
+                                                    <Button
+                                                        className={"m-1"}
+                                                        variant="success"
+                                                        onClick={() => {
+                                                            setAssignmentModal(true)
+                                                        }}
+                                                    >
+                                                        Submit
+                                                    </Button>
+                                                </div>
                                             </Card.Body>
                                         </Card>
                                         <br/>
@@ -129,6 +142,53 @@ const Unit01 = () => {
                     }
 
                 </div>
+
+
+                {
+                    assignmentModal &&
+                    <div>
+                        <Modal
+                            show={assignmentModal}
+                            onHide={() => setAssignmentModal(false)}
+                            dialogClassName="custom-modal"
+                            size={"lg"}
+                            aria-labelledby="example-custom-modal-styling-title"
+                            centered
+                        >
+                            <Modal.Header closeButton>
+                                <Modal.Title id="example-custom-modal-styling-title">
+                                    Submit Assignment
+                                </Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <Form handleSubmit={(e) => {e.preventDefault()}}>
+
+                                    <Form.Group controlId={"question"} >
+                                        <Form.Label>File Name</Form.Label>
+                                        <Form.Control type={"text"} className={"m-2"} placeholder={"File Name"} />
+                                    </Form.Group>
+
+                                    <br/>
+                                    <Form.Group controlId={"question"} >
+                                        <Form.Label>File Link</Form.Label>
+                                        <Form.Control type={"text"} className={"m-2"} placeholder={"File Link"} />
+                                    </Form.Group>
+
+
+                                    <br/>
+                                    <Modal.Footer>
+                                        <Button type={"submit"}>Submit</Button>
+                                    </Modal.Footer>
+
+
+
+                                </Form>
+                            </Modal.Body>
+                        </Modal>
+                    </div>
+                }
+
+
 
 
 
