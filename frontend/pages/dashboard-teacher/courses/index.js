@@ -51,7 +51,7 @@ const Index = () => {
                             <td>{course.name}</td>
                             {course.lessons ? <td>{course.lessons.length}</td> : <td>0</td>}
                             <td>
-                                <Link href={`/dashboard-teacher/courses/${course.name.toLowerCase()}`}>
+                                <Link href={`/dashboard-teacher/courses/${course._id}`}>
                                     click
                                 </Link>
                             </td>
