@@ -1,0 +1,3 @@
+diff --git a/frontend/pages/dashboard-teacher/courses/english/unit-01.js b/frontend/pages/dashboard-teacher/courses/[course]/unit-01.js
+rename from frontend/pages/dashboard-teacher/courses/english/unit-01.js
+rename to frontend/pages/dashboard-teacher/courses/[course]/unit-01.js
