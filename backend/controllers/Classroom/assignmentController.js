@@ -50,7 +50,7 @@ exports.updateAssignment = catchAsyncErrors(async (req, res, next) => {
 
   //const lesson = await Lesson.findById(req.params.lessonID);
 
-  const assignment = await Assignment.findOneAndUpdate(
+  const assignment = await Assignment.findByIdAndUpdate(
     req.params.assignmentID,
     newData,
     {
