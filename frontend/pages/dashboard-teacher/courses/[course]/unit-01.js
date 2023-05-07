@@ -352,7 +352,10 @@ const Unit01 = () => {
                                     <Card.Text>
                                         Event Date
                                     </Card.Text>
-                                    <Button variant="primary">Go to Event</Button>
+                                    <div>
+                                        <Button variant="primary">Edit</Button>
+                                        <Button className={"m-1"} variant="primary">Delete</Button>
+                                    </div>
                                 </Card.Body>
                             </Card>
 
@@ -435,7 +438,7 @@ const Unit01 = () => {
 
                                     <div style={{display: "flex", justifyContent: "space-between"}}>
                                         <Button type={"submit"}>Submit</Button>
-                                        <Button>Next</Button>
+                                        <Button type={"submit"}>Next</Button>
                                     </div>
 
 
@@ -444,9 +447,6 @@ const Unit01 = () => {
                             </Modal.Body>
                         </Modal>
                     }
-
-
-
 
 
                 </div>
@@ -542,3 +542,6 @@ const Unit01 = () => {
 };
 
 export default Unit01;
+
+
+

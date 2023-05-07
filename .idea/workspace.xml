@@ -5,12 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d9b86c9f-0b89-4563-ba11-369d16e7ec77" name="Changes" comment="Done Teacher Dashboard">
+      <change afterPath="$PROJECT_DIR$/frontend/pages/dashboard-student/courses/[course]/quiz.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/middlewares/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/middlewares/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/components/Dashboard/Sidebar/SidebarStudent.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/components/Dashboard/Sidebar/SidebarStudent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-student/courses.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-student/courses/english/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-student/courses/english/unit-01.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-student/courses/[course]/unit-01.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-student/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-student/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/courses/[course]/[slug].js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/courses/[course]/[slug].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/courses/english/attendance-details.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/courses/english/attendance.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/courses/english/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/courses/english/unit-01.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/courses/[course]/unit-01.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/courses/[course]/unit-01.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/courses/[course]/unit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/courses/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/courses/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +25,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="package" />
         <option value="JavaScript File" />
       </list>
     </option>
@@ -98,6 +104,7 @@
       <recent name="C:\Users\KiNG\WebstormProjects\fyp-virtual-school\frontend\pages\dashboard-teacher\courses" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Momin\WebstormProjects\fyp-virtual-school\frontend\pages\dashboard-student\courses\[course]" />
       <recent name="C:\Users\Momin\WebstormProjects\fyp-virtual-school\frontend\pages\dashboard-teacher\courses\[course]" />
     </key>
   </component>

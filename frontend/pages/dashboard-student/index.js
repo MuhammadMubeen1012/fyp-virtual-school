@@ -25,39 +25,6 @@ const Index = () => {
 
 
 
-    const fetchData = async () => {
-        try {
-            const res = await axios.get('http://localhost:7000/api/v1/academicYear/classrooms/6433b54f4f2a795f64ae7ce7', {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*',
-                    'Authorization': `${Cookies.get('token')}`
-                }
-            })
-            // const data = await res.data.classrooms;
-            // console.log(data);
-
-
-            const userId = JSON.parse(localStorage.getItem("user"))
-            console.log(userId._id);
-
-            // const check = data.classrooms.map((item, idx) => {
-            //     if (item._id === userId){
-            //         return item;
-            //     }
-            //     return null;
-            // })
-
-            // console.log(check);
-
-
-
-        } catch (e) {
-            console.log(e, "error");
-        }
-
-    }
-
     const getStudent = () => {
         axios.get(`http://localhost:7000/api/v1/student`, {
             headers: {

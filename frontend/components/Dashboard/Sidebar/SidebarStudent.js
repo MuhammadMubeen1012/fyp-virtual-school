@@ -98,7 +98,7 @@ const SidebarStudent = () => {
                                 key={index}
                             >
 
-                                <a className={`link ${activeMenu.id === item.id ? "active" : "" } `}
+                                <a className={`link  `}
 
                                 >
                                     <span className="material-icons-sharp">{item.icon}</span>
