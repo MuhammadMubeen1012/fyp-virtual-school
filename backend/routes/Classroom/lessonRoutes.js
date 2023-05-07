@@ -15,6 +15,7 @@ const {
   deleteContent,
   getLessonsByCourseID,
   getcontentByLessonID,
+  getLessonByID,
 } = require("../../controllers/Classroom/lessonController");
 
 //routes
@@ -39,4 +40,7 @@ router
   .route("/lesson/content/:id")
   .get(isAuthenticatedUser, getcontentByLessonID);
 
+router
+  .route("/course/lesson/:lessonID")
+  .get(isAuthenticatedUser, getLessonByID);
 module.exports = router;

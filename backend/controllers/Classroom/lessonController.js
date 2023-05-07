@@ -167,3 +167,20 @@ exports.getcontentByLessonID = catchAsyncErrors(async (req, res, next) => {
     );
   }
 });
+
+// @desc get content by lesson ID
+// @route GET /content/:lessonID
+exports.getLessonByID = catchAsyncErrors(async (req, res, next) => {
+  const lesson = await Lesson.findById(req.params.lessonID);
+
+  if (lesson) {
+    res.status(200).json({
+      success: true,
+      lesson: lesson,
+    });
+  } else {
+    return next(
+      new ErrorHandler(`Lesson does not found with id: ${req.params.id}`)
+    );
+  }
+});

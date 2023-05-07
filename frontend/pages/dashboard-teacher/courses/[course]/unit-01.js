@@ -366,101 +366,96 @@ const Unit01 = () => {
           </Nav.Item>
         </Nav>
 
+        {/* ============= Tabs running by conditional rendering ================= */}
+        <div className="">
+          eventKey === 0 ?
+          <div>
+            {/*Lesson Tab*/}
+            <Card>
+              <Card.Header>Content</Card.Header>
+              <Card.Body>
+                <Card.Text>File Link</Card.Text>
+                <div>
+                  <Button variant="primary">Edit</Button>
+                  <Button className={"m-1"} variant="primary">
+                    Delete
+                  </Button>
+                </div>
+              </Card.Body>
+            </Card>{" "}
+            <br />
+          </div>{" "}
+          : eventKey === 1 ?
+          <div>
+            {/*Event Tab*/}
+            <Card>
+              <Card.Header>Event Title</Card.Header>
+              <Card.Body>
+                <Card.Title>Description</Card.Title>
+                <Card.Text>Event Date</Card.Text>
+                <Button variant="primary">Go to Event</Button>
+              </Card.Body>
+            </Card>{" "}
+            <br />
+            <Card>
+              <Card.Header>Event Title</Card.Header>
+              <Card.Body>
+                <Card.Title>Description</Card.Title>
+                <Card.Text>Event Date</Card.Text>
+                <div>
+                  <Button variant="primary">Edit</Button>
+                  <Button className={"m-1"} variant="primary">
+                    Delete
+                  </Button>
+                </div>
+              </Card.Body>
+            </Card>
+          </div>{" "}
+          : eventKey === 2 ?
+          <div>
+            {/*Assignments Tab*/}
+            <Card>
+              <Card.Header>Assignment Title</Card.Header>
+              <Card.Body>
+                <Card.Title>Description</Card.Title>
+                <Card.Text>File Link</Card.Text>
 
+                <div>
+                  <Button variant="primary">Go to Event</Button>
+                  <Button className={"m-1"} variant="primary">
+                    View Submissions
+                  </Button>
+                </div>
+              </Card.Body>
+            </Card>
+            <br />
+          </div>{" "}
+          : eventKey === 3 ?
+          <div>
+            {/*Quiz Tab*/}
+            <Card>
+              <Card.Header>Quiz Title</Card.Header>
+              <Card.Body>
+                <Card.Title>Description</Card.Title>
 
-                {/* ============= Tabs running by conditional rendering ================= */}
-                <div className="">
-                    {
-                        eventKey === 0 ?
-                            <div>
-                            {/*Lesson Tab*/}
-                            <Card>
-                                <Card.Header>Content</Card.Header>
-                                <Card.Body>
-                                    <Card.Text>
-                                        File Link
-                                    </Card.Text>
-                                    <div>
-                                        <Button variant="primary">Edit</Button>
-                                        <Button className={"m-1"} variant="primary">Delete</Button>
-                                    </div>
-                                </Card.Body>
-                            </Card> <br/>
+                <div>
+                  <Button
+                    variant="primary"
+                    onClick={() => {
+                      setIsModalAddQuestion(true);
+                    }}
+                  >
+                    Add Questions
+                  </Button>
 
-
-                        </div> :
-                        eventKey === 1 ?
-                            <div>
-                            {/*Event Tab*/}
-                            <Card>
-                                <Card.Header>Event Title</Card.Header>
-                                <Card.Body>
-                                    <Card.Title>Description</Card.Title>
-                                    <Card.Text>
-                                        Event Date
-                                    </Card.Text>
-                                    <Button variant="primary">Go to Event</Button>
-                                </Card.Body>
-                            </Card> <br/>
-
-                            <Card>
-                                <Card.Header>Event Title</Card.Header>
-                                <Card.Body>
-                                    <Card.Title>Description</Card.Title>
-                                    <Card.Text>
-                                        Event Date
-                                    </Card.Text>
-                                    <div>
-                                        <Button variant="primary">Edit</Button>
-                                        <Button className={"m-1"} variant="primary">Delete</Button>
-                                    </div>
-                                </Card.Body>
-                            </Card>
-
-                        </div> :
-                        eventKey === 2 ?
-                            <div>
-                            {/*Assignments Tab*/}
-                            <Card>
-                                <Card.Header>Assignment Title</Card.Header>
-                                <Card.Body>
-                                    <Card.Title>Description</Card.Title>
-                                    <Card.Text>
-                                        File Link
-                                    </Card.Text>
-
-                                    <div>
-                                        <Button variant="primary">Go to Event</Button>
-                                        <Button className={"m-1"} variant="primary">View Submissions</Button>
-                                    </div>
-
-                                </Card.Body>
-                            </Card>
-                            <br/>
-
-                        </div> :
-                        eventKey === 3 ?
-                            <div>
-                                    {/*Quiz Tab*/}
-                                    <Card>
-                                        <Card.Header>Quiz Title</Card.Header>
-                                        <Card.Body>
-                                            <Card.Title>Description</Card.Title>
-
-                                            <div>
-                                                <Button variant="primary"
-                                                        onClick={() => {
-                                                            setIsModalAddQuestion(true);
-                                                        }}
-                                                >Add Questions</Button>
-
-                                                <Button className={"m-1"} variant={"primary"}>View Submissions</Button>
-                                            </div>
-
-                                        </Card.Body>
-                                    </Card>
-                                    <br/>
-
+                  <Button className={"m-1"} variant={"primary"}>
+                    View Submissions
+                  </Button>
+                </div>
+              </Card.Body>
+            </Card>
+            <br />
+          </div>
           {isModalAddQuestion && (
             <Modal
               show={isModalAddQuestion}
