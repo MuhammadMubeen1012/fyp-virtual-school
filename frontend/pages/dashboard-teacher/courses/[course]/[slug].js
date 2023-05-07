@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import Link from "next/link";
-import {Button, Dropdown, Form, Modal, Nav} from "react-bootstrap";
+import {Button, Card, Dropdown, Form, Modal, Nav} from "react-bootstrap";
 import LayoutTeacher from "../../../../components/Dashboard/Layout/LayoutTeacher";
+
 
 const Slug = () => {
     const [modal, setModal] = useState({
@@ -9,16 +10,17 @@ const Slug = () => {
         active: false,
     });
     const [eventKey, setEventKey] = useState(0);
+    const [isModalAddQuestion, setIsModalAddQuestion] = useState(false);
 
     return (
         <LayoutTeacher>
-            {/* =============== Start of Main ================= */}
+            {/*=============== Start of Main ================= */}
 
             <main>
 
                 <h1>Overview</h1>
 
-                <div className="" style={{border: "1px solid red", paddingBlock: "1rem" ,display: "flex", justifyContent: "space-between"}}>
+                <div className="" style={{ paddingBlock: "1rem" ,display: "flex", justifyContent: "space-between"}}>
                     <div>
                         <span>Unit 1</span>
                         <h3>Speaking to the world</h3>
@@ -29,8 +31,11 @@ const Slug = () => {
                     </div>
                 </div>
 
-                <div className="" style={{border: "1px solid red", paddingBlock: "1rem" }}>
-                    vector image....
+                <div style={{
+                    paddingBlock: "1rem",
+                    border: "1px solid red",
+                }}>
+                    vector image...
                 </div>
                 <br/>
                 <Dropdown>
@@ -39,11 +44,10 @@ const Slug = () => {
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>
-                        <Dropdown.Item onClick={() => setModal({item: 1, active: true})}>Lecture</Dropdown.Item>
-                        <Dropdown.Item onClick={() => setModal({item: 2, active: true})}>Live Video</Dropdown.Item>
-                        <Dropdown.Item onClick={() => setModal({item: 3, active: true})}>Assignments</Dropdown.Item>
-                        <Dropdown.Item onClick={() => setModal({item: 4, active: true})}>Exercises</Dropdown.Item>
-                        <Dropdown.Item onClick={() => setModal({item: 5, active: true})}>Quiz</Dropdown.Item>
+                        <Dropdown.Item onClick={() => setModal({item: 1, active: true})}>Content</Dropdown.Item>
+                        <Dropdown.Item onClick={() => setModal({item: 2, active: true})}>Events</Dropdown.Item>
+                        <Dropdown.Item onClick={() => setModal({item: 3, active: true})}>Assignment</Dropdown.Item>
+                        <Dropdown.Item onClick={() => setModal({item: 4, active: true})}>Quiz</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
 
@@ -64,178 +68,244 @@ const Slug = () => {
                                 {
                                     modal.item === 1 ?
                                         <div>
-                                            Lectures
+                                            Add Content
                                         </div> :
                                         modal.item === 2 ?
                                             <div>
-                                                Class Video
+                                                Add Event
                                             </div> :
                                             modal.item === 3 ?
                                                 <div>
-                                                    Assignments
+                                                    Add Assignment
                                                 </div> :
                                                 modal.item === 4 ?
                                                     <div>
-                                                        Exercise
-                                                    </div> :
-                                                    modal.item === 5 ?
-                                                        <div>
-                                                            Quiz
-                                                        </div> : ""
+                                                        Add Quiz
+                                                    </div> : ""
                                 }
                             </Modal.Title>
                         </Modal.Header>
-                        <Modal.Body>
 
+                        <Modal.Body>
                             {
                                 modal.item === 1 ?
                                     <div>
-                                        {/* Lectures Video Link */}
+                                        {/* lesson Video Link */}
                                         <Form>
-                                            <Form.Label>Upload File</Form.Label>
-                                            <Form.Group controlId={""}>
-                                                <Button>Choose File</Button>
-                                                <Form.Label></Form.Label>
-                                            </Form.Group>
-                                            <br/>
-
 
                                             <Form.Group controlId={""} >
-                                                <Form.Label>Or Give Drive Link</Form.Label>
+                                                <Form.Label>File Link</Form.Label>
                                                 <Form.Control type={"text"} className={"m-2"} placeholder={"File Link"} />
                                             </Form.Group>
 
                                             <br/>
-                                            <Button type={"submit"}>Submit</Button>
+                                            <Modal.Footer>
+                                                <Button>Submit</Button>
+                                            </Modal.Footer>
+
 
                                         </Form>
-                                    </div> :
+                                    </div>
+                                    :
                                     modal.item === 2 ?
-                                        <div className="">
-                                            {/*Live Video Link*/}
+                                        <div>
+                                            {/* Event Modal */}
                                             <Form>
-                                                <Form.Label>Upload Recorded Video</Form.Label>
-                                                <Form.Group controlId={""}>
-                                                    <Button>Choose File</Button>
-                                                    <Form.Label></Form.Label>
+                                                <Form.Group controlId={"name"} >
+                                                    <Form.Label>Title</Form.Label>
+                                                    <Form.Control type={"text"} className={"m-2"} placeholder={"Title"} />
                                                 </Form.Group>
                                                 <br/>
 
+                                                <Form.Group controlId={"name"} >
+                                                    <Form.Label>Description</Form.Label>
+                                                    <Form.Control type={"text"} className={"m-2"} placeholder={"Description"} />
+                                                </Form.Group> <br/>
 
-                                                <Form.Group controlId={""} >
-                                                    <Form.Label>Or Give Drive Link</Form.Label>
-                                                    <Form.Control type={"text"} className={"m-2"} placeholder={"Video Link"} />
+                                                <Form.Group controlId={"name"} >
+                                                    <Form.Label>Date</Form.Label>
+                                                    <Form.Control type={"date"} className={"m-2"} placeholder={"Date"} />
+                                                </Form.Group> <br/>
+
+                                                <Form.Group controlId={"name"} >
+
+                                                    <div style={{display: "flex", justifyContent: "space-between" }}>
+                                                        <div>
+                                                            <label htmlFor="">Hours</label><br/>
+                                                            <Form.Control placeholder={"Hours"} type="text"/>
+                                                        </div>
+
+                                                        <div>
+                                                            <label htmlFor="">Minutes</label><br/>
+                                                            <Form.Control placeholder={"Minutes"} type="text"/>
+                                                        </div>
+
+                                                        <div>
+                                                            <label htmlFor="">Seconds</label><br/>
+                                                            <Form.Control placeholder={"Seconds"} type="text"/>
+                                                        </div>
+                                                    </div>
+
+                                                </Form.Group> <br/>
+
+
+                                                <Form.Group controlId={"name"} >
+                                                    <Form.Label>Event Link</Form.Label>
+                                                    <Form.Control type={"text"} className={"m-2"} placeholder={"Link"} />
                                                 </Form.Group>
 
+                                                <Form.Group controlId={"name"} >
+                                                    <Form.Label>Event Password</Form.Label>
+                                                    <Form.Control type={"password"} className={"m-2"} placeholder={"Event Password"} />
+                                                </Form.Group> <br/>
+
+
                                                 <br/>
-                                                <Button type={"submit"}>Submit</Button>
+                                                <Modal.Footer>
+                                                    <Button type={"submit"}>Submit</Button>
+                                                </Modal.Footer>
 
                                             </Form>
                                         </div>
-                                         :
+                                        :
                                         modal.item === 3 ?
                                             <div className="">
                                                 {/* Assignments Modal */}
                                                 <Form>
-                                                    <Form.Label>Upload File</Form.Label>
-                                                    <Form.Group controlId={""}>
-                                                        <Button>Choose File</Button>
-                                                        <Form.Label></Form.Label>
+                                                    <Form.Group controlId={"Title"} >
+                                                        <Form.Label>Title</Form.Label>
+                                                        <Form.Control type={"text"} className={"m-2"} placeholder={"Title"} />
                                                     </Form.Group>
                                                     <br/>
 
-
-                                                    <Form.Group controlId={""} >
-                                                        <Form.Label>Or Give Assignment Link</Form.Label>
-                                                        <Form.Control type={"text"} className={"m-2"} placeholder={"Assignment Link"} />
+                                                    <Form.Group controlId={"Title"} >
+                                                        <Form.Label>Description</Form.Label>
+                                                        <Form.Control type={"text"} className={"m-2"} placeholder={"Description"} />
                                                     </Form.Group>
-
                                                     <br/>
-                                                    <Form.Group controlId={"Marks"} >
+
+                                                    <Form.Group controlId={"file"} >
+                                                        <Form.Label>File Name</Form.Label>
+                                                        <Form.Control type={"text"} className={"m-2"} placeholder={"File Name"} />
+                                                    </Form.Group>
+                                                    <br/>
+
+                                                    <Form.Group controlId={"file"} >
+                                                        <Form.Label>File</Form.Label>
+                                                        <Form.Control type={"text"} className={"m-2"} placeholder={"Add File Link"} />
+                                                    </Form.Group>
+                                                    <br/>
+
+                                                    <Form.Group controlId={"name"} >
+                                                        <Form.Label>Deadline</Form.Label>
+                                                        <Form.Control type={"date"} className={"m-2"} placeholder={"Date"} />
+                                                    </Form.Group> <br/>
+
+                                                    <Form.Group controlId={"file"} >
                                                         <Form.Label>Marks</Form.Label>
                                                         <Form.Control type={"number"} className={"m-2"} placeholder={"Marks"} />
                                                     </Form.Group>
-
+                                                    <br/>
 
                                                     <br/>
-                                                    <Button type={"submit"}>Submit</Button>
+                                                    <Modal.Footer>
+                                                        <Button type={"submit"}>Submit</Button>
+                                                    </Modal.Footer>
 
                                                 </Form>
                                             </div>
-                                             :
+                                            :
                                             modal.item === 4 ?
-                                                <div>
-                                                    Exercise
-                                                </div> :
-                                                modal.item === 5 ?
-                                                    <div className="">
-                                                        {/*  Quiz Modal  */}
-                                                        <Form>
-                                                            <Form.Group controlId={"question"} >
-                                                                <Form.Label>Question</Form.Label>
-                                                                <Form.Control type={"text"} className={"m-2"} placeholder={"Type Question here..."} />
-                                                            </Form.Group>
-                                                            <br/>
+                                                <div className="">
+                                                    {/*  Quiz Modal  */}
+                                                    <Form>
+                                                        <Form.Group controlId={"question"} >
+                                                            <Form.Label>Name</Form.Label>
+                                                            <Form.Control type={"text"} className={"m-2"} placeholder={"Name"} />
+                                                        </Form.Group>
+                                                        <br/>
 
-                                                            <Form.Label>Options</Form.Label>
-                                                            <Form.Group controlId={"question"} >
-                                                                <Form.Control type={"text"} className={"m-2"} placeholder={"Option 1"} />
-                                                                <Form.Control type={"text"} className={"m-2"} placeholder={"Option 2"} />
-                                                                <Form.Control type={"text"} className={"m-2"} placeholder={"Option 3"} />
-                                                                <Form.Control type={"text"} className={"m-2"} placeholder={"Option 4"} />
-                                                            </Form.Group>
+                                                        <Form.Group controlId={"question"} >
+                                                            <Form.Label>Description</Form.Label>
+                                                            <Form.Control type={"text"} className={"m-2"} placeholder={"Description"} />
+                                                        </Form.Group>
+                                                        <br/>
 
-                                                            <br/>
-                                                            <Form.Group controlId={"question"} >
-                                                                <Form.Label>Marks</Form.Label>
-                                                                <Form.Control type={"number"} className={"m-2"} placeholder={"Marks"} />
-                                                            </Form.Group>
+                                                        <Form.Group controlId={"name"} >
+                                                            <label>Start Time</label><br/>
+                                                            <div style={{display: "flex", justifyContent: "space-between" }}>
+
+                                                                <div>
+
+                                                                    <Form.Control placeholder={"Hours"} type="text"/>
+                                                                </div>
+
+                                                                <div>
+                                                                    <Form.Control placeholder={"Minutes"} type="text"/>
+                                                                </div>
+
+                                                                <div>
+
+                                                                    <Form.Control placeholder={"Seconds"} type="text"/>
+                                                                </div>
+                                                            </div>
+
+                                                        </Form.Group> <br/>
 
 
-                                                            <br/>
-                                                            <Form.Label>Answer</Form.Label>
-                                                            <Form.Select controlId={"question"} >
-                                                                <option value="">___Select Option___</option>
-                                                                <option value="">Option 1</option>
-                                                                <option value="">Option 2</option>
-                                                                <option value="">Option 3</option>
-                                                                <option value="">Option 4</option>
-                                                            </Form.Select>
+                                                        <Form.Group controlId={"name"} >
+                                                            <label>End Time</label>
+                                                            <div style={{display: "flex", justifyContent: "space-between" }}>
+                                                                <div>
+                                                                    <Form.Control placeholder={"Hours"} type="text"/>
+                                                                </div>
 
-                                                            <br/>
+                                                                <div>
+                                                                    <Form.Control placeholder={"Minutes"} type="text"/>
+                                                                </div>
+
+                                                                <div>
+                                                                    <Form.Control placeholder={"Seconds"} type="text"/>
+                                                                </div>
+                                                            </div>
+
+                                                        </Form.Group> <br/>
+
+                                                        <div>
+                                                            <input type="checkbox" id="isLive" />
+                                                            <label htmlFor="isLive"> isLive</label>
+                                                        </div>
+
+                                                        <br/>
+                                                        <Modal.Footer>
                                                             <Button type={"submit"}>Submit</Button>
+                                                        </Modal.Footer>
 
-                                                        </Form>
-                                                    </div>
-                                                        : ""
+                                                    </Form>
+
+
+                                                </div>
+                                                : ""
                             }
                         </Modal.Body>
                     </Modal>
                 </div>
 
 
-                {/* ============= Tabs for Lectures, Live Video, Assignments, Exercises, Quizes, Other Section ================= */}
+                {/* ============= Tabs for lesson, Live Video, Assignments, Exercises, Quizes, Other Section ================= */}
                 <Nav className={"mt-5 mb-5"} fill variant="tabs" defaultActiveKey="#">
-
                     <Nav.Item>
-                        <Nav.Link  href="#" onClick={() => setEventKey(0)}>Lectures</Nav.Link>
+                        <Nav.Link  href="#" onClick={() => setEventKey(0)}>Content</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                        <Nav.Link eventKey="link-1" onClick={() => setEventKey(1)}>Live Video</Nav.Link>
+                        <Nav.Link eventKey="link-1" onClick={() => setEventKey(1)}>Events</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
                         <Nav.Link eventKey="link-2" onClick={() => setEventKey(2)}>Assignments</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                        <Nav.Link eventKey="link-3" onClick={() => setEventKey(3)}>Exercises</Nav.Link>
+                        <Nav.Link eventKey="link-4" onClick={() => setEventKey(3)} >Quizes</Nav.Link>
                     </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link eventKey="link-4" onClick={() => setEventKey(4)} >Quizes</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link eventKey="link-5" onClick={() =>  setEventKey(5)} >Other Section</Nav.Link>
-                    </Nav.Item>
-
                 </Nav>
 
 
@@ -245,55 +315,142 @@ const Slug = () => {
                     {
                         eventKey === 0 ?
                             <div>
-                                <div>
+                                {/*Lesson Tab*/}
+                                <Card>
+                                    <Card.Header>Content</Card.Header>
+                                    <Card.Body>
+                                        <Card.Text>
+                                            File Link
+                                        </Card.Text>
+                                        <div>
+                                            <Button variant="primary">Edit</Button>
+                                            <Button className={"m-1"} variant="primary">Delete</Button>
+                                        </div>
+                                    </Card.Body>
+                                </Card> <br/>
 
-                                </div>
-                                <br/>
-                                lectures will be here....
+
                             </div> :
                             eventKey === 1 ?
                                 <div>
-                                    <div>
+                                    {/*Event Tab*/}
+                                    <Card>
+                                        <Card.Header>Event Title</Card.Header>
+                                        <Card.Body>
+                                            <Card.Title>Description</Card.Title>
+                                            <Card.Text>
+                                                Event Date
+                                            </Card.Text>
+                                            <Button variant="primary">Go to Event</Button>
+                                        </Card.Body>
+                                    </Card> <br/>
 
-                                    </div>
-                                    <br/>
-                                    live video will be here...
+                                    <Card>
+                                        <Card.Header>Event Title</Card.Header>
+                                        <Card.Body>
+                                            <Card.Title>Description</Card.Title>
+                                            <Card.Text>
+                                                Event Date
+                                            </Card.Text>
+                                            <Button variant="primary">Go to Event</Button>
+                                        </Card.Body>
+                                    </Card>
+
                                 </div> :
                                 eventKey === 2 ?
                                     <div>
-                                        <div>
-
-                                        </div>
+                                        {/*Assignments Tab*/}
+                                        <Card>
+                                            <Card.Header>Assignment Title</Card.Header>
+                                            <Card.Body>
+                                                <Card.Title>Description</Card.Title>
+                                                <Card.Text>
+                                                    File Link
+                                                </Card.Text>
+                                                <Button variant="primary">Go to Event</Button>
+                                            </Card.Body>
+                                        </Card>
                                         <br/>
-                                        assignments will be here...
+
                                     </div> :
                                     eventKey === 3 ?
                                         <div>
-                                            <div>
-
-                                            </div>
+                                            {/*Quiz Tab*/}
+                                            <Card>
+                                                <Card.Header>Quiz Title</Card.Header>
+                                                <Card.Body>
+                                                    <Card.Title>Description</Card.Title>
+                                                    <Button variant="primary"
+                                                            onClick={() => {
+                                                                setIsModalAddQuestion(true);
+                                                            }}
+                                                    >Add Questions</Button>
+                                                </Card.Body>
+                                            </Card>
                                             <br/>
-                                            exercises will be here...
-                                        </div> :
-                                        eventKey === 4 ?
-                                            <div>
-                                                <div>
 
-                                                </div>
-                                                <br/>
-                                                quizes will be here....
-                                            </div> :
-                                            eventKey === 5 ?
-                                                <div>
-                                                    <div>
-
-                                                    </div>
-                                                    <br/>
-                                                    other section will be here...
-                                                </div> : ""
+                                        </div> : ""
                     }
+
+
+                    {
+                        isModalAddQuestion
+                        &&
+                        <Modal
+                            show={isModalAddQuestion}
+                            onHide={() => setIsModalAddQuestion(false)}
+                            dialogClassName="custom-modal"
+                            size={"lg"}
+                            aria-labelledby="example-custom-modal-styling-title"
+                            centered
+                        >
+                            <Modal.Header closeButton>
+                                <Modal.Title id="example-custom-modal-styling-title">
+                                    Add Quiz
+                                </Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <Form handleSubmit={(e) => {e.preventDefault()}}>
+
+                                    <Form.Group controlId={"question"} >
+                                        <Form.Label>Question</Form.Label>
+                                        <Form.Control type={"text"} className={"m-2"} placeholder={"Type Question here..."} />
+                                    </Form.Group>
+                                    <br/>
+
+                                    <Form.Label>Options</Form.Label>
+                                    <Form.Group controlId={"question"} >
+                                        <Form.Control type={"text"} className={"m-2"} placeholder={"Option 1"} />
+                                        <Form.Control type={"text"} className={"m-2"} placeholder={"Option 2"} />
+                                        <Form.Control type={"text"} className={"m-2"} placeholder={"Option 3"} />
+                                        <Form.Control type={"text"} className={"m-2"} placeholder={"Option 4"} />
+                                    </Form.Group>
+
+                                    <br/>
+                                    <Form.Group controlId={"question"} >
+                                        <Form.Label>Marks</Form.Label>
+                                        <Form.Control type={"number"} className={"m-2"} placeholder={"Marks"} />
+                                    </Form.Group>
+
+
+                                    <div style={{display: "flex", justifyContent: "space-between"}}>
+                                        <Button type={"submit"}>Submit</Button>
+                                        <Button>Next</Button>
+                                    </div>
+
+
+
+                                </Form>
+                            </Modal.Body>
+                        </Modal>
+                    }
+
+
+
+
+
                 </div>
-                {/* =============      Tabs for Lectures........           ================== */}
+                {/* =============      Tabs for lesson       ================== */}
 
 
 

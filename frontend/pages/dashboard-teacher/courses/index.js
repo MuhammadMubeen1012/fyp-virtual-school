@@ -7,10 +7,7 @@ const Index = () => {
     const [courses, setCourses] = useState([]);
     const [loading, setLoading] = useState(false);
     useEffect(() => {
-        // console.log('useEffect []');
-        // console.log(courses);
         if (courses.length === 0) {
-            // console.log('equal to []');
             getCourses().then((res) => {
                 setCourses(res);
             })
@@ -22,7 +19,9 @@ const Index = () => {
         }
     }, [courses]);
 
-    return (<LayoutTeacher>
+    return (
+
+        <LayoutTeacher>
 
 
         {/*=============== Start of main ================= */}
@@ -45,7 +44,6 @@ const Index = () => {
 
                     <tbody>
                     {loading ? courses.map((res, index) => {
-                        console.log('000----------------', res);
                         const course = res.data.course;
                         return (<tr key={index}>
                             <td>{course.name}</td>
@@ -56,7 +54,8 @@ const Index = () => {
                                 </Link>
                             </td>
                         </tr>)
-                    }) : ""}
+                    }) : ""
+                    }
                     </tbody>
                 </table>
 
@@ -67,7 +66,9 @@ const Index = () => {
         {/*=============== End Of Main  ==================*/}
 
 
-    </LayoutTeacher>);
+    </LayoutTeacher>
+
+    );
 };
 
 export default Index;
