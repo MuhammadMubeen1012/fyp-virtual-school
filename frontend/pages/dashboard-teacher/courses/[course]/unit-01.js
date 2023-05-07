@@ -370,7 +370,12 @@ const Unit01 = () => {
                                     <Card.Text>
                                         File Link
                                     </Card.Text>
-                                    <Button variant="primary">Go to Event</Button>
+
+                                    <div>
+                                        <Button variant="primary">Go to Event</Button>
+                                        <Button className={"m-1"} variant="primary">View Submissions</Button>
+                                    </div>
+
                                 </Card.Body>
                             </Card>
                             <br/>
@@ -383,11 +388,17 @@ const Unit01 = () => {
                                         <Card.Header>Quiz Title</Card.Header>
                                         <Card.Body>
                                             <Card.Title>Description</Card.Title>
-                                            <Button variant="primary"
-                                                onClick={() => {
-                                                    setIsModalAddQuestion(true);
-                                                }}
-                                            >Add Questions</Button>
+
+                                            <div>
+                                                <Button variant="primary"
+                                                        onClick={() => {
+                                                            setIsModalAddQuestion(true);
+                                                        }}
+                                                >Add Questions</Button>
+
+                                                <Button className={"m-1"} variant={"primary"}>View Submissions</Button>
+                                            </div>
+
                                         </Card.Body>
                                     </Card>
                                     <br/>
