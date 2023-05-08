@@ -169,7 +169,7 @@ exports.getcontentByLessonID = catchAsyncErrors(async (req, res, next) => {
 });
 
 // @desc get content by lesson ID
-// @route GET /content/:lessonID
+// @route GET /lesson/:lessonID
 exports.getLessonByID = catchAsyncErrors(async (req, res, next) => {
   const lesson = await Lesson.findById(req.params.lessonID);
 

@@ -15,12 +15,19 @@ const lessonSchema = new mongoose.Schema({
     required: true,
     ref: "Course",
   },
-  content: [
-    {
-      type: String,
-      default: "No content",
-    },
-  ],
+  content: {
+    type: [
+      {
+        name: {
+          type: String,
+        },
+        link: {
+          type: String,
+        },
+      },
+    ],
+    default: [],
+  },
   assignments: [
     {
       type: mongoose.Schema.Types.ObjectId,
