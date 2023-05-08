@@ -1,11 +1,15 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import LayoutAdmin from "../../components/Dashboard/Layout/LayoutAdmin";
 import Link from "next/link";
 import {getClassroomsByAcademicYear} from "./DashboardController";
+import {Dropdown, Nav} from "react-bootstrap";
 
-const DashboardAdmin = () => {
+
+const Class06 = () => {
     const [classrooms, setClassrooms] = React.useState([]);
     const [loading, setLoading] = React.useState(false);
+    const [eventKey, setEventKey] = useState(0);
+
     useEffect(() => {
         if (classrooms.length === 0) {
             getClassroomsByAcademicYear().then(r => setClassrooms(r));
@@ -25,90 +29,54 @@ const DashboardAdmin = () => {
                 <h1>Overview</h1>
 
 
-                {/* ============ Start of insights ============== */}
 
-                <div className="insights">
-
-                    {/*course completed*/}
-                    <div className="course-completed">
-                        <span className="material-icons-sharp">person_outline</span>
-                        <div className="middle">
-                            <div className="left">
-                                <h3>Total Students</h3>
-                                <h1>130</h1>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    {/*course progress*/}
-                    <div className="course-progress">
-                        <span className="material-icons-sharp">analytics</span>
-                        <div className="middle">
-                            <div className="left">
-                                <h3>Total Teachers</h3>
-                                <h1>14</h1>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    {/*Certification*/}
-                    <div className="certification">
-                        <span className="material-icons-sharp">analytics</span>
-                        <div className="middle">
-                            <div className="left">
-                                <h3>Total Faculty</h3>
-                                <h1>15</h1>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                {/*============ END of insights =================== */}
+                {/* ============= Tabs for lesson, Live Video, Assignments, Exercises, Quizes, Other Section ================= */}
+                    <Nav className={"mt-5 mb-5"} fill variant="tabs" defaultActiveKey="#">
+                    <Nav.Item>
+                        <Nav.Link href="#" onClick={() => setEventKey(0)}>
+                            Courses
+                        </Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link eventKey="link-1" onClick={() => setEventKey(1)}>
+                            Students
+                        </Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link eventKey="link-2" onClick={() => setEventKey(2)}>
+                            Teacher
+                        </Nav.Link>
+                    </Nav.Item>
+                </Nav>
+                {/* =========== Tabs End Here ================  */}
 
 
-                <div className="courses-table">
 
-                    <h2>Classrooms</h2>
-
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>Classroom</th>
-                            <th>No. of Students</th>
-                            <th>No. of Teachers</th>
-                            <th>Details</th>
-                        </tr>
-                        </thead>
-
-                        <tbody>
+                {/* ============= Tabs running by conditional rendering ================= */}
+                    <div className="">
                         {
-                            loading ?
-                                classrooms.map((classroom) => {
-                                    return (
-                                        <tr key={classroom._id}>
-                                            <td>{classroom.name}</td>
-                                            <td>{classroom.students.length}</td>
-                                            <td>{classroom.teachers.length}</td>
-                                            <td className="primary">
-                                                <Link href={"/dashboard-admin/class-06"}>
-                                                    Details
-                                                </Link>
 
-                                            </td>
-                                        </tr>
-                                    )
-                                }) : ""
+                            eventKey === 0 ?
+                                <div>
+                                    {/*Courses Tab*/}
+                                    <CourseData />
+                                </div>
+                            : eventKey === 1 ?
+                                <div>
+                                    {/*Students Tab*/}
+
+                                </div>
+                            : eventKey === 2 ?
+                                <div>
+                                    {/*Teachers Tab*/}
+
+                                </div>
+                            :  ""
+
                         }
+                    </div>
+                {/* =============      Tabs running code Ends here       ================== */}
 
-                        </tbody>
-                    </table>
-
-                </div>
 
 
             </main>
@@ -226,4 +194,63 @@ const DashboardAdmin = () => {
     );
 };
 
-export default DashboardAdmin;
+export default Class06;
+
+
+
+export function CourseData(){
+    return(
+        <div>
+            <div className="courses-table">
+
+                <h2>Classrooms</h2>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Classroom</th>
+                        <th>No. of Students</th>
+                        <th>No. of Teachers</th>
+                        <th>Details</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {
+                        loading ?
+                            classrooms.map((classroom) => {
+                                return (
+                                    <tr key={classroom._id}>
+                                        <td>{classroom.name}</td>
+                                        <td>{classroom.students.length}</td>
+                                        <td>{classroom.teachers.length}</td>
+                                        <td className="primary">
+                                            <Link href={"/dashboard-admin/class-06"}>
+                                                Details
+                                            </Link>
+
+                                        </td>
+                                    </tr>
+                                )
+                            }) : ""
+                    }
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    )
+}
+
+export function StudentData(){
+
+
+}
+
+export function TeacherData(){
+
+
+}
+
+
+

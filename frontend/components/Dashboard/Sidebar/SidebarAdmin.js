@@ -98,7 +98,8 @@ const SidebarAdmin = () => {
                                 href={item.link}
                                 key={index}
                             >
-                                <a className={`link ${activeMenu.id === item.id ? "active" : "" } `}>
+                                {/*${activeMenu.link === item.link ? "active" : "" }*/}
+                                <a className={`link  `}>
                                     <span className="material-icons-sharp">{item.icon}</span>
                                     <h3>{item.name}</h3>
                                 </a>

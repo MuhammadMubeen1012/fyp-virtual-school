@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import LayoutTeacher from "../../../../components/Dashboard/Layout/LayoutTeacher";
 import Link from "next/link";
 import {Router, useRouter} from "next/router";
-import {getLessons} from "./CourseController";
+import {getLessons} from "../../../../components/Controllers/CourseController";
 
 const Index = () => {
     const [course, setCourse] = useState([]);

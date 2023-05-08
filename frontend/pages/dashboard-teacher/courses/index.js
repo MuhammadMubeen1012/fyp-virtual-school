@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import LayoutTeacher from "../../../components/Dashboard/Layout/LayoutTeacher";
 import Link from "next/link";
-import {getCourses} from "./CoursesController";
+import {getCourses} from "../../../components/Controllers/CoursesController";
+import axios from "axios";
+import Cookies from "js-cookie";
 
 const Index = () => {
     const [courses, setCourses] = useState([]);
@@ -72,3 +74,38 @@ const Index = () => {
 };
 
 export default Index;
+
+
+
+
+export const getCourses = async () => {
+    const teacher = await getTeacher();
+    const coursesLinks = teacher.courses;
+
+    return Promise.all(coursesLinks.map((course) => {
+        return axios.get(`http://localhost:7000/api/v1/course/${course}`,
+            {
+                headers: {
+                    Authorization: `${Cookies.get('token')}`
+                }
+            })
+    }))
+}
+
+
+const getTeacher = async () => {
+    const response = await axios.get(`http://localhost:7000/api/v1/teacher`, {
+        headers: {
+            Authorization: `${Cookies.get('token')}`
+        }
+    })
+    return response.data.teacher
+}
+
+
+
+
+
+
+
+
