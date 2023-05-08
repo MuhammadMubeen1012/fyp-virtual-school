@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Button, Card, Dropdown, Form, Modal, Nav} from "react-bootstrap";
 import LayoutTeacher from "../../../../components/Dashboard/Layout/LayoutTeacher";
 import {useRouter} from "next/router";
-import {getLesson} from "./CourseController";
+import {getLesson} from "../../../../components/Controllers/CourseController";
 
 
 const Slug = () => {
