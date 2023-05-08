@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal" created-in="WS-231.8770.64">
+    <data-source name="@cluster0.q7xx2sb.mongodb.net" uuid="9218a37d-2474-4a14-b4f1-e2f7fb66dc2e">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MONGO" exact-version="0" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>mubeen</user-name>
+      <schema-mapping />
+    </data-source>
+  </component>
+</project>

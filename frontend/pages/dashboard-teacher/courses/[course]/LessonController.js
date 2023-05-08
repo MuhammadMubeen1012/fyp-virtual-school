@@ -1,83 +1,62 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-//  Get the lesson details of that course by its ID.
-// output: [objects of lessons]
-export const getLessonDetailsByCourse = async (courseID) => {
-  const response = await axios.get(
-    `http://localhost:7000/api/v1/lesson/${courseID}`,
-    {
-      headers: {
-        Authorization: `${Cookies.get("token")}`,
-      },
-    }
-  );
 
-  return response.data.lessons;
-};
 // console.log("Lesson Details", getLessonDetailsByCourse("testID"));
 
 // 	Get the Content of that lesson
 // output [link of contents of specified lesson]
-export const getContentsByLesson = async (lessonID) => {
-  const response = await axios.get(
-    `http://localhost:7000/api/v1/lesson/content/${lessonID}`,
-    {
-      headers: {
-        Authorization: `${Cookies.get("token")}`,
-      },
-    }
-  );
 
-  return response.data.content;
-};
 // console.log("Contents", getContentsByLesson("6452547c1f2d691aa5a8ad7d"));
 
 // 	Get the Assignments of that lesson
 // output [object of assignments of specified lesson]
 export const getAssignmentsByLesson = async (lessonID) => {
-  const response = await axios.get(
-    `http://localhost:7000/api/v1/assignment/${lessonID}`,
-    {
-      headers: {
-        Authorization: `${Cookies.get("token")}`,
-      },
-    }
-  );
+    const response = await axios.get(
+        `http://localhost:7000/api/v1/assignment/${lessonID}`,
+        {
+            headers: {
+                Authorization: `${Cookies.get("token")}`,
+            },
+        }
+    );
 
-  return response.data.assignments;
+    return response.data.assignments;
 };
 // console.log("Assignments", getAssignmentsByLesson("6452547c1f2d691aa5a8ad7d"));
 
 // 	Get Quizes of that lesson
 // output [object of quizes of specified lesson]
-export const getQuizesByLesson = async (lessonID) => {
-  const response = await axios.get(
-    `http://localhost:7000/api/v1/quiz/${lessonID}`,
-    {
-      headers: {
-        Authorization: `${Cookies.get("token")}`,
-      },
-    }
-  );
+// {
+// }
 
-  return response.data.quiz;
+export const getQuizesByLesson = async (lessonID) => {
+    const response = await axios.get(
+        `http://localhost:7000/api/v1/quiz/${lessonID}`,
+        {
+            headers: {
+                Authorization: `${Cookies.get("token")}`,
+            },
+        }
+    );
+
+    return response.data.quiz;
 };
 // console.log("Quiz", getQuizesByLesson("6452547c1f2d691aa5a8ad7d"));
 
 // 	Get event of that lesson
 // output [object of quizes of specified lesson]
 export const getEventsByLesson = async (lessonID) => {
-  const response = await axios.get(
-    `http://localhost:7000/api/v1/event/${lessonID}`,
-    {
-      headers: {
-        Authorization: `${Cookies.get("token")}`,
-      },
-    }
-  );
+    const response = await axios.get(
+        `http://localhost:7000/api/v1/event/${lessonID}`,
+        {
+            headers: {
+                Authorization: `${Cookies.get("token")}`,
+            },
+        }
+    );
 
-  return response.data.event;
+    return response.data.event;
 };
 // console.log("Event", getEventsByLesson("6452547c1f2d691aa5a8ad7d"));
 
@@ -100,18 +79,18 @@ export const getAllSubmissions = async (assignmentID) => {
 // 	Post requests for content
 // output {success and message property}
 export const postContentByLesson = async (lessonID, data) => {
-  let payLoad = data;
+    let payLoad = data;
 
-  const response = await axios.put(
-    `http://localhost:7000/api/v1/lesson/create/content/${lessonID}`,
-    payLoad,
-    {
-      headers: {
-        Authorization: `${Cookies.get("token")}`,
-      },
-    }
-  );
-  return response.data;
+    const response = await axios.put(
+        `http://localhost:7000/api/v1/lesson/create/content/${lessonID}`,
+        payLoad,
+        {
+            headers: {
+                Authorization: `${Cookies.get("token")}`,
+            },
+        }
+    );
+    return response.data;
 };
 
 // console.log(
@@ -124,18 +103,18 @@ export const postContentByLesson = async (lessonID, data) => {
 // 	Post requests for assignment
 // output {success and message property}
 export const postAssignmentByLesson = async (lessonID, data) => {
-  let payLoad = data;
+    let payLoad = data;
 
-  const response = await axios.post(
-    `http://localhost:7000/api/v1/assignment/${lessonID}`,
-    payLoad,
-    {
-      headers: {
-        Authorization: `${Cookies.get("token")}`,
-      },
-    }
-  );
-  return response.data;
+    const response = await axios.post(
+        `http://localhost:7000/api/v1/assignment/${lessonID}`,
+        payLoad,
+        {
+            headers: {
+                Authorization: `${Cookies.get("token")}`,
+            },
+        }
+    );
+    return response.data;
 };
 
 // console.log(
@@ -154,18 +133,18 @@ export const postAssignmentByLesson = async (lessonID, data) => {
 // 	Post requests for event
 // output {success, message and event property}
 export const postEventByLesson = async (lessonID, data) => {
-  let payLoad = data;
+    let payLoad = data;
 
-  const response = await axios.post(
-    `http://localhost:7000/api/v1/event/${lessonID}`,
-    payLoad,
-    {
-      headers: {
-        Authorization: `${Cookies.get("token")}`,
-      },
-    }
-  );
-  return response.data;
+    const response = await axios.post(
+        `http://localhost:7000/api/v1/event/${lessonID}`,
+        payLoad,
+        {
+            headers: {
+                Authorization: `${Cookies.get("token")}`,
+            },
+        }
+    );
+    return response.data;
 };
 
 // console.log(
@@ -184,18 +163,18 @@ export const postEventByLesson = async (lessonID, data) => {
 // Post requests for Quiz
 // output {message and success property}
 export const postQuizByLesson = async (lessonID, data) => {
-  let payLoad = data;
+    let payLoad = data;
 
-  const response = await axios.post(
-    `http://localhost:7000/api/v1/quiz/${lessonID}`,
-    payLoad,
-    {
-      headers: {
-        Authorization: `${Cookies.get("token")}`,
-      },
-    }
-  );
-  return response.data;
+    const response = await axios.post(
+        `http://localhost:7000/api/v1/quiz/${lessonID}`,
+        payLoad,
+        {
+            headers: {
+                Authorization: `${Cookies.get("token")}`,
+            },
+        }
+    );
+    return response.data;
 };
 
 // console.log(
@@ -211,18 +190,18 @@ export const postQuizByLesson = async (lessonID, data) => {
 // Post requests for Quiz
 // output {message and success property}
 export const postQuestionsByQuiz = async (quizID, data) => {
-  let payLoad = data;
+    let payLoad = data;
 
-  const response = await axios.put(
-    `http://localhost:7000/api/v1/quiz/questions/${quizID}`,
-    payLoad,
-    {
-      headers: {
-        Authorization: `${Cookies.get("token")}`,
-      },
-    }
-  );
-  return response.data;
+    const response = await axios.put(
+        `http://localhost:7000/api/v1/quiz/questions/${quizID}`,
+        payLoad,
+        {
+            headers: {
+                Authorization: `${Cookies.get("token")}`,
+            },
+        }
+    );
+    return response.data;
 };
 
 // console.log(
@@ -254,18 +233,18 @@ export const postQuestionsByQuiz = async (quizID, data) => {
 // 	Put request for content,
 // output {content property}
 export const updateContent = async (lessonID, data) => {
-  let payLoad = data;
+    let payLoad = data;
 
-  const response = await axios.put(
-    `http://localhost:7000/api/v1/lesson/update/content/${lessonID}`,
-    payLoad,
-    {
-      headers: {
-        Authorization: `${Cookies.get("token")}`,
-      },
-    }
-  );
-  return response.data;
+    const response = await axios.put(
+        `http://localhost:7000/api/v1/lesson/update/content/${lessonID}`,
+        payLoad,
+        {
+            headers: {
+                Authorization: `${Cookies.get("token")}`,
+            },
+        }
+    );
+    return response.data;
 };
 
 // console.log(
@@ -278,18 +257,18 @@ export const updateContent = async (lessonID, data) => {
 // 	Put request for assignment
 // Output {message,success, and assignment property}
 export const updateAssignment = async (assignmentID, data) => {
-  let payLoad = data;
+    let payLoad = data;
 
-  const response = await axios.put(
-    `http://localhost:7000/api/v1/assignment/update/${assignmentID}`,
-    payLoad,
-    {
-      headers: {
-        Authorization: `${Cookies.get("token")}`,
-      },
-    }
-  );
-  return response.data;
+    const response = await axios.put(
+        `http://localhost:7000/api/v1/assignment/update/${assignmentID}`,
+        payLoad,
+        {
+            headers: {
+                Authorization: `${Cookies.get("token")}`,
+            },
+        }
+    );
+    return response.data;
 };
 
 // console.log(
@@ -308,18 +287,18 @@ export const updateAssignment = async (assignmentID, data) => {
 // 	Put request for event
 // output {message, success, and event property}
 export const updateEvent = async (eventID, data) => {
-  let payLoad = data;
+    let payLoad = data;
 
-  const response = await axios.put(
-    `http://localhost:7000/api/v1/event/${eventID}`,
-    payLoad,
-    {
-      headers: {
-        Authorization: `${Cookies.get("token")}`,
-      },
-    }
-  );
-  return response.data;
+    const response = await axios.put(
+        `http://localhost:7000/api/v1/event/${eventID}`,
+        payLoad,
+        {
+            headers: {
+                Authorization: `${Cookies.get("token")}`,
+            },
+        }
+    );
+    return response.data;
 };
 // console.log(
 //   "U-Event",
@@ -335,18 +314,18 @@ export const updateEvent = async (eventID, data) => {
 
 // 	Put request for Quiz
 export const updateQuiz = async (quizID, data) => {
-  let payLoad = data;
+    let payLoad = data;
 
-  const response = await axios.put(
-    `http://localhost:7000/api/v1/quiz/${quizID}`,
-    payLoad,
-    {
-      headers: {
-        Authorization: `${Cookies.get("token")}`,
-      },
-    }
-  );
-  return response.data;
+    const response = await axios.put(
+        `http://localhost:7000/api/v1/quiz/${quizID}`,
+        payLoad,
+        {
+            headers: {
+                Authorization: `${Cookies.get("token")}`,
+            },
+        }
+    );
+    return response.data;
 };
 // data object
 // {
@@ -358,18 +337,18 @@ export const updateQuiz = async (quizID, data) => {
 
 // 	Put request for Quiz
 export const updateQuizQuestions = async (quizID, data) => {
-  let payLoad = data;
+    let payLoad = data;
 
-  const response = await axios.put(
-    `http://localhost:7000/api/v1/quiz/questions/update/${quizID}`,
-    payLoad,
-    {
-      headers: {
-        Authorization: `${Cookies.get("token")}`,
-      },
-    }
-  );
-  return response.data;
+    const response = await axios.put(
+        `http://localhost:7000/api/v1/quiz/questions/update/${quizID}`,
+        payLoad,
+        {
+            headers: {
+                Authorization: `${Cookies.get("token")}`,
+            },
+        }
+    );
+    return response.data;
 };
 //data object
 // {
@@ -398,15 +377,15 @@ export const updateQuizQuestions = async (quizID, data) => {
 // 	Delete request for content,
 // output {updated lesson and success property}
 export const deleteContentByLesson = async (lessonID) => {
-  const response = await axios.delete(
-    `http://localhost:7000/api/v1/lesson/delete/content/${lessonID}`,
-    {
-      headers: {
-        Authorization: `${Cookies.get("token")}`,
-      },
-    }
-  );
-  return response.data;
+    const response = await axios.delete(
+        `http://localhost:7000/api/v1/lesson/delete/content/${lessonID}`,
+        {
+            headers: {
+                Authorization: `${Cookies.get("token")}`,
+            },
+        }
+    );
+    return response.data;
 };
 
 // console.log(
@@ -417,15 +396,15 @@ export const deleteContentByLesson = async (lessonID) => {
 // 	Delete request for assignment
 // output {updated lesson and success property}
 export const deleteAssignmentByID = async (assignmentID) => {
-  const response = await axios.delete(
-    `http://localhost:7000/api/v1/assignment/delete/${assignmentID}`,
-    {
-      headers: {
-        Authorization: `${Cookies.get("token")}`,
-      },
-    }
-  );
-  return response.data;
+    const response = await axios.delete(
+        `http://localhost:7000/api/v1/assignment/delete/${assignmentID}`,
+        {
+            headers: {
+                Authorization: `${Cookies.get("token")}`,
+            },
+        }
+    );
+    return response.data;
 };
 
 //console.log("Delete-Ass", deleteAssignmentByID("6457ce236408640deeaceeda"));
@@ -433,15 +412,15 @@ export const deleteAssignmentByID = async (assignmentID) => {
 // 	Delete request for event
 // output {updated lesson and success property}
 export const deleteEventByID = async (eventID) => {
-  const response = await axios.delete(
-    `http://localhost:7000/api/v1/event/${eventID}`,
-    {
-      headers: {
-        Authorization: `${Cookies.get("token")}`,
-      },
-    }
-  );
-  return response.data;
+    const response = await axios.delete(
+        `http://localhost:7000/api/v1/event/${eventID}`,
+        {
+            headers: {
+                Authorization: `${Cookies.get("token")}`,
+            },
+        }
+    );
+    return response.data;
 };
 
 // console.log("Delete-Event", deleteEventByID("6457cfaf6408640deeaceedf"));
@@ -449,15 +428,15 @@ export const deleteEventByID = async (eventID) => {
 // 	Delete request for Quiz
 // output {updated lesson and success property}
 export const deleteQuizByID = async (quizID) => {
-  const response = await axios.delete(
-    `http://localhost:7000/api/v1/quiz/${quizID}`,
-    {
-      headers: {
-        Authorization: `${Cookies.get("token")}`,
-      },
-    }
-  );
-  return response.data;
+    const response = await axios.delete(
+        `http://localhost:7000/api/v1/quiz/${quizID}`,
+        {
+            headers: {
+                Authorization: `${Cookies.get("token")}`,
+            },
+        }
+    );
+    return response.data;
 };
 
 // console.log("Delete-Quiz", deleteQuizByID("6457d06f6408640deeaceee4"));

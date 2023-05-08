@@ -3,15 +3,20 @@ import Link from "next/link";
 import {Button, Card, Dropdown, Form, Modal, Nav} from "react-bootstrap";
 import LayoutTeacher from "../../../../components/Dashboard/Layout/LayoutTeacher";
 import {getLessonDetailsByCourse} from "./LessonController";
+import {useRouter} from "next/router";
 
 const Unit01 = () => {
+
+
+    const [lesson, setLesson] = useState(null);
+    const [loadingLesson, setLoadingLesson] = useState(false);
+
     const [modal, setModal] = useState({
         item: 0,
         active: false,
     });
     const [eventKey, setEventKey] = useState(0);
     const [isModalAddQuestion, setIsModalAddQuestion] = useState(false);
-
     return (
         <LayoutTeacher>
             {/*=============== Start of Main ================= */}
@@ -46,11 +51,7 @@ const Unit01 = () => {
                     vector image...
                 </div>
                 <br/>
-
-
-
-                {/* ============== Dropdown Menu to create Assignments, Quiz, etc ========================== */}
-                    <Dropdown>
+                <Dropdown>
                     <Dropdown.Toggle variant="primary" id="dropdown-basic">
                         Create
                     </Dropdown.Toggle>
@@ -71,13 +72,8 @@ const Unit01 = () => {
                     </Dropdown.Menu>
                 </Dropdown>
 
-                {/* ============== Dropdown Menu Ends Here =================== */}
-
-
-
-
-                {/* ==================== Events Modals according to the Create event from Dropdown ========================= */}
-                    <div className={""}>
+                {/*Setting Modals according to the create event*/}
+                <div className={""}>
                     <Modal
                         show={modal.active}
                         onHide={() => setModal({item: 0, active: false})}
@@ -105,23 +101,244 @@ const Unit01 = () => {
                         <Modal.Body>
                             {modal.item === 1 ? (
                                 <div>
-                                    {/* Content Modal */}
-                                    <ContentModal />
+                                    {/* lesson Video Link */}
+                                    <Form>
+                                        <Form.Group controlId={""}>
+                                            <Form.Label>File Link</Form.Label>
+                                            <Form.Control
+                                                type={"text"}
+                                                className={"m-2"}
+                                                placeholder={"File Link"}
+                                            />
+                                        </Form.Group>
+
+                                        <br/>
+                                        <Modal.Footer>
+                                            <Button>Submit</Button>
+                                        </Modal.Footer>
+                                    </Form>
                                 </div>
                             ) : modal.item === 2 ? (
                                 <div>
                                     {/* Event Modal */}
-                                    <EventModal />
+                                    <Form>
+                                        <Form.Group controlId={"name"}>
+                                            <Form.Label>Title</Form.Label>
+                                            <Form.Control
+                                                type={"text"}
+                                                className={"m-2"}
+                                                placeholder={"Title"}
+                                            />
+                                        </Form.Group>
+                                        <br/>
+                                        <Form.Group controlId={"name"}>
+                                            <Form.Label>Description</Form.Label>
+                                            <Form.Control
+                                                type={"text"}
+                                                className={"m-2"}
+                                                placeholder={"Description"}
+                                            />
+                                        </Form.Group>{" "}
+                                        <br/>
+                                        <Form.Group controlId={"name"}>
+                                            <Form.Label>Date</Form.Label>
+                                            <Form.Control
+                                                type={"date"}
+                                                className={"m-2"}
+                                                placeholder={"Date"}
+                                            />
+                                        </Form.Group>{" "}
+                                        <br/>
+                                        <Form.Group controlId={"name"}>
+                                            <div
+                                                style={{
+                                                    display: "flex",
+                                                    justifyContent: "space-between",
+                                                }}
+                                            >
+                                                <div>
+                                                    <label htmlFor="">Hours</label>
+                                                    <br/>
+                                                    <Form.Control placeholder={"Hours"} type="text"/>
+                                                </div>
+
+                                                <div>
+                                                    <label htmlFor="">Minutes</label>
+                                                    <br/>
+                                                    <Form.Control placeholder={"Minutes"} type="text"/>
+                                                </div>
+
+                                                <div>
+                                                    <label htmlFor="">Seconds</label>
+                                                    <br/>
+                                                    <Form.Control placeholder={"Seconds"} type="text"/>
+                                                </div>
+                                            </div>
+                                        </Form.Group>{" "}
+                                        <br/>
+                                        <Form.Group controlId={"name"}>
+                                            <Form.Label>Event Link</Form.Label>
+                                            <Form.Control
+                                                type={"text"}
+                                                className={"m-2"}
+                                                placeholder={"Link"}
+                                            />
+                                        </Form.Group>
+                                        <Form.Group controlId={"name"}>
+                                            <Form.Label>Event Password</Form.Label>
+                                            <Form.Control
+                                                type={"password"}
+                                                className={"m-2"}
+                                                placeholder={"Event Password"}
+                                            />
+                                        </Form.Group>{" "}
+                                        <br/>
+                                        <br/>
+                                        <Modal.Footer>
+                                            <Button type={"submit"}>Submit</Button>
+                                        </Modal.Footer>
+                                    </Form>
                                 </div>
                             ) : modal.item === 3 ? (
                                 <div className="">
                                     {/* Assignments Modal */}
-                                    <AssignmentModal />
+                                    <Form>
+                                        <Form.Group controlId={"Title"}>
+                                            <Form.Label>Title</Form.Label>
+                                            <Form.Control
+                                                type={"text"}
+                                                className={"m-2"}
+                                                placeholder={"Title"}
+                                            />
+                                        </Form.Group>
+                                        <br/>
+                                        <Form.Group controlId={"Title"}>
+                                            <Form.Label>Description</Form.Label>
+                                            <Form.Control
+                                                type={"text"}
+                                                className={"m-2"}
+                                                placeholder={"Description"}
+                                            />
+                                        </Form.Group>
+                                        <br/>
+                                        <Form.Group controlId={"file"}>
+                                            <Form.Label>File Name</Form.Label>
+                                            <Form.Control
+                                                type={"text"}
+                                                className={"m-2"}
+                                                placeholder={"File Name"}
+                                            />
+                                        </Form.Group>
+                                        <br/>
+                                        <Form.Group controlId={"file"}>
+                                            <Form.Label>File</Form.Label>
+                                            <Form.Control
+                                                type={"text"}
+                                                className={"m-2"}
+                                                placeholder={"Add File Link"}
+                                            />
+                                        </Form.Group>
+                                        <br/>
+                                        <Form.Group controlId={"name"}>
+                                            <Form.Label>Deadline</Form.Label>
+                                            <Form.Control
+                                                type={"date"}
+                                                className={"m-2"}
+                                                placeholder={"Date"}
+                                            />
+                                        </Form.Group>{" "}
+                                        <br/>
+                                        <Form.Group controlId={"file"}>
+                                            <Form.Label>Marks</Form.Label>
+                                            <Form.Control
+                                                type={"number"}
+                                                className={"m-2"}
+                                                placeholder={"Marks"}
+                                            />
+                                        </Form.Group>
+                                        <br/>
+                                        <br/>
+                                        <Modal.Footer>
+                                            <Button type={"submit"}>Submit</Button>
+                                        </Modal.Footer>
+                                    </Form>
                                 </div>
                             ) : modal.item === 4 ? (
                                 <div className="">
                                     {/*  Quiz Modal  */}
-                                    <QuizModal />
+                                    <Form>
+                                        <Form.Group controlId={"question"}>
+                                            <Form.Label>Name</Form.Label>
+                                            <Form.Control
+                                                type={"text"}
+                                                className={"m-2"}
+                                                placeholder={"Name"}
+                                            />
+                                        </Form.Group>
+                                        <br/>
+                                        <Form.Group controlId={"question"}>
+                                            <Form.Label>Description</Form.Label>
+                                            <Form.Control
+                                                type={"text"}
+                                                className={"m-2"}
+                                                placeholder={"Description"}
+                                            />
+                                        </Form.Group>
+                                        <br/>
+                                        <Form.Group controlId={"name"}>
+                                            <label>Start Time</label>
+                                            <br/>
+                                            <div
+                                                style={{
+                                                    display: "flex",
+                                                    justifyContent: "space-between",
+                                                }}
+                                            >
+                                                <div>
+                                                    <Form.Control placeholder={"Hours"} type="text"/>
+                                                </div>
+
+                                                <div>
+                                                    <Form.Control placeholder={"Minutes"} type="text"/>
+                                                </div>
+
+                                                <div>
+                                                    <Form.Control placeholder={"Seconds"} type="text"/>
+                                                </div>
+                                            </div>
+                                        </Form.Group>{" "}
+                                        <br/>
+                                        <Form.Group controlId={"name"}>
+                                            <label>End Time</label>
+                                            <div
+                                                style={{
+                                                    display: "flex",
+                                                    justifyContent: "space-between",
+                                                }}
+                                            >
+                                                <div>
+                                                    <Form.Control placeholder={"Hours"} type="text"/>
+                                                </div>
+
+                                                <div>
+                                                    <Form.Control placeholder={"Minutes"} type="text"/>
+                                                </div>
+
+                                                <div>
+                                                    <Form.Control placeholder={"Seconds"} type="text"/>
+                                                </div>
+                                            </div>
+                                        </Form.Group>{" "}
+                                        <br/>
+                                        <div>
+                                            <input type="checkbox" id="isLive"/>
+                                            <label htmlFor="isLive"> isLive</label>
+                                        </div>
+                                        <br/>
+                                        <Modal.Footer>
+                                            <Button type={"submit"}>Submit</Button>
+                                        </Modal.Footer>
+                                    </Form>
                                 </div>
                             ) : (
                                 ""
@@ -129,14 +346,9 @@ const Unit01 = () => {
                         </Modal.Body>
                     </Modal>
                 </div>
-                {/* ==================== Events Modal Code Ends Here ==================================  */}
-
-
-
-
 
                 {/* ============= Tabs for lesson, Live Video, Assignments, Exercises, Quizes, Other Section ================= */}
-                    <Nav className={"mt-5 mb-5"} fill variant="tabs" defaultActiveKey="#">
+                <Nav className={"mt-5 mb-5"} fill variant="tabs" defaultActiveKey="#">
                     <Nav.Item>
                         <Nav.Link href="#" onClick={() => setEventKey(0)}>
                             Content
@@ -158,620 +370,240 @@ const Unit01 = () => {
                         </Nav.Link>
                     </Nav.Item>
                 </Nav>
-                {/* =========== Tabs End Here ================  */}
-
-
 
 
 
                 {/* ============= Tabs running by conditional rendering ================= */}
-                    <div className="">
-
-
+                <div className="">
                     {
-
                         eventKey === 0 ?
-                        <div>
+                            <div>
                             {/*Lesson Tab*/}
-                            <ContentData />
-                        </div>
-                        : eventKey === 1 ?
-                        <div>
+                            <Card>
+                                <Card.Header>Content</Card.Header>
+                                <Card.Body>
+                                    <Card.Text>
+                                        File Link
+                                    </Card.Text>
+                                    <div>
+                                        <Button variant="primary">Edit</Button>
+                                        <Button className={"m-1"} variant="primary">Delete</Button>
+                                    </div>
+                                </Card.Body>
+                            </Card> <br/>
+
+
+                        </div> :
+                        eventKey === 1 ?
+                            <div>
                             {/*Event Tab*/}
-                            <EventData />
-                        </div>
-                        : eventKey === 2 ?
-                        <div>
+                            <Card>
+                                <Card.Header>Event Title</Card.Header>
+                                <Card.Body>
+                                    <Card.Title>Description</Card.Title>
+                                    <Card.Text>
+                                        Event Date
+                                    </Card.Text>
+                                    <Button variant="primary">Go to Event</Button>
+                                </Card.Body>
+                            </Card> <br/>
+
+                            <Card>
+                                <Card.Header>Event Title</Card.Header>
+                                <Card.Body>
+                                    <Card.Title>Description</Card.Title>
+                                    <Card.Text>
+                                        Event Date
+                                    </Card.Text>
+                                    <div>
+                                        <Button variant="primary">Edit</Button>
+                                        <Button className={"m-1"} variant="primary">Delete</Button>
+                                    </div>
+                                </Card.Body>
+                            </Card>
+
+                        </div> :
+                        eventKey === 2 ?
+                            <div>
                             {/*Assignments Tab*/}
-                            <AssignmentData />
+                            <Card>
+                                <Card.Header>Assignment Title</Card.Header>
+                                <Card.Body>
+                                    <Card.Title>Description</Card.Title>
+                                    <Card.Text>
+                                        File Link
+                                    </Card.Text>
+
+                                    <div>
+                                        <Button variant="primary">Go to Event</Button>
+                                        <Button className={"m-1"} variant="primary">View Submissions</Button>
+                                    </div>
+
+                                </Card.Body>
+                            </Card>
+                            <br/>
+
+                        </div> :
+                        eventKey === 3 ?
+                            <div>
+                                    {/*Quiz Tab*/}
+                                    <Card>
+                                        <Card.Header>Quiz Title</Card.Header>
+                                        <Card.Body>
+                                            <Card.Title>Description</Card.Title>
+
+                                            <div>
+                                                <Button variant="primary"
+                                                        onClick={() => {
+                                                            setIsModalAddQuestion(true);
+                                                        }}
+                                                >Add Questions</Button>
+
+                                                <Button className={"m-1"} variant={"primary"}>View Submissions</Button>
+                                            </div>
+
+                                        </Card.Body>
+                                    </Card>
+                                    <br/>
+
+          {isModalAddQuestion && (
+            <Modal
+              show={isModalAddQuestion}
+              onHide={() => setIsModalAddQuestion(false)}
+              dialogClassName="custom-modal"
+              size={"lg"}
+              aria-labelledby="example-custom-modal-styling-title"
+              centered
+            >
+              <Modal.Header closeButton>
+                <Modal.Title id="example-custom-modal-styling-title">
+                  Add Quiz
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <Form
+                  handleSubmit={(e) => {
+                    e.preventDefault();
+                  }}
+                >
+                  <Form.Group controlId={"question"}>
+                    <Form.Label>Question</Form.Label>
+                    <Form.Control
+                      type={"text"}
+                      className={"m-2"}
+                      placeholder={"Type Question here..."}
+                    />
+                  </Form.Group>
+                  <br />
+
+                                                            <Form.Label>Options</Form.Label>
+                                                            <Form.Group controlId={"question"}>
+                                                                <Form.Control
+                                                                    type={"text"}
+                                                                    className={"m-2"}
+                                                                    placeholder={"Option 1"}
+                                                                />
+                                                                <Form.Control
+                                                                    type={"text"}
+                                                                    className={"m-2"}
+                                                                    placeholder={"Option 2"}
+                                                                />
+                                                                <Form.Control
+                                                                    type={"text"}
+                                                                    className={"m-2"}
+                                                                    placeholder={"Option 3"}
+                                                                />
+                                                                <Form.Control
+                                                                    type={"text"}
+                                                                    className={"m-2"}
+                                                                    placeholder={"Option 4"}
+                                                                />
+                                                            </Form.Group>
+
+                                                            <br/>
+                                                            <Form.Group controlId={"question"}>
+                                                                <Form.Label>Marks</Form.Label>
+                                                                <Form.Control
+                                                                    type={"number"}
+                                                                    className={"m-2"}
+                                                                    placeholder={"Marks"}
+                                                                />
+                                                            </Form.Group>
+
+                                                            <div
+                                                                style={{
+                                                                    display: "flex",
+                                                                    justifyContent: "space-between"
+                                                                }}
+                                                            >
+                                                                <Button type={"submit"}>Submit</Button>
+                                                                <Button type={"submit"}>Next</Button>
+                                                            </div>
+                                                        </Form>
+                                                    </Modal.Body>
+                                                </Modal>
+                                            )}
+                                        </div>
+                                        {/* =============      Tabs for lesson       ================== */}
+                        </main>
+
+                    {/*=============== End Of Main  ==================*/}
+
+                    {/*============= start of Right side*/}
+                    <div className="right">
+                        <div className="profile">
+                            <div className="info">
+                                <p>
+                                    Hey, <b>Teacher</b>
+                                </p>
+                            </div>
+
+                            <div className="profile-photo"></div>
                         </div>
-                        : eventKey === 3 ?
-                        <div>
-                            {/*Quiz Tab*/}
-                            <QuizData onChange={setIsModalAddQuestion} />
+
+                        {/*====================== Start of Recent Updates ==================== */}
+                        <div className="recent-updates">
+                            <h2>Notice Board</h2>
+                            <div className="updates">
+                                <div className="update">
+                                    <div className="profile-photo">
+                                        <h3>- UX</h3>
+                                    </div>
+
+                                    <div className="message">
+                                        <p>Assignment due 20 March</p>
+                                        <small className="text-muted">2 Minutes Ago</small>
+                                    </div>
+                                </div>
+
+                                <div className="update">
+                                    <div className="profile-photo">
+                                        <h3>- SEO</h3>
+                                    </div>
+
+                                    <div className="message">
+                                        <p>Assignment due 21 March</p>
+                                        <small className="text-muted">2 Minutes Ago</small>
+                                    </div>
+                                </div>
+
+                                <div className="update">
+                                    <div className="profile-photo">
+                                        <h3>- SE</h3>
+                                    </div>
+
+                                    <div className="message">
+                                        <p>Assignment due 25 March</p>
+                                        <small className="text-muted">2 Minutes Ago</small>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-
-                        : ""
-
-
-                    }
-
-
-
-
-                    {isModalAddQuestion && (
-                        <div>
-                            <QuizAddQuestionsModal  isCheck={isModalAddQuestion} onChange={setIsModalAddQuestion}  />
-                        </div>
-                    )}
-                </div>
-                {/* =============      Tabs running code Ends here       ================== */}
-
-
-
-
-
-            </main>
-
-            {/* =================  End Of Main  ================== */}
-
-
-
-
-
-            {/* ============== start of Right side ======================== */}
-            <div className="right">
-                <div className="profile">
-                    <div className="info">
-                        <p>
-                            Hey, <b>Teacher</b>
-                        </p>
+                        {/*====================== End of Recent Updates ====================== */}
                     </div>
-
-                    <div className="profile-photo"></div>
-                </div>
-
-                {/*====================== Start of Recent Updates ==================== */}
-                <div className="recent-updates">
-                    <h2>Notice Board</h2>
-                    <div className="updates">
-                        <div className="update">
-                            <div className="profile-photo">
-                                <h3>- UX</h3>
-                            </div>
-
-                            <div className="message">
-                                <p>Assignment due 20 March</p>
-                                <small className="text-muted">2 Minutes Ago</small>
-                            </div>
-                        </div>
-
-                        <div className="update">
-                            <div className="profile-photo">
-                                <h3>- SEO</h3>
-                            </div>
-
-                            <div className="message">
-                                <p>Assignment due 21 March</p>
-                                <small className="text-muted">2 Minutes Ago</small>
-                            </div>
-                        </div>
-
-                        <div className="update">
-                            <div className="profile-photo">
-                                <h3>- SE</h3>
-                            </div>
-
-                            <div className="message">
-                                <p>Assignment due 25 March</p>
-                                <small className="text-muted">2 Minutes Ago</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {/*====================== End of Recent Updates ====================== */}
-            </div>
-            {/*============= End of left Side*/}
+                    {/*============= End of left Side*/}
         </LayoutTeacher>
-    );
+);
 };
 
 export default Unit01;
-
-
-
-
-
-// ================================== Modals for Creating Events  ==============================================
-export function ContentModal() {
-
-    return(
-        <>
-
-            <Form>
-                <Form.Group controlId={""}>
-                    <Form.Label>File Link</Form.Label>
-                    <Form.Control
-                        type={"text"}
-                        className={"m-2"}
-                        placeholder={"File Link"}
-                    />
-                </Form.Group>
-
-                <br/>
-                <Modal.Footer>
-                    <Button>Submit</Button>
-                </Modal.Footer>
-            </Form>
-
-        </>
-    )
-}
-
-
-export function EventModal() {
-
-    return(
-        <>
-
-            <Form>
-                <Form.Group controlId={"name"}>
-                    <Form.Label>Title</Form.Label>
-                    <Form.Control
-                        type={"text"}
-                        className={"m-2"}
-                        placeholder={"Title"}
-                    />
-                </Form.Group>
-                <br/>
-                <Form.Group controlId={"name"}>
-                    <Form.Label>Description</Form.Label>
-                    <Form.Control
-                        type={"text"}
-                        className={"m-2"}
-                        placeholder={"Description"}
-                    />
-                </Form.Group>{" "}
-                <br/>
-                <Form.Group controlId={"name"}>
-                    <Form.Label>Date</Form.Label>
-                    <Form.Control
-                        type={"date"}
-                        className={"m-2"}
-                        placeholder={"Date"}
-                    />
-                </Form.Group>{" "}
-                <br/>
-                <Form.Group controlId={"name"}>
-                    <div
-                        style={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                        }}
-                    >
-                        <div>
-                            <label htmlFor="">Hours</label>
-                            <br/>
-                            <Form.Control placeholder={"Hours"} type="text"/>
-                        </div>
-
-                        <div>
-                            <label htmlFor="">Minutes</label>
-                            <br/>
-                            <Form.Control placeholder={"Minutes"} type="text"/>
-                        </div>
-
-                        <div>
-                            <label htmlFor="">Seconds</label>
-                            <br/>
-                            <Form.Control placeholder={"Seconds"} type="text"/>
-                        </div>
-                    </div>
-                </Form.Group>{" "}
-                <br/>
-                <Form.Group controlId={"name"}>
-                    <Form.Label>Event Link</Form.Label>
-                    <Form.Control
-                        type={"text"}
-                        className={"m-2"}
-                        placeholder={"Link"}
-                    />
-                </Form.Group>
-                <Form.Group controlId={"name"}>
-                    <Form.Label>Event Password</Form.Label>
-                    <Form.Control
-                        type={"password"}
-                        className={"m-2"}
-                        placeholder={"Event Password"}
-                    />
-                </Form.Group>{" "}
-                <br/>
-                <br/>
-                <Modal.Footer>
-                    <Button type={"submit"}>Submit</Button>
-                </Modal.Footer>
-            </Form>
-
-        </>
-    )
-}
-
-
-export function AssignmentModal() {
-
-    return(
-        <>
-
-            <Form>
-                <Form.Group controlId={"Title"}>
-                    <Form.Label>Title</Form.Label>
-                    <Form.Control
-                        type={"text"}
-                        className={"m-2"}
-                        placeholder={"Title"}
-                    />
-                </Form.Group>
-                <br/>
-                <Form.Group controlId={"Title"}>
-                    <Form.Label>Description</Form.Label>
-                    <Form.Control
-                        type={"text"}
-                        className={"m-2"}
-                        placeholder={"Description"}
-                    />
-                </Form.Group>
-                <br/>
-                <Form.Group controlId={"file"}>
-                    <Form.Label>File Name</Form.Label>
-                    <Form.Control
-                        type={"text"}
-                        className={"m-2"}
-                        placeholder={"File Name"}
-                    />
-                </Form.Group>
-                <br/>
-                <Form.Group controlId={"file"}>
-                    <Form.Label>File</Form.Label>
-                    <Form.Control
-                        type={"text"}
-                        className={"m-2"}
-                        placeholder={"Add File Link"}
-                    />
-                </Form.Group>
-                <br/>
-                <Form.Group controlId={"name"}>
-                    <Form.Label>Deadline</Form.Label>
-                    <Form.Control
-                        type={"date"}
-                        className={"m-2"}
-                        placeholder={"Date"}
-                    />
-                </Form.Group>{" "}
-                <br/>
-                <Form.Group controlId={"file"}>
-                    <Form.Label>Marks</Form.Label>
-                    <Form.Control
-                        type={"number"}
-                        className={"m-2"}
-                        placeholder={"Marks"}
-                    />
-                </Form.Group>
-                <br/>
-                <br/>
-                <Modal.Footer>
-                    <Button type={"submit"}>Submit</Button>
-                </Modal.Footer>
-            </Form>
-
-        </>
-    )
-}
-
-
-export function QuizModal() {
-
-    return(
-        <>
-
-            <Form>
-                <Form.Group controlId={"question"}>
-                    <Form.Label>Name</Form.Label>
-                    <Form.Control
-                        type={"text"}
-                        className={"m-2"}
-                        placeholder={"Name"}
-                    />
-                </Form.Group>
-                <br/>
-                <Form.Group controlId={"question"}>
-                    <Form.Label>Description</Form.Label>
-                    <Form.Control
-                        type={"text"}
-                        className={"m-2"}
-                        placeholder={"Description"}
-                    />
-                </Form.Group>
-                <br/>
-                <Form.Group controlId={"name"}>
-                    <label>Start Time</label>
-                    <br/>
-                    <div
-                        style={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                        }}
-                    >
-                        <div>
-                            <Form.Control placeholder={"Hours"} type="text"/>
-                        </div>
-
-                        <div>
-                            <Form.Control placeholder={"Minutes"} type="text"/>
-                        </div>
-
-                        <div>
-                            <Form.Control placeholder={"Seconds"} type="text"/>
-                        </div>
-                    </div>
-                </Form.Group>{" "}
-                <br/>
-                <Form.Group controlId={"name"}>
-                    <label>End Time</label>
-                    <div
-                        style={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                        }}
-                    >
-                        <div>
-                            <Form.Control placeholder={"Hours"} type="text"/>
-                        </div>
-
-                        <div>
-                            <Form.Control placeholder={"Minutes"} type="text"/>
-                        </div>
-
-                        <div>
-                            <Form.Control placeholder={"Seconds"} type="text"/>
-                        </div>
-                    </div>
-                </Form.Group>{" "}
-                <br/>
-                <div>
-                    <input type="checkbox" id="isLive"/>
-                    <label htmlFor="isLive"> isLive</label>
-                </div>
-                <br/>
-                <Modal.Footer>
-                    <Button type={"submit"}>Submit</Button>
-                </Modal.Footer>
-            </Form>
-
-        </>
-    )
-}
-
-export function QuizAddQuestionsModal(props) {
-
-    return(
-        <>
-
-            <Modal
-                show={props.isCheck}
-                onHide={() => props.onChange(false)}
-                dialogClassName="custom-modal"
-                size={"lg"}
-                aria-labelledby="example-custom-modal-styling-title"
-                centered
-            >
-                <Modal.Header closeButton>
-                    <Modal.Title id="example-custom-modal-styling-title">
-                        Add Quiz
-                    </Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Form
-                        handleSubmit={(e) => {
-                            e.preventDefault();
-                        }}
-                    >
-                        <Form.Group controlId={"question"}>
-                            <Form.Label>Question</Form.Label>
-                            <Form.Control
-                                type={"text"}
-                                className={"m-2"}
-                                placeholder={"Type Question here..."}
-                            />
-                        </Form.Group>
-                        <br/>
-
-                        <Form.Label>Options</Form.Label>
-                        <Form.Group controlId={"question"}>
-                            <Form.Control
-                                type={"text"}
-                                className={"m-2"}
-                                placeholder={"Option 1"}
-                            />
-                            <Form.Control
-                                type={"text"}
-                                className={"m-2"}
-                                placeholder={"Option 2"}
-                            />
-                            <Form.Control
-                                type={"text"}
-                                className={"m-2"}
-                                placeholder={"Option 3"}
-                            />
-                            <Form.Control
-                                type={"text"}
-                                className={"m-2"}
-                                placeholder={"Option 4"}
-                            />
-                        </Form.Group>
-
-                        <br/>
-                        <Form.Group controlId={"question"}>
-                            <Form.Label>Marks</Form.Label>
-                            <Form.Control
-                                type={"number"}
-                                className={"m-2"}
-                                placeholder={"Marks"}
-                            />
-                        </Form.Group>
-
-                        <div
-                            style={{display: "flex", justifyContent: "space-between"}}
-                        >
-                            <Button type={"submit"}>Submit</Button>
-                            <Button type={"submit"}>Next</Button>
-                        </div>
-                    </Form>
-                </Modal.Body>
-            </Modal>
-
-        </>
-    )
-}
-
-// ================================= Modal for Events Code Ends Here =============================================
-
-
-
-
-
-
-
-// ================================= Tabs Content Data =============================================
-
-export function ContentData() {
-
-    return(
-        <>
-
-            <Card>
-                <Card.Header>Content</Card.Header>
-                <Card.Body>
-                    <Card.Text>File Link</Card.Text>
-                    <div>
-                        <Button variant="primary">Edit</Button>
-                        <Button className={"m-1"} variant="primary">
-                            Delete
-                        </Button>
-                    </div>
-                </Card.Body>
-            </Card>{" "}
-
-        </>
-    )
-}
-
-
-export function EventData() {
-
-    return(
-        <>
-
-            <Card>
-                <Card.Header>Event Title</Card.Header>
-                <Card.Body>
-                    <Card.Title>Description</Card.Title>
-                    <Card.Text>Event Date</Card.Text>
-                    <Button variant="primary">Go to Event</Button>
-                </Card.Body>
-            </Card>{" "}
-            <br/>
-            <Card>
-                <Card.Header>Event Title</Card.Header>
-                <Card.Body>
-                    <Card.Title>Description</Card.Title>
-                    <Card.Text>Event Date</Card.Text>
-                    <div>
-                        <Button variant="primary">Edit</Button>
-                        <Button className={"m-1"} variant="primary">
-                            Delete
-                        </Button>
-                    </div>
-                </Card.Body>
-            </Card>
-
-        </>
-    )
-}
-
-
-export function AssignmentData() {
-
-    return(
-        <>
-
-            <Card>
-                <Card.Header>Assignment Title</Card.Header>
-                <Card.Body>
-                    <Card.Title>Description</Card.Title>
-                    <Card.Text>File Link</Card.Text>
-
-                    <div>
-                        <Button variant="primary">Go to Event</Button>
-                        <Button className={"m-1"} variant="primary">
-                            View Submissions
-                        </Button>
-                    </div>
-                </Card.Body>
-            </Card>
-            <br/>
-
-
-        </>
-    )
-}
-
-
-export function QuizData(props) {
-
-    return(
-        <>
-
-            <Card>
-                <Card.Header>Quiz Title</Card.Header>
-                <Card.Body>
-                    <Card.Title>Description</Card.Title>
-
-                    <div>
-                        <Button
-                            variant="primary"
-                            onClick={() => {
-                                props.onChange(true);
-                            }}
-                        >
-                            Add Questions
-                        </Button>
-
-                        <Button className={"m-1"} variant={"primary"}>
-                            View Submissions
-                        </Button>
-                    </div>
-                </Card.Body>
-            </Card>
-            <br/>
-
-        </>
-    )
-}
-
-
-
-
-// ================================= Tabs Content Ends Here =============================================
-
-
-
-
-
-
-
-
-
-
-
-
-

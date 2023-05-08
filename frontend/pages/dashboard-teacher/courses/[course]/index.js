@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import LayoutTeacher from "../../../../components/Dashboard/Layout/LayoutTeacher";
 import Link from "next/link";
 import {Router, useRouter} from "next/router";
-import { getLessons} from "./CourseController";
+import {getLessons} from "./CourseController";
 
 const Index = () => {
     const [course, setCourse] = useState([]);
@@ -56,30 +56,14 @@ const Index = () => {
                             loading && lessons !== null ? (
                                 lessons.data.lessons.map((lesson, index) => (
                                     <tr>
-                                        <td>{index+1}</td>
+                                        <td>{index + 1}</td>
                                         <td>{lesson.name}</td>
-                                        <td>link</td>
+                                        <td><Link href={`/dashboard-teacher/courses/${course}/${lesson._id}`}
+                                                  className="primary ">Details</Link></td>
                                     </tr>)
                                 )
                             ) : ""
                         }
-                        <tr>
-                            <th>01</th>
-                            <td>Introduction</td>
-                            <Link href={"/dashboard-teacher/courses/english/unit-01"}
-                                  className="primary ">Details</Link>
-                        </tr>
-                        <tr>
-                            <th>02</th>
-                            <td>Vocabulary</td>
-                            <td className="primary">Details</td>
-                        </tr>
-                        <tr>
-                            <th>03</th>
-                            <td>Grammar</td>
-                            <td className="primary">Details</td>
-                        </tr>
-
 
                         </tbody>
                     </table>

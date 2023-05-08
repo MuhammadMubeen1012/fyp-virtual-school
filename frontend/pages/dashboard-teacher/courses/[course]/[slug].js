@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-import Link from "next/link";
 import {Button, Card, Dropdown, Form, Modal, Nav} from "react-bootstrap";
 import LayoutTeacher from "../../../../components/Dashboard/Layout/LayoutTeacher";
+import {useRouter} from "next/router";
+import {getLesson} from "./CourseController";
 
 
 const Slug = () => {
@@ -12,6 +13,48 @@ const Slug = () => {
     const [eventKey, setEventKey] = useState(0);
     const [isModalAddQuestion, setIsModalAddQuestion] = useState(false);
 
+    const [lessonLink, setLessonLink] = useState("");
+    const [lesson, setLesson] = useState({}); // lesson data
+    const [lessonLoading, setLessonLoading] = useState(false);
+
+    const [contentLink, setContentLink] = useState([]);
+    const [content, setContent] = useState([]);
+    const [contentLoading, setContentLoading] = useState(false);
+
+    const [eventsLink, setEventsLink] = useState([]);
+    const [events, setEvents] = useState([]);
+    const [eventsLoading, setEventsLoading] = useState(false);
+
+    const [quizesLink, setQuizesLink] = useState([]);
+    const [quizes, setQuizes] = useState([]);
+    const [quizesLoading, setQuizesLoading] = useState(false);
+
+    const router = useRouter();
+    useState(() => {
+        const lesson_id = router.query['slug'];
+        console.log(lesson_id);
+        setLessonLink(lesson_id);
+
+
+        if (lesson_id !== undefined) {
+            getLesson(lesson_id).then(r => {
+                console.log(r.data.lesson);
+                setContentLink(r.data.content)
+                setEventsLink(r.data.events)
+                setQuizesLink(r.data.quizes)
+                setLesson(r.data.lesson)
+
+            }).catch(e => console.log(e));
+        }
+    }, []);
+
+    useState(() => {
+        if (lesson !== undefined && lessonLink !== undefined && lessonLoading === false) {
+            console.log(lesson);
+            setLessonLoading(true);
+        }
+    }, [lesson]);
+
     return (
         <LayoutTeacher>
             {/*=============== Start of Main ================= */}
@@ -20,14 +63,14 @@ const Slug = () => {
 
                 <h1>Overview</h1>
 
-                <div className="" style={{ paddingBlock: "1rem" ,display: "flex", justifyContent: "space-between"}}>
+                <div className="" style={{paddingBlock: "1rem", display: "flex", justifyContent: "space-between"}}>
                     <div>
-                        <span>Unit 1</span>
-                        <h3>Speaking to the world</h3>
+                        <span>{lessonLoading ? lesson.name : ""}</span>
+                        <h3>{lessonLoading ? lesson.description : ""}</h3>
                     </div>
 
                     <div>
-                        <button className={"btn btn-primary"}>Next Lesson </button>
+                        <button className={"btn btn-primary"}>Next Lesson</button>
                     </div>
                 </div>
 
@@ -52,9 +95,8 @@ const Slug = () => {
                 </Dropdown>
 
 
-
                 {/*Setting Modals according to the create event*/}
-                <div className={""} >
+                <div className={""}>
                     <Modal
                         show={modal.active}
                         onHide={() => setModal({item: 0, active: false})}
@@ -93,9 +135,10 @@ const Slug = () => {
                                         {/* lesson Video Link */}
                                         <Form>
 
-                                            <Form.Group controlId={""} >
+                                            <Form.Group controlId={""}>
                                                 <Form.Label>File Link</Form.Label>
-                                                <Form.Control type={"text"} className={"m-2"} placeholder={"File Link"} />
+                                                <Form.Control type={"text"} className={"m-2"}
+                                                              placeholder={"File Link"}/>
                                             </Form.Group>
 
                                             <br/>
@@ -111,25 +154,27 @@ const Slug = () => {
                                         <div>
                                             {/* Event Modal */}
                                             <Form>
-                                                <Form.Group controlId={"name"} >
+                                                <Form.Group controlId={"name"}>
                                                     <Form.Label>Title</Form.Label>
-                                                    <Form.Control type={"text"} className={"m-2"} placeholder={"Title"} />
+                                                    <Form.Control type={"text"} className={"m-2"}
+                                                                  placeholder={"Title"}/>
                                                 </Form.Group>
                                                 <br/>
 
-                                                <Form.Group controlId={"name"} >
+                                                <Form.Group controlId={"name"}>
                                                     <Form.Label>Description</Form.Label>
-                                                    <Form.Control type={"text"} className={"m-2"} placeholder={"Description"} />
+                                                    <Form.Control type={"text"} className={"m-2"}
+                                                                  placeholder={"Description"}/>
                                                 </Form.Group> <br/>
 
-                                                <Form.Group controlId={"name"} >
+                                                <Form.Group controlId={"name"}>
                                                     <Form.Label>Date</Form.Label>
-                                                    <Form.Control type={"date"} className={"m-2"} placeholder={"Date"} />
+                                                    <Form.Control type={"date"} className={"m-2"} placeholder={"Date"}/>
                                                 </Form.Group> <br/>
 
-                                                <Form.Group controlId={"name"} >
+                                                <Form.Group controlId={"name"}>
 
-                                                    <div style={{display: "flex", justifyContent: "space-between" }}>
+                                                    <div style={{display: "flex", justifyContent: "space-between"}}>
                                                         <div>
                                                             <label htmlFor="">Hours</label><br/>
                                                             <Form.Control placeholder={"Hours"} type="text"/>
@@ -149,14 +194,15 @@ const Slug = () => {
                                                 </Form.Group> <br/>
 
 
-                                                <Form.Group controlId={"name"} >
+                                                <Form.Group controlId={"name"}>
                                                     <Form.Label>Event Link</Form.Label>
-                                                    <Form.Control type={"text"} className={"m-2"} placeholder={"Link"} />
+                                                    <Form.Control type={"text"} className={"m-2"} placeholder={"Link"}/>
                                                 </Form.Group>
 
-                                                <Form.Group controlId={"name"} >
+                                                <Form.Group controlId={"name"}>
                                                     <Form.Label>Event Password</Form.Label>
-                                                    <Form.Control type={"password"} className={"m-2"} placeholder={"Event Password"} />
+                                                    <Form.Control type={"password"} className={"m-2"}
+                                                                  placeholder={"Event Password"}/>
                                                 </Form.Group> <br/>
 
 
@@ -172,38 +218,44 @@ const Slug = () => {
                                             <div className="">
                                                 {/* Assignments Modal */}
                                                 <Form>
-                                                    <Form.Group controlId={"Title"} >
+                                                    <Form.Group controlId={"Title"}>
                                                         <Form.Label>Title</Form.Label>
-                                                        <Form.Control type={"text"} className={"m-2"} placeholder={"Title"} />
+                                                        <Form.Control type={"text"} className={"m-2"}
+                                                                      placeholder={"Title"}/>
                                                     </Form.Group>
                                                     <br/>
 
-                                                    <Form.Group controlId={"Title"} >
+                                                    <Form.Group controlId={"Title"}>
                                                         <Form.Label>Description</Form.Label>
-                                                        <Form.Control type={"text"} className={"m-2"} placeholder={"Description"} />
+                                                        <Form.Control type={"text"} className={"m-2"}
+                                                                      placeholder={"Description"}/>
                                                     </Form.Group>
                                                     <br/>
 
-                                                    <Form.Group controlId={"file"} >
+                                                    <Form.Group controlId={"file"}>
                                                         <Form.Label>File Name</Form.Label>
-                                                        <Form.Control type={"text"} className={"m-2"} placeholder={"File Name"} />
+                                                        <Form.Control type={"text"} className={"m-2"}
+                                                                      placeholder={"File Name"}/>
                                                     </Form.Group>
                                                     <br/>
 
-                                                    <Form.Group controlId={"file"} >
+                                                    <Form.Group controlId={"file"}>
                                                         <Form.Label>File</Form.Label>
-                                                        <Form.Control type={"text"} className={"m-2"} placeholder={"Add File Link"} />
+                                                        <Form.Control type={"text"} className={"m-2"}
+                                                                      placeholder={"Add File Link"}/>
                                                     </Form.Group>
                                                     <br/>
 
-                                                    <Form.Group controlId={"name"} >
+                                                    <Form.Group controlId={"name"}>
                                                         <Form.Label>Deadline</Form.Label>
-                                                        <Form.Control type={"date"} className={"m-2"} placeholder={"Date"} />
+                                                        <Form.Control type={"date"} className={"m-2"}
+                                                                      placeholder={"Date"}/>
                                                     </Form.Group> <br/>
 
-                                                    <Form.Group controlId={"file"} >
+                                                    <Form.Group controlId={"file"}>
                                                         <Form.Label>Marks</Form.Label>
-                                                        <Form.Control type={"number"} className={"m-2"} placeholder={"Marks"} />
+                                                        <Form.Control type={"number"} className={"m-2"}
+                                                                      placeholder={"Marks"}/>
                                                     </Form.Group>
                                                     <br/>
 
@@ -219,21 +271,26 @@ const Slug = () => {
                                                 <div className="">
                                                     {/*  Quiz Modal  */}
                                                     <Form>
-                                                        <Form.Group controlId={"question"} >
+                                                        <Form.Group controlId={"question"}>
                                                             <Form.Label>Name</Form.Label>
-                                                            <Form.Control type={"text"} className={"m-2"} placeholder={"Name"} />
+                                                            <Form.Control type={"text"} className={"m-2"}
+                                                                          placeholder={"Name"}/>
                                                         </Form.Group>
                                                         <br/>
 
-                                                        <Form.Group controlId={"question"} >
+                                                        <Form.Group controlId={"question"}>
                                                             <Form.Label>Description</Form.Label>
-                                                            <Form.Control type={"text"} className={"m-2"} placeholder={"Description"} />
+                                                            <Form.Control type={"text"} className={"m-2"}
+                                                                          placeholder={"Description"}/>
                                                         </Form.Group>
                                                         <br/>
 
-                                                        <Form.Group controlId={"name"} >
+                                                        <Form.Group controlId={"name"}>
                                                             <label>Start Time</label><br/>
-                                                            <div style={{display: "flex", justifyContent: "space-between" }}>
+                                                            <div style={{
+                                                                display: "flex",
+                                                                justifyContent: "space-between"
+                                                            }}>
 
                                                                 <div>
 
@@ -253,9 +310,12 @@ const Slug = () => {
                                                         </Form.Group> <br/>
 
 
-                                                        <Form.Group controlId={"name"} >
+                                                        <Form.Group controlId={"name"}>
                                                             <label>End Time</label>
-                                                            <div style={{display: "flex", justifyContent: "space-between" }}>
+                                                            <div style={{
+                                                                display: "flex",
+                                                                justifyContent: "space-between"
+                                                            }}>
                                                                 <div>
                                                                     <Form.Control placeholder={"Hours"} type="text"/>
                                                                 </div>
@@ -272,7 +332,7 @@ const Slug = () => {
                                                         </Form.Group> <br/>
 
                                                         <div>
-                                                            <input type="checkbox" id="isLive" />
+                                                            <input type="checkbox" id="isLive"/>
                                                             <label htmlFor="isLive"> isLive</label>
                                                         </div>
 
@@ -295,7 +355,7 @@ const Slug = () => {
                 {/* ============= Tabs for lesson, Live Video, Assignments, Exercises, Quizes, Other Section ================= */}
                 <Nav className={"mt-5 mb-5"} fill variant="tabs" defaultActiveKey="#">
                     <Nav.Item>
-                        <Nav.Link  href="#" onClick={() => setEventKey(0)}>Content</Nav.Link>
+                        <Nav.Link href="#" onClick={() => setEventKey(0)}>Content</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
                         <Nav.Link eventKey="link-1" onClick={() => setEventKey(1)}>Events</Nav.Link>
@@ -304,10 +364,9 @@ const Slug = () => {
                         <Nav.Link eventKey="link-2" onClick={() => setEventKey(2)}>Assignments</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                        <Nav.Link eventKey="link-4" onClick={() => setEventKey(3)} >Quizes</Nav.Link>
+                        <Nav.Link eventKey="link-4" onClick={() => setEventKey(3)}>Quizes</Nav.Link>
                     </Nav.Item>
                 </Nav>
-
 
 
                 {/* ============= Tabs running by conditional rendering ================= */}
@@ -410,26 +469,29 @@ const Slug = () => {
                                 </Modal.Title>
                             </Modal.Header>
                             <Modal.Body>
-                                <Form handleSubmit={(e) => {e.preventDefault()}}>
+                                <Form handleSubmit={(e) => {
+                                    e.preventDefault()
+                                }}>
 
-                                    <Form.Group controlId={"question"} >
+                                    <Form.Group controlId={"question"}>
                                         <Form.Label>Question</Form.Label>
-                                        <Form.Control type={"text"} className={"m-2"} placeholder={"Type Question here..."} />
+                                        <Form.Control type={"text"} className={"m-2"}
+                                                      placeholder={"Type Question here..."}/>
                                     </Form.Group>
                                     <br/>
 
                                     <Form.Label>Options</Form.Label>
-                                    <Form.Group controlId={"question"} >
-                                        <Form.Control type={"text"} className={"m-2"} placeholder={"Option 1"} />
-                                        <Form.Control type={"text"} className={"m-2"} placeholder={"Option 2"} />
-                                        <Form.Control type={"text"} className={"m-2"} placeholder={"Option 3"} />
-                                        <Form.Control type={"text"} className={"m-2"} placeholder={"Option 4"} />
+                                    <Form.Group controlId={"question"}>
+                                        <Form.Control type={"text"} className={"m-2"} placeholder={"Option 1"}/>
+                                        <Form.Control type={"text"} className={"m-2"} placeholder={"Option 2"}/>
+                                        <Form.Control type={"text"} className={"m-2"} placeholder={"Option 3"}/>
+                                        <Form.Control type={"text"} className={"m-2"} placeholder={"Option 4"}/>
                                     </Form.Group>
 
                                     <br/>
-                                    <Form.Group controlId={"question"} >
+                                    <Form.Group controlId={"question"}>
                                         <Form.Label>Marks</Form.Label>
-                                        <Form.Control type={"number"} className={"m-2"} placeholder={"Marks"} />
+                                        <Form.Control type={"number"} className={"m-2"} placeholder={"Marks"}/>
                                     </Form.Group>
 
 
@@ -439,23 +501,14 @@ const Slug = () => {
                                     </div>
 
 
-
                                 </Form>
                             </Modal.Body>
                         </Modal>
                     }
 
 
-
-
-
                 </div>
                 {/* =============      Tabs for lesson       ================== */}
-
-
-
-
-
 
 
             </main>
@@ -510,7 +563,6 @@ const Slug = () => {
                         </div>
 
 
-
                         <div className="update">
                             <div className="profile-photo">
                                 <h3>- SE</h3>
@@ -525,16 +577,13 @@ const Slug = () => {
                         </div>
 
 
-
                     </div>
                 </div>
                 {/*====================== End of Recent Updates ====================== */}
 
 
-
             </div>
             {/*============= End of left Side*/}
-
 
 
         </LayoutTeacher>
