@@ -2,12 +2,6 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 
-// console.log("Lesson Details", getLessonDetailsByCourse("testID"));
-
-// 	Get the Content of that lesson
-// output [link of contents of specified lesson]
-
-// console.log("Contents", getContentsByLesson("6452547c1f2d691aa5a8ad7d"));
 
 // 	Get the Assignments of that lesson
 // output [object of assignments of specified lesson]
