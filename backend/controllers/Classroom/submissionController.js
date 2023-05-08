@@ -72,7 +72,7 @@ exports.updateSubmission = catchAsyncErrors(async (req, res, next) => {
 exports.getSubmissionByAssignment = catchAsyncErrors(async (req, res, next) => {
   const submission = await Submission.findOne({
     assignment: req.params.assignmentID,
-    submittedBy: "64061f80c1d1638f3086c6a7",
+    submittedBy: req.user._id,
   });
 
   if (submission) {

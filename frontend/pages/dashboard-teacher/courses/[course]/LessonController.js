@@ -81,6 +81,22 @@ export const getEventsByLesson = async (lessonID) => {
 };
 // console.log("Event", getEventsByLesson("6452547c1f2d691aa5a8ad7d"));
 
+// @def get the all submissions of that student of that assignment
+// @output {success and submission[{submission}] property}
+export const getAllSubmissions = async (assignmentID) => {
+  const response = await axios.get(
+    `http://localhost:7000/api/v1/submissions/${assignmentID}`,
+    {
+      headers: {
+        Authorization: `${Cookies.get("token")}`,
+      },
+    }
+  );
+
+  return response.data;
+};
+//console.log("Ass-Subs", getAllSubmissions("64526b89dc8e8a1328433b42"));
+
 // 	Post requests for content
 // output {success and message property}
 export const postContentByLesson = async (lessonID, data) => {

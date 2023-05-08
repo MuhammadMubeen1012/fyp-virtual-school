@@ -16,7 +16,7 @@ exports.submitQuiz = catchAsyncErrors(async (req, res, next) => {
   //  console.log("student: ", student);
 
   const data = req.body;
-  let quizSubmission;
+  let quizSubmission = {};
 
   if (quiz && course && student) {
     quizSubmission = await QuizSubmission.create({
