@@ -3,56 +3,7 @@ import Cookies from "js-cookie";
 
 
 
-// 	Get the Assignments of that lesson
-// output [object of assignments of specified lesson]
-export const getAssignmentsByLesson = async (lessonID) => {
-    const response = await axios.get(
-        `http://localhost:7000/api/v1/assignment/${lessonID}`,
-        {
-            headers: {
-                Authorization: `${Cookies.get("token")}`,
-            },
-        }
-    );
 
-    return response.data.assignments;
-};
-// console.log("Assignments", getAssignmentsByLesson("6452547c1f2d691aa5a8ad7d"));
-
-// 	Get Quizes of that lesson
-// output [object of quizes of specified lesson]
-// {
-// }
-
-export const getQuizesByLesson = async (lessonID) => {
-    const response = await axios.get(
-        `http://localhost:7000/api/v1/quiz/${lessonID}`,
-        {
-            headers: {
-                Authorization: `${Cookies.get("token")}`,
-            },
-        }
-    );
-
-    return response.data.quiz;
-};
-// console.log("Quiz", getQuizesByLesson("6452547c1f2d691aa5a8ad7d"));
-
-// 	Get event of that lesson
-// output [object of quizes of specified lesson]
-export const getEventsByLesson = async (lessonID) => {
-    const response = await axios.get(
-        `http://localhost:7000/api/v1/event/${lessonID}`,
-        {
-            headers: {
-                Authorization: `${Cookies.get("token")}`,
-            },
-        }
-    );
-
-    return response.data.event;
-};
-// console.log("Event", getEventsByLesson("6452547c1f2d691aa5a8ad7d"));
 
 // @def get the all submissions of that student of that assignment
 // @output {success and submission[{submission}] property}
@@ -81,32 +32,8 @@ export const getAllSubmissions = async (assignmentID) => {
 
 
 
-// Post requests for Quiz
-// output {message and success property}
-export const postQuizByLesson = async (lessonID, data) => {
-    let payLoad = data;
 
-    const response = await axios.post(
-        `http://localhost:7000/api/v1/quiz/${lessonID}`,
-        payLoad,
-        {
-            headers: {
-                Authorization: `${Cookies.get("token")}`,
-            },
-        }
-    );
-    return response.data;
-};
 
-// console.log(
-//   "P-Quiz",
-//   postQuizByLesson("6452547c1f2d691aa5a8ad7d", {
-//     name: "Quiz: Intro to Eng-6 P2",
-//     description: "Suprised Quiz",
-//     startTime: { hours: 3, minutes: 0, seconds: "0" },
-//     duration: { hours: 0, minutes: 15, seconds: "0" },
-//   })
-// );
 
 // Post requests for Quiz
 // output {message and success property}
@@ -308,56 +235,3 @@ export const deleteContentByLesson = async (lessonID) => {
     );
     return response.data;
 };
-
-// console.log(
-//   "Delete-Content",
-//   deleteContentByLesson("6452547c1f2d691aa5a8ad7d")
-// );
-
-// 	Delete request for assignment
-// output {updated lesson and success property}
-export const deleteAssignmentByID = async (assignmentID) => {
-    const response = await axios.delete(
-        `http://localhost:7000/api/v1/assignment/delete/${assignmentID}`,
-        {
-            headers: {
-                Authorization: `${Cookies.get("token")}`,
-            },
-        }
-    );
-    return response.data;
-};
-
-//console.log("Delete-Ass", deleteAssignmentByID("6457ce236408640deeaceeda"));
-
-// 	Delete request for event
-// output {updated lesson and success property}
-export const deleteEventByID = async (eventID) => {
-    const response = await axios.delete(
-        `http://localhost:7000/api/v1/event/${eventID}`,
-        {
-            headers: {
-                Authorization: `${Cookies.get("token")}`,
-            },
-        }
-    );
-    return response.data;
-};
-
-// console.log("Delete-Event", deleteEventByID("6457cfaf6408640deeaceedf"));
-
-// 	Delete request for Quiz
-// output {updated lesson and success property}
-export const deleteQuizByID = async (quizID) => {
-    const response = await axios.delete(
-        `http://localhost:7000/api/v1/quiz/${quizID}`,
-        {
-            headers: {
-                Authorization: `${Cookies.get("token")}`,
-            },
-        }
-    );
-    return response.data;
-};
-
-// console.log("Delete-Quiz", deleteQuizByID("6457d06f6408640deeaceee4"));

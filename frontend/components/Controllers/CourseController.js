@@ -23,7 +23,8 @@ const getLessons = async (id) => {
     )
 }
 const getLesson = async (lesson_id) => {
-    return await (axios.get(`http://localhost:7000/api/v1/course/lesson/${lesson_id}`,
+    console.log(Cookies.get('token'))
+    const response = await (axios.get(`http://localhost:7000/api/v1/course/lesson/${lesson_id}`,
             {
                 headers: {
                     Authorization: `${Cookies.get('token')}`
@@ -31,6 +32,7 @@ const getLesson = async (lesson_id) => {
 
             })
     )
+    return response.data.lesson;
 }
 
 const addNewContent = async (lessonID, data) => {
@@ -85,9 +87,9 @@ const addNewQuiz = async (lessonID, data) => {
 }
 
 
-const getContent = async (lessonID) => {
+export const getAssignments = async (lessonID) => {
     const response = await axios.get(
-        `http://localhost:7000/api/v1/lesson/content/${lessonID}`,
+        `http://localhost:7000/api/v1/assignment/${lessonID}`,
         {
             headers: {
                 Authorization: `${Cookies.get("token")}`,
@@ -95,10 +97,74 @@ const getContent = async (lessonID) => {
         }
     );
 
-    return response.data.content;
+    return response.data.assignments;
+};
+
+export const getQuizes = async (lessonID) => {
+    const response = await axios.get(
+        `http://localhost:7000/api/v1/quiz/${lessonID}`,
+        {
+            headers: {
+                Authorization: `${Cookies.get("token")}`,
+            },
+        }
+    );
+
+    return response.data.quiz;
+};
+
+export const getEvents = async (lessonID) => {
+    const response = await axios.get(
+        `http://localhost:7000/api/v1/event/${lessonID}`,
+        {
+            headers: {
+                Authorization: `${Cookies.get("token")}`,
+            },
+        }
+    );
+
+    return response.data.event;
 };
 
 
-export {getLessons, getLesson, getContent, addNewContent, addNewAssignment, addNewEvent,addNewQuiz};
+export const deleteAssignment = async (assignmentID) => {
+    const response = await axios.delete(
+        `http://localhost:7000/api/v1/assignment/delete/${assignmentID}`,
+        {
+            headers: {
+                Authorization: `${Cookies.get("token")}`,
+            },
+        }
+    );
+    return response.data;
+};
+
+export const deleteEvent = async (eventID) => {
+    const response = await axios.delete(
+        `http://localhost:7000/api/v1/event/${eventID}`,
+        {
+            headers: {
+                Authorization: `${Cookies.get("token")}`,
+            },
+        }
+    );
+    return response.data;
+};
+
+export const deleteQuiz = async (quizID) => {
+    const response = await axios.delete(
+        `http://localhost:7000/api/v1/quiz/${quizID}`,
+        {
+            headers: {
+                Authorization: `${Cookies.get("token")}`,
+            },
+        }
+    );
+    return response.data;
+};
+
+
+
+export {getLessons, getLesson, addNewContent, addNewAssignment, addNewEvent, addNewQuiz};
 
 
