@@ -70,22 +70,6 @@ export const getAllSubmissions = async (assignmentID) => {
 };
 //console.log("Ass-Subs", getAllSubmissions("64526b89dc8e8a1328433b42"));
 
-// 	Post requests for content
-// output {success and message property}
-export const postContentByLesson = async (lessonID, data) => {
-    let payLoad = data;
-
-    const response = await axios.put(
-        `http://localhost:7000/api/v1/lesson/create/content/${lessonID}`,
-        payLoad,
-        {
-            headers: {
-                Authorization: `${Cookies.get("token")}`,
-            },
-        }
-    );
-    return response.data;
-};
 
 // console.log(
 //   "P-Lesson",
@@ -94,65 +78,8 @@ export const postContentByLesson = async (lessonID, data) => {
 //   })
 // );
 
-// 	Post requests for assignment
-// output {success and message property}
-export const postAssignmentByLesson = async (lessonID, data) => {
-    let payLoad = data;
 
-    const response = await axios.post(
-        `http://localhost:7000/api/v1/assignment/${lessonID}`,
-        payLoad,
-        {
-            headers: {
-                Authorization: `${Cookies.get("token")}`,
-            },
-        }
-    );
-    return response.data;
-};
 
-// console.log(
-//   "P-Assignment",
-//   postAssignmentByLesson("6452547c1f2d691aa5a8ad7d", {
-//     name: "Assignment02",
-//     description: "Assignment02 of English-6 P2",
-//     fileName: "Assignment02.pdf",
-//     fileLink:
-//       "https://drive.google.com/file/d/1Gscx-Il0w04cOzS9d5r6b42tpydrZi28/view?usp=share_link",
-//     totalMarks: 20,
-//     deadLine: "2023-04-05",
-//   })
-// );
-
-// 	Post requests for event
-// output {success, message and event property}
-export const postEventByLesson = async (lessonID, data) => {
-    let payLoad = data;
-
-    const response = await axios.post(
-        `http://localhost:7000/api/v1/event/${lessonID}`,
-        payLoad,
-        {
-            headers: {
-                Authorization: `${Cookies.get("token")}`,
-            },
-        }
-    );
-    return response.data;
-};
-
-// console.log(
-//   "P-Event",
-//   postEventByLesson("6452547c1f2d691aa5a8ad7d", {
-//     name: "Introduction to English-6 P2",
-//     description: "Live Class: Introduction to English-6 P2",
-//     eventDate: "2023-04-25",
-//     duration: { hours: 1, minutes: 0, seconds: "0" },
-//     eventPassword: "123",
-//     eventLink:
-//       "www.youtube.com/live/introduction-to-eng-2/2398787w5r6yrwe5rqwe",
-//   })
-// );
 
 // Post requests for Quiz
 // output {message and success property}

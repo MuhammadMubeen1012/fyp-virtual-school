@@ -2,7 +2,12 @@ import React, {useState} from 'react';
 import {Button, Card, Dropdown, Form, Modal, Nav} from "react-bootstrap";
 import LayoutTeacher from "../../../../components/Dashboard/Layout/LayoutTeacher";
 import {useRouter} from "next/router";
-import {getLesson} from "../../../../components/Controllers/CourseController";
+import {
+    getLesson,
+    addNewContent,
+    getContent,
+    addNewAssignment, addNewEvent, addNewQuiz
+} from "../../../../components/Controllers/CourseController";
 
 
 const Slug = () => {
@@ -29,6 +34,10 @@ const Slug = () => {
     const [quizes, setQuizes] = useState([]);
     const [quizesLoading, setQuizesLoading] = useState(false);
 
+    const [assignments, setAssignments] = useState([]);
+    const [assignmentsLoading, setAssignmentsLoading] = useState(false);
+    const [assignmentsLink, setAssignmentsLink] = useState([]);
+
     const router = useRouter();
     useState(() => {
         const lesson_id = router.query['slug'];
@@ -38,11 +47,23 @@ const Slug = () => {
 
         if (lesson_id !== undefined) {
             getLesson(lesson_id).then(r => {
-                console.log(r.data.lesson);
-                setContentLink(r.data.content)
-                setEventsLink(r.data.events)
-                setQuizesLink(r.data.quizes)
-                setLesson(r.data.lesson)
+                const lesson = r.data.lesson;
+                setLesson(lesson);
+
+                setContent(lesson.content);
+                setContentLoading(true);
+                setContentLink(lesson.content.map((res) => res._id));
+                console.log(lesson.content);
+
+                setEvents(lesson.event)
+                setEventsLoading(true)
+                setEventsLink(lesson.event)
+                console.log(lesson.event);
+
+                setQuizes(lesson.quizes)
+                setQuizesLink(lesson.quizes)
+                setQuizesLoading(true)
+                console.log(lesson.quizes);
 
             }).catch(e => console.log(e));
         }
@@ -58,7 +79,7 @@ const Slug = () => {
     return (
         <LayoutTeacher>
             {/*=============== Start of Main ================= */}
-                <main>
+            <main>
                 <h1>Overview</h1>
 
                 <div
@@ -70,8 +91,8 @@ const Slug = () => {
                     }}
                 >
                     <div>
-                        <span>Unit 1</span>
-                        <h3>Speaking to the world</h3>
+                        <span>{lessonLoading ? lesson.name : ""}</span>
+                        <h3>{lessonLoading ? lesson.description : ""}</h3>
                     </div>
 
                     <div>
@@ -88,7 +109,6 @@ const Slug = () => {
                     vector image...
                 </div>
                 <br/>
-
 
 
                 {/* ============== Dropdown Menu to create Assignments, Quiz, etc ========================== */}
@@ -114,8 +134,6 @@ const Slug = () => {
                 </Dropdown>
 
                 {/* ============== Dropdown Menu Ends Here =================== */}
-
-
 
 
                 {/* ==================== Events Modals according to the Create event from Dropdown ========================= */}
@@ -148,22 +166,22 @@ const Slug = () => {
                             {modal.item === 1 ? (
                                 <div>
                                     {/* Content Modal */}
-                                    <ContentModal />
+                                    <ContentModal lessonId={lessonLink}/>
                                 </div>
                             ) : modal.item === 2 ? (
                                 <div>
                                     {/* Event Modal */}
-                                    <EventModal />
+                                    <EventModal lessonId={lessonLink}/>
                                 </div>
                             ) : modal.item === 3 ? (
                                 <div className="">
                                     {/* Assignments Modal */}
-                                    <AssignmentModal />
+                                    <AssignmentModal lessonId={lessonLink}/>
                                 </div>
                             ) : modal.item === 4 ? (
                                 <div className="">
                                     {/*  Quiz Modal  */}
-                                    <QuizModal />
+                                    <QuizModal lessonId={lessonLink}/>
                                 </div>
                             ) : (
                                 ""
@@ -172,9 +190,6 @@ const Slug = () => {
                     </Modal>
                 </div>
                 {/* ==================== Events Modal Code Ends Here ==================================  */}
-
-
-
 
 
                 {/* ============= Tabs for lesson, Live Video, Assignments, Exercises, Quizes, Other Section ================= */}
@@ -203,9 +218,6 @@ const Slug = () => {
                 {/* =========== Tabs End Here ================  */}
 
 
-
-
-
                 {/* ============= Tabs running by conditional rendering ================= */}
                 <div className="">
 
@@ -215,22 +227,44 @@ const Slug = () => {
                         eventKey === 0 ?
                             <div>
                                 {/*Lesson Tab*/}
-                                <ContentData />
+                                {contentLoading && content && content.length > 0 ? content.map((item, index) => {
+                                    return (
+                                        <div key={index}>
+                                            <ContentData content={item}/>
+                                        </div>
+                                    )
+                                }) : ""}
+                                {/*<ContentData/>*/}
                             </div>
                             : eventKey === 1 ?
                                 <div>
                                     {/*Event Tab*/}
-                                    <EventData />
+                                    {eventsLoading && events && events.length > 0 ? events.map((item, index) => {
+                                        return (
+                                            <div key={index}>
+                                                <EventData content={item}/>
+                                            </div>
+                                        )
+                                    }) : ""}
                                 </div>
                                 : eventKey === 2 ?
                                     <div>
                                         {/*Assignments Tab*/}
-                                        <AssignmentData />
+
+                                        <AssignmentData content={item}/>
+
                                     </div>
                                     : eventKey === 3 ?
                                         <div>
                                             {/*Quiz Tab*/}
-                                            <QuizData onChange={setIsModalAddQuestion} />
+                                            {quizesLoading && quizes && quizes.length > 0 ? quizes.map((item, index) => {
+                                                return (
+                                                    <div key={index}>
+                                                        <QuizData content={item} onChange={setIsModalAddQuestion}/>
+
+                                                    </div>
+                                                )
+                                            }) : ""}
                                         </div>
 
                                         : ""
@@ -239,28 +273,21 @@ const Slug = () => {
                     }
 
 
-
-
                     {isModalAddQuestion && (
                         <div>
-                            <QuizAddQuestionsModal  isCheck={isModalAddQuestion} onChange={setIsModalAddQuestion}  />
+                            <QuizAddQuestionsModal isCheck={isModalAddQuestion} onChange={setIsModalAddQuestion}/>
                         </div>
                     )}
                 </div>
                 {/* =============      Tabs running code Ends here       ================== */}
 
 
-
-
-
             </main>
             {/* =================  End Of Main  ================== */}
 
 
-
-
             {/* ============== start of Right side ======================== */}
-                <div className="right">
+            <div className="right">
                 <div className="profile">
                     <div className="info">
                         <p>
@@ -319,29 +346,46 @@ const Slug = () => {
 export default Slug;
 
 
-
-
-
-
 // ================================== Modals for Creating Events  ==============================================
-export function ContentModal() {
+export function ContentModal({lessonId}) {
+    const submitHandler = (e) => {
+        e.preventDefault();
+        const data = {
+            name: e.target.name.value,
+            link: e.target.link.value,
+        };
+        addNewContent(lessonId, data).then(r => console.log(r))
+        console.log(data)
 
-    return(
+    }
+
+
+    return (
         <>
 
-            <Form>
+            <Form onSubmit={submitHandler}>
+                <Form.Group controlId={""}>
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control
+                        type={"text"}
+                        className={"m-2"}
+                        name={"name"}
+                        placeholder={"Name"}
+                    />
+                </Form.Group>
                 <Form.Group controlId={""}>
                     <Form.Label>File Link</Form.Label>
                     <Form.Control
                         type={"text"}
                         className={"m-2"}
+                        name={"link"}
                         placeholder={"File Link"}
                     />
                 </Form.Group>
 
                 <br/>
                 <Modal.Footer>
-                    <Button>Submit</Button>
+                    <Button type={'submit'}>Submit</Button>
                 </Modal.Footer>
             </Form>
 
@@ -350,40 +394,57 @@ export function ContentModal() {
 }
 
 
-export function EventModal() {
+export function EventModal({lessonId}) {
 
-    return(
+    const submitHandler = (e) => {
+        e.preventDefault();
+        const data = {
+            name: e.target.name.value,
+            description: e.target.description.value,
+            eventDate: e.target.eventDate.value,
+            duration: e.target.duration.value,
+            eventPassword: e.target.eventPassword.value,
+            eventLink: e.target.eventLink.value,
+        };
+        addNewEvent(lessonId, data).then(r => console.log(r))
+        console.log(data)
+    }
+    return (
         <>
 
-            <Form>
-                <Form.Group controlId={"name"}>
+            <Form onSubmit={submitHandler}>
+                <Form.Group controlId={""}>
                     <Form.Label>Title</Form.Label>
                     <Form.Control
                         type={"text"}
                         className={"m-2"}
                         placeholder={"Title"}
+                        name={"name"}
                     />
                 </Form.Group>
                 <br/>
-                <Form.Group controlId={"name"}>
+                <Form.Group controlId={""}>
                     <Form.Label>Description</Form.Label>
                     <Form.Control
                         type={"text"}
                         className={"m-2"}
                         placeholder={"Description"}
+                        name={"description"}
                     />
                 </Form.Group>{" "}
                 <br/>
-                <Form.Group controlId={"name"}>
+                <Form.Group controlId={""}>
                     <Form.Label>Date</Form.Label>
                     <Form.Control
                         type={"date"}
                         className={"m-2"}
                         placeholder={"Date"}
+                        name={"eventDate"}
                     />
                 </Form.Group>{" "}
                 <br/>
-                <Form.Group controlId={"name"}>
+                <Form.Group controlId={""}>
+                    <Form.Label>Duration</Form.Label>
                     <div
                         style={{
                             display: "flex",
@@ -393,7 +454,9 @@ export function EventModal() {
                         <div>
                             <label htmlFor="">Hours</label>
                             <br/>
-                            <Form.Control placeholder={"Hours"} type="text"/>
+                            <Form.Control placeholder={"Hours"}
+                                          type="text"
+                                          name={'duration'}/>
                         </div>
 
                         <div>
@@ -410,20 +473,22 @@ export function EventModal() {
                     </div>
                 </Form.Group>{" "}
                 <br/>
-                <Form.Group controlId={"name"}>
+                <Form.Group controlId={""}>
                     <Form.Label>Event Link</Form.Label>
                     <Form.Control
                         type={"text"}
                         className={"m-2"}
                         placeholder={"Link"}
+                        name={"eventLink"}
                     />
                 </Form.Group>
-                <Form.Group controlId={"name"}>
+                <Form.Group controlId={""}>
                     <Form.Label>Event Password</Form.Label>
                     <Form.Control
                         type={"password"}
                         className={"m-2"}
                         placeholder={"Event Password"}
+                        name={"eventPassword"}
                     />
                 </Form.Group>{" "}
                 <br/>
@@ -438,63 +503,83 @@ export function EventModal() {
 }
 
 
-export function AssignmentModal() {
+export function AssignmentModal({lessonId}) {
+    const submitHandler = (e) => {
+        e.preventDefault();
+        const data = {
+            name: e.target.title.value,
+            description: e.target.description.value,
+            fileName: e.target.fileName.value,
+            fileLink: e.target.file.value,
+            deadLine: e.target.deadline.value,
+            totalMarks: e.target.marks.value,
+        };
+        addNewAssignment(lessonId, data).then(r => console.log(r))
+        console.log(data)
 
-    return(
+    }
+
+    return (
         <>
 
-            <Form>
-                <Form.Group controlId={"Title"}>
+            <Form onSubmit={submitHandler}>
+                <Form.Group controlId={""}>
                     <Form.Label>Title</Form.Label>
                     <Form.Control
                         type={"text"}
                         className={"m-2"}
                         placeholder={"Title"}
+                        name={"title"}
                     />
                 </Form.Group>
                 <br/>
-                <Form.Group controlId={"Title"}>
+                <Form.Group controlId={""}>
                     <Form.Label>Description</Form.Label>
                     <Form.Control
                         type={"text"}
                         className={"m-2"}
                         placeholder={"Description"}
+                        name={"description"}
                     />
                 </Form.Group>
                 <br/>
-                <Form.Group controlId={"file"}>
+                <Form.Group controlId={""}>
                     <Form.Label>File Name</Form.Label>
                     <Form.Control
                         type={"text"}
                         className={"m-2"}
                         placeholder={"File Name"}
+                        name={"fileName"}
                     />
                 </Form.Group>
                 <br/>
-                <Form.Group controlId={"file"}>
+                <Form.Group controlId={""}>
                     <Form.Label>File</Form.Label>
                     <Form.Control
                         type={"text"}
                         className={"m-2"}
                         placeholder={"Add File Link"}
+                        name={"file"}
                     />
                 </Form.Group>
                 <br/>
-                <Form.Group controlId={"name"}>
+                <Form.Group controlId={""}>
                     <Form.Label>Deadline</Form.Label>
                     <Form.Control
                         type={"date"}
                         className={"m-2"}
                         placeholder={"Date"}
+                        name={"deadline"}
                     />
                 </Form.Group>{" "}
                 <br/>
-                <Form.Group controlId={"file"}>
+                <Form.Group controlId={""}>
                     <Form.Label>Marks</Form.Label>
                     <Form.Control
                         type={"number"}
                         className={"m-2"}
                         placeholder={"Marks"}
+                        name={"marks"}
                     />
                 </Form.Group>
                 <br/>
@@ -509,31 +594,48 @@ export function AssignmentModal() {
 }
 
 
-export function QuizModal() {
+export function QuizModal({lessonId}) {
 
-    return(
+    const submitHandler = (e) => {
+        e.preventDefault();
+        const startTime = e.target.hours.value + ":" + e.target.minutes.value + ":" + e.target.seconds.value;
+        const duration = e.target.dHours.value + ":" + e.target.dMinutes.value + ":" + e.target.dSeconds.value;
+
+        const data = {
+            name: e.target.name.value,
+            description: e.target.description.value,
+            startTime: startTime,
+            duration: duration,
+        };
+        addNewQuiz(lessonId, data).then(r => console.log(r))
+        console.log(data)
+
+    }
+    return (
         <>
 
-            <Form>
-                <Form.Group controlId={"question"}>
+            <Form onSubmit={submitHandler}>
+                <Form.Group controlId={""}>
                     <Form.Label>Name</Form.Label>
                     <Form.Control
                         type={"text"}
                         className={"m-2"}
                         placeholder={"Name"}
+                        name={"name"}
                     />
                 </Form.Group>
                 <br/>
-                <Form.Group controlId={"question"}>
+                <Form.Group controlId={""}>
                     <Form.Label>Description</Form.Label>
                     <Form.Control
                         type={"text"}
                         className={"m-2"}
                         placeholder={"Description"}
+                        name={"description"}
                     />
                 </Form.Group>
                 <br/>
-                <Form.Group controlId={"name"}>
+                <Form.Group controlId={""}>
                     <label>Start Time</label>
                     <br/>
                     <div
@@ -543,21 +645,21 @@ export function QuizModal() {
                         }}
                     >
                         <div>
-                            <Form.Control placeholder={"Hours"} type="text"/>
+                            <Form.Control placeholder={"Hours"} type="text" name={'hours'}/>
                         </div>
 
                         <div>
-                            <Form.Control placeholder={"Minutes"} type="text"/>
+                            <Form.Control placeholder={"Minutes"} type="text" name={'minutes'}/>
                         </div>
 
                         <div>
-                            <Form.Control placeholder={"Seconds"} type="text"/>
+                            <Form.Control placeholder={"Seconds"} type="text" name={'seconds'}/>
                         </div>
                     </div>
                 </Form.Group>{" "}
                 <br/>
-                <Form.Group controlId={"name"}>
-                    <label>End Time</label>
+                <Form.Group controlId={""}>
+                    <label>Duration</label>
                     <div
                         style={{
                             display: "flex",
@@ -565,15 +667,15 @@ export function QuizModal() {
                         }}
                     >
                         <div>
-                            <Form.Control placeholder={"Hours"} type="text"/>
+                            <Form.Control placeholder={"Hours"} type="text" name={'dHours'}/>
                         </div>
 
                         <div>
-                            <Form.Control placeholder={"Minutes"} type="text"/>
+                            <Form.Control placeholder={"Minutes"} type="text" name={'dMinutes'}/>
                         </div>
 
                         <div>
-                            <Form.Control placeholder={"Seconds"} type="text"/>
+                            <Form.Control placeholder={"Seconds"} type="text" name={'dSeconds'}/>
                         </div>
                     </div>
                 </Form.Group>{" "}
@@ -594,7 +696,7 @@ export function QuizModal() {
 
 export function QuizAddQuestionsModal(props) {
 
-    return(
+    return (
         <>
 
             <Modal
@@ -677,22 +779,16 @@ export function QuizAddQuestionsModal(props) {
 // ================================= Modal for Events Code Ends Here =============================================
 
 
-
-
-
-
-
 // ================================= Tabs Content Data =============================================
 
-export function ContentData() {
+export function ContentData({content}) {
 
-    return(
+    return (
         <>
-
             <Card>
-                <Card.Header>Content</Card.Header>
+                <Card.Header>{content.name}</Card.Header>
                 <Card.Body>
-                    <Card.Text>File Link</Card.Text>
+                    <Card.Text>{content.link}</Card.Text>
                     <div>
                         <Button variant="primary">Edit</Button>
                         <Button className={"m-1"} variant="primary">
@@ -709,7 +805,7 @@ export function ContentData() {
 
 export function EventData() {
 
-    return(
+    return (
         <>
 
             <Card>
@@ -742,7 +838,7 @@ export function EventData() {
 
 export function AssignmentData() {
 
-    return(
+    return (
         <>
 
             <Card>
@@ -769,7 +865,7 @@ export function AssignmentData() {
 
 export function QuizData(props) {
 
-    return(
+    return (
         <>
 
             <Card>

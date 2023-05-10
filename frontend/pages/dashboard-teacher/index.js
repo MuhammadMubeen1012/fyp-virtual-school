@@ -291,7 +291,7 @@ export default Index;
 
 
 
-export const getCourses = (coursesLinks) => {
+/*export const getCourses = (coursesLinks) => {
     return Promise.all(coursesLinks.map((course) => {
         return axios.get(`http://localhost:7000/api/v1/course/${course}`,
             {
@@ -300,10 +300,10 @@ export const getCourses = (coursesLinks) => {
                 }
             })
     }))
-}
+}*/
 
 
-export const getTeacher = async () => {
+/*export const getTeacher = async () => {
     const response = await axios.get(`http://localhost:7000/api/v1/teacher`, {
         headers: {
             Authorization: `${Cookies.get('token')}`
@@ -311,9 +311,9 @@ export const getTeacher = async () => {
     })
 
     return response.data.teacher
-}
+}*/
 
-export const getClassrooms = async (classroomsLinks) => {
+/*export const getClassrooms = async (classroomsLinks) => {
     const res = await Promise.all(classroomsLinks.map((classId) => {
         return axios.get(`http://localhost:7000/api/v1/classroom/${classId}`, {
             headers: {
@@ -325,7 +325,7 @@ export const getClassrooms = async (classroomsLinks) => {
         console.log(r.data.classrooms);
         return r.data.classrooms
     })
-}
+}*/
 
 
 

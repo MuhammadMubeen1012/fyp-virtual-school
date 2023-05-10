@@ -77,7 +77,7 @@ export default Index;
 
 
 
-
+/*
 export const getCourses = async () => {
     const teacher = await getTeacher();
     const coursesLinks = teacher.courses;
@@ -90,7 +90,7 @@ export const getCourses = async () => {
                 }
             })
     }))
-}
+}*/
 
 
 const getTeacher = async () => {

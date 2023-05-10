@@ -37,9 +37,10 @@ exports.createContent = catchAsyncErrors(async (req, res, next) => {
   const data = req.body;
 
   console.log(lesson);
-  // console.log(lesson.content);
+  console.log(lesson.content);
+  console.log(data);
 
-  lesson.content.push(data.content);
+  lesson.content.push(data);
 
   await lesson.save();
 

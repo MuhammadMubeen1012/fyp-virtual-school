@@ -24,6 +24,7 @@ exports.createAssignment = catchAsyncErrors(async (req, res, next) => {
     createdBy: req.user._id,
   });
 
+  console.log(assignment);
   if (assignment) {
     lesson.assignments.push(assignment._id);
     await lesson.save();
