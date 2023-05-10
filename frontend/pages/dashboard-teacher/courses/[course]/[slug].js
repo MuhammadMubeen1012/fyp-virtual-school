@@ -796,7 +796,7 @@ export function ContentData({content}) {
                         </Button>
                     </div>
                 </Card.Body>
-            </Card>{" "}
+            </Card>
 
         </>
     )

@@ -1,5 +1,5 @@
 import React from 'react';
-import LayoutTeacher from "../../components/Dashboard/Layout/LayoutTeacher";
+import LayoutTeacher from "../../../components/Dashboard/Layout/LayoutTeacher";
 import Link from "next/link";
 
 const Attendance = () => {
