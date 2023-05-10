@@ -66,7 +66,9 @@ const SidebarAdmin = () => {
 
 
     const router = useRouter();
-    const activeMenu = useMemo(
+    const [activeMenu, setActiveMenu] = useState();
+
+    const activePath = useMemo(
         () => sidebar.find(menu => menu.link === router.pathname),
         [router.pathname]
     );
@@ -77,7 +79,7 @@ const SidebarAdmin = () => {
 
     return (
         <div className={"container-dashboard"}>
-            <aside className={` ${toggleHamdburger ? "toggle animated  " : "" } `}>
+            <aside className={` ${toggleHamburger ? "toggle animated" : "" } `}>
 
                 <div className="top">
                     <div className="logo">
@@ -91,20 +93,33 @@ const SidebarAdmin = () => {
 
                 <div className="sidebar">
 
+
                     {
                         sidebar.map((item, index) => (
-
-                            <Link
-                                href={item.link}
-                                key={index}
+                            <div className={"wrap-a"}
+                                 onClick={() => {
+                                     setActiveMenu(index)
+                                 }}
                             >
-                                {/*${activeMenu.link === item.link ? "active" : "" }*/}
-                                <a className={`link  `}>
-                                    <span className="material-icons-sharp">{item.icon}</span>
-                                    <h3>{item.name}</h3>
-                                </a>
+                                <Link
+                                    href={item.link}
+                                    key={index}
+                                >
+                                    {/*${sidebar.link === item.link.includes(`${sidebar.link}}`) ? "active" : "" }*/}
+                                    {/*${item.id === activeMenu ? "active" : ""}*/}
+                                    <a
+                                        className={`link  `}
+                                    >
 
-                            </Link>
+                                        <span className="material-icons-sharp">{item.icon}</span>
+                                        <h3>{item.name}</h3>
+
+
+                                    </a>
+
+                                </Link>
+                            </div>
+
 
                         ))
                     }
@@ -117,7 +132,7 @@ const SidebarAdmin = () => {
             <div
                 className={`hamburger`}
                 id={"close-btn"}
-                onClick={ () => setToggleHamburger(!toggleHamdburger) }
+                onClick={ () => setToggleHamburger(!toggleHamburger) }
             >
                 <span className="material-icons-sharp fs-1 ">menu</span>
             </div>
