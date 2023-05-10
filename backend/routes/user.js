@@ -11,6 +11,7 @@ const {
   addAdmin,
   getStudentByUserID,
   getTeacherByUserID,
+  blockUnblockUser,
 } = require("../controllers/userController");
 const { isAuthenticatedUser } = require("../middlewares/auth");
 
@@ -23,5 +24,6 @@ router.route("/password/reset/:token").put(resetPassword);
 router.route("/addAdmin").post(addAdmin);
 router.route("/student").get(isAuthenticatedUser, getStudentByUserID);
 router.route("/teacher").get(isAuthenticatedUser, getTeacherByUserID);
+router.route("/block/user/:userID").put(isAuthenticatedUser, blockUnblockUser);
 
 module.exports = router;

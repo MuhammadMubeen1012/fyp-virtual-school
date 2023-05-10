@@ -230,3 +230,23 @@ exports.getTeacherByUserID = catchAsyncErrors(async (req, res, next) => {
     });
   }
 });
+
+// @def block or unblock user
+// @route PUT /block/user/:userID
+exports.blockUnblockUser = catchAsyncErrors(async (req, res, next) => {
+  const newData = {
+    isBlocked: req.body.isBlocked,
+  };
+
+  const user = await User.findByIdAndUpdate(req.params.userID, newData, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
+
+  res.status(200).json({
+    success: true,
+    message: "Successfully updated",
+    User: user,
+  });
+});

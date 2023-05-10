@@ -37,7 +37,10 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-
+  isBlocked: {
+    type: Boolean,
+    default: false,
+  },
   //token is sent to the user by email for password reset purposes,
   //that token is stored there, and when the token is expire.
   resetPasswordToken: String,

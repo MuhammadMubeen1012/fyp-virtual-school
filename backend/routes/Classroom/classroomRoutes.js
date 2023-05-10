@@ -24,17 +24,17 @@ router.route("/classroom/:id").put(isAuthenticatedUser, updateClassroom);
 
 router.route("/classroom/:id").delete(isAuthenticatedUser, deleteClassroom);
 
-router
-  .route("/classroom/students/:id")
-  .get(isAuthenticatedUser, getStudentsByClass);
+// router
+//   .route("/classroom/students/:id")
+//   .get(isAuthenticatedUser, getStudentsByClass);
 
-router
-  .route("/classroom/teachers/:id")
-  .get(isAuthenticatedUser, getTeachersByClass);
+// router
+//   .route("/classroom/teachers/:id")
+//   .get(isAuthenticatedUser, getTeachersByClass);
 
-router
-  .route("/classroom/courses/:id")
-  .get(isAuthenticatedUser, getCoursesByClass);
+// router
+//   .route("/classroom/courses/:id")
+//   .get(isAuthenticatedUser, getCoursesByClass);
 
 router.route("/students/:classID").get(isAuthenticatedUser, getStudentsByClass);
 router.route("/teachers/:classID").get(isAuthenticatedUser, getTeachersByClass);
