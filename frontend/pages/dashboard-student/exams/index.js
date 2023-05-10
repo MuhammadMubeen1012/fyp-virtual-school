@@ -1,10 +1,11 @@
 import React from 'react';
-import LayoutTeacher from "../../../components/Dashboard/Layout/LayoutTeacher";
+import LayoutStudent from "../../../components/Dashboard/Layout/LayoutStudent";
 import Link from "next/link";
 
-const Exam = () => {
+const Courses = () => {
     return (
-        <LayoutTeacher>
+        <LayoutStudent>
+
             {/*=============== Start of main ================= */}
             <main>
                 <h1>Exam</h1>
@@ -29,7 +30,7 @@ const Exam = () => {
                         <tr>
                             <td>01</td>
                             <td>English</td>
-                            <Link href={"/dashboard-teacher/exam/exam-details"} className="primary ">Open</Link>
+                            <Link href={"/dashboard-student/exams/exam-details"} className="primary ">Open</Link>
                         </tr>
 
                         </tbody>
@@ -40,8 +41,10 @@ const Exam = () => {
 
             </main>
             {/*=============== End Of Main  ==================*/}
-        </LayoutTeacher>
+
+
+        </LayoutStudent>
     );
 };
 
-export default Exam;
+export default Courses;

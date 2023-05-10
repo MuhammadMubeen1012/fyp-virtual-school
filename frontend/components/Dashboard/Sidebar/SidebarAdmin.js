@@ -73,7 +73,7 @@ const SidebarAdmin = () => {
         [router.pathname]
     );
 
-    const [toggleHamdburger, setToggleHamburger] = useState(true);
+    const [toggleHamburger, setToggleHamburger] = useState(true);
     const [sidebarClick, setSidebarClick] = useState(sidebar);
 
 

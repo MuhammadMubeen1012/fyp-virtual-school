@@ -1,8 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Link from "next/link";
 import LayoutStudent from "../../../components/Dashboard/Layout/LayoutStudent";
 
 const Index = () => {
+
+    const [course, setCourse] = useState("english");
+
     return (
         <LayoutStudent>
 
@@ -20,45 +23,17 @@ const Index = () => {
                         <tr>
                             <th>Course Title</th>
                             <th>Lessons Completed</th>
-                            <th>Duration</th>
                         </tr>
                         </thead>
 
                         <tbody>
                         <tr>
                             <td>English</td>
-                            <td>18/40 (48%)</td>
-                            <td>10h 13m 28s</td>
-
-                            <Link href={"/dashboard-student/courses/english"} className="primary ">Details</Link>
+                            <td>3</td>
+                            <Link href={`/dashboard-student/courses/${course}`} className="primary ">Details</Link>
                         </tr>
 
-                        <tr>
-                            <td>Maths</td>
-                            <td>7/35 (20%)</td>
-                            <td>20h 30m 0s</td>
-                            <td className="primary">Details</td>
-                        </tr>
-                        <tr>
-                            <td>Science</td>
-                            <td>21/23 (97%)</td>
-                            <td>15hr 10m 0s</td>
-                            <td className="primary">Details</td>
-                        </tr>
 
-                        <tr>
-                            <td>Urdu</td>
-                            <td>21/23 (97%)</td>
-                            <td>15hr 10m 0s</td>
-                            <td className="primary">Details</td>
-                        </tr>
-
-                        <tr>
-                            <td>History</td>
-                            <td>21/23 (97%)</td>
-                            <td>15hr 10m 0s</td>
-                            <td className="primary">Details</td>
-                        </tr>
 
                         </tbody>
                     </table>

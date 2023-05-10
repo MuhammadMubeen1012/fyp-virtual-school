@@ -41,9 +41,9 @@ const SidebarStudent = () => {
 
         {
             id: 5,
-            name: "Assignments",
+            name: "Exams",
             icon: <span className="material-icons-sharp">inventory</span>,
-            link: "/dashboard-student/assignments"
+            link: "/dashboard-student/exams"
         },
 
         {
