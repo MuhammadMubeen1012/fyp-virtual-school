@@ -1,4 +1,4 @@
-import React, {useMemo, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import Link from "next/link";
 import {useRouter} from "next/router";
 
@@ -61,12 +61,20 @@ const SidebarTeacher = () => {
         },
     ];
 
+    const [activeMenu, setActiveMenu] = useState();
 
     const router = useRouter();
-    const activeMenu = useMemo(
+    const activePath = useMemo(
         () => sidebar.find(menu => menu.link === router.pathname),
         [router.pathname]
     );
+
+    useEffect(() => {
+
+    }, [activeMenu]);
+
+
+
 
     const [toggleHamburger, setToggleHamburger] = useState(true);
     const [sidebarClick, setSidebarClick] = useState(sidebar);
@@ -88,19 +96,33 @@ const SidebarTeacher = () => {
 
                 <div className="sidebar">
 
+
                     {
                         sidebar.map((item, index) => (
-
-                            <Link
-                                href={item.link}
-                                key={index}
+                            <div className={"wrap-a"}
+                                onClick={() => {
+                                    setActiveMenu(index)
+                                }}
                             >
-                                <a className={`link `}>
-                                    <span className="material-icons-sharp">{item.icon}</span>
-                                    <h3>{item.name}</h3>
-                                </a>
+                                <Link
+                                    href={item.link}
+                                    key={index}
+                                >
+                                    {/*${sidebar.link === item.link.includes(`${sidebar.link}}`) ? "active" : "" }*/}
+                                    {/*${item.id === activeMenu ? "active" : ""}*/}
+                                    <a
+                                        className={`link  `}
+                                    >
 
-                            </Link>
+                                        <span className="material-icons-sharp">{item.icon}</span>
+                                        <h3>{item.name}</h3>
+
+
+                                    </a>
+
+                                </Link>
+                            </div>
+
 
                         ))
                     }

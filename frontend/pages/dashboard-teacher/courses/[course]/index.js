@@ -3,6 +3,7 @@ import LayoutTeacher from "../../../../components/Dashboard/Layout/LayoutTeacher
 import Link from "next/link";
 import {Router, useRouter} from "next/router";
 import {getLessons} from "../../../../components/Controllers/CourseController";
+import {Button} from "react-bootstrap";
 
 const Index = () => {
     const [course, setCourse] = useState([]);
@@ -37,10 +38,12 @@ const Index = () => {
                     <div style={{display: "flex", justifyContent: "space-between"}}>
                         <h2>Courses</h2>
                         <div>
-                            <button>Create</button>
-                            <button>Edit</button>
+                            <Button>Create</Button>
+                            <Button className={"m-1"}>Edit</Button>
                         </div>
                     </div>
+
+                    <br/>
                     <table>
                         <thead>
 

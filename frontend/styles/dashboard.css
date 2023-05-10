@@ -94,8 +94,9 @@ small{
 
 
 aside{
-    height: 100vh;
+    min-height: 100vh;
     /*width: 15%;*/
+    /*border: 2px solid red;*/
 }
 
 aside .top{
@@ -127,12 +128,12 @@ aside .close.toggle{
 /*============================*/
 /* SIDEBAR */
 /*============================*/
-aside .sidebar{
+.sidebar{
     background: white;
     display: flex;
     flex-direction: column;
-    height: 86vh;
-    position: relative;
+    /*height: 100%;*/
+    /*position: relative;*/
     top: 2rem;
 
 }
@@ -142,17 +143,22 @@ aside h1{
     text-align: center;
 }
 
+aside{
+    /*position: relative;*/
+}
+
 aside a{
     display: flex;
     color: var(--color-info-dark);
     margin-left: 2rem;
     gap: 1rem;
     align-items: center;
-    position: relative;
-    height: 3.7rem;
+    height: 3.5rem;
     transition: all 300ms ease;
     text-align: center;
+    position: relative;
 }
+
 
 
 aside .sidebar .link span{
@@ -165,11 +171,13 @@ aside .sidebar h3{
     margin-top: 5px;
 }
 
-aside .sidebar .link:last-child{
+aside .sidebar .wrap-a:last-child{
+    /*position: relative;*/
     position: absolute;
     bottom: 2rem;
     width: 100%;
 }
+
 
 .active{
     background: var(--color-light);
@@ -180,7 +188,7 @@ aside .sidebar .link:last-child{
 aside .sidebar .link.active::before{
     content: "";
     width: 6px;
-    min-height: 100vh;
+    height: 100%;
     background: var(--color-primary);
 }
 

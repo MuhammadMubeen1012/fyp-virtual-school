@@ -25,7 +25,7 @@ const StudentResult = () => {
                 {/* ============= Start of Courses ================= */}
                 <div className="courses-table">
 
-                    <h2>Courses</h2>
+                    <h2>Students</h2>
 
                     <table>
                         <thead>

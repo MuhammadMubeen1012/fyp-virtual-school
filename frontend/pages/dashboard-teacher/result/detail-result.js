@@ -22,7 +22,7 @@ const DetailResult = () => {
                         <thead>
                         <tr>
                             <th>Serial No.</th>
-                            <th>Assignment Title</th>
+                            <th>Assignment </th>
                             <th>Total Marks</th>
                             <th>Obtain Marks</th>
                         </tr>
@@ -54,7 +54,7 @@ const DetailResult = () => {
                         <thead>
                         <tr>
                             <th>Serial No.</th>
-                            <th>Quiz Title</th>
+                            <th>Quiz </th>
                             <th>Total Marks</th>
                             <th>Obtain Marks</th>
                         </tr>
