@@ -221,9 +221,6 @@ const Index = () => {
 
 
 
-
-
-
                 {/*============= start of Right side*/}
                 <div className="right">
 

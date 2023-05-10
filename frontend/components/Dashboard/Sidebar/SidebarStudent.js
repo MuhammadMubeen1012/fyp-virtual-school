@@ -20,9 +20,9 @@ const SidebarStudent = () => {
 
         {
             id: 2,
-            name: "Learning Paths",
+            name: "Attendance",
             icon: <span className="material-icons-sharp">person_outline</span>,
-            link: "/dashboard-student/learning-paths"
+            link: "/dashboard-student/attendance"
         },
 
         {
@@ -48,9 +48,9 @@ const SidebarStudent = () => {
 
         {
             id: 6,
-            name: "Grades",
+            name: "Results",
             icon: <span className="material-icons-sharp">grade</span>,
-            link: "/dashboard-student/grades"
+            link: "/dashboard-student/results"
         },
 
         {

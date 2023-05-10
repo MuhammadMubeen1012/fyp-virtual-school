@@ -107,7 +107,8 @@ function Index(effect, deps) {
         }
     }, [mainCourses]);
 
-    return (<LayoutTeacher>
+    return (
+        <LayoutTeacher>
 
         {/*=============== Start of main ================= */}
         <main>

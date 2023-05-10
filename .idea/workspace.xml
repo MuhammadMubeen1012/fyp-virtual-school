@@ -5,12 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d9b86c9f-0b89-4563-ba11-369d16e7ec77" name="Changes" comment="Updated">
-      <change afterPath="$PROJECT_DIR$/frontend/components/Controllers/apt_test.http" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/pages/dashboard-student/attendance/attendance-detail.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/pages/dashboard-student/attendance/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/pages/dashboard-student/results/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/pages/dashboard-student/results/result-details.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/components/Controllers/CourseController.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/components/Controllers/CourseController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/components/Controllers/LessonController.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/components/Controllers/LessonController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/courses/[course]/[slug].js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/courses/[course]/[slug].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/components/Dashboard/Sidebar/SidebarStudent.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/components/Dashboard/Sidebar/SidebarStudent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-student/attendance.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-student/grades.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-student/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-student/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,12 +26,12 @@
       <list>
         <option value="package" />
         <option value="JavaScript File" />
-        <option value="HTTP Request" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitToolBoxStore">
     <option name="recentBranches">
@@ -58,10 +62,6 @@
       </RecentBranches>
     </option>
   </component>
-  <component name="HttpClientSelectedEnvironments">
-    <file url="jar://$APPLICATION_HOME_DIR$/plugins/restClient/lib/restClient.jar!/com/intellij/ws/rest/client/requests/collection/get-requests.http" environment="test" />
-    <file url="jar://$APPLICATION_HOME_DIR$/plugins/restClient/lib/restClient.jar!/com/intellij/ws/rest/client/requests/collection/requests-with-authorization.http" environment="test" />
-  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -87,7 +87,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\KiNG\\AppData\\Local\\JetBrains\\Toolbox\\apps\\WebStorm\\ch-0\\231.8770.64\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\Momin\\AppData\\Local\\JetBrains\\Toolbox\\apps\\WebStorm\\ch-0\\231.8770.64\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -109,20 +109,13 @@
       <recent name="C:\Users\KiNG\WebstormProjects\fyp-virtual-school\frontend\pages\dashboard-teacher\courses" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Momin\WebstormProjects\fyp-virtual-school\frontend\pages\dashboard-teacher\attendance" />
+      <recent name="C:\Users\Momin\WebstormProjects\fyp-virtual-school\frontend\components\Controllers" />
       <recent name="C:\Users\Momin\WebstormProjects\fyp-virtual-school\frontend\pages\dashboard-student\courses\[course]" />
       <recent name="C:\Users\Momin\WebstormProjects\fyp-virtual-school\frontend\pages\dashboard-teacher\courses\[course]" />
     </key>
   </component>
-  <component name="RunManager" selected="HTTP Request.apt_test | #1">
-    <configuration name="All in apt_test" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$PROJECT_DIR$/frontend/components/Controllers/apt_test.http">
-      <method v="2" />
-    </configuration>
-    <configuration name="apt_test | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/frontend/components/Controllers/apt_test.http" requestIdentifier="#1" runType="Run single request">
-      <method v="2" />
-    </configuration>
-    <configuration name="apt_test | #2" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/frontend/components/Controllers/apt_test.http" index="2" requestIdentifier="#2" runType="Run single request">
-      <method v="2" />
-    </configuration>
+  <component name="RunManager">
     <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/frontend/package.json" />
       <command value="run" />
@@ -133,17 +126,8 @@
       <envs />
       <method v="2" />
     </configuration>
-    <list>
-      <item itemvalue="HTTP Request.All in apt_test" />
-      <item itemvalue="HTTP Request.apt_test | #2" />
-      <item itemvalue="HTTP Request.apt_test | #1" />
-      <item itemvalue="npm.dev" />
-    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="HTTP Request.apt_test | #1" />
-        <item itemvalue="HTTP Request.apt_test | #2" />
-        <item itemvalue="HTTP Request.All in apt_test" />
         <item itemvalue="npm.dev" />
       </list>
     </recent_temporary>
@@ -164,7 +148,6 @@
       <workItem from="1683272392423" duration="3957000" />
       <workItem from="1683511713916" duration="3124000" />
       <workItem from="1683539463882" duration="666000" />
-      <workItem from="1683656798940" duration="1281000" />
     </task>
     <task id="LOCAL-00001" summary="Done Teacher Dashboard">
       <created>1683225338573</created>
@@ -173,14 +156,7 @@
       <option name="project" value="LOCAL" />
       <updated>1683225338573</updated>
     </task>
-    <task id="LOCAL-00002" summary="Updated">
-      <created>1683551077641</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1683551077641</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -199,7 +175,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Done Teacher Dashboard" />
-    <MESSAGE value="Updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="Done Teacher Dashboard" />
   </component>
 </project>
