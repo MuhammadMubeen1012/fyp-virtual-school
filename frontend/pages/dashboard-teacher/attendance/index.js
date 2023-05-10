@@ -7,7 +7,8 @@ const Attendance = () => {
         <LayoutTeacher>
             {/*=============== Start of main ================= */}
             <main>
-                <h1>Attendance</h1>
+                <h1>Results</h1>
+
 
                 {/* ============= Start of Courses ================= */}
                 <div className="courses-table">
@@ -16,49 +17,22 @@ const Attendance = () => {
 
                     <table>
                         <thead>
-                        <tr>
-                            <th>Course Title</th>
-                            <th>Lessons Completed</th>
-                            <th>Duration</th>
-                        </tr>
+                            <tr>
+                                <th>Serial No.</th>
+                                <th>Course Name</th>
+                                <th>View Details</th>
+
+                            </tr>
                         </thead>
 
                         <tbody>
-                        <tr>
-                            <td>English</td>
-                            <td>18/40 (48%)</td>
-                            <td>10h 13m 28s</td>
-
-                            <Link href={"/dashboard-teacher/courses/english/attendance-details"} className="primary ">Details</Link>
-                        </tr>
-
-                        <tr>
-                            <td>Maths</td>
-                            <td>7/35 (20%)</td>
-                            <td>20h 30m 0s</td>
-                            <td className="primary">Details</td>
-                        </tr>
-                        <tr>
-                            <td>Science</td>
-                            <td>21/23 (97%)</td>
-                            <td>15hr 10m 0s</td>
-                            <td className="primary">Details</td>
-                        </tr>
-
-                        <tr>
-                            <td>Urdu</td>
-                            <td>21/23 (97%)</td>
-                            <td>15hr 10m 0s</td>
-                            <td className="primary">Details</td>
-                        </tr>
-
-                        <tr>
-                            <td>History</td>
-                            <td>21/23 (97%)</td>
-                            <td>15hr 10m 0s</td>
-                            <td className="primary">Details</td>
-                        </tr>
-
+                            <tr>
+                                <td>01</td>
+                                <td>English</td>
+                                <Link href={"/dashboard-teacher/attendance/attendance-details"} className="primary">
+                                    Open
+                                </Link>
+                            </tr>
                         </tbody>
                     </table>
 

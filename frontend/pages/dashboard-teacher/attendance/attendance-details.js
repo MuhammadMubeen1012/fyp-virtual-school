@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import LayoutTeacher from "../../../../components/Dashboard/Layout/LayoutTeacher";
+import LayoutTeacher from "../../../components/Dashboard/Layout/LayoutTeacher";
 import Link from "next/link";
 import {Button} from "react-bootstrap";
 
@@ -96,7 +96,7 @@ const AttendanceDetail = () => {
                                         <td>{item.class}</td>
                                         <td>{item.timeStart}</td>
                                         <td>{item.timeEnd}</td>
-                                        <td className="primary"> <Link href={"/dashboard-teacher/courses/english/attendance"}>Open</Link> </td>
+                                        <td className="primary"> <Link href={"/dashboard-teacher/attendance/new-attendance"}>Open</Link> </td>
                                     </tr>
                                 ))
                             }
