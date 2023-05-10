@@ -43,7 +43,7 @@ const SidebarTeacher = () => {
             id: 5,
             name: "Results",
             icon: <span className="material-icons-sharp">inventory</span>,
-            link: "/dashboard-teacher/results"
+            link: "/dashboard-teacher/result"
         },
 
         {

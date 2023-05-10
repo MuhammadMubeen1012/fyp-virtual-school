@@ -180,7 +180,7 @@ aside .sidebar .link:last-child{
 aside .sidebar .link.active::before{
     content: "";
     width: 6px;
-    height: 100%;
+    min-height: 100vh;
     background: var(--color-primary);
 }
 

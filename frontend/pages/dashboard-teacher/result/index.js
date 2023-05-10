@@ -1,6 +1,7 @@
 import React from 'react';
-import LayoutTeacher from "../../components/Dashboard/Layout/LayoutTeacher";
+import LayoutTeacher from "../../../components/Dashboard/Layout/LayoutTeacher";
 import Link from "next/link";
+import {Button} from "react-bootstrap";
 
 const Results = () => {
     return (
@@ -9,6 +10,7 @@ const Results = () => {
             <main>
                 <h1>Results</h1>
 
+
                 {/* ============= Start of Courses ================= */}
                 <div className="courses-table">
 
@@ -16,24 +18,20 @@ const Results = () => {
 
                     <table>
                         <thead>
-                            <tr>
-                                <th>Serial No.</th>
-                                <th>Student Name</th>
-                                <th>Total Marks</th>
-                                <th>Obtain Marks</th>
-                                <th>View Details</th>
+                        <tr>
+                            <th>Serial No.</th>
+                            <th>Course Name</th>
+                            <th>View Details</th>
 
-                            </tr>
+                        </tr>
                         </thead>
 
                         <tbody>
-                            <tr>
-                                <td>01</td>
-                                <td>Momin</td>
-                                <td>100</td>
-                                <td>70</td>
-                                <Link href={"/dashboard-teacher/courses/english/attendance-details"} className="primary ">Details</Link>
-                            </tr>
+                        <tr>
+                            <td>01</td>
+                            <td>English</td>
+                            <Link href={"/dashboard-teacher/result/student-result"} className="primary ">Open</Link>
+                        </tr>
 
                         </tbody>
                     </table>

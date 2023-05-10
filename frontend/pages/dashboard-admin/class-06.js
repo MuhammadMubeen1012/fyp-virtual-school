@@ -64,12 +64,12 @@ const Class06 = () => {
                             : eventKey === 1 ?
                                 <div>
                                     {/*Students Tab*/}
-
+                                    <StudentData />
                                 </div>
                             : eventKey === 2 ?
                                 <div>
                                     {/*Teachers Tab*/}
-
+                                    <TeacherData />
                                 </div>
                             :  ""
 
@@ -203,36 +203,22 @@ export function CourseData(){
         <div>
             <div className="courses-table">
 
-                <h2>Classrooms</h2>
+                <h2>Courses</h2>
                 <table>
                     <thead>
-                    <tr>
-                        <th>Classroom</th>
-                        <th>No. of Students</th>
-                        <th>No. of Teachers</th>
-                        <th>Details</th>
-                    </tr>
+                        <tr>
+                            <th>Serial No.</th>
+                            <th>Code</th>
+                            <th>Name</th>
+                            <th>No of Lessons</th>
+                            <th>Teacher</th>
+                        </tr>
                     </thead>
 
                     <tbody>
-                    {
-                        loading ?
-                            classrooms.map((classroom) => {
-                                return (
-                                    <tr key={classroom._id}>
-                                        <td>{classroom.name}</td>
-                                        <td>{classroom.students.length}</td>
-                                        <td>{classroom.teachers.length}</td>
-                                        <td className="primary">
-                                            <Link href={"/dashboard-admin/class-06"}>
-                                                Details
-                                            </Link>
-
-                                        </td>
-                                    </tr>
-                                )
-                            }) : ""
-                    }
+                        <tr>
+                            <td></td>
+                        </tr>
 
                     </tbody>
                 </table>
@@ -244,12 +230,62 @@ export function CourseData(){
 
 export function StudentData(){
 
+    return(
+        <div>
+            <div className="courses-table">
+
+                <h2>Students</h2>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Serial No.</th>
+                        <th>Name</th>
+                        <th>Father Name</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr>
+                        <td></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    )
 
 }
 
 export function TeacherData(){
 
+    return(
+        <div>
+            <div className="courses-table">
 
+                <h2>Teachers</h2>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Serial No.</th>
+                        <th>Name</th>
+                        <th>Father Name</th>
+                        <th>No of Courses</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr>
+                        <td></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    )
 }
 
 

@@ -4,8 +4,10 @@ import Link from "next/link";
 import {getClassroomsByAcademicYear} from "./DashboardController";
 
 const DashboardAdmin = () => {
+
     const [classrooms, setClassrooms] = React.useState([]);
     const [loading, setLoading] = React.useState(false);
+
     useEffect(() => {
         if (classrooms.length === 0) {
             getClassroomsByAcademicYear().then(r => setClassrooms(r));
@@ -21,7 +23,7 @@ const DashboardAdmin = () => {
         <LayoutAdmin>
 
             {/*=============== Start of main ================= */}
-            <main>
+                <main>
                 <h1>Overview</h1>
 
 
@@ -116,10 +118,8 @@ const DashboardAdmin = () => {
 
 
 
-
-
             {/*============= start of Right side*/}
-            <div className="right">
+                <div className="right">
 
                 <div className="profile">
                     <div className="info">
@@ -227,3 +227,13 @@ const DashboardAdmin = () => {
 };
 
 export default DashboardAdmin;
+
+
+
+
+
+
+
+
+
+

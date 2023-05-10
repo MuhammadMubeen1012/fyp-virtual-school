@@ -338,7 +338,7 @@ const Slug = () => {
                 </div>
                 {/*====================== End of Recent Updates ====================== */}
             </div>
-            {/*============= End of left Side*/}
+            {/*============= End of left Side ============================= */}
         </LayoutTeacher>
     );
 };

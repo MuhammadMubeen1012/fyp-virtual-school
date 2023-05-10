@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import LayoutTeacher from "../../../components/Dashboard/Layout/LayoutTeacher";
 import Link from "next/link";
-import {getCourses} from "../../../components/Controllers/CoursesController";
 import axios from "axios";
 import Cookies from "js-cookie";
 
