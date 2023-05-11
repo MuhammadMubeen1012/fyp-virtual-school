@@ -3,10 +3,6 @@ import LayoutTeacher from "../../../components/Dashboard/Layout/LayoutTeacher";
 import Link from "next/link";
 import {getCourses} from "./attendanceController";
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 9387460982eec61f14e86ea12a2df925872e93aa
 const Attendance = () => {
     const [courses, setCourses] = React.useState([]);
     const [loading, setLoading] = React.useState(false);
