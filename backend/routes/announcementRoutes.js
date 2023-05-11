@@ -16,18 +16,16 @@ const {
 } = require("../middlewares/auth");
 
 //routes
-router
-  .route("/admins/announcements")
-  .post(isAuthenticatedUser, createAnnouncement);
+// router
+//   .route("/admins/announcements")
+//   .post(isAuthenticatedUser, createAnnouncement);
 
-router
-  .route("/teachers/announcements")
-  .post(isAuthenticatedUser, createAnnouncement);
+router.route("/announcement").post(isAuthenticatedUser, createAnnouncement);
 
 router.route("/announcements").get(isAuthenticatedUser, getAnnouncements);
 
 router
-  .route("/announcements/:id")
+  .route("/announcement/:id")
   .get(isAuthenticatedUser, getSingleAnnouncement);
 
 router

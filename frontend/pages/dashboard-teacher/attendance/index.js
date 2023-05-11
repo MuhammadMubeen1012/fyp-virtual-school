@@ -2,6 +2,7 @@ import React from "react";
 import LayoutTeacher from "../../../components/Dashboard/Layout/LayoutTeacher";
 import Link from "next/link";
 import {} from "./attendanceController";
+
 const Attendance = () => {
   return (
     <LayoutTeacher>
