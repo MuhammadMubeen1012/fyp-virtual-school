@@ -124,7 +124,10 @@ const Index = (props) => {
                                             >
                                                 Edit
                                             </Button>
-                                            <Button className={"m-1 btn-danger"}>Delete</Button>
+                                            <Button className={"m-1 btn-danger"} onClick={
+                                                () => {
+                                                }
+                                            }>Delete</Button>
                                         </td>
 
 
