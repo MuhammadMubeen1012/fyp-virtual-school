@@ -16,6 +16,7 @@ import {
     deleteQuiz
 } from "../../../../components/Controllers/CourseController";
 import Link from "next/link";
+import VectorSvg from "../../../../components/Common/VectorSvg";
 
 
 const Slug = () => {
@@ -52,7 +53,7 @@ const Slug = () => {
         setLessonLink(lesson_id);
 
 
-        if (lesson_id !== undefined) {
+        if (lessonLink !== undefined) {
             getLesson(lesson_id).then(data => {
                 const lesson = data
                 setLesson(lesson);
@@ -147,13 +148,6 @@ const Slug = () => {
                 </div>
             </div>
 
-            <div
-                style={{
-                    paddingBlock: "1rem", border: "1px solid red",
-                }}
-            >
-                vector image...
-            </div>
             <br/>
 
 
@@ -203,7 +197,11 @@ const Slug = () => {
                     <Modal.Body>
                         {modal.item === 1 ? (<div>
                             {/* Content Modal */}
-                            <ContentModal lessonId={lessonLink}/>
+                            <ContentModal
+                                lessonId={lessonLink}
+                                url={router.asPath}
+                                setModal={setModal}
+                            />
                         </div>) : modal.item === 2 ? (<div>
                             {/* Event Modal */}
                             <EventModal lessonId={lessonLink}/>
@@ -248,15 +246,13 @@ const Slug = () => {
 
             {/* ============= Tabs running by conditional rendering ================= */}
             <div className="">
-
-
                 {
-
                     eventKey === 0 ? <div>
                         {/*Lesson Tab*/}
                         {contentLoading && content && content.length > 0 ? content.map((item, index) => {
                             return (<div key={index}>
                                 <ContentData content={item}/>
+                                <br/>
                             </div>)
                         }) : ""}
                         {/*<ContentData/>*/}
@@ -283,7 +279,8 @@ const Slug = () => {
 
                             </div>)
                         }) : ""}
-                    </div> : ""}
+                    </div> : ""
+                }
 
 
                 {isModalAddQuestion && (<div>
@@ -357,14 +354,21 @@ export default Slug;
 
 
 // ================================== Modals for Creating Events  ==============================================
-export function ContentModal({lessonId}) {
+export function ContentModal({lessonId, url, setModal}) {
     const submitHandler = (e) => {
         e.preventDefault();
         const data = {
             name: e.target.name.value, link: e.target.link.value,
         };
-        addNewContent(lessonId, data).then(r => console.log(r))
-        console.log(data)
+        addNewContent(lessonId, data).then(r => {
+            console.log(r)
+            // window.location.href = url;
+// console.log(url)
+        })
+        console.log(data);
+        setModal({item: 0, active: false});
+
+        // put sweet alert here
 
     }
 
@@ -679,10 +683,6 @@ export function QuizModal({lessonId}) {
                 </div>
             </Form.Group>{" "}
             <br/>
-            <div>
-                <input type="checkbox" id="isLive"/>
-                <label htmlFor="isLive"> isLive</label>
-            </div>
             <br/>
             <Modal.Footer>
                 <Button type={"submit"}>Submit</Button>
@@ -766,6 +766,7 @@ export function QuizAddQuestionsModal(props) {
                         <Button type={"submit"}>Next</Button>
                     </div>
                 </Form>
+
             </Modal.Body>
         </Modal>
 
@@ -784,12 +785,7 @@ export function ContentData({content}) {
             <Card.Header>{content.name}</Card.Header>
             <Card.Body>
                 <Card.Text>{content.link}</Card.Text>
-                <div>
-                    <Button variant="primary">Edit</Button>
-                    <Button className={"m-1"} variant="primary">
-                        Delete
-                    </Button>
-                </div>
+                <Button>Open</Button>
             </Card.Body>
         </Card>
 
@@ -833,7 +829,9 @@ export function AssignmentData({content}) {
 
                 <div>
                     <Button variant="primary">Go to Event</Button>
-                    <Button className={"m-1"} variant="primary">
+                    <Button
+                        href={"/dashboard-teacher/courses/english/assignment-details"}
+                        className={"m-1"} variant="primary">
                         View Submissions
                     </Button>
                     <Button className={"m-1"} variant="primary" onClick={onDelete}>
@@ -863,14 +861,13 @@ export function QuizData({content, onChange}) {
                 <div>
                     <Button
                         variant="primary"
-                        onClick={() => {
-                            onChange(true);
-                        }}
+                        href={"/dashboard-teacher/courses/english/add-quiz-questions"}
                     >
                         Add Questions
                     </Button>
 
-                    <Button className={"m-1"} variant={"primary"}>
+                    <Button href={"/dashboard-teacher/courses/english/quiz-details"} className={"m-1"}
+                            variant={"primary"}>
                         View Submissions
                     </Button>
                     <Button className={"m-1"} variant="primary" onClick={onDelete}>

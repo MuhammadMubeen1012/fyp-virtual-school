@@ -191,7 +191,7 @@ function Index(effect, deps) {
                         return (<tr key={index}>
                             <td>{course.name}</td>
                             <td>{course.lessons.length}</td>
-                            <td><Link href={'#'}>click here</Link></td>
+                            <td><Link href={`/dashboard-teacher/courses/${course.name.toLowerCase()}`}>click here</Link></td>
                         </tr>)
                     })}
 
@@ -199,7 +199,6 @@ function Index(effect, deps) {
                     </tbody>
                 </table>
 
-                <a href="#">Show All</a>
 
             </div>
             {/* ============= End of Courses  ================== */}

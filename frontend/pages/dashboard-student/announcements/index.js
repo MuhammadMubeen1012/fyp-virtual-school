@@ -1,13 +1,15 @@
 import React from 'react';
-import LayoutTeacher from "../../../components/Dashboard/Layout/LayoutTeacher";
+import LayoutStudent from "../../../components/Dashboard/Layout/LayoutStudent";
 import Link from "next/link";
 
-const Exam = () => {
+const Courses = () => {
     return (
-        <LayoutTeacher>
+        <LayoutStudent>
+
+
             {/*=============== Start of main ================= */}
             <main>
-                <h1>Exam</h1>
+                <h1>Results</h1>
 
 
                 {/* ============= Start of Courses ================= */}
@@ -29,22 +31,22 @@ const Exam = () => {
                         <tr>
                             <td>01</td>
                             <td>English</td>
-                            <Link href={"/dashboard-teacher/exam/exam-details"} className="primary ">Open</Link>
+                            <Link href={"/dashboard-teacher/attendance/attendance-details"} className="primary">
+                                Open
+                            </Link>
                         </tr>
-
                         </tbody>
                     </table>
 
                 </div>
                 {/* ============= End of Courses  ================== */}
 
-
-
-
             </main>
             {/*=============== End Of Main  ==================*/}
-        </LayoutTeacher>
+
+
+        </LayoutStudent>
     );
 };
 
-export default Exam;
+export default Courses;
