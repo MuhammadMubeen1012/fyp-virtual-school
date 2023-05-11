@@ -144,3 +144,19 @@ exports.getStudentByID = catchAsyncErrors(async (req, res, next) => {
     });
   }
 });
+
+exports.getCourses = catchAsyncErrors(async (req, res, next) => {
+  const courses = await Course.find({ teacher: req.user._id });
+
+  if (courses) {
+    res.status(200).json({
+      success: true,
+      courses: courses,
+    });
+  } else {
+    res.status(200).json({
+      success: false,
+      courses: [],
+    });
+  }
+});

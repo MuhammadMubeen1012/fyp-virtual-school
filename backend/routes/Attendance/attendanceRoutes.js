@@ -10,6 +10,7 @@ const {
   getAttendanceByCourse,
   getAttendanceByCourseAndStudent,
   updateAttendance,
+  getAttendance,
 } = require("../../controllers/Attendance/attendanceController");
 
 router
@@ -40,5 +41,9 @@ router
 router
   .route("/attendance/update/:attendanceID")
   .put(isAuthenticatedUser, updateAttendance);
+
+router
+  .route("/attendance/:attendanceID")
+  .get(isAuthenticatedUser, getAttendance);
 
 module.exports = router;

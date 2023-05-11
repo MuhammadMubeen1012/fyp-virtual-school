@@ -2,34 +2,47 @@ const catchAsyncErrors = require("../../middlewares/catchAsyncErrors");
 const Attendance = require("../../models/Attendance/Attendance");
 const Classroom = require("../../models/Classroom/Classroom");
 const Course = require("../../models/Classroom/Course");
+const Student = require("../../models/student");
 
 // @desc create attendance by date, students list of that class and default status of each student. Like roaster
 // @route  POST /attendance/:courseID
 exports.createAttendance = catchAsyncErrors(async (req, res, next) => {
   const course = await Course.findById(req.params.courseID);
   const classroom = await Classroom.findById(course.classroom);
-
   let attendanceList = [];
+  let students = [];
+  const data = req.body;
 
-  await classroom.students.forEach((id) =>
-    attendanceList.push({
-      studentID: id,
-      status: "Absent",
-    })
-  );
+  for (let i = 0; i < classroom.students.length; i++) {
+    students.push(await Student.findOne({ user: classroom.students[i] }));
+  }
 
+  if (students.length > 0) {
+    for (let student of students) {
+      attendanceList.push({
+        studentID: student._id.toString(),
+        studentName: student.firstName + "" + student.lastName,
+        status: "Absent",
+      });
+    }
+  }
   //attendance creation needs course,classroom,teacher,attendanceList
-  const attendance = await Attendance.create({
-    course: course._id,
-    classroom: classroom._id,
-    teacher: course.teacher,
-    attendanceList: attendanceList,
-  });
-
-  if (attendance) {
-    res.status(200).json({
-      attendance: attendance,
+  if (attendanceList.length > 0) {
+    const attendance = await Attendance.create({
+      course: course._id,
+      classroom: classroom._id,
+      teacher: course.teacher,
+      attendanceList: attendanceList,
+      startTime: data.startTime,
+      endTime: data.endTime,
     });
+    if (attendance) {
+      res.status(200).json({
+        attendance: attendance,
+      });
+    }
+  } else {
+    console.log("List not compiled");
   }
 });
 
@@ -93,6 +106,19 @@ exports.getAttendanceByCourse = catchAsyncErrors(async (req, res, next) => {
   const attendance = await Attendance.find({ course: req.params.courseID });
 
   console.log(attendance);
+
+  if (attendance) {
+    res.status(200).json({
+      success: true,
+      attendance: attendance,
+    });
+  }
+});
+
+// @desc get attendance by its id
+// @route GET /attendance/:attendanceID
+exports.getAttendance = catchAsyncErrors(async (req, res, next) => {
+  const attendance = await Attendance.findById(req.params.attendanceID);
 
   if (attendance) {
     res.status(200).json({

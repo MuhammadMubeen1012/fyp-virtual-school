@@ -9,6 +9,7 @@ const {
   deleteCourse,
   getTeacherByID,
   getStudentByID,
+  getCourses,
 } = require("../../controllers/Classroom/courseController");
 
 //routes
@@ -20,5 +21,7 @@ router.route("/course/:id").delete(isAuthenticatedUser, deleteCourse);
 
 router.route("/teacher/:teacherID").get(isAuthenticatedUser, getTeacherByID);
 router.route("/student/:studentID").get(isAuthenticatedUser, getStudentByID);
+
+router.route("/courses").get(isAuthenticatedUser, getCourses);
 
 module.exports = router;

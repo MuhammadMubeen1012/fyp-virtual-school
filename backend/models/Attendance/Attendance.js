@@ -13,11 +13,20 @@ const attendanceSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "teacher",
   },
+  startTime: {
+    type: String,
+  },
+  endTime: {
+    type: String,
+  },
   attendanceList: [
     {
       studentID: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "student",
+      },
+      studentName: {
+        type: String,
       },
       status: {
         type: String,
