@@ -36,7 +36,7 @@ const SidebarTeacher = () => {
             id: 4,
             name: "Notice Board",
             icon: <span className="material-icons-sharp">mail_outline</span>,
-            link: "/dashboard-teacher/notice-board"
+            link: "/dashboard-teacher/announcements"
         },
 
         {

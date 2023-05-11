@@ -16,6 +16,7 @@ import {
     deleteQuiz
 } from "../../../../components/Controllers/CourseController";
 import Link from "next/link";
+import VectorSvg from "../../../../components/Common/VectorSvg";
 
 
 const Slug = () => {
@@ -147,13 +148,6 @@ const Slug = () => {
                 </div>
             </div>
 
-            <div
-                style={{
-                    paddingBlock: "1rem", border: "1px solid red",
-                }}
-            >
-                vector image...
-            </div>
             <br/>
 
 
@@ -248,15 +242,13 @@ const Slug = () => {
 
             {/* ============= Tabs running by conditional rendering ================= */}
             <div className="">
-
-
                 {
-
                     eventKey === 0 ? <div>
                         {/*Lesson Tab*/}
                         {contentLoading && content && content.length > 0 ? content.map((item, index) => {
                             return (<div key={index}>
                                 <ContentData content={item}/>
+                                <br/>
                             </div>)
                         }) : ""}
                         {/*<ContentData/>*/}
@@ -283,7 +275,8 @@ const Slug = () => {
 
                             </div>)
                         }) : ""}
-                    </div> : ""}
+                    </div> : ""
+                }
 
 
                 {isModalAddQuestion && (<div>
@@ -679,10 +672,6 @@ export function QuizModal({lessonId}) {
                 </div>
             </Form.Group>{" "}
             <br/>
-            <div>
-                <input type="checkbox" id="isLive"/>
-                <label htmlFor="isLive"> isLive</label>
-            </div>
             <br/>
             <Modal.Footer>
                 <Button type={"submit"}>Submit</Button>
@@ -766,6 +755,7 @@ export function QuizAddQuestionsModal(props) {
                         <Button type={"submit"}>Next</Button>
                     </div>
                 </Form>
+
             </Modal.Body>
         </Modal>
 
@@ -784,12 +774,7 @@ export function ContentData({content}) {
             <Card.Header>{content.name}</Card.Header>
             <Card.Body>
                 <Card.Text>{content.link}</Card.Text>
-                <div>
-                    <Button variant="primary">Edit</Button>
-                    <Button className={"m-1"} variant="primary">
-                        Delete
-                    </Button>
-                </div>
+                <Button>Open</Button>
             </Card.Body>
         </Card>
 
@@ -863,14 +848,12 @@ export function QuizData({content, onChange}) {
                 <div>
                     <Button
                         variant="primary"
-                        onClick={() => {
-                            onChange(true);
-                        }}
+                        href={"/dashboard-teacher/courses/english/add-quiz-questions"}
                     >
                         Add Questions
                     </Button>
 
-                    <Button className={"m-1"} variant={"primary"}>
+                    <Button href={"/dashboard-teacher/courses/english/quiz-details"} className={"m-1"} variant={"primary"}>
                         View Submissions
                     </Button>
                     <Button className={"m-1"} variant="primary" onClick={onDelete}>

@@ -36,7 +36,7 @@ const SidebarStudent = () => {
             id: 4,
             name: "Messages",
             icon: <span className="material-icons-sharp">mail_outline</span>,
-            link: "/dashboard-student/messages"
+            link: "/dashboard-student/announcements"
         },
 
         {

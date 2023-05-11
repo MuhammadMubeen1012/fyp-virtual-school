@@ -5,15 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d9b86c9f-0b89-4563-ba11-369d16e7ec77" name="Changes" comment="Updated">
-      <change afterPath="$PROJECT_DIR$/frontend/pages/dashboard-student/attendance/attendance-detail.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/pages/dashboard-student/attendance/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/pages/dashboard-student/results/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/pages/dashboard-student/results/result-details.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/components/Common/VectorSvg.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/pages/dashboard-student/announcements/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/announcements/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/courses/[course]/add-quiz-questions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/courses/[course]/quiz-details.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/components/Dashboard/Sidebar/SidebarStudent.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/components/Dashboard/Sidebar/SidebarStudent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-student/attendance.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-student/grades.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-student/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-student/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/components/Dashboard/Sidebar/SidebarTeacher.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/components/Dashboard/Sidebar/SidebarTeacher.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-student/assignments.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-student/learning-paths.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-student/messages.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/courses/[course]/[slug].js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/courses/[course]/[slug].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/courses/[course]/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/courses/[course]/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
