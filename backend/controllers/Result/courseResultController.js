@@ -11,7 +11,7 @@ const ExamSubmission = require("../../models/Classroom/ExamSubmission");
 const CourseResult = require("../../models/Result/CourseResult");
 
 // @def compile course Result
-// @route POST /result/:courseID
+// @route POST /compile/result/:courseID
 exports.compileCourseResult = catchAsyncErrors(async (req, res, next) => {
   const course = await Course.findById(req.params.courseID);
   const classroom = await Classroom.findById(course.classroom);
@@ -97,7 +97,7 @@ exports.compileCourseResult = catchAsyncErrors(async (req, res, next) => {
         classroom: classroom._id,
         student: student,
         academicYear: classroom.academicYear,
-        createdBy: req.user._id,
+        createdBy: course.teacher,
         obtainedMarks: resultObtainedMarks,
         totalMarks: resultTotalmarks,
         assignmentGrade: assignmentGrade,
