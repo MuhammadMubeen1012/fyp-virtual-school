@@ -53,7 +53,7 @@ const Slug = () => {
         setLessonLink(lesson_id);
 
 
-        if (lesson_id !== undefined) {
+        if (lessonLink !== undefined) {
             getLesson(lesson_id).then(data => {
                 const lesson = data
                 setLesson(lesson);
@@ -197,7 +197,7 @@ const Slug = () => {
                     <Modal.Body>
                         {modal.item === 1 ? (<div>
                             {/* Content Modal */}
-                            <ContentModal lessonId={lessonLink}/>
+                            <ContentModal lessonId={lessonLink} url={router.asPath}/>
                         </div>) : modal.item === 2 ? (<div>
                             {/* Event Modal */}
                             <EventModal lessonId={lessonLink}/>
@@ -350,13 +350,17 @@ export default Slug;
 
 
 // ================================== Modals for Creating Events  ==============================================
-export function ContentModal({lessonId}) {
+export function ContentModal({lessonId, url}) {
     const submitHandler = (e) => {
         e.preventDefault();
         const data = {
             name: e.target.name.value, link: e.target.link.value,
         };
-        addNewContent(lessonId, data).then(r => console.log(r))
+        addNewContent(lessonId, data).then(r => {
+            console.log(r)
+            window.location.href = url
+// console.log(url)
+        })
         console.log(data)
 
     }
@@ -853,7 +857,8 @@ export function QuizData({content, onChange}) {
                         Add Questions
                     </Button>
 
-                    <Button href={"/dashboard-teacher/courses/english/quiz-details"} className={"m-1"} variant={"primary"}>
+                    <Button href={"/dashboard-teacher/courses/english/quiz-details"} className={"m-1"}
+                            variant={"primary"}>
                         View Submissions
                     </Button>
                     <Button className={"m-1"} variant="primary" onClick={onDelete}>
