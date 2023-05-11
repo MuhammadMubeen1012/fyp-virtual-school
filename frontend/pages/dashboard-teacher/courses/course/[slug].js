@@ -197,7 +197,11 @@ const Slug = () => {
                     <Modal.Body>
                         {modal.item === 1 ? (<div>
                             {/* Content Modal */}
-                            <ContentModal lessonId={lessonLink} url={router.asPath}/>
+                            <ContentModal
+                                lessonId={lessonLink}
+                                url={router.asPath}
+                                setModal={setModal}
+                            />
                         </div>) : modal.item === 2 ? (<div>
                             {/* Event Modal */}
                             <EventModal lessonId={lessonLink}/>
@@ -350,7 +354,7 @@ export default Slug;
 
 
 // ================================== Modals for Creating Events  ==============================================
-export function ContentModal({lessonId, url}) {
+export function ContentModal({lessonId, url, setModal}) {
     const submitHandler = (e) => {
         e.preventDefault();
         const data = {
@@ -358,10 +362,13 @@ export function ContentModal({lessonId, url}) {
         };
         addNewContent(lessonId, data).then(r => {
             console.log(r)
-            window.location.href = url
+            // window.location.href = url;
 // console.log(url)
         })
-        console.log(data)
+        console.log(data);
+        setModal({item: 0, active: false});
+
+        // put sweet alert here
 
     }
 
@@ -822,7 +829,9 @@ export function AssignmentData({content}) {
 
                 <div>
                     <Button variant="primary">Go to Event</Button>
-                    <Button className={"m-1"} variant="primary">
+                    <Button
+                        href={"/dashboard-teacher/courses/english/assignment-details"}
+                        className={"m-1"} variant="primary">
                         View Submissions
                     </Button>
                     <Button className={"m-1"} variant="primary" onClick={onDelete}>

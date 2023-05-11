@@ -2,16 +2,18 @@ import React from "react";
 import LayoutTeacher from "../../../components/Dashboard/Layout/LayoutTeacher";
 import Link from "next/link";
 import {} from "./attendanceController";
+
+
 const Attendance = () => {
   return (
     <LayoutTeacher>
       {/*=============== Start of main ================= */}
       <main>
-        <h1>Results</h1>
+        <h1>Attendance</h1>
 
         {/* ============= Start of Courses ================= */}
         <div className="courses-table">
-          <h2>Courses</h2>
+          <h2>Attendance</h2>
 
           <table>
             <thead>

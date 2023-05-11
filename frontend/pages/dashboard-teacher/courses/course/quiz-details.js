@@ -23,6 +23,7 @@ const QuizDetails = () => {
                             <tr>
                                 <th>Serial No.</th>
                                 <th>Student Name</th>
+                                <th>File Link</th>
                                 <th>Time</th>
                             </tr>
                         </thead>
@@ -31,6 +32,7 @@ const QuizDetails = () => {
                             <tr>
                                 <td>01</td>
                                 <td>Momin</td>
+                                <td>Link</td>
                                 <td>11:00pm</td>
                             </tr>
                         </tbody>
