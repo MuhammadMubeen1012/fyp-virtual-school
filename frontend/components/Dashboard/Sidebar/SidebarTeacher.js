@@ -18,12 +18,12 @@ const SidebarTeacher = () => {
             link: "/dashboard-teacher/courses"
         },
 
-        {
-            id: 2,
-            name: "Students",
-            icon: <span className="material-icons-sharp">person_outline</span>,
-            link: "/dashboard-teacher/students"
-        },
+        // {
+        //     id: 2,
+        //     name: "Students",
+        //     icon: <span className="material-icons-sharp">person_outline</span>,
+        //     link: "/dashboard-teacher/students"
+        // },
 
         {
             id: 3,
