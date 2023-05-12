@@ -29,9 +29,11 @@ router
   .get(isAuthenticatedUser, getSingleAnnouncement);
 
 router
-  .route("/announcements/:id")
+  .route("/delete/announcement/:id")
   .delete(isAuthenticatedUser, deleteAnnouncement);
 
-router.route("/announcements/:id").put(isAuthenticatedUser, updateAnnouncement);
+router
+  .route("/update/announcement/:id")
+  .put(isAuthenticatedUser, updateAnnouncement);
 
 module.exports = router;
