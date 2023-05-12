@@ -33,7 +33,7 @@ router
   .put(isAuthenticatedUser, updateSubjectiveExam);
 
 router
-  .route("/exam/objectiveExam/update/:examID/:index")
+  .route("/exam/objectiveExam/update/:examID")
   .put(isAuthenticatedUser, updateObjectiveExam);
 
 router.route("/exam/:examID").delete(isAuthenticatedUser, deleteExam);
