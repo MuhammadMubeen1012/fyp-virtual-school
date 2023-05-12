@@ -3,8 +3,12 @@ import LayoutTeacher from "../../../components/Dashboard/Layout/LayoutTeacher";
 
 import {Button, Card, Dropdown, Form, Modal} from "react-bootstrap";
 import {AssignmentModal, ContentModal, EventModal, QuizModal} from "../courses/course/[slug]";
+import {useRouter} from "next/router";
 
 const Exam = () => {
+
+    const router = useRouter();
+
     const [modal, setModal] = useState({
         item: 0,
         active: false,
@@ -115,7 +119,7 @@ const Exam = () => {
                                             <br/>
                                             <br/>
                                             <Modal.Footer>
-                                                <Button type={"submit"}>Submit</Button>
+                                                <Button type={"submit"}>Add</Button>
                                             </Modal.Footer>
                                         </Form>
                                     </Modal.Body>
@@ -148,10 +152,14 @@ const Exam = () => {
                                 </Dropdown.Toggle>
 
                                 <Dropdown.Menu>
-                                    <Dropdown.Item onClick={() => setModal({item: 1, active: true})}>
+                                    <Dropdown.Item onClick={() => {
+                                        router.push("/dashboard-teacher/exam/subjective-exam")
+                                    }}>
                                         Subjective
                                     </Dropdown.Item>
-                                    <Dropdown.Item onClick={() => setModal({item: 2, active: true})}>
+                                    <Dropdown.Item onClick={() => {
+                                        router.push("/dashboard-teacher/exam/objective-exam")
+                                    }}>
                                         Objective
                                     </Dropdown.Item>
                                 </Dropdown.Menu>
