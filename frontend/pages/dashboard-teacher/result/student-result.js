@@ -3,7 +3,7 @@ import LayoutTeacher from "../../../components/Dashboard/Layout/LayoutTeacher";
 import Link from "next/link";
 import { Button } from "react-bootstrap";
 import {} from "./resultController";
-import {} from "../announcement/announcementController";
+import {} from "../announcements/announcementController";
 
 const StudentResult = () => {
   return (

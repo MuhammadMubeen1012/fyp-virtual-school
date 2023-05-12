@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import LayoutTeacher from "../../../components/Dashboard/Layout/LayoutTeacher";
 
 import {Button, Card, Dropdown, Form, Modal} from "react-bootstrap";
-import {AssignmentModal, ContentModal, EventModal, QuizModal} from "../courses/[course]/[slug]";
+import {AssignmentModal, ContentModal, EventModal, QuizModal} from "../courses/course/[slug]";
 
 const Exam = () => {
     const [modal, setModal] = useState({

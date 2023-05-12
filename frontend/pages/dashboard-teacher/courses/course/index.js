@@ -6,8 +6,9 @@ import {getLessons} from "../../../../components/Controllers/CourseController";
 import {Button, Form, Modal} from "react-bootstrap";
 import {AssignmentModal, ContentModal, EventModal, QuizModal} from "./[slug]";
 
-const Index = () => {
-    const [course, setCourse] = useState([]);
+const Index = (props) => {
+    const router = useRouter();
+    const [course, setCourse] = useState({});
     const [lessons, setLessons] = useState([]);
     const [loading, setLoading] = useState(false);
     const [createLessonModal, setCreateLessonModal] = useState(false);
@@ -16,9 +17,8 @@ const Index = () => {
     const [unitDescription, setUnitDescription] = useState();
 
 
-    const router = useRouter();
-    console.log(router.query);
-
+    // console.log(router.query);
+    console.log(props);
     const createNewLesson = () => {
 
         const newLesson = {
@@ -26,7 +26,6 @@ const Index = () => {
             unitName,
             unitDescription
         }
-
 
 
     }
@@ -40,10 +39,16 @@ const Index = () => {
 
 
     useEffect(() => {
-        // console.log(router.query );
-        setCourse(router.query.course);
-        getLessons(router.query.course).then(r => setLessons(r));
-    }, []);
+        if (router.isReady) {
+            const query = router.query
+            setCourse(router.query)
+
+            if (query.courseName && query.courseId) {
+                getLessons(query.courseId).then(r => setLessons(r));
+            }
+        }
+    }, [router.isReady]);
+
 
     useEffect(() => {
         if (loading === false && lessons.length !== 0) {
@@ -62,12 +67,12 @@ const Index = () => {
                 {/* ============= Start of Courses ================= */}
                 <div className="courses-table">
                     <div style={{display: "flex", justifyContent: "space-between"}}>
-                        <h2>Courses</h2>
+                        <h2>Course {loading ? course.courseName : ""}</h2>
                         <div>
                             <Button
-                               onClick={() => {
-                                   setCreateLessonModal(true)
-                               }}
+                                onClick={() => {
+                                    setCreateLessonModal(true)
+                                }}
                             >
                                 Create
                             </Button>
@@ -75,43 +80,61 @@ const Index = () => {
                     </div>
 
 
-
                     <br/>
                     {/* ================================ Table of Lessons =================== */}
                     <table>
                         <thead>
-                            <tr>
-                                <th>Unit No.</th>
-                                <th>Unit Name</th>
-                                <th>Details</th>
-                            </tr>
+                        <tr>
+                            <th>Unit No.</th>
+                            <th>Unit Name</th>
+                            <th>Details</th>
+                        </tr>
                         </thead>
 
                         <tbody>
-                            {
-                                loading && lessons !== null ? (
-                                    lessons.data.lessons.map((lesson, index) => (
-                                        <tr>
-                                            <td>{index + 1}</td>
-                                            <td>{lesson.name}</td>
-                                            <td>
-                                                <Link href={`/dashboard-teacher/courses/${course}/${lesson._id}`}
-                                                      className="primary ">Open</Link>
-                                            </td>
-                                            <td>
-                                                <Button
-                                                    onClick={() => setEditLessonModal(true)}
-                                                >
-                                                    Edit
-                                                </Button>
-                                                <Button className={"m-1 btn-danger"}>Delete</Button>
-                                            </td>
+                        {
+                            loading && lessons !== null ? (
+                                lessons.data.lessons.map((lesson, index) => (
+                                    <tr>
+                                        <td>{index + 1}</td>
+                                        <td>{lesson.name}</td>
+                                        <td>
+                                            {/* href={{
+                                            pathname: `/dashboard-teacher/courses/course`,
+                                            query: {
+                                                courseId: course._id,
+                                                courseName: course.name
+                                            }
+                                        }}*/}
+                                            <Link
+                                                href={{
+                                                    pathname: `/dashboard-teacher/courses/course/lesson/`,
+                                                    query: {
+                                                        courseId: course._id,
+                                                        courseName: course.name,
+                                                        lessonName:lesson.name,
+                                                        lessonId:lesson._id
+                                                    }
+                                                }}
+                                                className="primary ">Open</Link>
+                                        </td>
+                                        <td>
+                                            <Button
+                                                onClick={() => setEditLessonModal(true)}
+                                            >
+                                                Edit
+                                            </Button>
+                                            <Button className={"m-1 btn-danger"} onClick={
+                                                () => {
+                                                }
+                                            }>Delete</Button>
+                                        </td>
 
 
-                                        </tr>)
-                                    )
-                                ) : ""
-                            }
+                                    </tr>)
+                                )
+                            ) : ""
+                        }
 
                         </tbody>
                     </table>
@@ -144,14 +167,13 @@ const Index = () => {
 export default Index;
 
 
-
-export function CreateLesson(props){
+export function CreateLesson(props) {
 
     const handleCreateLesson = (e) => {
         e.preventDefault();
     }
 
-    return(
+    return (
         <div className="">
             <Modal
                 show={props.createLessonModal}
@@ -205,13 +227,13 @@ export function CreateLesson(props){
 }
 
 
-export function EditLesson(props){
+export function EditLesson(props) {
 
     const handleEditLesson = (e) => {
         e.preventDefault();
     }
 
-    return(
+    return (
         <div className="">
             <Modal
                 show={props.editLessonModal}
@@ -229,7 +251,7 @@ export function EditLesson(props){
                 </Modal.Header>
 
                 <Modal.Body>
-                    <Form onSubmit={handleEditLesson} >
+                    <Form onSubmit={handleEditLesson}>
                         <Form.Group controlId={""}>
                             <Form.Label>Unit Name</Form.Label>
                             <Form.Control

@@ -127,6 +127,18 @@ export const getEvents = async (lessonID) => {
 };
 
 
+export const deleteLesson = async (lessonId) => {
+    const response = await axios.delete(
+        `http://localhost:7000/api/v1/lesson/delete/${lessonId}`,
+        {
+            headers: {
+                Authorization: `${Cookies.get("token")}`,
+            },
+        }
+    );
+    return response.data;
+};
+
 export const deleteAssignment = async (assignmentID) => {
     const response = await axios.delete(
         `http://localhost:7000/api/v1/assignment/delete/${assignmentID}`,
@@ -138,6 +150,7 @@ export const deleteAssignment = async (assignmentID) => {
     );
     return response.data;
 };
+
 
 export const deleteEvent = async (eventID) => {
     const response = await axios.delete(
