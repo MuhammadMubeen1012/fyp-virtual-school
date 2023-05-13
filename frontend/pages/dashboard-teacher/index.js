@@ -282,7 +282,9 @@ function Index(effect, deps) {
         {/*============= End of left Side*/}
 
 
-    </LayoutTeacher>);
+    </LayoutTeacher>
+
+    );
 };
 
 export default Index;
