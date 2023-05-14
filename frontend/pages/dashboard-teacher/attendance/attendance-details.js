@@ -4,13 +4,18 @@ import Link from "next/link";
 import {Button, Form, Modal} from "react-bootstrap";
 import {useRouter} from "next/router";
 import {getCourseAttendance} from "./attendanceController";
+import swal from "@sweetalert/with-react";
+
 
 const AttendanceDetail = () => {
     const router = useRouter();
     const [course, setCourse] = useState({});
-
+    const [startTime, setStartTime] = useState();
+    const [endTime, setEndTime] = useState();
     const [attendance, setAttendance] = useState([]);
     const [loadingAttendance, setLoadingAttendance] = useState(false);
+    const [modal, setModal] = useState(false);
+
 
     useEffect(() => {
             if (router.isReady) {
@@ -55,11 +60,24 @@ const AttendanceDetail = () => {
                         <div>
                             <Button
                                 style={{color: "#fff"}}
+                                onClick={() => {
+                                    setModal(true)
+                                }}
                             >
                                 Create New
                             </Button>
                         </div>
+
                     </div>
+
+                    <CreateAttendanceModal
+                        modal={modal}
+                        setModal={setModal}
+                        startTime={startTime}
+                        setStartTime={setStartTime}
+                        endTime={endTime}
+                        setEndTime={setEndTime}
+                    />
 
 
                     {/*========================= Attendance Table ========================== */}
@@ -111,16 +129,38 @@ const AttendanceDetail = () => {
 export default AttendanceDetail;
 
 
-export function CreateAttendanceModal(){
+export function CreateAttendanceModal({modal, setModal, startTime, endTime, setStartTime, setEndTime}){
 
-    const [modal, setModal] = useState(false);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        swal({
+            title: "Created Successfully",
+            icon: "success"
+        })
+        setModal(false);
+
+        console.log(startTime, endTime)
+
+    }
+
+    const handleChange = (e) => {
+        const name = e.target.name;
+        if (name === "timeStart"){
+            setStartTime(e.target.value);
+        }
+        else if (name === "timeEnd"){
+            setEndTime(e.target.value)
+        }
+    }
 
     return(
         <div>
 
             <Modal
-                show={examModal}
-                onHide={() => setExamModal(false) }
+                show={modal}
+                onHide={() => setModal(false) }
                 dialogClassName="custom-modal"
                 size={"lg"}
                 aria-labelledby="example-custom-modal-styling-title"
@@ -133,14 +173,24 @@ export function CreateAttendanceModal(){
                 </Modal.Header>
 
                 <Modal.Body>
-                    <Form>
+                    <Form onSubmit={handleSubmit}>
                         <Form.Group controlId={""}>
-                            <Form.Label>Name</Form.Label>
+                            <Form.Label>Time Start</Form.Label>
                             <Form.Control
                                 type={"text"}
                                 className={"m-2"}
-                                placeholder={"Name"}
-                                name={"name"}
+                                placeholder={"Time Start"}
+                                name={"timeStart"}
+                                onChange={handleChange}
+                            /><br/>
+
+                            <Form.Label>Time End</Form.Label>
+                            <Form.Control
+                                type={"text"}
+                                className={"m-2"}
+                                placeholder={"Time End"}
+                                name={"timeEnd"}
+                                onChange={handleChange}
                             />
                         </Form.Group>
                         <Modal.Footer>
