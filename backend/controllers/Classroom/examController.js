@@ -197,6 +197,20 @@ exports.deleteObjectiveExam = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
+exports.getExamByCourse = catchAsyncErrors(async (req, res, next) => {
+  const exam = await Exam.find({ course: req.params.courseID });
+
+  if (!exam) {
+    return next(
+      new ErrorHandler(`Exam does not found with id: ${req.params.courseID}`)
+    );
+  }
+
+  res.status(200).json({
+    success: true,
+    exam,
+  });
+});
 //@desc get the exam
 //@route GET /exam/:examID
 exports.getExam = catchAsyncErrors(async (req, res, next) => {
