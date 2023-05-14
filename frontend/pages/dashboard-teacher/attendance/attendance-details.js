@@ -168,7 +168,7 @@ export function CreateAttendanceModal({modal, setModal, startTime, endTime, setS
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="example-custom-modal-styling-title">
-                        Create Exam
+                        Create Attendance
                     </Modal.Title>
                 </Modal.Header>
 

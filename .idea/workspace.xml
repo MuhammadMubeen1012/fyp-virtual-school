@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9b86c9f-0b89-4563-ba11-369d16e7ec77" name="Changes" comment="updated exam shows">
+    <list default="true" id="d9b86c9f-0b89-4563-ba11-369d16e7ec77" name="Changes" comment="delete event, assignment, quiz">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/exam/exam-details.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/exam/exam-details.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/exam/examController.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/exam/examController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/exam/subjective-exam.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/exam/subjective-exam.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/announcements/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/announcements/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/attendance/attendance-details.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/attendance/attendance-details.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,8 +25,10 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="5" />
     <option name="recentBranches">
       <RecentBranches>
         <option name="branchesForRepo">
@@ -79,13 +80,13 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/KiNG/WebstormProjects/fyp-virtual-school/frontend/pages/dashboard-teacher/courses&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Momin/WebstormProjects/fyp-virtual-school/frontend/components&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\KiNG\\AppData\\Local\\JetBrains\\Toolbox\\apps\\WebStorm\\ch-0\\231.8770.64\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\Momin\\AppData\\Local\\JetBrains\\Toolbox\\apps\\WebStorm\\ch-0\\231.8770.64\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -107,6 +108,7 @@
       <recent name="C:\Users\KiNG\WebstormProjects\fyp-virtual-school\frontend\pages\dashboard-teacher\courses" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Momin\WebstormProjects\fyp-virtual-school\frontend\pages\dashboard-teacher\courses\course" />
       <recent name="C:\Users\Momin\WebstormProjects\fyp-virtual-school\frontend\pages\dashboard-student\courses\[course]" />
       <recent name="C:\Users\Momin\WebstormProjects\fyp-virtual-school\frontend\pages\dashboard-teacher\courses\[course]" />
     </key>
@@ -165,9 +167,8 @@
       <workItem from="1683656798940" duration="1281000" />
       <workItem from="1683812854160" duration="7083000" />
       <workItem from="1683826176838" duration="32000" />
-      <workItem from="1683826305473" duration="4954000" />
-      <workItem from="1683891659757" duration="2612000" />
-      <workItem from="1684039923886" duration="12366000" />
+      <workItem from="1683994578992" duration="3711000" />
+      <workItem from="1684039990841" duration="17792000" />
     </task>
     <task id="LOCAL-00001" summary="Done Teacher Dashboard">
       <created>1683225338573</created>
@@ -190,35 +191,7 @@
       <option name="project" value="LOCAL" />
       <updated>1683729712995</updated>
     </task>
-    <task id="LOCAL-00004" summary="updated">
-      <created>1683826344194</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1683826344194</updated>
-    </task>
-    <task id="LOCAL-00005" summary="updated">
-      <created>1683826456409</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1683826456409</updated>
-    </task>
-    <task id="LOCAL-00006" summary="updated">
-      <created>1684040215373</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1684040215373</updated>
-    </task>
-    <task id="LOCAL-00007" summary="updated exam shows">
-      <created>1684062179003</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1684062179003</updated>
-    </task>
-    <option name="localTasksCounter" value="8" />
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -239,8 +212,6 @@
     <MESSAGE value="Done Teacher Dashboard" />
     <MESSAGE value="Updated" />
     <MESSAGE value="delete event, assignment, quiz" />
-    <MESSAGE value="updated" />
-    <MESSAGE value="updated exam shows" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated exam shows" />
+    <option name="LAST_COMMIT_MESSAGE" value="delete event, assignment, quiz" />
   </component>
 </project>

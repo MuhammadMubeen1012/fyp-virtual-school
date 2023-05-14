@@ -1,12 +1,18 @@
 import React, {useState} from 'react';
 import LayoutTeacher from "../../../components/Dashboard/Layout/LayoutTeacher";
-import {Button, Form, Modal, Nav} from "react-bootstrap";
+import {Button, Card, Form, InputGroup, Modal, Nav} from "react-bootstrap";
 import swal from "@sweetalert/with-react";
 
-const Courses = () => {
+const Announcement = () => {
 
     const [modal, setModal] = useState(false);
     const [tab, setTab] = useState(0);
+    const [formData, setFormData] = useState({
+        subject: '',
+        description: '',
+        attachment: '',
+        announcementFor: '',
+    });
 
 
     return (
@@ -28,6 +34,8 @@ const Courses = () => {
                     <AnnouncementModal
                         modal={modal}
                         setModal={setModal}
+                        data={formData}
+                        setData={setFormData}
                     />
 
                 }
@@ -63,6 +71,8 @@ const Courses = () => {
                 }
 
 
+
+
             </main>
             {/*=============== End Of Main  ==================*/}
 
@@ -70,14 +80,17 @@ const Courses = () => {
     );
 };
 
-export default Courses;
+export default Announcement;
 
 
 
-export function AnnouncementModal({modal, setModal}){
+export function AnnouncementModal({modal, setModal, data, setData}){
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        console.log(data);
+
 
         swal({
             title: "Added Successfully",
@@ -85,11 +98,16 @@ export function AnnouncementModal({modal, setModal}){
         });
         setModal(false);
 
+
     }
 
     const handleChange = (e) => {
-        e.preventDefault();
+        const {name, value} = e.target;
 
+        setData(prevState => ({
+            ...prevState,
+            [name]: value,
+        }));
 
 
     }
@@ -107,22 +125,23 @@ export function AnnouncementModal({modal, setModal}){
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="example-custom-modal-styling-title">
-                        Add Quiz
+                        Add Announcement
                     </Modal.Title>
                 </Modal.Header>
+
                 <Modal.Body>
 
                     <Form onSubmit={handleSubmit}>
 
-                        <Form.Group controlId={"question"}>
+                        <Form.Group>
                             <Form.Label>Subject</Form.Label>
                             <Form.Control
                                 type={"text"}
                                 className={"m-2"}
                                 placeholder={"Subject"}
                                 name={"subject"}
-                                onChange={() => handleChange}
-                                required
+                                value={data.subject}
+                                onChange={handleChange}
                             />
 
                             <Form.Label>Description</Form.Label>
@@ -130,7 +149,9 @@ export function AnnouncementModal({modal, setModal}){
                                 type={"text"}
                                 className={"m-2"}
                                 placeholder={"Description"}
-                                required
+                                name={"description"}
+                                value={data.description}
+                                onChange={handleChange}
                             />
 
                             <Form.Label>Link</Form.Label>
@@ -138,11 +159,40 @@ export function AnnouncementModal({modal, setModal}){
                                 type={"text"}
                                 className={"m-2"}
                                 placeholder={"Link"}
-                                required
+                                name={"attachment"}
+                                value={data.attachment}
+                                onChange={handleChange}
+
                             />
+
+                            <InputGroup>
+                                <Form.Check
+                                    type={"radio"}
+                                    id={"student"}
+                                    value={"student"}
+                                    label={"Student"}
+                                    name={"announcementFor"}
+                                    // checked={data.announcementFor === "student"}
+
+                                />
+                            </InputGroup>
+
+
+                            <InputGroup>
+                                <Form.Check
+                                    type={"radio"}
+                                    id={"all"}
+                                    value={"all"}
+                                    label={"All"}
+                                    name={"announcementFor"}
+                                    // checked={data.announcementFor === "all"}
+                                />
+                            </InputGroup>
 
 
                         </Form.Group>
+
+
                         <br/>
 
                         <div
@@ -152,10 +202,6 @@ export function AnnouncementModal({modal, setModal}){
                         </div>
                     </Form>
 
-
-                    {/*<Modal.Footer>*/}
-                    {/*    <Button>Submit</Button>*/}
-                    {/*</Modal.Footer>*/}
                 </Modal.Body>
 
             </Modal>
@@ -170,20 +216,30 @@ export function AnnouncementModal({modal, setModal}){
 export function SentTab(){
 
     return(
-        <div>
-
-        </div>
+        <>
+            <Card>
+                <Card.Header>Header</Card.Header>
+                <Card.Body>
+                    <Card.Text>Description</Card.Text>
+                    <Button>Open</Button>
+                </Card.Body>
+            </Card>
+        </>
     )
 }
-
 
 export function ReceiveTab(){
 
     return(
-        <div>
-
-
-        </div>
+        <>
+            <Card>
+                <Card.Header>Header</Card.Header>
+                <Card.Body>
+                    <Card.Text>Description</Card.Text>
+                    <Button>Open</Button>
+                </Card.Body>
+            </Card>
+        </>
     )
 }
 
