@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import LayoutTeacher from "../../../../components/Dashboard/Layout/LayoutTeacher";
 import Link from "next/link";
 import {Router, useRouter} from "next/router";
-import {getLessons} from "../../../../components/Controllers/CourseController";
+import {addLesson, deleteLesson, getLessons, updateLesson} from "../../../../components/Controllers/CourseController";
 import {Button, Form, Modal} from "react-bootstrap";
 import {AssignmentModal, ContentModal, EventModal, QuizModal} from "./[slug]";
 
@@ -13,36 +13,14 @@ const Index = (props) => {
     const [loading, setLoading] = useState(false);
     const [createLessonModal, setCreateLessonModal] = useState(false);
     const [editLessonModal, setEditLessonModal] = useState(false);
-    const [unitName, setUnitName] = useState();
-    const [unitDescription, setUnitDescription] = useState();
-
-
-    // console.log(router.query);
-    console.log(props);
-    const createNewLesson = () => {
-
-        const newLesson = {
-            serial: lessons.length + 1,
-            unitName,
-            unitDescription
-        }
-
-
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        // createNewLesson();
-
-    }
+    const [lesson, setLesson] = useState({});
 
 
     useEffect(() => {
         if (router.isReady) {
             const query = router.query
             setCourse(router.query)
-
+            console.log(router.query);
             if (query.courseName && query.courseId) {
                 getLessons(query.courseId).then(r => setLessons(r));
             }
@@ -112,20 +90,28 @@ const Index = (props) => {
                                                     query: {
                                                         courseId: course._id,
                                                         courseName: course.name,
-                                                        lessonName:lesson.name,
-                                                        lessonId:lesson._id
+                                                        lessonName: lesson.name,
+                                                        lessonId: lesson._id
                                                     }
                                                 }}
                                                 className="primary ">Open</Link>
                                         </td>
                                         <td>
                                             <Button
-                                                onClick={() => setEditLessonModal(true)}
-                                            >
+                                                onClick={() => {
+                                                    setLesson(lesson)
+                                                    setEditLessonModal(true)
+                                                }
+                                                }>
                                                 Edit
                                             </Button>
                                             <Button className={"m-1 btn-danger"} onClick={
-                                                () => {
+                                                (e) => {
+                                                    e.preventDefault();
+                                                    deleteLesson(lesson._id).then(r => {
+                                                        console.log(r);
+                                                    })
+                                                    window.location.reload();
                                                 }
                                             }>Delete</Button>
                                         </td>
@@ -144,6 +130,7 @@ const Index = (props) => {
                     <CreateLesson
                         createLessonModal={createLessonModal}
                         setCreateLessonModal={setCreateLessonModal}
+                        courseId={course.courseId}
                     />
 
 
@@ -151,6 +138,7 @@ const Index = (props) => {
                     <EditLesson
                         editLessonModal={editLessonModal}
                         setEditLessonModal={setEditLessonModal}
+                        lesson={lesson}
                     />
 
                 </div>
@@ -169,8 +157,20 @@ export default Index;
 
 export function CreateLesson(props) {
 
+    const [unitName, setUnitName] = useState("");
+    const [unitDescription, setUnitDescription] = useState("");
     const handleCreateLesson = (e) => {
         e.preventDefault();
+
+        const lesson = {
+            name: unitName,
+            description: unitDescription,
+        }
+        addLesson(props.courseId, lesson).then(r => {
+            console.log(r);
+            window.location.reload();
+        })
+
     }
 
     return (
@@ -228,9 +228,29 @@ export function CreateLesson(props) {
 
 
 export function EditLesson(props) {
+    const {lesson} = props;
+    const [id, setId] = useState(null);
+    const [lessonName, setLessonName] = useState(null);
+    const [lessonDescription, setLessonDescription] = useState(null);
+
+    useEffect(() => {
+        const {_id, name, description} = lesson;
+        if (lesson !== null) {
+            setId(_id);
+            setLessonName(lesson.name);
+            setLessonDescription(lesson.description);
+        }
+    }, [lesson]);
 
     const handleEditLesson = (e) => {
         e.preventDefault();
+        console.log(name, description);
+        updateLesson(id, {
+            name: lessonName,
+            description: lessonDescription
+        }).then(r => console.log(r));
+        window.location.reload();
+
     }
 
     return (
@@ -255,27 +275,31 @@ export function EditLesson(props) {
                         <Form.Group controlId={""}>
                             <Form.Label>Unit Name</Form.Label>
                             <Form.Control
+                                id={"name"}
                                 type={"text"}
                                 className={"m-2"}
-                                name={"unitName"}
+                                name={"name"}
+                                value={lessonName}
+                                onChange={(e) => setLessonName(e.target.value)}
                                 placeholder={"Unit Name"}
-                                onChange={(e) => setUnitName(e.target.value)}
                             />
                         </Form.Group>
                         <Form.Group controlId={""}>
                             <Form.Label>Unit Description</Form.Label>
                             <Form.Control
+                                id={"description"}
                                 type={"text"}
                                 className={"m-2"}
-                                name={"unitDescription"}
-                                onChange={(e) => setUnitDescription(e.target.value)}
+                                name={"description"}
+                                value={lessonDescription}
+                                onChange={(e) => setLessonDescription(e.target.value)}
                                 placeholder={"Unit Description"}
                             />
                         </Form.Group>
 
                         <br/>
                         <Modal.Footer>
-                            <Button type={"submit"}>Edit</Button>
+                            <Button type={"submit"}>Update</Button>
                         </Modal.Footer>
                     </Form>
                 </Modal.Body>

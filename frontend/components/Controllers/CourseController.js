@@ -34,6 +34,16 @@ const getLesson = async (lesson_id) => {
     )
     return response.data.lesson;
 }
+const updateLesson = async (lesson_id, obj) => {
+    // console.log(Cookies.get('token'))
+    return await axios.put(`http://localhost:7000/api/v1/lesson/${lesson_id}`,
+            obj,
+            {
+                headers: {
+                    Authorization: `${Cookies.get('token')}`
+                }
+            });
+}
 
 const addNewContent = async (lessonID, data) => {
     const response = await axios.put(
@@ -76,6 +86,19 @@ const addNewEvent = async (lessonID, data) => {
 const addNewQuiz = async (lessonID, data) => {
     const response = await axios.post(
         `http://localhost:7000/api/v1/quiz/${lessonID}`,
+        data,
+        {
+            headers: {
+                Authorization: `${Cookies.get("token")}`,
+            },
+        }
+    );
+    return response.data;
+}
+
+export const addLesson = async (courseId, data) => {
+    const response = await axios.post(
+        `http://localhost:7000/api/v1/lesson/${courseId}`,
         data,
         {
             headers: {
@@ -129,7 +152,7 @@ export const getEvents = async (lessonID) => {
 
 export const deleteLesson = async (lessonId) => {
     const response = await axios.delete(
-        `http://localhost:7000/api/v1/lesson/delete/${lessonId}`,
+        `http://localhost:7000/api/v1/lesson/${lessonId}`,
         {
             headers: {
                 Authorization: `${Cookies.get("token")}`,
@@ -177,7 +200,6 @@ export const deleteQuiz = async (quizID) => {
 };
 
 
-
-export {getLessons, getLesson, addNewContent, addNewAssignment, addNewEvent, addNewQuiz};
+export {getLessons, getLesson, addNewContent, addNewAssignment, addNewEvent, addNewQuiz, updateLesson};
 
 
