@@ -62,6 +62,18 @@ export const getExam = async (examID) => {
   return response.data;
 };
 
+export const getExams = async (courseId) => {
+    const response = await axios.get(
+        `http://localhost:7000/api/v1/exam/course/${courseId}`,
+        {
+            headers: {
+                Authorization: `${Cookies.get("token")}`,
+            },
+        }
+    );
+    return response.data;
+};
+
 // get subjective exam
 export const getSubjectiveExam = async (examID) => {
   const response = await axios.get(

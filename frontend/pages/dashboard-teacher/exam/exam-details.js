@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import LayoutTeacher from "../../../components/Dashboard/Layout/LayoutTeacher";
 
 import {Button, Card, Dropdown, Form, Modal} from "react-bootstrap";
 import {AssignmentModal, ContentModal, EventModal, QuizModal} from "../courses/course/[slug]";
 import {useRouter} from "next/router";
+import {getExams} from "./examController";
 
 const Exam = () => {
 
@@ -13,9 +14,26 @@ const Exam = () => {
         item: 0,
         active: false,
     });
+    const [exams, setExams] = useState([]);
+    const [loadingExams, setLoadingExams] = useState(false);
 
     const [examModal, setExamModal] = useState(false);
+    useEffect(() => {
+        if (router.isReady) {
+            console.log(router.query)
+            getExams(router.query.courseId).then((res) => {
+                setExams(res.exam);
+                console.log(res);
+            });
+        }
+    }, [router.isReady]);
 
+    useEffect(() => {
+        if (exams.length > 0) {
+            setLoadingExams(true);
+            console.log('exams', exams);
+        }
+    }, [exams]);
     return (
         <LayoutTeacher>
             {/*=============== Start of main ================= */}
@@ -29,11 +47,11 @@ const Exam = () => {
                     }}
                 >
 
-                <Button
-                    onClick={(e) => setExamModal(true) }
-                >
-                    Create Exam
-                </Button>
+                    <Button
+                        onClick={(e) => setExamModal(true)}
+                    >
+                        Create Exam
+                    </Button>
 
                     {
                         examModal &&
@@ -46,51 +64,51 @@ const Exam = () => {
                 </div>
 
                 <br/><br/>
-                <Card>
-                    <Card.Header>Title</Card.Header>
-                    <Card.Body>
-                        <Card.Text>Description</Card.Text>
 
-                        <div
-                            style={{
-                                display: "flex",
-                                gap: "0.5rem",
-                            }}
-                        >
-                            <Button variant="primary">View Submissions</Button>
+                {
+                    loadingExams && exams ? exams.map((exam) => {
+                        return <Card>
+                            <Card.Header>{exam.name}</Card.Header>
+                            <Card.Body>
+                                <Card.Text>{exam.description}</Card.Text>
 
-                            {/* ============== Dropdown Menu to create Assignments, Quiz, etc ========================== */}
-                            <Dropdown>
-                                <Dropdown.Toggle variant="primary" id="dropdown-basic">
-                                    Create
-                                </Dropdown.Toggle>
+                                <div
+                                    style={{
+                                        display: "flex",
+                                        gap: "0.5rem",
+                                    }}
+                                >
+                                    <Button variant="primary">View Submissions</Button>
 
-                                <Dropdown.Menu>
-                                    <Dropdown.Item onClick={() => {
-                                        router.push("/dashboard-teacher/exam/subjective-exam")
-                                    }}>
-                                        Subjective
-                                    </Dropdown.Item>
-                                    <Dropdown.Item onClick={() => {
-                                        router.push("/dashboard-teacher/exam/objective-exam")
-                                    }}>
-                                        Objective
-                                    </Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
-                            {/* ============== Dropdown Menu Ends Here =================== */}
+                                    {/* ============== Dropdown Menu to create Assignments, Quiz, etc ========================== */}
+                                    <Dropdown>
+                                        <Dropdown.Toggle variant="primary" id="dropdown-basic">
+                                            Create
+                                        </Dropdown.Toggle>
 
-                        </div>
+                                        <Dropdown.Menu>
+                                            <Dropdown.Item onClick={() => {
+                                                router.push("/dashboard-teacher/exam/subjective-exam")
+                                            }}>
+                                                Subjective
+                                            </Dropdown.Item>
+                                            <Dropdown.Item onClick={() => {
+                                                router.push("/dashboard-teacher/exam/objective-exam")
+                                            }}>
+                                                Objective
+                                            </Dropdown.Item>
+                                        </Dropdown.Menu>
+                                    </Dropdown>
+                                    {/* ============== Dropdown Menu Ends Here =================== */}
 
-
-                    </Card.Body>
-                </Card>
-
+                                </div>
 
 
+                            </Card.Body>
+                        </Card>
 
-
-
+                    }) : ""
+                }
 
 
                 {/* ==================== Events Modals according to the Create event from Dropdown ========================= */}
@@ -120,14 +138,14 @@ const Exam = () => {
                             {modal.item === 1 ? (
                                 <div>
                                     {/* Subjective Exam */}
-                                    <SubjectiveExam />
+                                    <SubjectiveExam/>
                                 </div>
                             ) : modal.item === 2 ? (
                                 <div>
                                     {/* Objective Exam */}
-                                    <ObjectiveExam />
+                                    <ObjectiveExam/>
                                 </div>
-                            ): (
+                            ) : (
                                 ""
                             )}
                         </Modal.Body>
@@ -145,16 +163,14 @@ const Exam = () => {
 export default Exam;
 
 
+export function CreateExamModal({examModal, setExamModal}) {
 
-
-export function CreateExamModal({examModal, setExamModal}){
-
-    return(
-        <>
+    return (
+        <LayoutTeacher>
             <div className="create-exam">
                 <Modal
                     show={examModal}
-                    onHide={() => setExamModal(false) }
+                    onHide={() => setExamModal(false)}
                     dialogClassName="custom-modal"
                     size={"lg"}
                     aria-labelledby="example-custom-modal-styling-title"
@@ -201,11 +217,13 @@ export function CreateExamModal({examModal, setExamModal}){
                                     </div>
 
                                     <div>
-                                        <Form.Control placeholder={"Minutes"} type="text" name={'minutes'}/>
+                                        <Form.Control placeholder={"Minutes"} type="text"
+                                                      name={'minutes'}/>
                                     </div>
 
                                     <div>
-                                        <Form.Control placeholder={"Seconds"} type="text" name={'seconds'}/>
+                                        <Form.Control placeholder={"Seconds"} type="text"
+                                                      name={'seconds'}/>
                                     </div>
                                 </div>
                             </Form.Group>{" "}
@@ -218,7 +236,8 @@ export function CreateExamModal({examModal, setExamModal}){
                                     }}
                                 >
                                     <div>
-                                        <Form.Control placeholder={"Hours"} type="text" name={'dHours'}/>
+                                        <Form.Control placeholder={"Hours"} type="text"
+                                                      name={'dHours'}/>
                                     </div>
 
                                     <div>
@@ -239,13 +258,61 @@ export function CreateExamModal({examModal, setExamModal}){
                     </Modal.Body>
                 </Modal>
             </div>
-        </>
-    )
-}
 
-export function SubjectiveExam(){
 
-    return(
+            {/* ==================== Events Modals according to the Create event from Dropdown ========================= */}
+
+
+            <div className={""}>
+                <Modal
+                    show={modal.active}
+                    onHide={() => setModal({item: 0, active: false})}
+                    dialogClassName="custom-modal"
+                    size={"lg"}
+                    aria-labelledby="example-custom-modal-styling-title"
+                    centered
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title id="example-custom-modal-styling-title">
+                            {modal.item === 1 ? (
+                                <div>Create Subjective Exam</div>
+                            ) : modal.item === 2 ? (
+                                <div>Create Objective Exam</div>
+                            ) : ""
+                            }
+                        </Modal.Title>
+                    </Modal.Header>
+
+                    <Modal.Body>
+                        {modal.item === 1 ? (
+                            <div>
+                                {/* Subjective Exam */}
+                                <SubjectiveExam/>
+                            </div>
+                        ) : modal.item === 2 ? (
+                            <div>
+                                {/* Objective Exam */}
+                                <ObjectiveExam/>
+                            </div>
+                        ) : (
+                            ""
+                        )}
+                    </Modal.Body>
+                </Modal>
+            </div>
+            {/* ==================== Events Modal Code Ends Here ==================================  */}
+
+
+            {/*=============== End Of Main  ==================*/}
+        </LayoutTeacher>
+    );
+};
+
+
+
+export function SubjectiveExam() {
+
+    return (
         <div>
             <Form
                 handleSubmit={(e) => {
@@ -294,9 +361,9 @@ export function SubjectiveExam(){
 }
 
 
-export function ObjectiveExam(){
+export function ObjectiveExam() {
 
-    return(
+    return (
         <div>
             <Form
                 handleSubmit={(e) => {
