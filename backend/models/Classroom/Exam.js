@@ -63,7 +63,6 @@ const examSchema = new mongoose.Schema({
 
   examStatus: {
     type: String,
-    required: true,
     enum: ["pending", "live"],
     default: "pending",
   },

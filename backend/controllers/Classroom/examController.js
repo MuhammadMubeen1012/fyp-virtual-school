@@ -32,8 +32,6 @@ exports.createExam = catchAsyncErrors(async (req, res, next) => {
     duration: data.duration,
     examDate: data.examDate,
     examTime: data.examTime,
-    examStatus: data.examStatus,
-    examSection: data.examSection,
     createdBy: req.user._id,
   });
 
