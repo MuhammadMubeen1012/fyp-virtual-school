@@ -1,79 +1,128 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
 import LayoutTeacher from "../../../components/Dashboard/Layout/LayoutTeacher";
 import Link from "next/link";
-import {Button} from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
+import { useRouter } from "next/router";
+import { getAttendance } from "./attendanceController";
 
 const Attendance = () => {
+  const router = useRouter();
+  const [attendance, setAttendance] = useState({});
+  const [loadingAttendance, setLoadingAttendance] = useState(false);
+  const [attendanceList, setAttendanceList] = useState([]);
+  const [markedAttendance, setMarkedAttendance] = useState([]);
 
-    return (
-        <LayoutTeacher>
+  useEffect(() => {
+    if (router.isReady) {
+      //   console.log(router.query);
+      getAttendance(router.query.attendanceID).then((res) => {
+        console.log(res.attendance.attendanceList);
+        setAttendance(res.attendance);
+        setAttendanceList(res.attendance.attendanceList);
+      });
+    }
+  }, [router.isReady]);
 
-            {/*=============== Start of main ================= */}
-            <main>
-                <h1>Attendance Teacher</h1>
+  useEffect(() => {
+    if (attendanceList.length > 0) {
+      setLoadingAttendance(true);
+      console.log(attendanceList);
+    }
+  }, [attendanceList]);
 
-                {/* ============= Start of Courses ================= */}
-                <div className="courses-table">
+  const submitHandle = (e) => {
+    e.preventDefault();
 
-                    <div style={{display: "flex", justifyContent: "space-between"}}>
-                        <h2>Courses</h2>
-                        <div>
-                            <Button>Save</Button>
-                        </div>
-                    </div>
+    console.log("Sending");
+  };
 
+  return (
+    <LayoutTeacher>
+      {/*=============== Start of main ================= */}
+      <main>
+        <h1>Attendance Teacher</h1>
+        <Form>
+          {/* ============= Start of Courses ================= */}
+          <div className="courses-table">
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <h2>Courses</h2>
+              <div>
+                <Button onClick={submitHandle}>Save</Button>
+              </div>
+            </div>
 
-                    {/*========================= Attendance Table ========================== */}
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>Serial No.</th>
-                            <th>Student Name </th>
-                            <th>Status </th>
-                            <th>Class </th>
-                            <th>Absences </th>
+            {/*========================= Attendance Table ========================== */}
+            <table>
+              <thead>
+                <tr>
+                  <th>Serial No.</th>
+                  <th>Student Name </th>
+                  <th>Status </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {loadingAttendance && attendanceList.length > 0
+                  ? attendanceList.map((item, idx) => {
+                      return (
+                        <tr key={idx}>
+                          <td>{idx + 1}</td>
+                          <td>{item.studentName}</td>
+                          {item.status === "Present" ? (
+                            <td>
+                              <input
+                                type="checkbox"
+                                checked
+                                value=""
+                                id="name"
+                                onChange={(e) => {
+                                  const newList = [...attendanceList];
+                                  newList[idx].status = e.target.checked
+                                    ? "Present"
+                                    : "Absent";
+                                  setAttendanceList(newList);
+                                  setMarkedAttendance((old) => [
+                                    ...old,
+                                    e.target.checked ? 1 : 0,
+                                  ]);
+                                  console.log(markedAttendance);
+                                }}
+                              />
+                            </td>
+                          ) : (
+                            <td>
+                              <input
+                                type="checkbox"
+                                name=""
+                                id=""
+                                onChange={(e) => {
+                                  const newList = [...attendanceList];
+                                  newList[idx].status = e.target.checked
+                                    ? "Present"
+                                    : "Absent";
+                                  setAttendanceList(newList);
+                                  setMarkedAttendance((old) => [
+                                    ...old,
+                                    e.target.checked ? 1 : 0,
+                                  ]);
+                                  console.log(markedAttendance);
+                                }}
+                              />
+                            </td>
+                          )}
                         </tr>
-                        </thead>
-
-                        <tbody>
-                        <tr>
-                            <th>01</th>
-                            <td>Ali Ahmed</td>
-                            <td><input type="checkbox" checked name="" id=""/></td>
-                            <td>IV-C</td>
-                            <td>0</td>
-
-                        </tr>
-
-                        <tr>
-                            <th>02</th>
-                            <td>Abdul Rehman</td>
-                            <td><input type="checkbox" checked name="" id=""/></td>
-                            <td>IV-C</td>
-                            <td>0</td>
-                        </tr>
-                        <tr>
-                            <th>03</th>
-                            <td>Aftab Ahmed</td>
-                            <td><input type="checkbox" checked name="" id=""/></td>
-                            <td>IV-C</td>
-                            <td>0</td>
-                        </tr>
-
-
-                        </tbody>
-                    </table>
-
-                </div>
-                {/* ============= End of Courses  ================== */}
-
-            </main>
-            {/*=============== End Of Main  ==================*/}
-
-
-
-        </LayoutTeacher>
-    );
+                      );
+                    })
+                  : ""}
+              </tbody>
+            </table>
+          </div>
+        </Form>
+        {/* ============= End of Courses  ================== */}
+      </main>
+      {/*=============== End Of Main  ==================*/}
+    </LayoutTeacher>
+  );
 };
 
 export default Attendance;
