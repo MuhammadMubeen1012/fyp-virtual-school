@@ -166,7 +166,7 @@ export default Exam;
 export function CreateExamModal({examModal, setExamModal}) {
 
     return (
-        <LayoutTeacher>
+        <>
             <div className="create-exam">
                 <Modal
                     show={examModal}
@@ -286,52 +286,7 @@ export function CreateExamModal({examModal, setExamModal}) {
                 </Modal>
             </div>
 
-
-            {/* ==================== Events Modals according to the Create event from Dropdown ========================= */}
-
-
-            <div className={""}>
-                <Modal
-                    show={modal.active}
-                    onHide={() => setModal({item: 0, active: false})}
-                    dialogClassName="custom-modal"
-                    size={"lg"}
-                    aria-labelledby="example-custom-modal-styling-title"
-                    centered
-                >
-                    <Modal.Header closeButton>
-                        <Modal.Title id="example-custom-modal-styling-title">
-                            {modal.item === 1 ? (
-                                <div>Create Subjective Exam</div>
-                            ) : modal.item === 2 ? (
-                                <div>Create Objective Exam</div>
-                            ) : ""
-                            }
-                        </Modal.Title>
-                    </Modal.Header>
-
-                    <Modal.Body>
-                        {modal.item === 1 ? (
-                            <div>
-                                {/* Subjective Exam */}
-                                <SubjectiveExam/>
-                            </div>
-                        ) : modal.item === 2 ? (
-                            <div>
-                                {/* Objective Exam */}
-                                <ObjectiveExam/>
-                            </div>
-                        ) : (
-                            ""
-                        )}
-                    </Modal.Body>
-                </Modal>
-            </div>
-            {/* ==================== Events Modal Code Ends Here ==================================  */}
-
-
-            {/*=============== End Of Main  ==================*/}
-        </LayoutTeacher>
+        </>
     );
 };
 
