@@ -164,17 +164,7 @@ export default Exam;
 export function CreateExamModal({examModal, setExamModal, courseId}) {
     const sumbitHandle = (e) => {
         e.preventDefault();
-        console.log(e.target.name.value);
-        console.log(e.target.description.value);
-        console.log(e.target.date.value);
-        console.log(e.target.totalMarks.value);
-        console.log(e.target.passingMarks.value);
-        console.log(e.target.hours.value)
-        console.log(e.target.minutes.value)
-        console.log(e.target.seconds.value)
-        console.log(e.target.dHours.value)
-        console.log(e.target.dMinutes.value)
-        console.log(e.target.dSeconds.value)
+
         createExam(courseId, {
             name: e.target.name.value,
             description: e.target.description.value,
