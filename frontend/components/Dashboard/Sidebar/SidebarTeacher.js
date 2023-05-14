@@ -65,7 +65,13 @@ const SidebarTeacher = () => {
 
     const router = useRouter();
     const activePath = useMemo(
-        () => sidebar.find(menu => menu.link === router.pathname),
+        () => sidebar.find(menu => {
+            // console.log(router.pathname.split('/'))
+            if(router.pathname.split(('/')).length ===2)
+            return true;
+            else
+                return  menu.link === `/${router.pathname.split('/')[1]}/${router.pathname.split('/')[2]}`
+        }),
         [router.pathname]
     );
 
@@ -111,7 +117,7 @@ const SidebarTeacher = () => {
                                     {/*${sidebar.link === item.link.includes(`${sidebar.link}}`) ? "active" : "" }*/}
                                     {/*${item.id === activeMenu ? "active" : ""}*/}
                                     <a
-                                        className={`link  `}
+                                        className={`link  ${ activePath.link === item.link ? "active" : ""} `}
                                     >
 
                                         <span className="material-icons-sharp">{item.icon}</span>

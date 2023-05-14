@@ -797,17 +797,22 @@ export function EventData({content}) {
     const onDelete = () => {
         deleteEvent(id).then(r => console.log(r))
     }
-    return (<><Card>
-        <Card.Header>{content.name}</Card.Header>
-        <Card.Body>
-            <Card.Title>{content.description}</Card.Title>
-            <Card.Text>{content.eventDate}</Card.Text>
-            <Button variant="primary">Go to Event</Button>
-            <Button className={"m-1"} variant="primary" onClick={onDelete}>
-                Delete
-            </Button>
-        </Card.Body>
-    </Card>    </>)
+    return (
+        <>
+            <Card>
+                <Card.Header>{content.name}</Card.Header>
+                <Card.Body>
+                    <Card.Title>{content.description}</Card.Title>
+                    <Card.Text>{content.eventDate}</Card.Text>
+                    <Button variant="primary">Go to Event</Button>
+                    <Button className={"m-1"} variant="primary" onClick={onDelete}>
+                        Delete
+                    </Button>
+                </Card.Body>
+            </Card>
+
+        </>
+    )
 }
 
 
@@ -828,7 +833,9 @@ export function AssignmentData({content}) {
 
                 <div>
                     <Button variant="primary">Go to Event</Button>
-                    <Button className={"m-1"} variant="primary">
+                    <Button
+                        href={"/dashboard-teacher/courses/course/assignment-details"}
+                        className={"m-1"} variant="primary">
                         View Submissions
                     </Button>
                     <Button className={"m-1"} variant="primary" onClick={onDelete}>
@@ -858,13 +865,15 @@ export function QuizData({content, onChange}) {
                 <div>
                     <Button
                         variant="primary"
-                        href={"/dashboard-teacher/courses/english/add-quiz-questions"}
+                        href={"/dashboard-teacher/courses/course/add-quiz-questions"}
                     >
                         Add Questions
                     </Button>
 
-                    <Button href={"/dashboard-teacher/courses/english/quiz-details"} className={"m-1"}
-                            variant={"primary"}>
+                    <Button
+                        href={"/dashboard-teacher/courses/course/quiz-details"}
+                        className={"m-1"}
+                        variant={"primary"}>
                         View Submissions
                     </Button>
                     <Button className={"m-1"} variant="primary" onClick={onDelete}>
