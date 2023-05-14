@@ -3,11 +3,9 @@ import Cookies from "js-cookie";
 
 // create a new exam
 export const createExam = async (courseID, data) => {
-  const payLoad = data;
-
   const response = await axios.post(
     `http://localhost:7000/api/v1/exam/${courseID}`,
-    payLoad,
+      data,
     {
       headers: {
         Authorization: `${Cookies.get("token")}`,
@@ -18,12 +16,11 @@ export const createExam = async (courseID, data) => {
 };
 
 // add subjective exam
-export const createSubjectiveQuestions = async (examID, data) => {
-  const payLoad = data;
+export const createSubjectiveExam = async (examID, data) => {
 
   const response = await axios.post(
     `http://localhost:7000/api/v1/exam/subjective/${examID}`,
-    payLoad,
+    data,
     {
       headers: {
         Authorization: `${Cookies.get("token")}`,

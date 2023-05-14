@@ -4,12 +4,12 @@ import LayoutTeacher from "../../../components/Dashboard/Layout/LayoutTeacher";
 import {Button, Card, Dropdown, Form, Modal} from "react-bootstrap";
 import {AssignmentModal, ContentModal, EventModal, QuizModal} from "../courses/course/[slug]";
 import {useRouter} from "next/router";
-import {getExams} from "./examController";
+import {createExam, getExams} from "./examController";
 
 const Exam = () => {
 
     const router = useRouter();
-
+    const [course, setCourse] = useState({});
     const [modal, setModal] = useState({
         item: 0,
         active: false,
@@ -21,6 +21,7 @@ const Exam = () => {
     useEffect(() => {
         if (router.isReady) {
             console.log(router.query)
+            setCourse(router.query);
             getExams(router.query.courseId).then((res) => {
                 setExams(res.exam);
                 console.log(res);
@@ -40,22 +41,19 @@ const Exam = () => {
             <main>
                 <h1>Exam Details</h1>
 
-                <div
-                    style={{
-                        display: "flex",
-                        justifyContent: "flex-end"
-                    }}
-                >
+                <div style={{
+                    display: "flex",
+                    justifyContent: "flex-end"
+                }}>
 
                     <Button
                         onClick={(e) => setExamModal(true)}
-                    >
-                        Create Exam
-                    </Button>
+                    >Create Exam</Button>
 
                     {
                         examModal &&
                         <CreateExamModal
+                            courseId={course.courseId}
                             examModal={examModal}
                             setExamModal={setExamModal}
                         />
@@ -88,12 +86,12 @@ const Exam = () => {
 
                                         <Dropdown.Menu>
                                             <Dropdown.Item onClick={() => {
-                                                router.push("/dashboard-teacher/exam/subjective-exam")
+                                                window.location.href = `/dashboard-teacher/exam/subjective-exam?examId=${exam._id}`
                                             }}>
                                                 Subjective
                                             </Dropdown.Item>
                                             <Dropdown.Item onClick={() => {
-                                                router.push("/dashboard-teacher/exam/objective-exam")
+                                               window.location.href = `/dashboard-teacher/exam/objective-exam?examId=${exam._id}`
                                             }}>
                                                 Objective
                                             </Dropdown.Item>
@@ -163,7 +161,34 @@ const Exam = () => {
 export default Exam;
 
 
-export function CreateExamModal({examModal, setExamModal}) {
+export function CreateExamModal({examModal, setExamModal, courseId}) {
+    const sumbitHandle = (e) => {
+        e.preventDefault();
+        console.log(e.target.name.value);
+        console.log(e.target.description.value);
+        console.log(e.target.date.value);
+        console.log(e.target.totalMarks.value);
+        console.log(e.target.passingMarks.value);
+        console.log(e.target.hours.value)
+        console.log(e.target.minutes.value)
+        console.log(e.target.seconds.value)
+        console.log(e.target.dHours.value)
+        console.log(e.target.dMinutes.value)
+        console.log(e.target.dSeconds.value)
+        createExam(courseId, {
+            name: e.target.name.value,
+            description: e.target.description.value,
+            passMarks: e.target.passingMarks.value,
+            totalMarks: e.target.totalMarks.value,
+            duration: e.target.dMinutes.value,
+            examDate: e.target.date.value,
+            examTime: e.target.hours.value + ":" + e.target.minutes.value + ":" + e.target.seconds.value,
+        }).then((res) => {
+            console.log(res);
+            setExamModal(false);
+            window.location.reload();
+        })
+    }
 
     return (
         <>
@@ -183,7 +208,7 @@ export function CreateExamModal({examModal, setExamModal}) {
                     </Modal.Header>
 
                     <Modal.Body>
-                        <Form>
+                        <Form onSubmit={sumbitHandle}>
                             <Form.Group controlId={""}>
                                 <Form.Label>Name</Form.Label>
                                 <Form.Control
@@ -204,7 +229,7 @@ export function CreateExamModal({examModal, setExamModal}) {
                                 />
                             </Form.Group>
                             <Form.Group controlId={""}>
-                                <Form.Label>Description</Form.Label>
+                                <Form.Label>Date</Form.Label>
                                 <Form.Control
                                     type={"date"}
                                     className={"m-2"}
@@ -213,7 +238,7 @@ export function CreateExamModal({examModal, setExamModal}) {
                                 />
                             </Form.Group>
                             <Form.Group controlId={""}>
-                                <Form.Label>Description</Form.Label>
+                                <Form.Label>Total Marks</Form.Label>
                                 <Form.Control
                                     type={"text"}
                                     className={"m-2"}
@@ -222,7 +247,7 @@ export function CreateExamModal({examModal, setExamModal}) {
                                 />
                             </Form.Group>
                             <Form.Group controlId={""}>
-                                <Form.Label>Description</Form.Label>
+                                <Form.Label>Passing Marks</Form.Label>
                                 <Form.Control
                                     type={"text"}
                                     className={"m-2"}
@@ -253,7 +278,7 @@ export function CreateExamModal({examModal, setExamModal}) {
                                                       name={'seconds'}/>
                                     </div>
                                 </div>
-                            </Form.Group>{" "}
+                            </Form.Group>
                             <br/>
                             <Form.Group controlId={""}>
                                 <label>Duration</label>
@@ -279,7 +304,7 @@ export function CreateExamModal({examModal, setExamModal}) {
                             <br/>
                             <br/>
                             <Modal.Footer>
-                                <Button type={"submit"}>Add</Button>
+                                <Button type={"submit"}>Create</Button>
                             </Modal.Footer>
                         </Form>
                     </Modal.Body>
@@ -289,7 +314,6 @@ export function CreateExamModal({examModal, setExamModal}) {
         </>
     );
 };
-
 
 
 export function SubjectiveExam() {
