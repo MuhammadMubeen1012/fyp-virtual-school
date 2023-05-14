@@ -203,6 +203,33 @@ export function CreateExamModal({examModal, setExamModal}) {
                                     name={"description"}
                                 />
                             </Form.Group>
+                            <Form.Group controlId={""}>
+                                <Form.Label>Description</Form.Label>
+                                <Form.Control
+                                    type={"date"}
+                                    className={"m-2"}
+                                    placeholder={"Date"}
+                                    name={"date"}
+                                />
+                            </Form.Group>
+                            <Form.Group controlId={""}>
+                                <Form.Label>Description</Form.Label>
+                                <Form.Control
+                                    type={"text"}
+                                    className={"m-2"}
+                                    placeholder={"Total Marks"}
+                                    name={"totalMarks"}
+                                />
+                            </Form.Group>
+                            <Form.Group controlId={""}>
+                                <Form.Label>Description</Form.Label>
+                                <Form.Control
+                                    type={"text"}
+                                    className={"m-2"}
+                                    placeholder={"Passing Marks"}
+                                    name={"passingMarks"}
+                                />
+                            </Form.Group>
                             <br/>
                             <Form.Group controlId={""}>
                                 <label>Start Time</label>

@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d9b86c9f-0b89-4563-ba11-369d16e7ec77" name="Changes" comment="delete event, assignment, quiz">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/components/Sample/ModalWithForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/components/Sample/ModalWithForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/attendance/attendance-details.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/attendance/attendance-details.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/exam/exam-details.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/exam/exam-details.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -168,7 +167,7 @@
       <workItem from="1683812854160" duration="7083000" />
       <workItem from="1683826176838" duration="32000" />
       <workItem from="1683994578992" duration="3711000" />
-      <workItem from="1684039990841" duration="11045000" />
+      <workItem from="1684039990841" duration="12220000" />
     </task>
     <task id="LOCAL-00001" summary="Done Teacher Dashboard">
       <created>1683225338573</created>
