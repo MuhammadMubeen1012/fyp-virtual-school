@@ -1,5 +1,6 @@
 import React from 'react';
 import SidebarTeacher from "../Sidebar/SidebarTeacher";
+import RightSideTeacher from "../RightSide/RightSideTeacher";
 
 const LayoutTeacher = ({children}) => {
     return (
@@ -7,10 +8,11 @@ const LayoutTeacher = ({children}) => {
 
             <SidebarTeacher />
 
-            <>
-                {children}
-            </>
 
+                {children}
+
+
+            <RightSideTeacher />
 
         </div>
     );

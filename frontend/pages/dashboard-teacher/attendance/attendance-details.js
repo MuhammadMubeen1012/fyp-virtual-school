@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import LayoutTeacher from "../../../components/Dashboard/Layout/LayoutTeacher";
 import Link from "next/link";
-import {Button} from "react-bootstrap";
+import {Button, Form, Modal} from "react-bootstrap";
 import {useRouter} from "next/router";
 import {getCourseAttendance} from "./attendanceController";
 
@@ -55,7 +55,6 @@ const AttendanceDetail = () => {
                         <div>
                             <Button
                                 style={{color: "#fff"}}
-                                href={"/dashboard-teacher/attendance/new-attendance"}
                             >
                                 Create New
                             </Button>
@@ -81,19 +80,16 @@ const AttendanceDetail = () => {
                         {
                             loadingAttendance && attendance.length > 0 ? attendance.map((item, idx) => (
                                 <tr key={idx}>
-                                    <td>{item._id}</td>
+                                    <td>{idx+1}</td>
                                     <td>{item.classroom}</td>
                                     <td>{item.startTime}</td>
                                     <td>{item.endTime}</td>
                                     <td>{(new Date(Date.parse(item.createdAt)).toLocaleDateString())}</td>
-                                    <Button
-                                        style={{color: "#fff"}}
-                                        onClick={() => {
-                                            
-                                        }}
+                                    <Link
+                                        style={{color: "#fff"}} href={"/dashboard-teacher/attendance/new-attendance"}
                                     >
-                                       View
-                                    </Button>
+                                       Open
+                                    </Link>
                                 </tr>
                             )) : ""
                         }
@@ -113,3 +109,61 @@ const AttendanceDetail = () => {
 };
 
 export default AttendanceDetail;
+
+
+export function CreateAttendanceModal(){
+
+    const [modal, setModal] = useState(false);
+
+    return(
+        <div>
+
+            <Modal
+                show={examModal}
+                onHide={() => setExamModal(false) }
+                dialogClassName="custom-modal"
+                size={"lg"}
+                aria-labelledby="example-custom-modal-styling-title"
+                centered
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title id="example-custom-modal-styling-title">
+                        Create Exam
+                    </Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                    <Form>
+                        <Form.Group controlId={""}>
+                            <Form.Label>Name</Form.Label>
+                            <Form.Control
+                                type={"text"}
+                                className={"m-2"}
+                                placeholder={"Name"}
+                                name={"name"}
+                            />
+                        </Form.Group>
+                        <Modal.Footer>
+                            <Button type={"submit"}>Add</Button>
+                        </Modal.Footer>
+                    </Form>
+                </Modal.Body>
+            </Modal>
+
+
+        </div>
+    )
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
