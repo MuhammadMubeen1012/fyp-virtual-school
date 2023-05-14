@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9b86c9f-0b89-4563-ba11-369d16e7ec77" name="Changes" comment="updated exam create">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/exam/examController.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/exam/examController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/exam/objective-exam.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/exam/objective-exam.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/exam/subjective-exam.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/exam/subjective-exam.js" afterDir="false" />
-    </list>
+    <list default="true" id="d9b86c9f-0b89-4563-ba11-369d16e7ec77" name="Changes" comment="updated  objective exam create" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -167,7 +162,7 @@
       <workItem from="1683826176838" duration="32000" />
       <workItem from="1683826305473" duration="4954000" />
       <workItem from="1683891659757" duration="2612000" />
-      <workItem from="1684039923886" duration="19827000" />
+      <workItem from="1684039923886" duration="20074000" />
     </task>
     <task id="LOCAL-00001" summary="Done Teacher Dashboard">
       <created>1683225338573</created>
@@ -225,7 +220,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684074069954</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="updated  objective exam create">
+      <created>1684089826555</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1684089826555</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -254,6 +256,7 @@
     <MESSAGE value="updated" />
     <MESSAGE value="updated exam shows" />
     <MESSAGE value="updated exam create" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated exam create" />
+    <MESSAGE value="updated  objective exam create" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated  objective exam create" />
   </component>
 </project>
