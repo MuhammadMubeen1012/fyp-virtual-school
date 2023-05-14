@@ -124,25 +124,25 @@
   {
     "question": "What are the major industries of Pakistan?",
     "questionOptions": ["Textile", "Agriculture", "Manufacturing"],
-    "questionAnswer": ["Textile", "Agriculture", "Manufacturing"],
+    "questionAnswer": "Agriculture",
     "isCorrect": true
   },
   {
     "question": "What are the major exports of Pakistan?",
     "questionOptions": ["Textiles", "Garments", "Remittances"],
-    "questionAnswer": ["Textiles", "Garments", "Remittances"],
+    "questionAnswer": "Textiles",
     "isCorrect": true
   },
   {
     "question": "What are the major imports of Pakistan?",
     "questionOptions": ["Oil", "Machinery", "Food"],
-    "questionAnswer": ["Oil", "Machinery", "Food"],
+    "questionAnswer": "Food",
     "isCorrect": true
   },
   {
     "question": "What are the major challenges facing Pakistan?",
     "questionOptions": ["Poverty", "Terrorism", "Corruption"],
-    "questionAnswer": ["Poverty", "Terrorism", "Corruption"],
+    "questionAnswer": "Corruption",
     "isCorrect": true
   },
   {
@@ -152,7 +152,7 @@
       "Space program",
       "Women's empowerment"
     ],
-    "questionAnswer": ["Nuclear power", "Space program", "Women's empowerment"],
+    "questionAnswer": "Nuclear power",
     "isCorrect": true
   },
   {
@@ -162,11 +162,7 @@
       "A more prosperous country",
       "A more peaceful country"
     ],
-    "questionAnswer": [
-      "A better future",
-      "A more prosperous country",
-      "A more peaceful country"
-    ],
+    "questionAnswer": "A more prosperous country",
     "isCorrect": true
   },
   {
@@ -176,11 +172,7 @@
       "Pakistan is a land of opportunity",
       "Pakistan is a peaceful and tolerant country"
     ],
-    "questionAnswer": [
-      "Pakistan is a beautiful country with a rich history and culture",
-      "Pakistan is a land of opportunity",
-      "Pakistan is a peaceful and tolerant country"
-    ],
+    "questionAnswer": "Pakistan is a land of opportunity",
     "isCorrect": true
   }
 ]
