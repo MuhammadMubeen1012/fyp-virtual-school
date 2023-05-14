@@ -187,6 +187,7 @@ exports.enrollTeacherInClassAndCourses = catchAsyncErrors(
     const classRoom = await Classroom.findById(req.params.classID);
     //user to enrolled in the class
     const user = await User.findOne(req.user._id);
+    const teacher = await Teacher.findOne({ user: req.user._id });
 
     classRoom.teachers.push(user._id);
 
@@ -195,6 +196,8 @@ exports.enrollTeacherInClassAndCourses = catchAsyncErrors(
     //add teacher to all such selected courses
     for (let i = 0; i < req.body.courses.length; i++) {
       const course = await Course.findById(req.body.courses[i]);
+      teacher.courses.push(course._id);
+      await teacher.save();
       course.teacher = user._id;
       await course.save();
     }
