@@ -17,12 +17,12 @@ router.route("/submit/exam/:examID").post(isAuthenticatedUser, submitExam);
 
 // GET /submit/exam/:studentID
 router
-  .route("/submit/exam/:studentID")
+  .route("/submission/exam/:studentID")
   .get(isAuthenticatedUser, getSubmissionByStudent);
 
 // @route GET /submit/exam/:examID
 router
-  .route("/submit/exam/:examID")
+  .route("/submissions/exam/:examID")
   .get(isAuthenticatedUser, getSubmissionsByExam);
 
 // @route PUT /grade/exam/:studentID

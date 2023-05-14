@@ -18,7 +18,7 @@ router
   .get(isAuthenticatedUser, getResultByStudent);
 
 router
-  .route("/result/exam/course/:courseID")
+  .route("/results/exam/course/:courseID")
   .get(isAuthenticatedUser, getResultByCourse);
 
 module.exports = router;

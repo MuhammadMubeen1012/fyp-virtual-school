@@ -15,6 +15,7 @@ const {
   getExam,
   getSubjectiveExam,
   getObjectiveExam,
+  getExamByCourse,
 } = require("../../controllers/Classroom/examController");
 
 router.route("/exam/:courseID").post(isAuthenticatedUser, createExam);
@@ -33,7 +34,7 @@ router
   .put(isAuthenticatedUser, updateSubjectiveExam);
 
 router
-  .route("/exam/objectiveExam/update/:examID/:index")
+  .route("/exam/objectiveExam/update/:examID")
   .put(isAuthenticatedUser, updateObjectiveExam);
 
 router.route("/exam/:examID").delete(isAuthenticatedUser, deleteExam);
@@ -46,8 +47,13 @@ router
   .route("/exam/objectiveExam/:examID")
   .delete(isAuthenticatedUser, deleteObjectiveExam);
 
+//get exam by exam ID
 router.route("/exam/:examID").get(isAuthenticatedUser, getExam);
 
+//get exam by course ID
+router
+  .route("/exam/course/:courseID")
+  .get(isAuthenticatedUser, getExamByCourse);
 router
   .route("/exam/subjectiveExam/:examID")
   .get(isAuthenticatedUser, getSubjectiveExam);
