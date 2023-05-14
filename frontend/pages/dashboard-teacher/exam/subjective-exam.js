@@ -22,34 +22,22 @@ const SubjectiveExam = () => {
         }
     }, [router.isReady]);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        // console.log(question);
-        setQuestions(() => ([...questions, question]))
-        setModal(false);
-    }
-
 
     return (
         <>
             <LayoutTeacher>
                 {/*=============== Start of main ================= */}
-
                 <main>
-
-                    <Form onSubmit={
-                        (e) => {
-                            e.preventDefault();
-                            console.log(questions);
-                            setSubmit(true);
-
-                            createSubjectiveExam(examId, questions).then((res) => {
-                                console.log(res);
-                                // window.location.reload();
-                            });
-                        }
-                    }>
+                    <Form onSubmit={(e) => {
+                        e.preventDefault();
+                        console.log(questions);
+                        setSubmit(true);
+                        console.log('00-------------------------------------------------------');
+                        createSubjectiveExam(examId, questions).then((res) => {
+                            console.log(res);
+                            router.back();
+                        });
+                    }}>
 
                         <h1>Add Questions</h1>
                         <br/>
@@ -110,7 +98,12 @@ const SubjectiveExam = () => {
                                 </Modal.Header>
 
                                 <Modal.Body>
-                                    <Form onSubmit={handleSubmit}>
+                                    <Form onSubmit={(e) => {
+                                        e.preventDefault();
+                                        // console.log(question);
+                                        setQuestions(() => ([...questions, question]))
+                                        setModal(false);
+                                    }}>
 
                                         <Form.Group controlId={"question"}>
                                             <Form.Label>Question</Form.Label>
@@ -128,8 +121,6 @@ const SubjectiveExam = () => {
                                             />
                                         </Form.Group>
                                         <br/>
-
-
                                         <Modal.Footer>
                                             <div
                                                 style={{
@@ -140,7 +131,6 @@ const SubjectiveExam = () => {
                                                 <Button type={"submit"}>Add</Button>
                                             </div>
                                         </Modal.Footer>
-
                                     </Form>
                                 </Modal.Body>
 
@@ -151,10 +141,9 @@ const SubjectiveExam = () => {
                     }
 
 
-
                 </main>
 
-                    {/*=============== End Of Main  ==================*/}
+                {/*=============== End Of Main  ==================*/}
 
             </LayoutTeacher>
         </>

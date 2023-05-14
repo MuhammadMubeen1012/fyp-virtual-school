@@ -1,39 +1,30 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Card, Form, Modal} from "react-bootstrap";
 import LayoutTeacher from "../../../components/Dashboard/Layout/LayoutTeacher";
+import {createObjectiveExam} from "./examController";
+import {useRouter} from "next/router";
 
 const ObjectiveExam = () => {
+    const router = useRouter();
 
-    const [question, setQuestion] = useState({
-        question: "",
-        option01: "",
-        option02: "",
-        option03: "",
-        option04: "",
-        answer: "",
-    });
+
+    const [question, setQuestion] = useState("");
+    const [option1, setOption1] = useState("");
+    const [option2, setOption2] = useState("");
+    const [option3, setOption3] = useState("");
+    const [option4, setOption4] = useState("");
+    const [correctOption, setCorrectOption] = useState("");
+
+    const [examId, setExamId] = useState(null);
     const [questions, setQuestions] = useState([]);
     const [modal, setModal] = useState(false);
 
-
     useEffect(() => {
-
-    }, [question, questions]);
-
-
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        console.log(question);
-
-        setQuestions(() => ([...questions, question]))
-
-        console.log(questions);
-
-        setModal(false);
-
-    }
+        if (router.isReady) {
+            setExamId(router.query.examId);
+            console.log(router.query.examId);
+        }
+    }, [router.isReady]);
 
 
     return (
@@ -41,25 +32,36 @@ const ObjectiveExam = () => {
             <LayoutTeacher>
                 {/*=============== Start of main ================= */}
                 <main>
+                    <Form onSubmit={(e) => {
+                        e.preventDefault();
+                        console.log(questions);
+                        if (examId !== null && questions.length !== 0) {
 
-                    <h1>Add Questions</h1>
-                    <br/>
-
-                    <div style={{
-                        display: "flex",
-                        justifyContent: "space-between",
+                            createObjectiveExam(examId, questions).then((res) => {
+                                    console.log(res);
+                                    // router.back();
+                                }
+                            );
+                        }
                     }}>
-                        <Button
-                            onClick={() => setModal(true)}
-                        >
-                            Add Question
-                        </Button>
+                        <h1>Add Questions</h1>
+                        <br/>
 
-                        <Button>
-                            Submit
-                        </Button>
-                    </div>
+                        <div style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                        }}>
+                            <Button
+                                onClick={() => setModal(true)}
+                            >
+                                Add Question
+                            </Button>
 
+                            <Button type={'submit'}>
+                                Submit
+                            </Button>
+                        </div>
+                    </Form>
 
                     {
                         modal &&
@@ -81,7 +83,24 @@ const ObjectiveExam = () => {
                                 </Modal.Header>
 
                                 <Modal.Body>
-                                    <Form onSubmit={handleSubmit}>
+                                    <Form onSubmit={(e) => {
+                                        e.preventDefault();
+                                        setQuestions(() => ([...questions, {
+                                            question: question,
+                                            questionOptions: [option1, option2, option3, option4],
+                                            questionAnswer: correctOption,
+                                        }]))
+
+                                        setModal(false);
+                                        setQuestion("");
+                                        setOption1("");
+                                        setOption2("");
+                                        setOption3("");
+                                        setOption4("");
+                                        setCorrectOption("");
+
+                                    }
+                                    }>
 
                                         <Form.Group controlId={"question"}>
                                             <Form.Label>Question</Form.Label>
@@ -90,12 +109,7 @@ const ObjectiveExam = () => {
                                                 className={"m-2"}
                                                 placeholder={"Type Question here..."}
                                                 name={"question"}
-                                                onChange={(e) => setQuestion((prev) => {
-                                                    return{
-                                                        ...prev,
-                                                        question: e.target.value,
-                                                    }
-                                                })}
+                                                onChange={(e) => setQuestion(e.target.value)}
                                             />
                                         </Form.Group>
                                         <br/>
@@ -107,48 +121,31 @@ const ObjectiveExam = () => {
                                                 className={"m-2"}
                                                 placeholder={"Option 1"}
                                                 name={"question-o1"}
-                                                onChange={(e) => setQuestion((prev) => {
-                                                    return{
-                                                        ...prev,
-                                                        option01: e.target.value,
-                                                    }
-                                                })}
+                                                onChange={(e) => setOption1(e.target.value)}
+
                                             />
                                             <Form.Control
                                                 type={"text"}
                                                 className={"m-2"}
                                                 placeholder={"Option 2"}
                                                 name={"question-02"}
-                                                onChange={(e) => setQuestion((prev) => {
-                                                    return{
-                                                        ...prev,
-                                                        option02: e.target.value,
-                                                    }
-                                                })}
+                                                onChange={(e) => setOption2(e.target.value)}
                                             />
                                             <Form.Control
                                                 type={"text"}
                                                 className={"m-2"}
                                                 placeholder={"Option 3"}
                                                 name={"question-03"}
-                                                onChange={(e) => setQuestion((prev) => {
-                                                    return{
-                                                        ...prev,
-                                                        option03: e.target.value,
-                                                    }
-                                                })}
+                                                onChange={(e) => setOption3(e.target.value)}
+
                                             />
                                             <Form.Control
                                                 type={"text"}
                                                 className={"m-2"}
                                                 placeholder={"Option 4"}
                                                 name={"question-04"}
-                                                onChange={(e) => setQuestion((prev) => {
-                                                    return{
-                                                        ...prev,
-                                                        option04: e.target.value,
-                                                    }
-                                                })}
+                                                onChange={(e) => setOption4(e.target.value)}
+
                                             />
 
                                             <br/>
@@ -158,23 +155,18 @@ const ObjectiveExam = () => {
                                                 className={"m-2"}
                                                 placeholder={"Correct Answer"}
                                                 name={"question-ans"}
-                                                onChange={(e) => setQuestion((prev) => {
-                                                    return{
-                                                        ...prev,
-                                                        answer: e.target.value,
-                                                    }
-                                                })}
+                                                onChange={(e) => setCorrectOption(e.target.value)}
+
                                             />
 
                                         </Form.Group>
 
 
                                         <Modal.Footer>
-                                            <div
-                                                style={{
-                                                    display: "flex",
-                                                    justifyContent: "flex-end"
-                                                }}
+                                            <div style={{
+                                                display: "flex",
+                                                justifyContent: "flex-end"
+                                            }}
                                             >
                                                 <Button type={"submit"}>Add</Button>
                                             </div>
@@ -186,28 +178,38 @@ const ObjectiveExam = () => {
                             </Modal>
 
 
-
                         </div>
                     }
 
 
-                    <br/><br/>
-                    <Card>
-                        <Card.Header>Q1</Card.Header>
-                        <Card.Body>
-                            <Card.Text>question description</Card.Text>
-                        </Card.Body>
-                    </Card>
+                    <br/>
+                    <br/>
 
+                    {
+                        questions.map((q, index) => (<Card key={index}>
+                                <Card.Header>Q{index + 1}</Card.Header>
+                                <Card.Body>
+                                    <Card.Text>{q.question}</Card.Text>
+                                    <Card.Text>{q.option01}</Card.Text>
+                                    <Card.Text>{q.option02}</Card.Text>
+                                    <Card.Text>{q.option03}</Card.Text>
+                                    <Card.Text>{q.option04}</Card.Text>
+                                    <Card.Text>{q.answer}</Card.Text>
+                                </Card.Body>
+                            </Card>
+                        ))
+                    }
 
 
                 </main>
-                {/*=============== End Of Main  ==================*/}
+                {/*=============== End Of Main  ==================*/
+                }
 
 
             </LayoutTeacher>
         </div>
-    );
+    )
+        ;
 };
 
 export default ObjectiveExam;
