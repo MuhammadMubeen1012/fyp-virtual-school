@@ -1,58 +1,43 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import LayoutTeacher from "../../../components/Dashboard/Layout/LayoutTeacher";
 import Link from "next/link";
 import {Button} from "react-bootstrap";
+import {useRouter} from "next/router";
+import {getCourseAttendance} from "./attendanceController";
 
 const AttendanceDetail = () => {
+    const router = useRouter();
+    const [course, setCourse] = useState({});
 
-    const attendanceTitle = [
-        {
-            serial: "Serial No.",
-            class: "Class",
-            timeStart: "Time Start",
-            timeEnd: "Time End"
+    const [attendance, setAttendance] = useState([]);
+    const [loadingAttendance, setLoadingAttendance] = useState(false);
+
+    useEffect(() => {
+            if (router.isReady) {
+                setCourse(router.query);
+                console.log(router.query);
+                getCourseAttendance(router.query.courseId).then((res) => {
+                    console.log(res.attendance);
+                    setAttendance(res.attendance);
+                });
+            }
         },
-    ];
+        [router.isReady]
+    );
 
-    const attendanceData = [
-        {
-            serial: 1,
-            class: "IV-A",
-            timeStart: "09:00",
-            timeEnd: "10:00",
-        },
+    useEffect(() => {
+        if (attendance.length > 0) {
+            setLoadingAttendance(true);
+            console.log(attendance);
 
-        {
-            serial: 2,
-            class: "IV-A",
-            timeStart: "09:00",
-            timeEnd: "10:00",
-        },
-
-        {
-            serial: 3,
-            class: "IV-A",
-            timeStart: "09:00",
-            timeEnd: "10:00",
-        },
-
-    ]
-
-    const [attendance, setAttendance] = useState(attendanceData);
-
-
-    const CreateNewAttendance = () => {
-
-        const newAttendanceData = {
-            serial: attendance.length+1,
-            class: "IV-A",
-            timeStart: "09:00",
-            timeEnd: "10:00",
-        };
-        setAttendance([...attendance, newAttendanceData]);
-
-    };
-
+        }
+    }, [attendance]);
+    const item = {
+        serial: "Serial No.",
+        class: "Class",
+        timeStart: "Time Start",
+        timeEnd: "Time End"
+    }
 
 
     return (
@@ -68,7 +53,12 @@ const AttendanceDetail = () => {
                     <div style={{display: "flex", justifyContent: "space-between"}}>
                         <h2>English</h2>
                         <div>
-                            <Button style={{color: "#fff"}} onClick={() => CreateNewAttendance()}  >Create New</Button>
+                            <Button
+                                style={{color: "#fff"}}
+                                href={"/dashboard-teacher/attendance/new-attendance"}
+                            >
+                                Create New
+                            </Button>
                         </div>
                     </div>
 
@@ -76,30 +66,37 @@ const AttendanceDetail = () => {
                     {/*========================= Attendance Table ========================== */}
                     <table>
                         <thead>
-                            {
-                                attendanceTitle.map((item, idx) => (
-                                    <tr key={item.serial}>
-                                        <th>{item.serial}</th>
-                                        <th>{item.class}</th>
-                                        <th>{item.timeStart}</th>
-                                        <th>{item.timeEnd}</th>
-                                    </tr>
-                                ))
-                            }
+                        {
+                            <tr>
+                                <th>{item.serial}</th>
+                                <th>{item.class}</th>
+                                <th>{item.timeStart}</th>
+                                <th>{item.timeEnd}</th>
+                                <th>Created At</th>
+                            </tr>
+                        }
                         </thead>
 
                         <tbody>
-                            {
-                                attendance.map((item, idx) => (
-                                    <tr key={item.serial}>
-                                        <td>{item.serial}</td>
-                                        <td>{item.class}</td>
-                                        <td>{item.timeStart}</td>
-                                        <td>{item.timeEnd}</td>
-                                        <td className="primary"> <Link href={"/dashboard-teacher/attendance/new-attendance"}>Open</Link> </td>
-                                    </tr>
-                                ))
-                            }
+                        {
+                            loadingAttendance && attendance.length > 0 ? attendance.map((item, idx) => (
+                                <tr key={idx}>
+                                    <td>{item._id}</td>
+                                    <td>{item.classroom}</td>
+                                    <td>{item.startTime}</td>
+                                    <td>{item.endTime}</td>
+                                    <td>{(new Date(Date.parse(item.createdAt)).toLocaleDateString())}</td>
+                                    <Button
+                                        style={{color: "#fff"}}
+                                        onClick={() => {
+                                            
+                                        }}
+                                    >
+                                       View
+                                    </Button>
+                                </tr>
+                            )) : ""
+                        }
 
                         </tbody>
                     </table>
@@ -109,7 +106,6 @@ const AttendanceDetail = () => {
 
             </main>
             {/*=============== End Of Main  ==================*/}
-
 
 
         </LayoutTeacher>

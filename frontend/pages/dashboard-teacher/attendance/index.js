@@ -10,6 +10,7 @@ const Attendance = () => {
 
     useEffect(() => {
         getCourses().then(r => setCourses(r.courses));
+
     }, []);
 
     useEffect(() => {
@@ -46,7 +47,13 @@ const Attendance = () => {
                                         <td>{index + 1}</td>
                                         <td>{course.name}</td>
                                         <Link
-                                            href={"/dashboard-teacher/attendance/attendance-details"}
+                                            href={{
+                                                pathname: `/dashboard-teacher/attendance/attendance-details`,
+                                                query: {
+                                                    courseId: course._id,
+                                                    courseName: course.name
+                                                }
+                                            }}
                                             className="primary"
                                         >
                                             Open
