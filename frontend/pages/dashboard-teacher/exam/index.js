@@ -37,8 +37,8 @@ const Exam = () => {
                     <table>
                         <thead>
                         <tr>
-                            <th>Serial No.</th>
                             <th>Course Name</th>
+                            <th>Lessons</th>
                             <th>View Details</th>
 
                         </tr>

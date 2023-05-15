@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import LayoutTeacher from "../../../components/Dashboard/Layout/LayoutTeacher";
 import {Button, Card, Form, InputGroup, Modal, Nav} from "react-bootstrap";
 import swal from "@sweetalert/with-react";
+import {createAnnouncement, getAnnouncements} from "./announcementController";
 
 const Announcement = () => {
 
@@ -13,6 +14,14 @@ const Announcement = () => {
         attachment: '',
         announcementFor: '',
     });
+
+    const [announcements, setAnnouncements] = useState([]);
+
+
+    useEffect(() => {
+        getAnnouncements().then(res => setAnnouncements(res.announcements));
+    }, []);
+
 
 
     return (
@@ -61,16 +70,18 @@ const Announcement = () => {
                     tab === 0 ?
                         <div>
                             {/*sent tab*/}
-                            <SentTab />
+                            <SentTab
+                                announcements={announcements}
+                            />
                         </div> :
 
                         <div>
                             {/*received tab*/}
-                            <ReceiveTab />
+                            <ReceiveTab
+                                announcements={announcements}
+                            />
                         </div>
                 }
-
-
 
 
             </main>
@@ -89,26 +100,35 @@ export function AnnouncementModal({modal, setModal, data, setData}){
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        console.log(data);
 
+        createAnnouncement(data).then(res => {
+            if(res.success){
+                swal({
+                    title: "Added Successfully",
+                    icon: "success",
+                });
+                setModal(false);
+            }
 
-        swal({
-            title: "Added Successfully",
-            icon: "success",
-        });
-        setModal(false);
+        }).catch(res => {
+            swal({
+                title: "Error",
+                icon: "error",
+            });
+        })
+
 
 
     }
 
     const handleChange = (e) => {
+
         const {name, value} = e.target;
 
         setData(prevState => ({
             ...prevState,
             [name]: value,
         }));
-
 
     }
 
@@ -162,33 +182,27 @@ export function AnnouncementModal({modal, setModal, data, setData}){
                                 name={"attachment"}
                                 value={data.attachment}
                                 onChange={handleChange}
-
                             />
 
-                            <InputGroup>
+
+                            <Form.Group controlId="" onChange={handleChange}>
                                 <Form.Check
-                                    type={"radio"}
+                                    value="student"
                                     id={"student"}
-                                    value={"student"}
-                                    label={"Student"}
+                                    type="radio"
+                                    label="Student"
                                     name={"announcementFor"}
                                     // checked={data.announcementFor === "student"}
-
                                 />
-                            </InputGroup>
-
-
-                            <InputGroup>
                                 <Form.Check
-                                    type={"radio"}
+                                    value="all"
                                     id={"all"}
-                                    value={"all"}
-                                    label={"All"}
+                                    type="radio"
+                                    label="All"
                                     name={"announcementFor"}
                                     // checked={data.announcementFor === "all"}
                                 />
-                            </InputGroup>
-
+                            </Form.Group>
 
                         </Form.Group>
 
@@ -213,32 +227,44 @@ export function AnnouncementModal({modal, setModal, data, setData}){
 }
 
 
-export function SentTab(){
+export function SentTab({announcements}){
 
     return(
         <>
-            <Card>
-                <Card.Header>Header</Card.Header>
-                <Card.Body>
-                    <Card.Text>Description</Card.Text>
-                    <Button>Open</Button>
-                </Card.Body>
-            </Card>
+            {
+                announcements.map(announcement => (
+                    <>
+                        <Card>
+                            <Card.Header>{announcement.subject}</Card.Header>
+                            <Card.Body>
+                                <Card.Text>{announcement.description}</Card.Text>
+                                <Button href={announcement.attachment}>Open</Button>
+                            </Card.Body>
+                        </Card>
+                    </>
+                ))
+            }
         </>
     )
 }
 
-export function ReceiveTab(){
+export function ReceiveTab({announcements}){
 
     return(
         <>
-            <Card>
-                <Card.Header>Header</Card.Header>
-                <Card.Body>
-                    <Card.Text>Description</Card.Text>
-                    <Button>Open</Button>
-                </Card.Body>
-            </Card>
+            {
+                announcements.map(announcement => (
+                    <>
+                        <Card>
+                            <Card.Header>{announcement.subject}</Card.Header>
+                            <Card.Body>
+                                <Card.Text>{announcement.description}</Card.Text>
+                                <Button href={announcement.attachment}>Open</Button>
+                            </Card.Body>
+                        </Card>
+                    </>
+                ))
+            }
         </>
     )
 }

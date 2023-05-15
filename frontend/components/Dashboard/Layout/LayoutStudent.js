@@ -1,5 +1,6 @@
 import React from 'react';
 import SidebarStudent from "../Sidebar/SidebarStudent";
+import RightSideStudent from "../RightSide/RightSideStudent";
 
 const LayoutStudent = ({children}) => {
     return (
@@ -7,10 +8,9 @@ const LayoutStudent = ({children}) => {
 
             <SidebarStudent />
 
-            <>
                 {children}
-            </>
 
+            <RightSideStudent />
 
         </div>
     );
