@@ -6,12 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d9b86c9f-0b89-4563-ba11-369d16e7ec77" name="Changes" comment="delete event, assignment, quiz">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-student/announcements/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-student/announcements/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-student/controllers/coursesController.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-student/controllers/coursesController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-student/courses/[course]/[slug].js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-student/courses/[course]/[slug].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-student/courses/[course]/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-student/courses/[course]/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-student/courses/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-student/courses/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-student/exams/exam-details.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-student/exams/exam-details.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-student/exams/subjective-exam.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-student/exams/subjective-exam.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -174,7 +168,7 @@
       <workItem from="1683826176838" duration="32000" />
       <workItem from="1683994578992" duration="3711000" />
       <workItem from="1684039990841" duration="28428000" />
-      <workItem from="1684150900485" duration="12066000" />
+      <workItem from="1684150900485" duration="13052000" />
     </task>
     <task id="LOCAL-00001" summary="Done Teacher Dashboard">
       <created>1683225338573</created>

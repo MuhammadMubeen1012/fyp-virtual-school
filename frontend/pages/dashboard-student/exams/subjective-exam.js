@@ -1,9 +1,9 @@
 import React from 'react';
 import LayoutStudent from "../../../components/Dashboard/Layout/LayoutStudent";
 import Link from "next/link";
-import {Form} from "react-bootstrap";
+import {Button, Form} from "react-bootstrap";
 
-const Courses = () => {
+const SubjectiveExam = () => {
     return (
         <LayoutStudent>
 
@@ -16,15 +16,9 @@ const Courses = () => {
                 <div className="courses-table">
 
                     <h2>Subjective Exam</h2>
+                    <br/>
 
-                    <div>
-                        <Form>
-                            <Form.Label>
-                                question
-                            </Form.Label>
-
-                        </Form>
-                    </div>
+                    <Questions />
 
                 </div>
                 {/* ============= End of Courses  ================== */}
@@ -37,4 +31,44 @@ const Courses = () => {
     );
 };
 
-export default Courses;
+export default SubjectiveExam;
+
+
+
+
+
+const Questions = () => {
+
+
+
+    return(
+        <>
+            <Form>
+                <Form.Label>
+                    Question
+                </Form.Label>
+
+                <Form.Control
+                    as="textarea"
+                    placeholder="Type answer here..."
+                    style={{ height: '100px', resize: "none" }}
+                />
+
+
+
+                <br/>
+
+                <div
+                    style={{
+                        display: "flex",
+                        justifyContent: "flex-end",
+                    }}
+                >
+                    <Button type={"submit"}>Submit</Button>
+                </div>
+            </Form>
+        </>
+    )
+}
+
+
