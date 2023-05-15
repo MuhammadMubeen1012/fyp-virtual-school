@@ -1,11 +1,28 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import LayoutStudent from "../../../../components/Dashboard/Layout/LayoutStudent";
 import Link from "next/link";
 import {Button, Card, Form, Modal, Nav} from "react-bootstrap";
+import {getContentsByLesson, getEventsByLesson} from "../../controllers/coursesController";
+import {useRouter} from "next/router";
 
 const Slug = () => {
+
+    const router = useRouter();
     const [eventKey, setEventKey] = useState(0);
     const [assignmentModal, setAssignmentModal] = useState(false);
+    const [contentData, setContentData] = useState();
+    const [eventData, setEventData] = useState();
+
+
+
+    useEffect(() => {
+        // console.log(router.query.lessonID)
+        getContentsByLesson(router.query.lessonID).then(res => setContentData(res))
+        getEventsByLesson(router.query.lessonID).then(res => setEventData(res))
+
+
+    }, []);
+
 
     return (
         <LayoutStudent>
@@ -35,6 +52,7 @@ const Slug = () => {
 
                     {/* ============= Tabs for lesson, Live Video, Assignments, Exercises, Quizes, Other Section ================= */}
                     <Nav className={"mt-5 mb-5"} fill variant="tabs" defaultActiveKey="#">
+
                         <Nav.Item>
                             <Nav.Link href="#" onClick={() => setEventKey(0)}>
                                 Content
@@ -59,82 +77,31 @@ const Slug = () => {
                     </Nav>
 
 
+
                     {/* ============= Tabs running by conditional rendering ================= */}
                     <div className="">
                         {eventKey === 0 ? (
                             <div>
-                                {/*Lesson Tab*/}
-                                <Card>
-                                    <Card.Header>Content</Card.Header>
-                                    <Card.Body>
-                                        <Card.Text>Description</Card.Text>
-                                        <div>
-                                            <Button variant="primary">Open</Button>
-                                        </div>
-                                    </Card.Body>
-                                </Card>{" "}
+                                {/*Content Tab*/}
+                                <ContentTab />
                                 <br/>
                             </div>
                         ) : eventKey === 1 ? (
                             <div>
                                 {/*Event Tab*/}
-                                <Card>
-                                    <Card.Header>Event Title</Card.Header>
-                                    <Card.Body>
-                                        <Card.Title>Description</Card.Title>
-                                        <Card.Text>Event Date</Card.Text>
-                                        <Button variant="primary">Go to Event</Button>
-                                    </Card.Body>
-                                </Card>{" "}
+                                <EventsTab />
                                 <br/>
-                                <Card>
-                                    <Card.Header>Event Title</Card.Header>
-                                    <Card.Body>
-                                        <Card.Title>Description</Card.Title>
-                                        <Card.Text>Event Date</Card.Text>
-                                        <Button variant="primary">Go to Event</Button>
-                                    </Card.Body>
-                                </Card>
                             </div>
                         ) : eventKey === 2 ? (
                             <div>
                                 {/*Assignments Tab*/}
-                                <Card>
-                                    <Card.Header>Assignment Title</Card.Header>
-                                    <Card.Body>
-                                        <Card.Text>Description</Card.Text>
-
-                                        <div>
-                                            <Button variant="primary">Open</Button>
-                                            <Button
-                                                className={"m-1"}
-                                                variant="success"
-                                                onClick={() => {
-                                                    setAssignmentModal(true);
-                                                }}
-                                            >
-                                                Submit
-                                            </Button>
-                                        </div>
-                                    </Card.Body>
-                                </Card>
+                                <AssignmentsTab />
                                 <br/>
                             </div>
                         ) : eventKey === 3 ? (
                             <div>
                                 {/*Quiz Tab*/}
-                                <Card>
-                                    <Card.Header>Quiz Title</Card.Header>
-                                    <Card.Body>
-                                        <Card.Title>Description</Card.Title>
-                                        <Button
-                                            variant="primary"
-                                            href={"/dashboard-student/courses/english/quiz"}
-                                        >
-                                            Open
-                                        </Button>
-                                    </Card.Body>
-                                </Card>
+                                <QuizTab />
                                 <br/>
                             </div>
                         ) : (
@@ -205,3 +172,101 @@ const Slug = () => {
 };
 
 export default Slug;
+
+
+
+export const ContentTab = () => {
+
+    return(
+        <>
+
+            <Card>
+                <Card.Header>Content</Card.Header>
+                <Card.Body>
+                    <Card.Text>Description</Card.Text>
+                    <div>
+                        <Button variant="primary">Open</Button>
+                    </div>
+                </Card.Body>
+            </Card>
+            <br/>
+
+        </>
+    )
+}
+
+
+export const EventsTab = () => {
+
+    return(
+        <>
+            <Card>
+                <Card.Header>Event Title</Card.Header>
+                <Card.Body>
+                    <Card.Title>Description</Card.Title>
+                    <Card.Text>Event Date</Card.Text>
+                    <Button variant="primary">Go to Event</Button>
+                </Card.Body>
+            </Card>
+            <br/>
+
+        </>
+    )
+}
+
+
+export const AssignmentsTab = () => {
+
+    return(
+        <>
+            <Card>
+                <Card.Header>Assignment Title</Card.Header>
+                <Card.Body>
+                    <Card.Text>Description</Card.Text>
+
+                    <div>
+                        <Button variant="primary">Open</Button>
+                        <Button
+                            className={"m-1"}
+                            variant="success"
+                            onClick={() => {
+                                setAssignmentModal(true);
+                            }}
+                        >
+                            Submit
+                        </Button>
+                    </div>
+                </Card.Body>
+            </Card>
+        </>
+    )
+}
+
+
+export const QuizTab = () => {
+
+    return(
+        <>
+            <Card>
+                <Card.Header>Quiz Title</Card.Header>
+                <Card.Body>
+                    <Card.Title>Description</Card.Title>
+                    <Button
+                        variant="primary"
+                        href={"/dashboard-student/courses/english/quiz"}
+                    >
+                        Open
+                    </Button>
+                </Card.Body>
+            </Card>
+        </>
+    )
+}
+
+
+
+
+
+
+
+

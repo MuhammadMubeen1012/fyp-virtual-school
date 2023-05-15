@@ -10,7 +10,6 @@ const Index = () => {
   useEffect(() => {
     if (courses.length === 0) {
       getCourses().then((res) => {
-        console.log("List --- ", res);
         setCourses(res.courses);
       });
     }
@@ -41,8 +40,7 @@ const Index = () => {
             </thead>
 
             <tbody>
-              {loading
-                ? courses.map((course, index) => {
+              {courses?.map((course, index) => {
                     // const course = res.data.course;
                     return (
                       <tr key={index}>
@@ -69,7 +67,7 @@ const Index = () => {
                       </tr>
                     );
                   })
-                : ""}
+                }
             </tbody>
           </table>
         </div>

@@ -44,7 +44,7 @@ export function Announcements({announcements}){
     return(
         <>
             {
-                announcements.map(announcement => (
+                announcements?.map(announcement => (
                     <>
                         <Card>
                             <Card.Header>{announcement.subject}</Card.Header>
@@ -52,7 +52,7 @@ export function Announcements({announcements}){
                                 <Card.Text>{announcement.description}</Card.Text>
                                 <Button href={announcement.attachment}>Open</Button>
                             </Card.Body>
-                        </Card>
+                        </Card><br/>
                     </>
                 ))
             }

@@ -11,18 +11,6 @@ export const getStudent = async () => {
   return response.data;
 };
 
-// export const getClassroom = async () => {
-//   const student = await getStudent()
-//   const classroom = student.classroom
-
-//   const response = await axios.get(`http://localhost:7000/api/v1/classroom/${classroom}`, {
-//     headers: {
-//       Authorization: `${Cookies.get("token")}`,
-//     },
-//   });
-
-//   return response.data;
-// };
 
 export const getCourses = async () => {
   const student = await getStudent();
@@ -42,6 +30,7 @@ export const getCourses = async () => {
   return response.data;
 };
 
+
 export const getLessons = async (id) => {
   return await axios.get(`http://localhost:7000/api/v1/lesson/${id}`, {
     headers: {
@@ -49,6 +38,8 @@ export const getLessons = async (id) => {
     },
   });
 };
+
+
 
 export const getLesson = async (lesson_id) => {
   const response = await axios.get(
@@ -61,6 +52,8 @@ export const getLesson = async (lesson_id) => {
   );
   return response.data.lesson;
 };
+
+
 // ---------- get -------------
 // 	Get the Content of that lesson
 // output [{name and link of contents of specified lesson}]
@@ -78,6 +71,8 @@ export const getContentsByLesson = async (lessonID) => {
 };
 // console.log("Contents", getContentsByLesson("6452547c1f2d691aa5a8ad7d"));
 
+
+
 // 	Get the Assignments of that lesson
 // output [object of assignments of specified lesson]
 export const getAssignmentsByLesson = async (lessonID) => {
@@ -93,6 +88,8 @@ export const getAssignmentsByLesson = async (lessonID) => {
   return response.data.assignments;
 };
 // console.log("Assignments", getAssignmentsByLesson("6452547c1f2d691aa5a8ad7d"));
+
+
 
 // 	Get Quizes of that lesson
 // output [object of quizes of specified lesson]
@@ -112,6 +109,8 @@ export const getQuizesByLesson = async (lessonID) => {
 
 // 	Get event of that lesson
 // output [object of quizes of specified lesson]
+
+
 export const getEventsByLesson = async (lessonID) => {
   const response = await axios.get(
     `http://localhost:7000/api/v1/event/${lessonID}`,
@@ -128,6 +127,8 @@ export const getEventsByLesson = async (lessonID) => {
 
 // @def get the submission of that student
 // @output {submission and success property}
+
+
 export const getAssignmentSubmissionByStudent = async (assignmentID) => {
   const response = await axios.get(
     `http://localhost:7000/api/v1/submission/${assignmentID}`,

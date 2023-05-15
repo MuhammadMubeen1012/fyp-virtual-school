@@ -44,7 +44,7 @@ const English = () => {
 
             <tbody>
               {loading
-                ? lessons.map((lesson, index) => {
+                ? lessons?.map((lesson, index) => {
                     // const course = res.data.course;
                     return (
                       <tr key={index}>
@@ -52,7 +52,6 @@ const English = () => {
                         <td>{lesson.name}</td>
                         <td>
                           <Link
-                            // href={`/dashboard-teacher/courses/${course._id}`}
                             href={{
                               pathname: `/dashboard-student/courses/english/unit-01`,
                               query: {
