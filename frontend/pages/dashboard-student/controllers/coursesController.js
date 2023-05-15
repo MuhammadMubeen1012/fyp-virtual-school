@@ -1,6 +1,66 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
+export const getStudent = async () => {
+  const response = await axios.get(`http://localhost:7000/api/v1/student`, {
+    headers: {
+      Authorization: `${Cookies.get("token")}`,
+    },
+  });
+
+  return response.data;
+};
+
+// export const getClassroom = async () => {
+//   const student = await getStudent()
+//   const classroom = student.classroom
+
+//   const response = await axios.get(`http://localhost:7000/api/v1/classroom/${classroom}`, {
+//     headers: {
+//       Authorization: `${Cookies.get("token")}`,
+//     },
+//   });
+
+//   return response.data;
+// };
+
+export const getCourses = async () => {
+  const student = await getStudent();
+  // console.log(student.student.classroom);
+  const classroom = student.student.classroom;
+  // console.log("Classroom", classroom);
+
+  const response = await axios.get(
+    `http://localhost:7000/api/v1/courses/${classroom}`,
+    {
+      headers: {
+        Authorization: `${Cookies.get("token")}`,
+      },
+    }
+  );
+
+  return response.data;
+};
+
+export const getLessons = async (id) => {
+  return await axios.get(`http://localhost:7000/api/v1/lesson/${id}`, {
+    headers: {
+      Authorization: `${Cookies.get("token")}`,
+    },
+  });
+};
+
+export const getLesson = async (lesson_id) => {
+  const response = await axios.get(
+    `http://localhost:7000/api/v1/course/lesson/${lesson_id}`,
+    {
+      headers: {
+        Authorization: `${Cookies.get("token")}`,
+      },
+    }
+  );
+  return response.data.lesson;
+};
 // ---------- get -------------
 // 	Get the Content of that lesson
 // output [{name and link of contents of specified lesson}]
