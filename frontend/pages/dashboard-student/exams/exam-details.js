@@ -1,33 +1,62 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import LayoutStudent from "../../../components/Dashboard/Layout/LayoutStudent";
 import Link from "next/link";
-import {Button, Card} from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
+import { getExam } from "../controllers/examController";
+import { useRouter } from "next/router";
 
 const Courses = () => {
-    return (
-        <LayoutStudent>
+  const [exams, setExams] = useState([]);
+  const [isExamLoaded, setExamLoading] = useState(false);
+  const router = useRouter();
 
-            {/*=============== Start of main ================= */}
-            <main>
-                <h1>Exam</h1>
+  useEffect(() => {
+    if (router.isReady) {
+      getExam(router.query.courseId).then((res) => {
+        //   console.log(res.exam);
+        setExams(res.exam);
+      });
+    }
+  }, [router.isReady]);
 
+  useEffect(() => {
+    if (exams.length > 0) {
+      setExamLoading(true);
 
-                <br/><br/>
-                <Card>
-                    <Card.Header>Title</Card.Header>
-                    <Card.Body>
-                        <Card.Text>Description</Card.Text>
-                        <Button variant="primary" href={"/dashboard-student/exams/objective-exam"}>Give Exam</Button>
-                        <Button variant="primary" className={"m-1"}>View</Button>
-                    </Card.Body>
-                </Card>
+      console.log("Exam loaded", exams);
+    }
+  });
 
-            </main>
-            {/*=============== End Of Main  ==================*/}
-
-
-        </LayoutStudent>
-    );
+  return (
+    <LayoutStudent>
+      {/*=============== Start of main ================= */}
+      <main>
+        <h1>Exam</h1>
+        <br />
+        <br />
+        {isExamLoaded && exams.length > 0
+          ? exams.map((exam, idx) => (
+              <Card>
+                <Card.Header>{exam.name}</Card.Header>
+                <Card.Body>
+                  <Card.Text>{exam.description}</Card.Text>
+                  <Button
+                    variant="primary"
+                    href={"/dashboard-student/exam/objective-exam"}
+                  >
+                    Attempt Exam
+                  </Button>
+                  <Button variant="primary" className={"m-1"}>
+                    View
+                  </Button>
+                </Card.Body>
+              </Card>
+            ))
+          : ""}
+      </main>
+      {/*=============== End Of Main  ==================*/}
+    </LayoutStudent>
+  );
 };
 
 export default Courses;

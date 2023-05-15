@@ -1,3 +1,5 @@
+import axios from "axios";
+import Cookies from "js-cookie";
 // ----------- exam -----------------
 // get exam by course
 export const getExam = async (courseID) => {
