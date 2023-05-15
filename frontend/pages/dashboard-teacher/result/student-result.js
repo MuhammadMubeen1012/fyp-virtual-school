@@ -1,16 +1,62 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import LayoutTeacher from "../../../components/Dashboard/Layout/LayoutTeacher";
 import Link from "next/link";
 import { Button } from "react-bootstrap";
-import {} from "./resultController";
+import { compileResults, getResults } from "./resultController";
 import {} from "../announcements/announcementController";
+import { useRouter } from "next/router";
+import { publishResults } from "./resultController";
 
 const StudentResult = () => {
+  const [results, setResults] = useState([]);
+  const [loadingResults, setLoadingResults] = useState(false);
+  const router = useRouter();
+  const [courseID, setCourseID] = useState({});
+  const [isPublished, setIsPublished] = useState(false);
+
+  useEffect(() => {
+    if (router.isReady) {
+      console.log(router.query.courseId);
+    }
+  }, [router.isReady]);
+
+  const compileResult = (courseID) => {
+    console.log("Compiling result");
+    compileResults(courseID).then((res) => {
+      if (!res.data.success) {
+        setLoadingResults(true);
+        getResults("645122c1e1bcdf8c2a93b954").then((res) => {
+          console.log(res.courseResult);
+          setResults(res.courseResult);
+        });
+        // console.log(loadingResults);
+      } else if (!res.data.success) {
+        setLoadingResults(false);
+        // console.log(loadingResults);
+        getResults("645122c1e1bcdf8c2a93b954").then((res) => {
+          console.log(res.courseResult);
+          setResults(res.courseResult);
+        });
+      }
+    });
+  };
+
+  const publishResult = (courseID) => {
+    // Testing ID ------- "645122c1e1bcdf8c2a93b954"
+    publishResults(courseID).then((res) => {
+      console.log(res.data.success);
+      console.log(res.data.message);
+      if (res.data.success) {
+        setIsPublished(true);
+      }
+    });
+    console.log("Publishing result");
+  };
   return (
     <LayoutTeacher>
       {/*=============== Start of main ================= */}
       <main>
-        <h1>Results</h1>
+        <h1>Results: {router.query.courseName}</h1>
 
         <div
           style={{
@@ -19,8 +65,18 @@ const StudentResult = () => {
             gap: "0.5rem",
           }}
         >
-          <Button variant={"primary"}>Compile Result</Button>
-          <Button variant={"primary"}>Publish</Button>
+          <Button
+            variant={"primary"}
+            onClick={(e) => compileResult(router.query.courseId)}
+          >
+            Compile Result
+          </Button>
+          <Button
+            variant={"primary"}
+            onClick={(e) => publishResult(router.query.courseId)}
+          >
+            Publish
+          </Button>
         </div>
 
         {/* ============= Start of Courses ================= */}
@@ -39,18 +95,32 @@ const StudentResult = () => {
             </thead>
 
             <tbody>
-              <tr>
-                <td>01</td>
-                <td>Momin</td>
-                <td>100</td>
-                <td>70</td>
-                <Link
-                  href={"/dashboard-teacher/result/detail-result"}
-                  className="primary "
-                >
-                  Open
-                </Link>
-              </tr>
+              {loadingResults && results
+                ? results.map((res, index) => {
+                    return (
+                      <tr key={index}>
+                        <td>{index + 1}</td>
+                        <td>{res.student}</td>
+                        <td>{res.totalMarks}</td>
+                        <td>{res.obtainedMarks}</td>
+                        <td>
+                          <Link
+                            className="primary "
+                            href={{
+                              pathname: `/dashboard-teacher/result/detail-result`,
+                              query: {
+                                courseId: res._id,
+                                studentID: res.student,
+                              },
+                            }}
+                          >
+                            Open
+                          </Link>
+                        </td>
+                      </tr>
+                    );
+                  })
+                : "Quiz, Assignment or Exam are not graded"}
             </tbody>
           </table>
         </div>

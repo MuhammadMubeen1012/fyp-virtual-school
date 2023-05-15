@@ -41,16 +41,22 @@ exports.compileCourseResult = catchAsyncErrors(async (req, res, next) => {
 
     //till here we can get the obtained marks by the student.
 
-    //for total marks
-    examSubmission = await ExamSubmission.findById(examResult.submission);
-    // console.log(examSubmission);
-    exam = await Exam.findById(examSubmission.examId);
-    //console.log(exam);
-    assignment = await Assignment.findById(assignmentResult.assignment);
-    //console.log(assignment);
-    quiz = await Quiz.findById(quizResult.quizID);
-    //console.log(quiz);
-
+    if (quizResult && examResult && assignmentResult) {
+      //for total marks
+      examSubmission = await ExamSubmission.findById(examResult.submission);
+      // console.log(examSubmission);
+      exam = await Exam.findById(examSubmission.examId);
+      //console.log(exam);
+      assignment = await Assignment.findById(assignmentResult.assignment);
+      //console.log(assignment);
+      quiz = await Quiz.findById(quizResult.quizID);
+      //console.log(quiz);
+    } else {
+      res.status(200).json({
+        success: false,
+        message: "Quiz, Assignment or Exam result are not compiled yet",
+      });
+    }
     // //compiling marks?
     resultObtainedMarks += quizResult.obtainedMarks;
     resultObtainedMarks += examResult.obtainedMarks;

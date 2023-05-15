@@ -18,6 +18,7 @@ export const getCourses = async () => {
 export const compileResults = async (courseID) => {
   const response = await axios.post(
     `http://localhost:7000/api/v1/compile/result/${courseID}`,
+    {},
     {
       headers: {
         Authorization: `${Cookies.get("token")}`,
