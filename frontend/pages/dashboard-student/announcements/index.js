@@ -1,52 +1,62 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import LayoutStudent from "../../../components/Dashboard/Layout/LayoutStudent";
 import Link from "next/link";
+import {Button, Card, Nav} from "react-bootstrap";
+import LayoutTeacher from "../../../components/Dashboard/Layout/LayoutTeacher";
+import {AnnouncementModal, ReceiveTab, SentTab} from "../../dashboard-teacher/announcements";
+import {getAnnouncements} from "../controllers/announcementController";
 
 const Courses = () => {
+
+    const [announcements, setAnnouncements] = useState();
+
+    useEffect(() => {
+        getAnnouncements().then(res => setAnnouncements(res.announcements));
+    }, []);
+
+
     return (
         <LayoutStudent>
 
-
             {/*=============== Start of main ================= */}
             <main>
-                <h1>Results</h1>
+                <h1>Announcements</h1>
+
+                <br/><br/>
+                <Announcements
+                    announcements={announcements}
+                />
 
 
-                {/* ============= Start of Courses ================= */}
-                <div className="courses-table">
-
-                    <h2>Courses</h2>
-
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>Serial No.</th>
-                            <th>Course Name</th>
-                            <th>View Details</th>
-
-                        </tr>
-                        </thead>
-
-                        <tbody>
-                        <tr>
-                            <td>01</td>
-                            <td>English</td>
-                            <Link href={"/dashboard-teacher/attendance/attendance-details"} className="primary">
-                                Open
-                            </Link>
-                        </tr>
-                        </tbody>
-                    </table>
-
-                </div>
-                {/* ============= End of Courses  ================== */}
 
             </main>
             {/*=============== End Of Main  ==================*/}
-
 
         </LayoutStudent>
     );
 };
 
 export default Courses;
+
+
+export function Announcements({announcements}){
+
+    return(
+        <>
+            {
+                announcements.map(announcement => (
+                    <>
+                        <Card>
+                            <Card.Header>{announcement.subject}</Card.Header>
+                            <Card.Body>
+                                <Card.Text>{announcement.description}</Card.Text>
+                                <Button href={announcement.attachment}>Open</Button>
+                            </Card.Body>
+                        </Card>
+                    </>
+                ))
+            }
+
+        </>
+    )
+}

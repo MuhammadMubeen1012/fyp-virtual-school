@@ -1,8 +1,24 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import LayoutStudent from "../../../components/Dashboard/Layout/LayoutStudent";
 import Link from "next/link";
+import {getCourses} from "../controllers/commonControllers";
 
 const Courses = () => {
+
+    const [courses, setCourses] = useState([]);
+
+    useEffect(() => {
+
+        getCourses().then(res => {
+            console.log(res.courses)
+            setCourses(res.courses)
+        })
+
+    }, []);
+
+
+
+
     return (
         <LayoutStudent>
 
@@ -27,11 +43,26 @@ const Courses = () => {
                         </thead>
 
                         <tbody>
-                        <tr>
-                            <td>01</td>
-                            <td>English</td>
-                            <Link href={"/dashboard-student/exams/exam-details"} className="primary ">Open</Link>
-                        </tr>
+                        {
+                            courses.map((course, idx) => (
+                                <tr>
+                                    <td>{idx + 1}</td>
+                                    <td>{course.name}</td>
+                                    <Link className="primary"
+                                          href={{
+                                              pathname: `/dashboard-student/exam/exam-details`,
+                                              query: {
+                                                  courseId: course._id,
+                                                  courseName: course.name
+                                              }
+                                          }}
+                                    >
+                                        Open
+                                    </Link>
+                                </tr>
+                            ))
+                        }
+
 
                         </tbody>
                     </table>

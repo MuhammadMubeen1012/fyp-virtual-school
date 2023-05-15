@@ -83,7 +83,7 @@ const SidebarTeacher = () => {
 
 
     const [toggleHamburger, setToggleHamburger] = useState(true);
-    const [sidebarClick, setSidebarClick] = useState(sidebar);
+
 
 
     return (

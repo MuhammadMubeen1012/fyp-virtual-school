@@ -29,14 +29,13 @@ const Slug = () => {
           <div>
             <button className={"btn btn-primary"}>Next Lesson </button>
           </div>
-        </div>
-
-        {/* <div
+        
+        <div
                     className=""
                     style={{ border: "1px solid red", paddingBlock: "1rem" }}
                 >
                     Vector Image...
-                </div> */}
+                </div> 
 
         {/* ============= Tabs for lesson, Live Video, Assignments, Exercises, Quizes, Other Section ================= */}
         <Nav className={"mt-5 mb-5"} fill variant="tabs" defaultActiveKey="#">
@@ -61,6 +60,48 @@ const Slug = () => {
             </Nav.Link>
           </Nav.Item>
         </Nav>
+
+                <div
+                    className=""
+                    style={{
+                        paddingBlock: "1rem",
+                        display: "flex",
+                        justifyContent: "space-between",
+                    }}
+                >
+                    <div>
+                        <span>Unit 1</span>
+                        <h3>Speaking to the world</h3>
+                    </div>
+
+                    <div>
+                        <button className={"btn btn-primary"}>Next Lesson </button>
+                    </div>
+                </div>
+
+                {/* ============= Tabs for lesson, Live Video, Assignments, Exercises, Quizes, Other Section ================= */}
+                <Nav className={"mt-5 mb-5"} fill variant="tabs" defaultActiveKey="#">
+                    <Nav.Item>
+                        <Nav.Link href="#" onClick={() => setEventKey(0)}>
+                            Content
+                        </Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link eventKey="link-1" onClick={() => setEventKey(1)}>
+                            Events
+                        </Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link eventKey="link-2" onClick={() => setEventKey(2)}>
+                            Assignments
+                        </Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link eventKey="link-4" onClick={() => setEventKey(3)}>
+                            Quizes
+                        </Nav.Link>
+                    </Nav.Item>
+         
 
         {/* ============= Tabs running by conditional rendering ================= */}
         <div className="">
