@@ -16,8 +16,6 @@ const Announcement = () => {
     });
 
     const [announcements, setAnnouncements] = useState([]);
-
-
     useEffect(() => {
         getAnnouncements().then(res => setAnnouncements(res.announcements));
     }, []);

@@ -11,7 +11,7 @@ const Courses = () => {
     const [announcements, setAnnouncements] = useState();
 
     useEffect(() => {
-        getAnnouncements().then()
+        getAnnouncements().then(res => setAnnouncements(res.announcements));
     }, []);
 
 
@@ -22,9 +22,10 @@ const Courses = () => {
             <main>
                 <h1>Announcements</h1>
 
-                {/*<Announcements*/}
-
-                {/*/>*/}
+                <br/><br/>
+                <Announcements
+                    announcements={announcements}
+                />
 
 
 
