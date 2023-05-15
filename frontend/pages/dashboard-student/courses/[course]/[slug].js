@@ -33,13 +33,6 @@ const Slug = () => {
                     </div>
                 </div>
 
-                <div
-                    className=""
-                    style={{ border: "1px solid red", paddingBlock: "1rem" }}
-                >
-                    Vector Image...
-                </div>
-
                 {/* ============= Tabs for lesson, Live Video, Assignments, Exercises, Quizes, Other Section ================= */}
                 <Nav className={"mt-5 mb-5"} fill variant="tabs" defaultActiveKey="#">
                     <Nav.Item>

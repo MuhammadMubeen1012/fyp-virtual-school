@@ -25,16 +25,16 @@ const SidebarStudent = () => {
             link: "/dashboard-student/attendance"
         },
 
-        {
-            id: 3,
-            name: "Instructors",
-            icon: <span className="material-icons-sharp">emoji_people</span>,
-            link: "/dashboard-student/instructors"
-        },
+        // {
+        //     id: 3,
+        //     name: "Instructors",
+        //     icon: <span className="material-icons-sharp">emoji_people</span>,
+        //     link: "/dashboard-student/instructors"
+        // },
 
         {
             id: 4,
-            name: "Messages",
+            name: "Announcements",
             icon: <span className="material-icons-sharp">mail_outline</span>,
             link: "/dashboard-student/announcements"
         },
@@ -60,20 +60,30 @@ const SidebarStudent = () => {
             link: "/dashboard-student/logout"
         },
     ];
-    const router = useRouter();
 
     const [activeMenu, setActiveMenu] = useState();
 
+    const router = useRouter();
     const activePath = useMemo(
-        () => sidebar.find(menu => menu.link === router.pathname),
+        () => sidebar.find(menu => {
+            // console.log(router.pathname.split('/'))
+            if(router.pathname.split(('/')).length ===2)
+                return true;
+            else
+                return  menu.link === `/${router.pathname.split('/')[1]}/${router.pathname.split('/')[2]}`
+        }),
         [router.pathname]
     );
 
-    const [toggleHamburger, setToggleHamburger] = useState(true);
-
     useEffect(() => {
 
-    }, [ activeMenu]);
+    }, [activeMenu]);
+
+
+
+
+    const [toggleHamburger, setToggleHamburger] = useState(true);
+
 
 
     return (
@@ -107,7 +117,7 @@ const SidebarStudent = () => {
                                     {/*${sidebar.link === item.link.includes(`${sidebar.link}}`) ? "active" : "" }*/}
                                     {/*${item.id === activeMenu ? "active" : ""}*/}
                                     <a
-                                        className={`link  `}
+                                        className={`link  ${ activePath.link === item.link ? "active" : ""} `}
                                     >
 
                                         <span className="material-icons-sharp">{item.icon}</span>
