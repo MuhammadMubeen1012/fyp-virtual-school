@@ -12,7 +12,6 @@ const Attendance = () => {
     const [loadingAttendance, setLoadingAttendance] = useState(false);
     const [attendanceList, setAttendanceList] = useState([]);
     const [markedAttendance, setMarkedAttendance] = useState([]);
-    const [length, setLength] = useState(0);
 
     useEffect(() => {
         if (router.isReady) {
@@ -21,7 +20,6 @@ const Attendance = () => {
                 console.log(res.attendance.attendanceList);
                 setAttendance(res.attendance);
                 setAttendanceList(res.attendance.attendanceList);
-                setLength(res.attendance.attendanceList.length)
             });
         }
     }, [router.isReady]);
@@ -29,31 +27,20 @@ const Attendance = () => {
     useEffect(() => {
         if (attendanceList.length > 0) {
             setLoadingAttendance(true);
-            const marked = new Array(attendanceList.length).fill(1);
             console.log(attendanceList);
-            for (let i = 0; i < attendanceList.length; i++) {
-                const item = attendanceList[i];
-                marked[i] = item.status === "Present" ? 1 : 0;
-
-            }
-            setMarkedAttendance(marked);
+            setMarkedAttendance(new Array(attendanceList.length).fill(1));
 
         }
     }, [attendanceList]);
 
     useEffect(() => {
         if (markedAttendance.length > 0) {
-
             console.log(markedAttendance);
         }
     }, [markedAttendance]);
     const submitHandle = (e) => {
         e.preventDefault();
-        saveAttendance(attendance._id, markedAttendance).then((res) => {
-            console.log(res);
-            console.log("Sending");
-            router.back();
-        });
+        router.back();
     };
 
     return (<LayoutTeacher>
@@ -66,7 +53,7 @@ const Attendance = () => {
                     <div style={{display: "flex", justifyContent: "space-between"}}>
                         <h2>Courses</h2>
                         <div>
-                            <Button onClick={submitHandle}>Save</Button>
+                            <Button onClick={submitHandle}>Back</Button>
                         </div>
                     </div>
 
@@ -82,24 +69,15 @@ const Attendance = () => {
 
                         <tbody>
                         {loadingAttendance && attendanceList.length > 0 ? attendanceList.map((item, idx) => {
-                            const marked = _.cloneDeep(markedAttendance);
-                            marked[idx] = item.status === "Present" ? 1 : 0;
-                            // setMarkedAttendance(marked);
-
                             return (<tr key={idx}>
                                 <td>{idx + 1}</td>
                                 <td>{item.studentName}</td>
                                 {(<td>
                                         <input
                                             type="checkbox"
-                                            checked={markedAttendance[idx] === 1}
+                                            checked={item.status === "Present"}
+                                            disabled={true}
                                             id="name"
-                                            onChange={(e) => {
-                                                const ma = _.cloneDeep(markedAttendance);
-                                                ma[idx] = e.target.checked ? 1 : 0;
-                                                setMarkedAttendance(ma);
-                                                console.log(markedAttendance)
-                                            }}
                                         />
                                     </td>
                                 )}

@@ -42,6 +42,7 @@ const Attendance = () => {
                         <tbody>
                             {
                                 courses.map((course, index) => {
+                                    console.log(course)
                                     return (
                                         <tr key={index}>
                                             <td>{index + 1}</td>
@@ -51,7 +52,9 @@ const Attendance = () => {
                                                     pathname: `/dashboard-teacher/attendance/attendance-details`,
                                                     query: {
                                                         courseId: course._id,
-                                                        courseName: course.name
+                                                        courseName: course.name,
+                                                        classroomId:course.classroom
+
                                                     }
                                                 }}
                                                 className="primary"

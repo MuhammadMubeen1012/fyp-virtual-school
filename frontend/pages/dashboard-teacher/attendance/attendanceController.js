@@ -3,12 +3,12 @@ import Cookies from "js-cookie";
 
 // get courses of teacher
 export const getCourses = async () => {
-  const response = await axios.get(`http://localhost:7000/api/v1/courses`, {
-    headers: {
-      Authorization: `${Cookies.get("token")}`,
-    },
-  });
-  return response.data;
+    const response = await axios.get(`http://localhost:7000/api/v1/courses`, {
+        headers: {
+            Authorization: `${Cookies.get("token")}`,
+        },
+    });
+    return response.data;
 };
 
 // console.log("Courses", getCourses());
@@ -17,16 +17,16 @@ export const getCourses = async () => {
 // @output [attendance]
 // object contain {classroom, course, createdAt, endTime, startTime, teacher, _id, attendanceListProperty}
 export const getCourseAttendance = async (courseID) => {
-  const response = await axios.get(
-    `http://localhost:7000/api/v1/attendance/course/${courseID}`,
-    {
-      headers: {
-        Authorization: `${Cookies.get("token")}`,
-      },
-    }
-  );
+    const response = await axios.get(
+        `http://localhost:7000/api/v1/attendance/course/${courseID}`,
+        {
+            headers: {
+                Authorization: `${Cookies.get("token")}`,
+            },
+        }
+    );
 
-  return response.data;
+    return response.data;
 };
 
 // console.log("Attendance: ", getCourseAttendance("64512345e1bcdf8c2a93b966"));
@@ -34,16 +34,16 @@ export const getCourseAttendance = async (courseID) => {
 // get attendance detail of any attendance
 // @ output {attendance and success property}
 export const getAttendance = async (id) => {
-  const response = await axios.get(
-    `http://localhost:7000/api/v1/attendance/${id}`,
-    {
-      headers: {
-        Authorization: `${Cookies.get("token")}`,
-      },
-    }
-  );
+    const response = await axios.get(
+        `http://localhost:7000/api/v1/attendance/${id}`,
+        {
+            headers: {
+                Authorization: `${Cookies.get("token")}`,
+            },
+        }
+    );
 
-  return response.data;
+    return response.data;
 };
 
 // console.log("Attendance:", getAttendance("645cb1f767d5fdfbdc9eb1e3"));
@@ -51,19 +51,19 @@ export const getAttendance = async (id) => {
 // create new attendance
 // @output attendance object
 export const createAttendance = async (courseID, data) => {
-  const payLoad = data;
+    const payLoad = data;
 
-  const response = await axios.post(
-    `http://localhost:7000/api/v1/attendance/${courseID}`,
-    payLoad,
-    {
-      headers: {
-        Authorization: `${Cookies.get("token")}`,
-      },
-    }
-  );
+    const response = await axios.post(
+        `http://localhost:7000/api/v1/attendance/${courseID}`,
+        payLoad,
+        {
+            headers: {
+                Authorization: `${Cookies.get("token")}`,
+            },
+        }
+    );
 
-  return response.data;
+    return response.data;
 };
 
 // console.log(
@@ -77,19 +77,16 @@ export const createAttendance = async (courseID, data) => {
 // save attendance
 // @output {attendance and success}
 export const saveAttendance = async (attendanceID, data) => {
-  const payLoad = data;
 
-  const response = await axios.put(
-    `http://localhost:7000/api/v1/attendance/${attendanceID}`,
-    payLoad,
-    {
-      headers: {
-        Authorization: `${Cookies.get("token")}`,
-      },
-    }
-  );
-
-  return response.data;
+    return await axios.put(
+        `http://localhost:7000/api/v1/attendance/${attendanceID}`,
+        {markedAttendance: data},
+        {
+            headers: {
+                Authorization: `${Cookies.get("token")}`,
+            },
+        }
+    );
 };
 
 // console.log(
