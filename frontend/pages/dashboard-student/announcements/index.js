@@ -12,6 +12,8 @@ const Courses = () => {
 
     useEffect(() => {
         getAnnouncements().then(res => setAnnouncements(res.announcements));
+
+
     }, []);
 
 
