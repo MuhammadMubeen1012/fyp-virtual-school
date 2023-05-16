@@ -93,13 +93,17 @@ const TeacherForm = () => {
 
     try {
       const res = axios
-        .post("http://localhost:7000/api/v1/admission/teacher/data", data, {
-          headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-            Authorization: `${Cookies.get("token")}`,
-          },
-        })
+        .post(
+          "http://localhost:7000/api/v1/admission/teacher/data",
+          dummyData,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*",
+              Authorization: `${Cookies.get("token")}`,
+            },
+          }
+        )
         .then((res) => {
           console.log(res);
           console.log("Registered Successfully");

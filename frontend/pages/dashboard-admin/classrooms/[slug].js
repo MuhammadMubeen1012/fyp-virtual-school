@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import LayoutAdmin from "../../components/Dashboard/Layout/LayoutAdmin";
-import Link from "next/link";
-import {getClassroomsByAcademicYear} from "./DashboardController";
-import {Dropdown, Nav} from "react-bootstrap";
+import LayoutAdmin from "../../../components/Dashboard/Layout/LayoutAdmin";
+import {getClassroomsByAcademicYear} from "../DashboardController";
+import {Button, Dropdown, Nav} from "react-bootstrap";
 
 
-const Class06 = () => {
+const Slug = () => {
     const [classrooms, setClassrooms] = React.useState([]);
     const [loading, setLoading] = React.useState(false);
     const [eventKey, setEventKey] = useState(0);
+
 
     useEffect(() => {
         if (classrooms.length === 0) {
@@ -31,7 +31,7 @@ const Class06 = () => {
 
 
                 {/* ============= Tabs for lesson, Live Video, Assignments, Exercises, Quizes, Other Section ================= */}
-                    <Nav className={"mt-5 mb-5"} fill variant="tabs" defaultActiveKey="#">
+                <Nav className={"mt-5 mb-5"} fill variant="tabs" defaultActiveKey="#">
                     <Nav.Item>
                         <Nav.Link href="#" onClick={() => setEventKey(0)}>
                             Courses
@@ -53,28 +53,28 @@ const Class06 = () => {
 
 
                 {/* ============= Tabs running by conditional rendering ================= */}
-                    <div className="">
-                        {
+                <div className="">
+                    {
 
-                            eventKey === 0 ?
-                                <div>
-                                    {/*Courses Tab*/}
-                                    <CourseData />
-                                </div>
-                            : eventKey === 1 ?
-                                <div>
-                                    {/*Students Tab*/}
-                                    <StudentData />
-                                </div>
-                            : eventKey === 2 ?
-                                <div>
-                                    {/*Teachers Tab*/}
-                                    <TeacherData />
-                                </div>
+                        eventKey === 0 ?
+                            <div>
+                                {/*Courses Tab*/}
+                                <CourseData />
+                            </div>
+                        : eventKey === 1 ?
+                            <div>
+                                {/*Students Tab*/}
+                                <StudentData />
+                            </div>
+                        : eventKey === 2 ?
+                            <div>
+                                {/*Teachers Tab*/}
+                                <TeacherData />
+                            </div>
                             :  ""
 
-                        }
-                    </div>
+                    }
+                </div>
                 {/* =============      Tabs running code Ends here       ================== */}
 
 
@@ -194,7 +194,7 @@ const Class06 = () => {
     );
 };
 
-export default Class06;
+export default Slug;
 
 
 
@@ -206,21 +206,25 @@ export function CourseData(){
                 <h2>Courses</h2>
                 <table>
                     <thead>
-                        <tr>
-                            <th>Serial No.</th>
-                            <th>Code</th>
-                            <th>Name</th>
-                            <th>No of Lessons</th>
-                            <th>Teacher</th>
-                        </tr>
+                    <tr>
+                        <th>Serial No.</th>
+                        <th>Code</th>
+                        <th>Name</th>
+                        <th>No of Lessons</th>
+                        <th>Teacher</th>
+                    </tr>
                     </thead>
 
                     <tbody>
-                        <tr>
-                            <td></td>
-                        </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>123</td>
+                        <td>English</td>
+                        <td>8</td>
+                        <td>John</td>
+                    </tr>
 
-                    </tbody>
+                    </tbody><br/>
                 </table>
 
             </div>
@@ -246,10 +250,15 @@ export function StudentData(){
 
                     <tbody>
                     <tr>
-                        <td></td>
+                        <td>1</td>
+                        <td>Ali</td>
+                        <td>Ahmed</td>
+                        <td>
+                            <Button variant={"danger"}>Block</Button>
+                        </td>
                     </tr>
 
-                    </tbody>
+                    </tbody><br/>
                 </table>
 
             </div>
@@ -277,10 +286,17 @@ export function TeacherData(){
 
                     <tbody>
                     <tr>
-                        <td></td>
+                        <td>1</td>
+                        <td>Kamran</td>
+                        <td>Ahmed</td>
+                        <td>5</td>
+                        <td>
+                            <Button variant={"danger"}>Block</Button>
+                        </td>
                     </tr>
 
-                    </tbody>
+                    </tbody><br/>
+
                 </table>
 
             </div>

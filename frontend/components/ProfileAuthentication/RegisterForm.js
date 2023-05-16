@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import toast, {Toaster} from "react-hot-toast";
 import axios from 'axios';
+import swal from "@sweetalert/with-react";
 
 const RegisterForm = () => {
     const [username, setUsername] = useState('');
@@ -30,12 +31,13 @@ const RegisterForm = () => {
                 }
             });
 
-            console.log(res);
-            console.log(data);
-            setUsername('');
-            setEmail('');
-            setPassword('');
-            toast.success("Registered Successfully");
+            await setUsername('');
+            await setEmail('');
+            await setPassword('');
+            await swal({
+                title: "Registered Successfully",
+                icon: "success"
+            })
 
         }catch (error) {
             console.log(error);
@@ -53,14 +55,16 @@ const RegisterForm = () => {
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label>Username</label>
-                    <input required type="text" className="form-control" placeholder="Username" onChange={
-                        (e) => setUsername(e.target.value)
-                    } />
+                    <input required type="text"
+                           className="form-control"
+                           placeholder="Username"
+                           onChange={(e) => setUsername(e.target.value)}
+                    />
                 </div>
 
                 <div className="form-group">
                     <label>Email</label>
-                    <input required type="email" className="form-control" placeholder="email" onChange={
+                    <input required type="email" className="form-control" placeholder="Email" onChange={
                         (e) => setEmail(e.target.value)
                     } />
                 </div>

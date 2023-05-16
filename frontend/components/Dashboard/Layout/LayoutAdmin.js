@@ -1,5 +1,6 @@
 import React from 'react';
 import SidebarAdmin from "../Sidebar/SidebarAdmin";
+import RightSideAdmin from "../RightSide/RightSideAdmin";
 
 const LayoutAdmin = ({children}) => {
     return (
@@ -7,10 +8,10 @@ const LayoutAdmin = ({children}) => {
 
             <SidebarAdmin />
 
-            <>
                 {children}
-            </>
 
+
+            <RightSideAdmin />
 
         </div>
     );
