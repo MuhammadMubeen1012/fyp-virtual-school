@@ -123,10 +123,3 @@ const SubjectiveExam = () => {
 
 export default SubjectiveExam;
 
-const Questions = () => {
-    return (
-        <>
-
-        </>
-    )
-};

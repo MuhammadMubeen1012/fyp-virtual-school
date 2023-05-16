@@ -31,7 +31,7 @@ const SidebarAdmin = () => {
             id: 3,
             name: "Classes",
             icon: <span className="material-icons-sharp">emoji_people</span>,
-            link: "/dashboard-admin/classes"
+            link: "/dashboard-admin/classrooms"
         },
 
         {

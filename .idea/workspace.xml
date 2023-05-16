@@ -5,15 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d9b86c9f-0b89-4563-ba11-369d16e7ec77" name="Changes" comment="delete event, assignment, quiz">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_08_05_2023_5_11_pm_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_08_05_2023_5_11_pm__Changes_.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/components/Dashboard/RightSide/RightSideAdmin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/pages/dashboard-admin/classrooms/[slug].js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/pages/dashboard-admin/classrooms/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/components/Dashboard/Layout/LayoutAdmin.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/components/Dashboard/Layout/LayoutAdmin.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/components/Dashboard/Sidebar/SidebarAdmin.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/components/Dashboard/Sidebar/SidebarAdmin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/components/Dashboard/Sidebar/SidebarStudent.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/components/Dashboard/Sidebar/SidebarStudent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/components/Dashboard/Sidebar/SidebarTeacher.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/components/Dashboard/Sidebar/SidebarTeacher.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-admin/teachers.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-admin/teachers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-student/controllers/examController.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-student/controllers/examController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-student/courses/[course]/[slug].js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-student/courses/[course]/[slug].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-admin/classes.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-admin/classes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-admin/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-admin/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-student/exams/subjective-exam.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-student/exams/subjective-exam.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -115,6 +114,7 @@
       <recent name="C:\Users\KiNG\WebstormProjects\fyp-virtual-school\frontend\pages\dashboard-teacher\courses" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Momin\WebstormProjects\fyp-virtual-school\frontend\pages\dashboard-admin\classes" />
       <recent name="C:\Users\Momin\WebstormProjects\fyp-virtual-school\frontend\pages\dashboard-teacher\courses\course" />
       <recent name="C:\Users\Momin\WebstormProjects\fyp-virtual-school\frontend\pages\dashboard-student\courses\[course]" />
       <recent name="C:\Users\Momin\WebstormProjects\fyp-virtual-school\frontend\pages\dashboard-teacher\courses\[course]" />
@@ -176,7 +176,7 @@
       <workItem from="1683826176838" duration="32000" />
       <workItem from="1683994578992" duration="3711000" />
       <workItem from="1684039990841" duration="28428000" />
-      <workItem from="1684150900485" duration="32071000" />
+      <workItem from="1684150900485" duration="36943000" />
     </task>
     <task id="LOCAL-00001" summary="Done Teacher Dashboard">
       <created>1683225338573</created>
