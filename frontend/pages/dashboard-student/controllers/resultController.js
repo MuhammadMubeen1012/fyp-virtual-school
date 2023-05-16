@@ -1,3 +1,6 @@
+import axios from "axios";
+import Cookies from "js-cookie";
+
 // get student course result
 export const getCourseResult = async (courseID, studentID) => {
   const response = await axios.get(

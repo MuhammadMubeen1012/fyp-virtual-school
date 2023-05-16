@@ -13,30 +13,37 @@ const StudentResult = () => {
   const router = useRouter();
   const [courseID, setCourseID] = useState({});
   const [isPublished, setIsPublished] = useState(false);
+  const [isCompiled, setCompilation] = useState(false);
 
   useEffect(() => {
     if (router.isReady) {
       console.log(router.query.courseId);
+      getResults("645122c1e1bcdf8c2a93b954").then((res) => {
+        console.log(res.courseResult);
+        setResults(res.courseResult);
+        setCompilation(true);
+      });
     }
   }, [router.isReady]);
+
+  useEffect(() => {
+    if (results) {
+      setLoadingResults(true);
+    }
+  });
 
   const compileResult = (courseID) => {
     console.log("Compiling result");
     compileResults(courseID).then((res) => {
-      if (!res.data.success) {
+      if (res.data.success) {
         setLoadingResults(true);
         getResults("645122c1e1bcdf8c2a93b954").then((res) => {
           console.log(res.courseResult);
           setResults(res.courseResult);
         });
         // console.log(loadingResults);
-      } else if (!res.data.success) {
+      } else {
         setLoadingResults(false);
-        // console.log(loadingResults);
-        getResults("645122c1e1bcdf8c2a93b954").then((res) => {
-          console.log(res.courseResult);
-          setResults(res.courseResult);
-        });
       }
     });
   };
@@ -52,6 +59,7 @@ const StudentResult = () => {
     });
     console.log("Publishing result");
   };
+
   return (
     <LayoutTeacher>
       {/*=============== Start of main ================= */}
@@ -65,12 +73,22 @@ const StudentResult = () => {
             gap: "0.5rem",
           }}
         >
-          <Button
-            variant={"primary"}
-            onClick={(e) => compileResult(router.query.courseId)}
-          >
-            Compile Result
-          </Button>
+          {isCompiled ? (
+            <Button
+              variant={"primary"}
+              onClick={(e) => compileResult(router.query.courseId)}
+            >
+              Compile Result
+            </Button>
+          ) : (
+            <Button
+              disabled
+              variant={"primary"}
+              onClick={(e) => compileResult(router.query.courseId)}
+            >
+              Compile Result
+            </Button>
+          )}
           <Button
             variant={"primary"}
             onClick={(e) => publishResult(router.query.courseId)}

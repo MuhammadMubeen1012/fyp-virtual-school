@@ -24,6 +24,7 @@ const DetailResult = () => {
       getResult("645122c1e1bcdf8c2a93b954", "645244addc59de951d55e4ba").then(
         (res) => {
           setDetailedResult(res.courseResult);
+          setLoadingResult(true);
           console.log(res.courseResult);
         }
       );
@@ -31,7 +32,7 @@ const DetailResult = () => {
   }, [router.isReady]);
 
   useEffect(() => {
-    if (detailedResult && !loadingResult) {
+    if (detailedResult && loadingResult) {
       setLoadingResult(true);
       setAssignmentGrade(detailedResult.assignmentGrade);
       setQuizGrade(detailedResult.quizGrade);
@@ -39,7 +40,7 @@ const DetailResult = () => {
 
       console.log(assignmentGrade, "--", quizGrade, "--", examGrade);
     }
-  }, [detailedResult]);
+  }, [loadingResult]);
 
   return (
     <LayoutTeacher>
@@ -51,21 +52,25 @@ const DetailResult = () => {
         <div className="courses-table">
           <h2>Assignment Results</h2>
 
-          <table>
-            <thead>
-              <tr>
-                <th>Total Marks</th>
-                <th>Obtain Marks</th>
-              </tr>
-            </thead>
+          {loadingResult && detailedResult ? (
+            <table>
+              <thead>
+                <tr>
+                  <th>Total Marks</th>
+                  <th>Obtain Marks</th>
+                </tr>
+              </thead>
 
-            <tbody>
-              <tr>
-                <td>{assignmentGrade.totalMarks}</td>
-                <td>{assignmentGrade.obtainedMarks}</td>
-              </tr>
-            </tbody>
-          </table>
+              <tbody>
+                <tr>
+                  <td>{assignmentGrade.totalMarks}</td>
+                  <td>{assignmentGrade.obtainedMarks}</td>
+                </tr>
+              </tbody>
+            </table>
+          ) : (
+            ""
+          )}
         </div>
         {/* ============= Assignment Result  ================== */}
 
@@ -73,21 +78,25 @@ const DetailResult = () => {
         <div className="courses-table">
           <h2>Quiz Results</h2>
 
-          <table>
-            <thead>
-              <tr>
-                <th>Total Marks</th>
-                <th>Obtain Marks</th>
-              </tr>
-            </thead>
+          {loadingResult && detailedResult ? (
+            <table>
+              <thead>
+                <tr>
+                  <th>Total Marks</th>
+                  <th>Obtain Marks</th>
+                </tr>
+              </thead>
 
-            <tbody>
-              <tr>
-                <td>{quizGrade.totalMarks}</td>
-                <td>{quizGrade.obtainedMarks}</td>
-              </tr>
-            </tbody>
-          </table>
+              <tbody>
+                <tr>
+                  <td>{quizGrade.totalMarks}</td>
+                  <td>{quizGrade.obtainedMarks}</td>
+                </tr>
+              </tbody>
+            </table>
+          ) : (
+            ""
+          )}
         </div>
         {/* ============= Quiz Result  ================== */}
 
@@ -95,21 +104,25 @@ const DetailResult = () => {
         <div className="courses-table">
           <h2>Exam Results</h2>
 
-          <table>
-            <thead>
-              <tr>
-                <th>Total Marks</th>
-                <th>Obtain Marks</th>
-              </tr>
-            </thead>
+          {loadingResult && detailedResult ? (
+            <table>
+              <thead>
+                <tr>
+                  <th>Total Marks</th>
+                  <th>Obtain Marks</th>
+                </tr>
+              </thead>
 
-            <tbody>
-              <tr>
-                <td>{examGrade.totalMarks}</td>
-                <td>{examGrade.obtainedMarks}</td>
-              </tr>
-            </tbody>
-          </table>
+              <tbody>
+                <tr>
+                  <td>{examGrade.totalMarks}</td>
+                  <td>{examGrade.obtainedMarks}</td>
+                </tr>
+              </tbody>
+            </table>
+          ) : (
+            ""
+          )}
         </div>
         {/* ============= Exam Result  ================== */}
       </main>
