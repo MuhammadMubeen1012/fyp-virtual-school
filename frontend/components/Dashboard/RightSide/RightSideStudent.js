@@ -12,6 +12,8 @@ const RightSideStudent = () => {
   const [areAssignments, setAreAssignments] = useState(false);
   const [quizes, setQuizes] = useState([]);
   const [areQuizes, setAreQuizes] = useState(false);
+  const [upcomingAssignments, setUpcomingAssignments] = useState();
+  const [upComingQuiz, setUpComingQuiz] = useState();
 
   useEffect(() => {
     async function fetchData() {
@@ -32,7 +34,7 @@ const RightSideStudent = () => {
           coursesLessons.map((lesson) => getAssignmentsByLesson(lesson._id))
         );
 
-        // console.log("Assignments", assignments);
+        console.log("Assignments", assignments);
         await setAssignments(assiggnments.flat());
         setAreAssignments(true);
 
@@ -40,7 +42,7 @@ const RightSideStudent = () => {
           coursesLessons.map((lesson) => getQuizesByLesson(lesson._id))
         );
 
-        // console.log("Quizes", quizes);
+        console.log("Quizes", quizes);
         await setQuizes(quizzes.flat());
         setAreQuizes(true);
         // await console.log("State-Q", quizes);
@@ -51,6 +53,19 @@ const RightSideStudent = () => {
     }
 
     fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (areAssignments && assignments.length > 0) {
+      setUpcomingAssignments(assignments.slice(0, 2));
+
+      console.log("UA", upcomingAssignments);
+    }
+
+    if (areQuizes && quizes.length > 0) {
+      setUpComingQuiz(quizes.slice(0, 2));
+      console.log("UQ", upComingQuiz);
+    }
   }, []);
 
   return (
@@ -71,27 +86,40 @@ const RightSideStudent = () => {
         <div className="recent-updates">
           <h2>Upcoming Activities</h2>
 
-          <div className="update">
-            <div className="profile-photo">
-              <h3>- SEO</h3>
-            </div>
+          {upComingQuiz
+            ? upComingQuiz.map((quiz) => (
+                <div className="update">
+                  <div className="profile-photo">
+                    <h3>Q</h3>
+                  </div>
 
-            <div className="message">
-              <p>Assignment due 21 March</p>
-              <small className="text-muted">2 Minutes Ago</small>
-            </div>
-          </div>
+                  <div className="message">
+                    <p>{quiz.name}</p>
+                    <small className="text-muted">{quiz.description}</small>
+                  </div>
+                </div>
+              ))
+            : ""}
 
-          <div className="update">
-            <div className="profile-photo">
-              <h3>- SE</h3>
-            </div>
+          {upcomingAssignments
+            ? upcomingAssignments.map((assignment) => (
+                <div className="update">
+                  <div className="profile-photo">
+                    <h3>A</h3>
+                  </div>
 
-            <div className="message">
-              <p>Assignment due 25 March</p>
-              <small className="text-muted">2 Minutes Ago</small>
-            </div>
-          </div>
+                  <div className="message">
+                    <p>{assignment.name}</p>
+                    <small className="text-muted">
+                      Deadline:
+                      {new Date(
+                        Date.parse(assignment.deadLine)
+                      ).toLocaleDateString()}
+                    </small>
+                  </div>
+                </div>
+              ))
+            : ""}
         </div>
       </div>
       {/*end of recent updates*/}
