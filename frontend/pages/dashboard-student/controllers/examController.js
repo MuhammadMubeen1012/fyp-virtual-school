@@ -45,7 +45,7 @@ export const getObjectiveExam = async (examID) => {
 export const submitSubjectiveExam = async (examID, data) => {
   const payLoad = data;
   const response = await axios.post(
-    `http://localhost:7000/api/v1/submit/exam/subjective/${examID}`,
+    `http://localhost:7000/api/v1/submit/subjective/exam/${examID}`,
     payLoad,
     {
       headers: {
@@ -60,7 +60,7 @@ export const submitSubjectiveExam = async (examID, data) => {
 export const submitObjectiveExam = async (examID, data) => {
   const payLoad = data;
   const response = await axios.put(
-    `http://localhost:7000/api/v1/submit/exam/objective/${examID}`,
+    `http://localhost:7000/api/v1/submit/objective/exam/${examID}`,
     payLoad,
     {
       headers: {

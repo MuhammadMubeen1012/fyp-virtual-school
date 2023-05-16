@@ -57,7 +57,7 @@ const SidebarStudent = () => {
             id: 7,
             name: "Logout",
             icon: <span className="material-icons-sharp">logout</span>,
-            link: "/dashboard-student/logout"
+            link: "/"
         },
     ];
 

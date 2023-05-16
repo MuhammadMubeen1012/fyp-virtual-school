@@ -60,21 +60,25 @@ const SidebarAdmin = () => {
             id: 8,
             name: "Logout",
             icon: <span className="material-icons-sharp">logout</span>,
-            link: "/dashboard-admin/logout"
+            link: "/"
         },
     ];
-
-
     const router = useRouter();
-    const [activeMenu, setActiveMenu] = useState();
 
     const activePath = useMemo(
-        () => sidebar.find(menu => menu.link === router.pathname),
+        () => sidebar.find(menu => {
+           if (router.pathname.split('/').length === 2){
+               return true;
+           }
+           else{
+               return menu.link === `/${router.pathname.split('/')[1]}/${router.pathname.split('/')[2]}`
+           }
+
+        }),
         [router.pathname]
     );
 
     const [toggleHamburger, setToggleHamburger] = useState(true);
-    const [sidebarClick, setSidebarClick] = useState(sidebar);
 
 
     return (
@@ -92,38 +96,26 @@ const SidebarAdmin = () => {
 
 
                 <div className="sidebar">
-
-
                     {
                         sidebar.map((item, index) => (
-                            <div className={"wrap-a"}
-                                 onClick={() => {
-                                     setActiveMenu(index)
-                                 }}
-                            >
+                            <div className={"wrap-a"}>
                                 <Link
                                     href={item.link}
                                     key={index}
                                 >
-                                    {/*${sidebar.link === item.link.includes(`${sidebar.link}}`) ? "active" : "" }*/}
-                                    {/*${item.id === activeMenu ? "active" : ""}*/}
                                     <a
-                                        className={`link  `}
+                                        className={`link ${activePath.link === item.link ? "active" : ""}  `}
                                     >
 
                                         <span className="material-icons-sharp">{item.icon}</span>
                                         <h3>{item.name}</h3>
-
-
                                     </a>
-
                                 </Link>
                             </div>
 
 
                         ))
                     }
-
                 </div>
 
 

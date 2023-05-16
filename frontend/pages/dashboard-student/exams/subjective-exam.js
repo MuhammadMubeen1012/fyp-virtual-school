@@ -13,7 +13,6 @@ const SubjectiveExam = () => {
     const [isExamLoaded, setExamLoading] = useState(false);
     const [answers, setAnswers] = useState(null);
     const [ans, setAns] = useState({});
-
     const router = useRouter();
 
     useEffect(() => {
@@ -125,5 +124,9 @@ const SubjectiveExam = () => {
 export default SubjectiveExam;
 
 const Questions = () => {
-    return <></>;
+    return (
+        <>
+
+        </>
+    )
 };
