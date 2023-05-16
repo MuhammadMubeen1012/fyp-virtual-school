@@ -11,9 +11,17 @@ const {
   getSubmissionByStudent,
   getSubmissionsByExam,
   gradeExamSubmission,
+  submitSubjectiveExam,
+  submitObjectiveExam,
 } = require("../../controllers/Classroom/examSubmissionController");
 
-router.route("/submit/exam/:examID").post(isAuthenticatedUser, submitExam);
+router
+  .route("/submit/subjective/exam/:examID")
+  .post(isAuthenticatedUser, submitSubjectiveExam);
+
+router
+  .route("/submit/objective/exam/:examID")
+  .put(isAuthenticatedUser, submitObjectiveExam);
 
 // GET /submit/exam/:studentID
 router

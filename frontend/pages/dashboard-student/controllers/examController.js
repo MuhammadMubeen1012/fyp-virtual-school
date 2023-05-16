@@ -42,10 +42,25 @@ export const getObjectiveExam = async (examID) => {
 
 // ---------------- exam submission ----------------------
 // submit exam
-export const submitExam = async (examID, data) => {
+export const submitSubjectiveExam = async (examID, data) => {
   const payLoad = data;
   const response = await axios.post(
-    `http://localhost:7000/api/v1/submit/exam/${examID}`,
+    `http://localhost:7000/api/v1/submit/exam/subjective/${examID}`,
+    payLoad,
+    {
+      headers: {
+        Authorization: `${Cookies.get("token")}`,
+      },
+    }
+  );
+
+  return response.data;
+};
+
+export const submitObjectiveExam = async (examID, data) => {
+  const payLoad = data;
+  const response = await axios.put(
+    `http://localhost:7000/api/v1/submit/exam/objective/${examID}`,
     payLoad,
     {
       headers: {

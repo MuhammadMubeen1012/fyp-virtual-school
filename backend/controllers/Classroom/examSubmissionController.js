@@ -5,8 +5,8 @@ const ObjectiveExam = require("../../models/Classroom/ObjectiveExam");
 const Student = require("../../models/student");
 
 // @def submit exam by student
-// @route /submit/exam/:examID
-exports.submitExam = catchAsyncErrors(async (req, res, next) => {
+// @route /submit/subjective/exam/:examID
+exports.submitSubjectiveExam = catchAsyncErrors(async (req, res, next) => {
   const exam = await Exam.findById(req.params.examID);
   const student = await Student.findOne({ user: req.user._id });
 
@@ -17,7 +17,6 @@ exports.submitExam = catchAsyncErrors(async (req, res, next) => {
       studentId: student.user,
       examId: exam._id,
       subjectiveAnswers: data.subjectiveAnswers,
-      objectiveAnswers: data.objectiveAnswers,
     });
 
     if (examSubmission) {
@@ -28,6 +27,34 @@ exports.submitExam = catchAsyncErrors(async (req, res, next) => {
     }
   } else {
     res.status(400).json({
+      success: false,
+      message: "No exam found",
+    });
+  }
+});
+
+// @def submit exam by student
+// @route /submit/objective/exam/:examID
+exports.submitObjectiveExam = catchAsyncErrors(async (req, res, next) => {
+  const exam = await Exam.findById(req.params.examID);
+  const student = await Student.findOne({ user: req.user._id });
+  const submission = await ExamSubmission.findOne({ studentId: student._id });
+
+  const data = req.body;
+
+  if (exam && student && submission) {
+    submission.objectiveAnswers = data.objectiveAnswers;
+
+    await submission.save();
+
+    if (submission) {
+      res.status(200).json({
+        success: true,
+        message: "Successfully submitted",
+      });
+    }
+  } else {
+    res.status(200).json({
       success: false,
       message: "No exam found",
     });
