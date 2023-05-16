@@ -5,16 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d9b86c9f-0b89-4563-ba11-369d16e7ec77" name="Changes" comment="delete event, assignment, quiz">
-      <change afterPath="$PROJECT_DIR$/frontend/pages/dashboard-admin/announcements/announcementController.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/pages/dashboard-admin/announcements/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/pages/dashboard-admin/teachers/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/components/Dashboard/Sidebar/SidebarAdmin.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/components/Dashboard/Sidebar/SidebarAdmin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-admin/class-06.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-admin/classes.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-admin/students/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-admin/requests.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-admin/students.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-admin/teachers.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/config/config.env" beforeDir="false" afterPath="$PROJECT_DIR$/backend/config/config.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/components/Admission/TeacherForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/components/Admission/TeacherForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/components/ProfileAuthentication/RegisterForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/components/ProfileAuthentication/RegisterForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/register.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,7 +173,7 @@
       <workItem from="1683826176838" duration="32000" />
       <workItem from="1683994578992" duration="3711000" />
       <workItem from="1684039990841" duration="28428000" />
-      <workItem from="1684150900485" duration="38310000" />
+      <workItem from="1684150900485" duration="39488000" />
     </task>
     <task id="LOCAL-00001" summary="Done Teacher Dashboard">
       <created>1683225338573</created>

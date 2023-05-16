@@ -22,6 +22,7 @@ const TeacherForm = () => {
     const [image1, setImage1] = useState();
     const [image2, setImage2] = useState();
     const [image3, setImage3] = useState();
+    const router = useRouter();
 
 
     useEffect(() => {
@@ -88,7 +89,7 @@ const TeacherForm = () => {
 
 
         try {
-            const res = axios.post('http://localhost:7000/api/v1/admission/teacher/data',dummyData , {
+            const res = axios.post('http://localhost:7000/api/v1/admission/teacher/data',data , {
                 headers: {
                     'Content-Type': 'application/json',
                     'Access-Control-Allow-Origin': '*',
@@ -98,6 +99,7 @@ const TeacherForm = () => {
                 console.log(res);
                 console.log("Registered Successfully");
                 toast.success("Registered Successfully");
+                router.push("/quiz-teacher")
             })
 
 
@@ -158,14 +160,6 @@ const TeacherForm = () => {
             setCourses(courses.filter((course) => course !== value))
         }
 
-
-    }
-    const handleDropdownChange = (e) => {
-        const selectedClass = e.target.value;
-        setFormData(prevFormData => ({
-            ...prevFormData,
-            class: selectedClass
-        }))
 
     }
 

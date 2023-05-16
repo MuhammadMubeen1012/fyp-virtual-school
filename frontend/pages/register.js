@@ -25,9 +25,6 @@ const ProfileAuthentication = () => {
                         </div>
 
 
-
-
-
                     </div>
                 </div>
             </div>
