@@ -2,7 +2,12 @@ import React, {useEffect, useState} from "react";
 import LayoutStudent from "../../../../components/Dashboard/Layout/LayoutStudent";
 import Link from "next/link";
 import {Button, Card, Form, Modal, Nav} from "react-bootstrap";
-import {getContentsByLesson, getEventsByLesson} from "../../controllers/coursesController";
+import {
+    getAssignmentsByLesson,
+    getContentsByLesson,
+    getEventsByLesson,
+    getQuizesByLesson
+} from "../../controllers/coursesController";
 import {useRouter} from "next/router";
 
 const Slug = () => {
@@ -12,13 +17,16 @@ const Slug = () => {
     const [assignmentModal, setAssignmentModal] = useState(false);
     const [contentData, setContentData] = useState();
     const [eventData, setEventData] = useState();
-
+    const [assignmentsData, setAssignmentsData] = useState();
+    const [quizData, setQuizData] = useState();
 
 
     useEffect(() => {
-        // console.log(router.query.lessonID)
+
         getContentsByLesson(router.query.lessonID).then(res => setContentData(res))
         getEventsByLesson(router.query.lessonID).then(res => setEventData(res))
+        getAssignmentsByLesson(router.query.lessonID).then(res => setAssignmentsData(res))
+        getQuizesByLesson(router.query.lessonID).then(res => setQuizData(res))
 
 
     }, []);
@@ -79,29 +87,39 @@ const Slug = () => {
 
 
                     {/* ============= Tabs running by conditional rendering ================= */}
-                    <div className="">
+                    <div>
                         {eventKey === 0 ? (
                             <div>
                                 {/*Content Tab*/}
-                                <ContentTab />
+                                <ContentTab
+                                    contentData={contentData}
+                                />
                                 <br/>
                             </div>
                         ) : eventKey === 1 ? (
                             <div>
                                 {/*Event Tab*/}
-                                <EventsTab />
+                                <EventsTab
+                                    eventData={eventData}
+                                />
                                 <br/>
                             </div>
                         ) : eventKey === 2 ? (
                             <div>
                                 {/*Assignments Tab*/}
-                                <AssignmentsTab />
+                                <AssignmentsTab
+                                    assignmentsData={assignmentsData}
+                                    assignmentModal={assignmentModal}
+                                    setAssignmentModal={setAssignmentModal}
+                                />
                                 <br/>
                             </div>
                         ) : eventKey === 3 ? (
                             <div>
                                 {/*Quiz Tab*/}
-                                <QuizTab />
+                                <QuizTab
+                                    quizData={quizData}
+                                />
                                 <br/>
                             </div>
                         ) : (
@@ -109,63 +127,17 @@ const Slug = () => {
                         )}
                     </div>
 
-                    {assignmentModal && (
-                        <div>
-                            <Modal
-                                show={assignmentModal}
-                                onHide={() => setAssignmentModal(false)}
-                                dialogClassName="custom-modal"
-                                size={"lg"}
-                                aria-labelledby="example-custom-modal-styling-title"
-                                centered
-                            >
-                                <Modal.Header closeButton>
-                                    <Modal.Title id="example-custom-modal-styling-title">
-                                        Submit Assignment
-                                    </Modal.Title>
-                                </Modal.Header>
-                                <Modal.Body>
-                                    <Form
-                                        handleSubmit={(e) => {
-                                            e.preventDefault();
-                                        }}
-                                    >
-                                        <Form.Group controlId={"question"}>
-                                            <Form.Label>File Name</Form.Label>
-                                            <Form.Control
-                                                type={"text"}
-                                                className={"m-2"}
-                                                placeholder={"File Name"}
-                                            />
-                                        </Form.Group>
+                    {/* ============= Tabs running by conditional rendering ================= */}
 
-                                        <br/>
-                                        <Form.Group controlId={"question"}>
-                                            <Form.Label>File Link</Form.Label>
-                                            <Form.Control
-                                                type={"text"}
-                                                className={"m-2"}
-                                                placeholder={"File Link"}
-                                            />
-                                        </Form.Group>
 
-                                        <br/>
-                                        <Modal.Footer>
-                                            <Button type={"submit"}>Submit</Button>
-                                        </Modal.Footer>
-                                    </Form>
-                                </Modal.Body>
-                            </Modal>
-                        </div>
-                    )}
+
+
+
 
                 </div>
 
             </main>
             {/*=============== End Of Main  ==================*/}
-
-
-
 
         </LayoutStudent>
 );
@@ -175,93 +147,204 @@ export default Slug;
 
 
 
-export const ContentTab = () => {
+export const ContentTab = ({contentData}) => {
+    const router = useRouter();
 
     return(
         <>
-
-            <Card>
-                <Card.Header>Content</Card.Header>
-                <Card.Body>
-                    <Card.Text>Description</Card.Text>
-                    <div>
-                        <Button variant="primary">Open</Button>
-                    </div>
-                </Card.Body>
-            </Card>
-            <br/>
+            {
+                contentData?.map((item, idx) => (
+                    <>
+                        <Card>
+                            <Card.Header>{item.name}</Card.Header>
+                            <Card.Body>
+                                <div>
+                                    <Button
+                                        target={"_blank"}
+                                        variant="primary"
+                                        onClick={() => {
+                                            router.push("https://www.google.com")
+                                            // window.location.href = ""
+                                        }}
+                                    >
+                                        Open
+                                    </Button>
+                                </div>
+                            </Card.Body>
+                        </Card>
+                        <br/>
+                    </>
+                ))
+            }
 
         </>
     )
 }
 
 
-export const EventsTab = () => {
+export const EventsTab = ({eventData}) => {
+    const router = useRouter();
 
     return(
         <>
-            <Card>
-                <Card.Header>Event Title</Card.Header>
-                <Card.Body>
-                    <Card.Title>Description</Card.Title>
-                    <Card.Text>Event Date</Card.Text>
-                    <Button variant="primary">Go to Event</Button>
-                </Card.Body>
-            </Card>
-            <br/>
+
+            {
+                eventData?.map((item, idx) =>(
+                    <>
+                        <Card>
+                            <Card.Header>{item.name}</Card.Header>
+                            <Card.Body>
+                                <Card.Title>{item.description}</Card.Title>
+                                <Card.Text>{item.eventDate.toLocaleString()}</Card.Text>
+                                <Button variant="primary"
+                                    target={"_blank"}
+                                    onClick={() => {
+                                        router.push(`https://${item.link}`)
+                                    }}
+                                >
+                                    Go to Event
+                                </Button>
+                            </Card.Body>
+                        </Card>
+                        <br/>
+                    </>
+                ))
+            }
+
+
 
         </>
     )
 }
 
 
-export const AssignmentsTab = () => {
+export const AssignmentsTab = ({assignmentsData, assignmentModal, setAssignmentModal}) => {
+    const router = useRouter();
 
     return(
         <>
-            <Card>
-                <Card.Header>Assignment Title</Card.Header>
-                <Card.Body>
-                    <Card.Text>Description</Card.Text>
+            {
+                assignmentsData?.map((item, idx) => (
+                    <>
+                        <Card>
+                            <Card.Header>{item.name}</Card.Header>
+                            <Card.Body>
+                                <Card.Text>{item.description}</Card.Text>
 
-                    <div>
-                        <Button variant="primary">Open</Button>
-                        <Button
-                            className={"m-1"}
-                            variant="success"
-                            onClick={() => {
-                                setAssignmentModal(true);
-                            }}
-                        >
-                            Submit
-                        </Button>
-                    </div>
-                </Card.Body>
-            </Card>
+                                <div>
+                                    <Button
+                                        variant="primary"
+                                        onClick={() => {
+                                            router.push(item.fileLink)
+                                        }}
+                                    >Open</Button>
+                                    <Button
+                                        className={"m-1"}
+                                        variant="success"
+                                        onClick={() => {
+                                            setAssignmentModal(true);
+                                        }}
+                                    >
+                                        Submit
+                                    </Button>
+                                </div>
+                            </Card.Body>
+                        </Card>
+                    </>
+                ))
+
+            }
+
         </>
     )
 }
 
 
-export const QuizTab = () => {
+export const AssignmentModal = ({assignmentModal, setAssignmentModal}) => {
 
     return(
         <>
-            <Card>
-                <Card.Header>Quiz Title</Card.Header>
-                <Card.Body>
-                    <Card.Title>Description</Card.Title>
-                    <Button
-                        variant="primary"
-                        href={"/dashboard-student/courses/english/quiz"}
+
+            <Modal
+                show={assignmentModal}
+                onHide={() => setAssignmentModal(false)}
+                dialogClassName="custom-modal"
+                size={"lg"}
+                aria-labelledby="example-custom-modal-styling-title"
+                centered
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title id="example-custom-modal-styling-title">
+                        Submit Assignment
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form
+                        handleSubmit={(e) => {
+                            e.preventDefault();
+                        }}
                     >
-                        Open
-                    </Button>
-                </Card.Body>
-            </Card>
+                        <Form.Group controlId={"question"}>
+                            <Form.Label>File Name</Form.Label>
+                            <Form.Control
+                                type={"text"}
+                                className={"m-2"}
+                                placeholder={"File Name"}
+                            />
+                        </Form.Group>
+
+                        <br/>
+                        <Form.Group controlId={"question"}>
+                            <Form.Label>File Link</Form.Label>
+                            <Form.Control
+                                type={"text"}
+                                className={"m-2"}
+                                placeholder={"File Link"}
+                            />
+                        </Form.Group>
+
+                        <br/>
+                        <Modal.Footer>
+                            <Button type={"submit"}>Submit</Button>
+                        </Modal.Footer>
+                    </Form>
+                </Modal.Body>
+            </Modal>
+
         </>
     )
 }
+
+
+export const QuizTab = ({quizData}) => {
+
+    return(
+        <>
+            {
+                quizData?.map((item, idx) => (
+                    <>
+                        <Card>
+                            <Card.Header>{item.name}</Card.Header>
+                            <Card.Body>
+                                <Card.Title>{item.description}</Card.Title>
+                                <Button
+                                    variant="primary"
+                                    href={"/dashboard-student/courses/english/quiz"}
+                                >
+                                    Open
+                                </Button>
+                            </Card.Body>
+                        </Card><br/>
+                    </>
+                ))
+            }
+
+        </>
+    )
+}
+
+
+
 
 
 

@@ -53,14 +53,13 @@ const Exam = () => {
                                 {course.lessons ? <td>{course.lessons.length}</td> : <td>0</td>}
                                 <td>
                                     <Link className="primary "
-                                        // href={`/dashboard-teacher/courses/${course._id}`}
-                                          href={{
-                                              pathname: `/dashboard-teacher/exam/exam-details`,
-                                              query: {
-                                                  courseId: course._id,
-                                                  courseName: course.name
-                                              }
-                                          }}
+                                      href={{
+                                          pathname: `/dashboard-teacher/exam/exam-details`,
+                                          query: {
+                                              courseId: course._id,
+                                              courseName: course.name
+                                          }
+                                      }}
                                     >
                                         Open
                                     </Link>

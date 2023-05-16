@@ -44,12 +44,6 @@ const ExamDetails = () => {
                   <Card.Text>{exam.description}</Card.Text>
                   <Button
                     variant="primary"
-                    href={"/dashboard-student/exam/objective-exam"}
-                  >
-                    Attempt Exam
-                  </Button>
-                  <Button
-                    variant="primary"
                     className={"m-1"}
                     onClick={() => {
                       setModal(true);
