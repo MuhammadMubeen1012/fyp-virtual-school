@@ -6,7 +6,7 @@ import {
     getAssignmentsByLesson,
     getContentsByLesson,
     getEventsByLesson,
-    getQuizesByLesson
+    getQuizesByLesson, submitAssignment
 } from "../../controllers/coursesController";
 import {useRouter} from "next/router";
 
@@ -19,6 +19,9 @@ const Slug = () => {
     const [eventData, setEventData] = useState();
     const [assignmentsData, setAssignmentsData] = useState();
     const [quizData, setQuizData] = useState();
+
+    const [formAssignmentData, setFormAssignmentData] = useState();
+
 
 
     useEffect(() => {
@@ -111,6 +114,8 @@ const Slug = () => {
                                     assignmentsData={assignmentsData}
                                     assignmentModal={assignmentModal}
                                     setAssignmentModal={setAssignmentModal}
+                                    formAssignmentData={formAssignmentData}
+                                    setFormAssignmentData={setFormAssignmentData}
                                 />
                                 <br/>
                             </div>
@@ -199,7 +204,7 @@ export const EventsTab = ({eventData}) => {
                                 <Button variant="primary"
                                     target={"_blank"}
                                     onClick={() => {
-                                        router.push(`https://${item.link}`)
+                                        // router.push(`https://${item.link}`)
                                     }}
                                 >
                                     Go to Event
@@ -218,7 +223,7 @@ export const EventsTab = ({eventData}) => {
 }
 
 
-export const AssignmentsTab = ({assignmentsData, assignmentModal, setAssignmentModal}) => {
+export const AssignmentsTab = ({assignmentsData, assignmentModal, setAssignmentModal, formAssignmentData, setFormAssignmentData}) => {
     const router = useRouter();
 
     return(
@@ -237,7 +242,9 @@ export const AssignmentsTab = ({assignmentsData, assignmentModal, setAssignmentM
                                         onClick={() => {
                                             router.push(item.fileLink)
                                         }}
-                                    >Open</Button>
+                                    >
+                                        Open
+                                    </Button>
                                     <Button
                                         className={"m-1"}
                                         variant="success"
@@ -249,7 +256,19 @@ export const AssignmentsTab = ({assignmentsData, assignmentModal, setAssignmentM
                                     </Button>
                                 </div>
                             </Card.Body>
+
+                            <AssignmentModal
+                                assignmentsData={assignmentsData}
+                                assignmentModal={assignmentModal}
+                                setAssignmentModal={setAssignmentModal}
+                                formAssignmentData={formAssignmentData}
+                                setFormAssignmentData={setFormAssignmentData}
+                                id={item._id}
+                            />
                         </Card>
+
+
+
                     </>
                 ))
 
@@ -260,7 +279,27 @@ export const AssignmentsTab = ({assignmentsData, assignmentModal, setAssignmentM
 }
 
 
-export const AssignmentModal = ({assignmentModal, setAssignmentModal}) => {
+export const AssignmentModal = ({assignmentsData, assignmentModal, setAssignmentModal, formAssignmentData, setFormAssignmentData, id}) => {
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(formAssignmentData);
+
+        submitAssignment(id , {
+            "fileName": formAssignmentData.fileName,
+            "fileLink": formAssignmentData.fileLink,
+        } )
+            .then(res => console.log(res))
+            .catch(res => console.log(res))
+    }
+
+    const handleChange = (e) => {
+        const {name, value} = e.target;
+        setFormAssignmentData(prevState => ({
+            ...prevState,
+            [name]: value,
+        }))
+    }
 
     return(
         <>
@@ -279,17 +318,15 @@ export const AssignmentModal = ({assignmentModal, setAssignmentModal}) => {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form
-                        handleSubmit={(e) => {
-                            e.preventDefault();
-                        }}
-                    >
+                    <Form onSubmit={handleSubmit}>
                         <Form.Group controlId={"question"}>
                             <Form.Label>File Name</Form.Label>
                             <Form.Control
                                 type={"text"}
                                 className={"m-2"}
                                 placeholder={"File Name"}
+                                name={"fileName"}
+                                onChange={handleChange}
                             />
                         </Form.Group>
 
@@ -300,6 +337,8 @@ export const AssignmentModal = ({assignmentModal, setAssignmentModal}) => {
                                 type={"text"}
                                 className={"m-2"}
                                 placeholder={"File Link"}
+                                name={"fileLink"}
+                                onChange={handleChange}
                             />
                         </Form.Group>
 

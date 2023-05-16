@@ -3,6 +3,7 @@ import Link from "next/link";
 import {useRouter} from "next/router";
 
 const SidebarTeacher = () => {
+
     const sidebar = [
         {
             id: 0,
@@ -57,16 +58,14 @@ const SidebarTeacher = () => {
             id: 7,
             name: "Logout",
             icon: <span className="material-icons-sharp">logout</span>,
-            link: "/dashboard-teacher/logout"
+            link: "/"
         },
     ];
-
-    const [activeMenu, setActiveMenu] = useState();
-
     const router = useRouter();
+
+
     const activePath = useMemo(
         () => sidebar.find(menu => {
-            // console.log(router.pathname.split('/'))
             if(router.pathname.split(('/')).length ===2)
             return true;
             else
@@ -75,9 +74,6 @@ const SidebarTeacher = () => {
         [router.pathname]
     );
 
-    useEffect(() => {
-
-    }, [activeMenu]);
 
 
 
@@ -105,24 +101,17 @@ const SidebarTeacher = () => {
 
                     {
                         sidebar.map((item, index) => (
-                            <div className={"wrap-a"}
-                                onClick={() => {
-                                    setActiveMenu(index)
-                                }}
-                            >
+                            <div className={"wrap-a"}>
                                 <Link
                                     href={item.link}
                                     key={index}
                                 >
-                                    {/*${sidebar.link === item.link.includes(`${sidebar.link}}`) ? "active" : "" }*/}
-                                    {/*${item.id === activeMenu ? "active" : ""}*/}
                                     <a
                                         className={`link  ${ activePath.link === item.link ? "active" : ""} `}
                                     >
 
                                         <span className="material-icons-sharp">{item.icon}</span>
                                         <h3>{item.name}</h3>
-
 
                                     </a>
 
