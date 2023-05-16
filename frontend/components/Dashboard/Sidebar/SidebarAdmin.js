@@ -34,26 +34,20 @@ const SidebarAdmin = () => {
             link: "/dashboard-admin/classrooms"
         },
 
-        {
-            id: 4,
-            name: "Attendance",
-            icon: <span className="material-icons-sharp">mail_outline</span>,
-            link: "/dashboard-admin/attendance"
-        },
+        // {
+        //     id: 4,
+        //     name: "Attendance",
+        //     icon: <span className="material-icons-sharp">mail_outline</span>,
+        //     link: "/dashboard-admin/attendance"
+        // },
 
         {
             id: 5,
-            name: "Notice Board",
+            name: "Announcements",
             icon: <span className="material-icons-sharp">inventory</span>,
-            link: "/dashboard-admin/notice-board"
+            link: "/dashboard-admin/announcements"
         },
 
-        {
-            id: 6,
-            name: "Requests",
-            icon: <span className="material-icons-sharp">grade</span>,
-            link: "/dashboard-admin/requests"
-        },
 
 
         {
