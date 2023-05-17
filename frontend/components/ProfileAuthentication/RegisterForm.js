@@ -4,16 +4,20 @@ import axios from 'axios';
 import swal from "@sweetalert/with-react";
 
 const RegisterForm = () => {
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+
+
+    const [formData, setFormData] = useState({
+        username: "",
+        email: "",
+        password: "",
+    });
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = {
-            name : username, // name: username,
-            email,  // email: email,
-            password, // password: password
+            name : formData.username, // name: username,
+            email: formData.email,  // email: email,
+            password: formData.password // password: password
         };
 
 
@@ -31,10 +35,13 @@ const RegisterForm = () => {
                 }
             });
 
-            await setUsername('');
-            await setEmail('');
-            await setPassword('');
-            await swal({
+            await setFormData({
+                username: "",
+                email: "",
+                password: "",
+            });
+
+            swal({
                 title: "Registered Successfully",
                 icon: "success"
             })
@@ -47,6 +54,16 @@ const RegisterForm = () => {
 
 
     }
+
+    const handleChange = (event) => {
+        const {name, value} = event.target;
+        setFormData(prevState => ({
+            ...prevState,
+            [name]: value,
+        }))
+
+    }
+
     return (
         <div className="register-form">
             <Toaster />
@@ -55,31 +72,45 @@ const RegisterForm = () => {
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label>Username</label>
-                    <input required type="text"
-                           className="form-control"
-                           placeholder="Username"
-                           onChange={(e) => setUsername(e.target.value)}
+                    <input
+                        required type="text"
+                        className="form-control"
+                        placeholder="Username"
+                        name={"username"}
+                        value={formData.username}
+                        onChange={handleChange}
                     />
                 </div>
 
                 <div className="form-group">
                     <label>Email</label>
-                    <input required type="email" className="form-control" placeholder="Email" onChange={
-                        (e) => setEmail(e.target.value)
-                    } />
+                    <input
+                        required type="email"
+                        className="form-control"
+                        placeholder="Email"
+                        name={"email"}
+                        value={formData.email}
+                        onChange={handleChange}
+                    />
                 </div>
 
                 <div className="form-group">
                     <label>Password</label>
-                    <input required type="password"  className="form-control" placeholder="Password"
-                     onChange={(e) =>{
-                            setPassword(e.target.value)}
-                    } />
+                    <input
+                        required type="password"
+                        className="form-control"
+                        placeholder="Password"
+                        name={"password"}
+                        value={formData.password}
+                        onChange={handleChange}
+                    />
                 </div>
 
                 <p className="description">The password should be at least eight characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like ! " ? $ % ^ & )</p>
 
-                <button type="submit">Register</button>
+                <button type="submit">
+                    Register
+                </button>
             </form>
         </div>
     )

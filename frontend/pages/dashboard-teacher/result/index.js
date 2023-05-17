@@ -37,7 +37,7 @@ const Results = () => {
               <tr>
                 <th>Serial No.</th>
                 <th>Course Name</th>
-                <th>View Details</th>+
+                <th>View Details</th>
               </tr>
             </thead>
 

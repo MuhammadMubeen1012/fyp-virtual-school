@@ -77,34 +77,34 @@ const RightSideTeacher = () => {
                     <div className="updates">
                         <div className="update">
                             <div className="profile-photo">
-                                <h3>- UX</h3>
+                                <h3>- A</h3>
                             </div>
 
                             <div className="message">
-                                <p>Assignment due 20 March</p>
-                                <small className="text-muted">2 Minutes Ago</small>
+                                <p>Announcement 01</p>
+                                <small className="text-muted">1 Day Ago</small>
                             </div>
                         </div>
 
                         <div className="update">
                             <div className="profile-photo">
-                                <h3>- SEO</h3>
+                                <h3>- A</h3>
                             </div>
 
                             <div className="message">
-                                <p>Assignment due 21 March</p>
-                                <small className="text-muted">2 Minutes Ago</small>
+                                <p>Announcement 02</p>
+                                <small className="text-muted">2 Days Ago</small>
                             </div>
                         </div>
 
                         <div className="update">
                             <div className="profile-photo">
-                                <h3>- SE</h3>
+                                <h3>- A</h3>
                             </div>
 
                             <div className="message">
-                                <p>Assignment due 25 March</p>
-                                <small className="text-muted">2 Minutes Ago</small>
+                                <p>Announcement 03</p>
+                                <small className="text-muted">2 Days Ago</small>
                             </div>
                         </div>
                     </div>

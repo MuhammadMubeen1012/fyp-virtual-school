@@ -16,6 +16,8 @@ import {
     deleteQuiz, getLessons
 } from "../../../../../components/Controllers/CourseController";
 import Link from "next/link";
+import swal from "@sweetalert/with-react";
+import {set} from "@cloudinary/url-gen/actions/variable";
 
 
 const Index = () => {
@@ -203,16 +205,36 @@ const Index = () => {
                     <Modal.Body>
                         {modal.item === 1 ? (<div>
                             {/* Content Modal */}
-                            <ContentModal lessonId={lessonLink} url={router.asPath}/>
+                            <ContentModal
+                                lessonId={lessonLink}
+                                url={router.asPath}
+                                modal={modal}
+                                setModal={setModal}
+                            />
                         </div>) : modal.item === 2 ? (<div>
                             {/* Event Modal */}
-                            <EventModal lessonId={lessonLink}/>
+                            <EventModal
+                                lessonId={lessonLink}
+                                url={router.asPath}
+                                modal={modal}
+                                setModal={setModal}
+                            />
                         </div>) : modal.item === 3 ? (<div className="">
                             {/* Assignments Modal */}
-                            <AssignmentModal lessonId={lessonLink}/>
+                            <AssignmentModal
+                                lessonId={lessonLink}
+                                url={router.asPath}
+                                modal={modal}
+                                setModal={setModal}
+                            />
                         </div>) : modal.item === 4 ? (<div className="">
                             {/*  Quiz Modal  */}
-                            <QuizModal lessonId={lessonLink}/>
+                            <QuizModal
+                                lessonId={lessonLink}
+                                url={router.asPath}
+                                modal={modal}
+                                setModal={setModal}
+                            />
                         </div>) : ("")}
                     </Modal.Body>
                 </Modal>
@@ -296,59 +318,7 @@ const Index = () => {
         {/* =================  End Of Main  ================== */}
 
 
-        {/*/!* ============== start of Right side ======================== *!/*/}
-        {/*<div className="right">*/}
-        {/*    <div className="profile">*/}
-        {/*        <div className="info">*/}
-        {/*            <p>*/}
-        {/*                Hey, <b>Teacher</b>*/}
-        {/*            </p>*/}
-        {/*        </div>*/}
 
-        {/*        <div className="profile-photo"></div>*/}
-        {/*    </div>*/}
-
-        {/*    /!*====================== Start of Recent Updates ==================== *!/*/}
-        {/*    <div className="recent-updates">*/}
-        {/*        <h2>Notice Board</h2>*/}
-        {/*        <div className="updates">*/}
-        {/*            <div className="update">*/}
-        {/*                <div className="profile-photo">*/}
-        {/*                    <h3>- UX</h3>*/}
-        {/*                </div>*/}
-
-        {/*                <div className="message">*/}
-        {/*                    <p>Assignment due 20 March</p>*/}
-        {/*                    <small className="text-muted">2 Minutes Ago</small>*/}
-        {/*                </div>*/}
-        {/*            </div>*/}
-
-        {/*            <div className="update">*/}
-        {/*                <div className="profile-photo">*/}
-        {/*                    <h3>- SEO</h3>*/}
-        {/*                </div>*/}
-
-        {/*                <div className="message">*/}
-        {/*                    <p>Assignment due 21 March</p>*/}
-        {/*                    <small className="text-muted">2 Minutes Ago</small>*/}
-        {/*                </div>*/}
-        {/*            </div>*/}
-
-        {/*            <div className="update">*/}
-        {/*                <div className="profile-photo">*/}
-        {/*                    <h3>- SE</h3>*/}
-        {/*                </div>*/}
-
-        {/*                <div className="message">*/}
-        {/*                    <p>Assignment due 25 March</p>*/}
-        {/*                    <small className="text-muted">2 Minutes Ago</small>*/}
-        {/*                </div>*/}
-        {/*            </div>*/}
-        {/*        </div>*/}
-        {/*    </div>*/}
-        {/*    /!*====================== End of Recent Updates ====================== *!/*/}
-        {/*</div>*/}
-        {/*/!*============= End of left Side ============================= *!/*/}
     </LayoutTeacher>);
 };
 
@@ -356,7 +326,7 @@ export default Index;
 
 
 // ================================== Modals for Creating Events  ==============================================
-export function ContentModal({lessonId, url}) {
+export function ContentModal({lessonId, url, setModal}) {
     const submitHandler = (e) => {
         e.preventDefault();
         const data = {
@@ -364,8 +334,17 @@ export function ContentModal({lessonId, url}) {
         };
         addNewContent(lessonId, data).then(r => {
             console.log(r)
-            window.location.href = url
-// console.log(url)
+
+            setModal({item: 0, active: false})
+            swal({
+                title: "Added Successfully",
+                icon: "success",
+            }).then(res => {
+                if(res){
+                    window.location.href = url;
+                }
+            })
+
         })
         console.log(data)
 
@@ -404,7 +383,7 @@ export function ContentModal({lessonId, url}) {
 }
 
 
-export function EventModal({lessonId}) {
+export function EventModal({lessonId, setModal, url}) {
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -416,7 +395,17 @@ export function EventModal({lessonId}) {
             eventPassword: e.target.eventPassword.value,
             eventLink: e.target.eventLink.value,
         };
-        addNewEvent(lessonId, data).then(r => console.log(r))
+        addNewEvent(lessonId, data).then(res => {
+            setModal({item: 1, active: false})
+            swal({
+                title: "Added Successfully",
+                icon: "success",
+            }).then(res => {
+                if(res){
+                  window.location.href = url;
+                }
+            })
+        })
         console.log(data)
     }
     return (<>
@@ -510,7 +499,7 @@ export function EventModal({lessonId}) {
 }
 
 
-export function AssignmentModal({lessonId}) {
+export function AssignmentModal({lessonId, url, setModal}) {
     const submitHandler = (e) => {
         e.preventDefault();
         const data = {
@@ -521,8 +510,20 @@ export function AssignmentModal({lessonId}) {
             deadLine: e.target.deadline.value,
             totalMarks: e.target.marks.value,
         };
-        addNewAssignment(lessonId, data).then(r => console.log(r))
-        console.log(data)
+        addNewAssignment(lessonId, data).then(r => {
+
+            setModal({item: 2, active: false})
+            swal({
+                title: "Added Successfully",
+                icon: "success",
+            }).then(res => {
+                if(res){
+                    window.location.href = url;
+                }
+            })
+
+        })
+
 
     }
 
@@ -599,7 +600,7 @@ export function AssignmentModal({lessonId}) {
 }
 
 
-export function QuizModal({lessonId}) {
+export function QuizModal({lessonId, url, setModal}) {
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -612,7 +613,17 @@ export function QuizModal({lessonId}) {
             startTime: startTime,
             duration: duration,
         };
-        addNewQuiz(lessonId, data).then(r => console.log(r))
+        addNewQuiz(lessonId, data).then(r => {
+            setModal({item: 2, active: false})
+            swal({
+                title: "Added Successfully",
+                icon: "success",
+            }).then(res => {
+                if(res){
+                    window.location.href = url;
+                }
+            })
+        })
         console.log(data)
 
     }

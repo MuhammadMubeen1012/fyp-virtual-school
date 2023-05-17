@@ -6,13 +6,15 @@ import toast, {Toaster} from "react-hot-toast";
 import {Button, Modal} from "react-bootstrap";
 import swal from "@sweetalert/with-react";
 import Cookies from "js-cookie";
+import {useRouter} from "next/router";
 
 const QuizTeacher = (props) => {
 
+    const router = useRouter();
     const [correctAnswers, setCorrectAnswers] = useState(0);
     const [answers, setAnswers] = useState([]);
     const [showModal, setShowModal] = useState(false);
-
+    let data = {}
     useEffect(() => {
 
     }, [answers, correctAnswers]);
@@ -32,15 +34,15 @@ const QuizTeacher = (props) => {
         console.log(correctAnswers)
 
         console.log(answers);
-
-
+        data = { answers: answers}
+        console.log(data)
         if (correctAnswers > 1){
 
             swal({
                 text: "Test Pass",
                 buttons: {
                     test: {
-                        text: "Take Test",
+                        text: "Ok",
                         value: "test",
                     }
                 },
@@ -54,7 +56,7 @@ const QuizTeacher = (props) => {
                 .then(value => {
                     switch(value){
                         case "test":
-                            router.push("/dashboard-teacher");
+                            // router.push("/dashboard-teacher");
                             break;
 
                         default:
@@ -77,7 +79,7 @@ const QuizTeacher = (props) => {
         }
 
         try{
-            const res = await axios.post('http://localhost:7000/api/v1/admission/teacher/submit/test', dummyData,{
+            const res = await axios.post('http://localhost:7000/api/v1/admission/teacher/submit/test', data,{
                 headers: {
                     'Content-Type': 'application/json',
                     'Access-Control-Allow-Origin': '*',
