@@ -135,7 +135,7 @@ exports.submitAndAssessTeacherTest = catchAsyncError(async (req, res, next) => {
     }
   }
 
-  if (correctAnswer >= 7) {
+  if (correctAnswer >= 1) {
     //who is logged in
     const user = await User.findOne(req.user._id);
 
@@ -154,7 +154,7 @@ exports.submitAndAssessTeacherTest = catchAsyncError(async (req, res, next) => {
       user,
     });
   } else {
-    res.json(400).json({
+    res.json(200).json({
       success: false,
       message: "You failed! Please try again later",
     });

@@ -77,7 +77,7 @@ const RightSideStudent = () => {
                 <div className="profile">
                     <div className="info">
                         <p>
-                            Hey, <b>Teacher</b>
+                            Hey, <b>Student</b>
                         </p>
                     </div>
 

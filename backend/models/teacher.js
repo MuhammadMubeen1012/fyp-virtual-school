@@ -22,92 +22,92 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 
 const teacherAdmissionSchema = new mongoose.Schema({
-  //properties (firstname,lastname,fathername,age,phonenumber,fatherNIC, personal NIC, class selection, courseSelection,b-formphoto,personalphoto, LastdegreeCertificates)
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "user",
-    required: true,
-  },
-  firstName: {
-    type: String,
-    required: [true, "Please enter your first name"],
-  },
-  lastName: {
-    type: String,
-    required: [true, "Please enter your last name"],
-  },
-  fatherName: {
-    type: String,
-    required: [true, "Please enter your father name"],
-  },
-  age: {
-    type: Number,
-    required: [true, "Please enter your age"],
-  },
-  phoneNumber: {
-    type: Number,
-    required: [true, "Please enter your phone number"],
-  },
-  personalNIC: {
-    type: Number,
-    required: [true, "Please enter your personal NIC number"],
-  },
+    //properties (firstname,lastname,fathername,age,phonenumber,fatherNIC, personal NIC, class selection, courseSelection,b-formphoto,personalphoto, LastdegreeCertificates)
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "user",
+        required: true,
+    },
+    firstName: {
+        type: String,
+        required: [true, "Please enter your first name"],
+    },
+    lastName: {
+        type: String,
+        required: [true, "Please enter your last name"],
+    },
+    fatherName: {
+        type: String,
+        required: [true, "Please enter your father name"],
+    },
+    age: {
+        type: Number,
+        required: [true, "Please enter your age"],
+    },
+    phoneNumber: {
+        type: Number,
+        required: [true, "Please enter your phone number"],
+    },
+    personalNIC: {
+        type: Number,
+        required: [true, "Please enter your personal NIC number"],
+    },
 
-  fatherNIC: {
-    type: Number,
-    required: [true, "Please enter your father's NIC number"],
-  },
+    fatherNIC: {
+        type: Number,
+        required: [true, "Please enter your father's NIC number"],
+    },
 
-  classroom: {
-    type: [mongoose.Schema.Types.ObjectId],
-    required: [true, "Please select class you want to teach in"],
-  },
-  courses: {
-    type: [mongoose.Schema.Types.ObjectId],
-    required: [true, "Please select max three courses you want to teach"],
-    // enum: {
-    //   // predefined courses
-    //   values: ["English", "Urdu", "Pakistan Studies", "Computer", "Maths"],
-    //   message: "Please select minimum 3 course for teaching",
-    // },
-  },
-  bForm: {
-    public_id: {
-      type: String,
-      required: true,
+    classroom: {
+        type: [mongoose.Schema.Types.ObjectId],
+        required: [true, "Please select class you want to teach in"],
     },
-    url: {
-      type: String,
-      required: true,
+    courses: {
+        type: [mongoose.Schema.Types.ObjectId],
+        required: [true, "Please select max three courses you want to teach"],
+        // enum: {
+        //   // predefined courses
+        //   values: ["English", "Urdu", "Pakistan Studies", "Computer", "Maths"],
+        //   message: "Please select minimum 3 course for teaching",
+        // },
     },
-  },
-  photo: {
-    public_id: {
-      type: String,
-      required: true,
+    bForm: {
+        public_id: {
+            type: String,
+            required: true,
+        },
+        url: {
+            type: String,
+            required: true,
+        },
     },
-    url: {
-      type: String,
-      required: true,
+    photo: {
+        public_id: {
+            type: String,
+            required: true,
+        },
+        url: {
+            type: String,
+            required: true,
+        },
     },
-  },
-  degreeProof: {
-    public_id: {
-      type: String,
-      required: true,
+    degreeProof: {
+        public_id: {
+            type: String,
+            required: true,
+        },
+        url: {
+            type: String,
+            required: true,
+        },
     },
-    url: {
-      type: String,
-      required: true,
+    testResult: {
+        type: Number,
     },
-  },
-  testResult: {
-    type: Number,
-  },
-  //to be determined
-  /**
-    id, isWithDrawn, isBlocked, dateAdmitted, class and course relationship
-   */
+    //to be determined
+    /**
+     id, isWithDrawn, isBlocked, dateAdmitted, class and course relationship
+     */
 });
 
 module.exports = mongoose.model("teacher", teacherAdmissionSchema);

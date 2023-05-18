@@ -36,36 +36,37 @@ const QuizTeacher = (props) => {
         console.log(answers);
         data = { answers: answers}
         console.log(data)
-        if (correctAnswers > 1){
 
-            swal({
-                text: "Test Pass",
-                buttons: {
-                    test: {
-                        text: "Ok",
-                        value: "test",
-                    }
-                },
-                content: (
-                    <div>
+        // if (correctAnswers > 1){
+        //
+        //     swal({
+        //         text: "Test Pass",
+        //         buttons: {
+        //             test: {
+        //                 text: "Ok",
+        //                 value: "test",
+        //             }
+        //         },
+        //         content: (
+        //             <div>
+        //
+        //                 <p>Test Pass</p>
+        //             </div>
+        //         )
+        //     })
+        //         .then(value => {
+        //             switch(value){
+        //                 case "test":
+        //                     // router.push("/dashboard-teacher");
+        //                     break;
+        //
+        //                 default:
+        //                     swal.close();
+        //
+        //             }
+        //         })
 
-                        <p>Test Pass</p>
-                    </div>
-                )
-            })
-                .then(value => {
-                    switch(value){
-                        case "test":
-                            // router.push("/dashboard-teacher");
-                            break;
-
-                        default:
-                            swal.close();
-
-                    }
-                })
-
-        }
+        //}
 
         // post request will be here.
         axios.defaults.baseURL = 'http://localhost:3000';
@@ -74,9 +75,9 @@ const QuizTeacher = (props) => {
         axios.defaults.headers.post['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept';
         axios.defaults.headers.post['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS';
 
-        const dummyData = {
-            "answers": ["Option01","Option01","Option01","Option01","Option01","Option01","Option01","Option01","Option01","Option01"]
-        }
+        // const dummyData = {
+        //     "answers": ["Option01","Option01","Option01","Option01","Option01","Option01","Option01","Option01","Option01","Option01"]
+        // }
 
         try{
             const res = await axios.post('http://localhost:7000/api/v1/admission/teacher/submit/test', data,{
@@ -87,9 +88,26 @@ const QuizTeacher = (props) => {
                 }
             });
 
-            console.log(res);
-            console.log("Registered Successfully");
-            toast.success("Registered Successfully");
+            if(res) {
+                console.log(res);
+                console.log("Registered Successfully");
+                swal({
+                    title: "Registered Successfully",
+                    icon: "success"
+                }).then(res => {
+                    if (res) {
+                        router.push("/login")
+                    }
+                })
+            }
+
+            // } else {
+            //     console.log(res);
+            //     console.log("Not Registered Successfully");
+            //     // toast.success("Try Again");
+            //     // window.location.reload();
+            // }
+
 
         }catch (error) {
             console.log(error);
@@ -138,10 +156,9 @@ const QuizTeacher = (props) => {
                             <div  style={{ display:"flex"}} className={" justify-content-center "}>
 
                                 <button type="submit" className={"default-btn"}>
-                                    {/*<a className={"default-btn text-center "} href={"/dashboard-student"}>*/}
+
                                         <i className="flaticon-checkmark"></i>
-                                    {/*    Submit*/}
-                                    {/*</a>*/}
+
 
                                     Submit
                                 </button>

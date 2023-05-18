@@ -66,7 +66,7 @@ const QuizStudent = () => {
             <div className="container mtb-100">
                 <div style={{ display: "flex", justifyContent: "center"}} className="row align-items-center justify-content-center">
                     <div  className="col-12">
-                        <h1 className={"mx-auto text-center"}>Teacher's Admission Quiz</h1>
+                        <h1 className={"mx-auto text-center"}>Student's Admission Quiz</h1>
 
                         <form action="" onSubmit={handleSubmit}>
 
@@ -95,7 +95,7 @@ const QuizStudent = () => {
                             <div  style={{ display:"flex"}} className={" justify-content-center "}>
 
                                 <button type="submit" className={"default-btn"}>
-                                    {/*<a className={"default-btn text-center "} href={"/dashboard-student"}>*/}
+
                                     <i className="flaticon-checkmark"></i>
                                     {/*    Submit*/}
                                     {/*</a>*/}

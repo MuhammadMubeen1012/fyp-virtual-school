@@ -9,21 +9,18 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-    maxLength: [20, "You cannot exceed to 20 characters"],
   },
   email: {
     type: String,
     required: true,
     trim: true,
     unique: true,
-    validate: [validator.isEmail, "Please enter a valid email address"],
   },
   password: {
     type: String,
     required: true,
     trim: true,
     select: false,
-    minLength: [8, "Your password must be longer than 8 characters"],
   },
   role: {
     type: String,

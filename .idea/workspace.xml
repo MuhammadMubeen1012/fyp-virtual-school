@@ -6,14 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="d9b86c9f-0b89-4563-ba11-369d16e7ec77" name="Changes" comment="delete event, assignment, quiz">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controllers/admissionController.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controllers/admissionController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/data/admissionTestData.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/data/admissionTestData.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/models/teacher.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/teacher.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/models/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/components/Admission/StudentForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/components/Admission/StudentForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/components/Admission/TeacherForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/components/Admission/TeacherForm.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/components/Dashboard/RightSide/RightSideStudent.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/components/Dashboard/RightSide/RightSideStudent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/components/Dashboard/RightSide/RightSideTeacher.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/components/Dashboard/RightSide/RightSideTeacher.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/components/ProfileAuthentication/RegisterForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/components/ProfileAuthentication/RegisterForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/courses/course/[slug].js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/courses/course/[slug].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/courses/course/lesson/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/courses/course/lesson/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/result/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/result/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/quiz-student.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/quiz-student.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/pages/quiz-teacher.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/quiz-teacher.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/quiz.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -177,7 +179,7 @@
       <workItem from="1683826176838" duration="32000" />
       <workItem from="1683994578992" duration="3711000" />
       <workItem from="1684039990841" duration="28428000" />
-      <workItem from="1684150900485" duration="52248000" />
+      <workItem from="1684150900485" duration="59532000" />
     </task>
     <task id="LOCAL-00001" summary="Done Teacher Dashboard">
       <created>1683225338573</created>

@@ -42,30 +42,30 @@ const TeacherForm = () => {
 
     const { _id } = JSON.parse(localStorage.getItem("user"));
 
-    const dummyData = {
-      user: _id,
-      firstName: "Muhammad",
-      lastName: "Mubeen",
-      fatherName: "Yaseen",
-      age: 28,
-      phoneNumber: 93151515115,
-      personalNIC: 4550400000000,
-      fatherNIC: 4550400000000,
-      class: 1,
-      course: ["English", "Urdu", "Pakistan Studies"],
-      bForm: {
-        public_id: "products/dsvbpny402gelwugv2le",
-        url: "https://res.cloudinary.com/bookit/image/upload/v1608062030/products/dsvbpny402gelwugv2le.jpg",
-      },
-      photo: {
-        public_id: "products/dsvbpny402gelwugv2le",
-        url: "https://res.cloudinary.com/bookit/image/upload/v1608062030/products/dsvbpny402gelwugv2le.jpg",
-      },
-      degreeProof: {
-        public_id: "products/dsvbpny402gelwugv2le",
-        url: "https://res.cloudinary.com/bookit/image/upload/v1608062030/products/dsvbpny402gelwugv2le.jpg",
-      },
-    };
+    // const dummyData = {
+    //   user: _id,
+    //   firstName: "Muhammad",
+    //   lastName: "Mubeen",
+    //   fatherName: "Yaseen",
+    //   age: 28,
+    //   phoneNumber: 93151515115,
+    //   personalNIC: 4550400000000,
+    //   fatherNIC: 4550400000000,
+    //   class: 1,
+    //   course: ["English", "Urdu", "Pakistan Studies"],
+    //   bForm: {
+    //     public_id: "products/dsvbpny402gelwugv2le",
+    //     url: "https://res.cloudinary.com/bookit/image/upload/v1608062030/products/dsvbpny402gelwugv2le.jpg",
+    //   },
+    //   photo: {
+    //     public_id: "products/dsvbpny402gelwugv2le",
+    //     url: "https://res.cloudinary.com/bookit/image/upload/v1608062030/products/dsvbpny402gelwugv2le.jpg",
+    //   },
+    //   degreeProof: {
+    //     public_id: "products/dsvbpny402gelwugv2le",
+    //     url: "https://res.cloudinary.com/bookit/image/upload/v1608062030/products/dsvbpny402gelwugv2le.jpg",
+    //   },
+    // };
     const data = {
       user: _id,
       firstName: firstName,
@@ -91,11 +91,12 @@ const TeacherForm = () => {
       },
     };
 
+    console.log(data)
     try {
       const res = axios
         .post(
           "http://localhost:7000/api/v1/admission/teacher/data",
-          dummyData,
+          data,
           {
             headers: {
               "Content-Type": "application/json",
@@ -135,7 +136,7 @@ const TeacherForm = () => {
     }).then((value) => {
       switch (value) {
         case "test":
-          router.push("/quiz");
+          router.push("/quiz-teacher");
           break;
 
         default:
@@ -342,36 +343,16 @@ const TeacherForm = () => {
             <option className={"option nice-select"} value="">
               ___Select Class___
             </option>
-            <option className={"option"} value="1">
-              Class 1
-            </option>
-            <option className={"option"} value="2">
-              Class 2
-            </option>
-            <option className={"option"} value="3">
-              Class 3
-            </option>
-            <option className={"option"} value="4">
-              Class 4
-            </option>
-            <option className={"option"} value="5">
-              Class 5
-            </option>
-            <option className={"option"} value="6">
+            <option className={"option"} value="6433b73ed47c769ed165ca0d">
               Class 6
             </option>
-            <option className={"option"} value="7">
+            <option className={"option"} value="645121f5e1bcdf8c2a93b94c">
               Class 7
             </option>
-            <option className={"option"} value="8">
+            <option className={"option"} value="64512204e1bcdf8c2a93b950">
               Class 8
             </option>
-            <option className={"option"} value="9">
-              Class 9
-            </option>
-            <option className={"option"} value="10">
-              Class 10
-            </option>
+
           </Form.Select>
           <br />
 

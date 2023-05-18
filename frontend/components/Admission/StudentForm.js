@@ -102,38 +102,38 @@ const StudentForm = () => {
         }
 
 
-        // swal({
-        //     text: "Student's Admission Test",
-        //     buttons: {
-        //         test: {
-        //             text: "Take Test",
-        //             value: "test",
-        //         }
-        //     },
-        //     content: (
-        //         <div>
-        //             <ol style={{textAlign: "left"}}>
-        //                 <li>You will have 15 mins for the quiz.</li>
-        //                 <li>You can't exit from Quiz while you're playing.</li>
-        //                 <li>Each Question carry equal marks.</li>
-        //             </ol>
-        //
-        //
-        //
-        //         </div>
-        //     )
-        // })
-        //     .then(value => {
-        //         switch(value){
-        //             case "test":
-        //                 router.push("/quiz");
-        //                 break;
-        //
-        //             default:
-        //                 swal.close();
-        //
-        //         }
-        //     })
+        swal({
+            text: "Student's Admission Test",
+            buttons: {
+                test: {
+                    text: "Take Test",
+                    value: "test",
+                }
+            },
+            content: (
+                <div>
+                    <ol style={{textAlign: "left"}}>
+                        <li>You will have 15 mins for the quiz.</li>
+                        <li>You can't exit from Quiz while you're playing.</li>
+                        <li>Each Question carry equal marks.</li>
+                    </ol>
+
+
+
+                </div>
+            )
+        })
+            .then(value => {
+                switch(value){
+                    case "test":
+                        router.push("/quiz-student");
+                        break;
+
+                    default:
+                        swal.close();
+
+                }
+            })
 
     }
 
