@@ -15,8 +15,8 @@ const QuizStudent = () => {
 
         setAnswers(prevState => ([...prevState, value]));
 
-        if (value === answer){
-            setCorrectAnswers( correctAnswers + 1 );
+        if (value === answer) {
+            setCorrectAnswers(correctAnswers + 1);
         }
     }
 
@@ -35,11 +35,11 @@ const QuizStudent = () => {
         axios.defaults.headers.post['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS';
 
         const dummyData = {
-            "answers": ["Option01","Option01","Option01","Option01","Option01","Option01","Option01","Option01","Option01","Option01"]
+            "answers": ["Option01", "Option01", "Option01", "Option01", "Option01", "Option01", "Option01", "Option01", "Option01", "Option01"]
         }
 
-        try{
-            const res = await axios.post('http://localhost:7000/api/v1/admission/student/submit/test', dummyData,{
+        try {
+            const res = await axios.post('http://localhost:7000/api/v1/admission/student/submit/test', dummyData, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Access-Control-Allow-Origin': '*'
@@ -50,10 +50,9 @@ const QuizStudent = () => {
             console.log("Registered Successfully");
             toast.success("Registered Successfully");
 
-        }catch (error) {
+        } catch (error) {
             console.log(error);
         }
-
 
 
     }
@@ -61,16 +60,15 @@ const QuizStudent = () => {
 
     return (
         <div>
-            <Navbar />
+            <Navbar/>
 
             <div className="container mtb-100">
-                <div style={{ display: "flex", justifyContent: "center"}} className="row align-items-center justify-content-center">
-                    <div  className="col-12">
+                <div style={{display: "flex", justifyContent: "center"}}
+                     className="row align-items-center justify-content-center">
+                    <div className="col-12">
                         <h1 className={"mx-auto text-center"}>Student's Admission Quiz</h1>
 
                         <form action="" onSubmit={handleSubmit}>
-
-
                             {
                                 questions.map((question, index) => (
                                     <div className={"m-4"} key={index}>
@@ -79,9 +77,9 @@ const QuizStudent = () => {
                                             question.questionOptions.map((option, idx) => (
                                                 <div key={idx}>
                                                     <input type="radio"
-                                                           onChange={(event) => handleRadio(event, question, question.questionAnswer) }
+                                                           onChange={(event) => handleRadio(event, question, question.questionAnswer)}
                                                            value={option}
-                                                           name={`option-${index}`} id={`option-${index}-${idx}`}  />
+                                                           name={`option-${index}`} id={`option-${index}-${idx}`}/>
                                                     <label htmlFor={`option-${index}-${idx}`}>{option}</label>
                                                 </div>
                                             ))
@@ -92,14 +90,10 @@ const QuizStudent = () => {
                                 ))
                             }
 
-                            <div  style={{ display:"flex"}} className={" justify-content-center "}>
+                            <div style={{display: "flex"}} className={" justify-content-center "}>
 
                                 <button type="submit" className={"default-btn"}>
-
                                     <i className="flaticon-checkmark"></i>
-                                    {/*    Submit*/}
-                                    {/*</a>*/}
-
                                     Submit
                                 </button>
 

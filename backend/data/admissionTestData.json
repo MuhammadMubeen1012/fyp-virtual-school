@@ -21,19 +21,31 @@
   },
   {
     "question": "What is the capital of Pakistan?",
-    "questionOptions": ["Islamabad", "Karachi", "Lahore"],
+    "questionOptions": [
+      "Islamabad",
+      "Karachi",
+      "Lahore"
+    ],
     "questionAnswer": "Islamabad",
     "isCorrect": true
   },
   {
     "question": "What is the national language of Pakistan?",
-    "questionOptions": ["Urdu", "Punjabi", "Sindhi"],
+    "questionOptions": [
+      "Urdu",
+      "Punjabi",
+      "Sindhi"
+    ],
     "questionAnswer": "Urdu",
     "isCorrect": true
   },
   {
     "question": "What is the national flower of Pakistan?",
-    "questionOptions": ["Jasmine", "Rose", "Lotus"],
+    "questionOptions": [
+      "Jasmine",
+      "Rose",
+      "Lotus"
+    ],
     "questionAnswer": "Jasmine",
     "isCorrect": true
   }

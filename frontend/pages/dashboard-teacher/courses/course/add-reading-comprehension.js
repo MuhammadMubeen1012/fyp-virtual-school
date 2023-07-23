@@ -38,18 +38,27 @@ const AddQuizQuestions = () => {
             {/*=============== Start of main ================= */}
             <main>
 
-                <h1>Add Questions</h1>
+                <h1>Add Reading Comprehension</h1>
                 <br/>
 
                 <div style={{
                     display: "flex",
                     justifyContent: "space-between",
                 }}>
-                    <Button
-                        onClick={() => setModal(true)}
-                    >
-                        Add Question
-                    </Button>
+                    <div style={{display: "flex", gap: "0.5rem"}}>
+                        <Button
+                            onClick={() => setModal(true)}
+                        >
+                            Add Passage
+                        </Button>
+                        <Button
+                            onClick={() => setModal(true)}
+                        >
+                            Add Question
+                        </Button>
+                    </div>
+
+
 
                     <Button>
                         Submit

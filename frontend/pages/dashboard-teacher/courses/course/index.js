@@ -5,6 +5,7 @@ import {Router, useRouter} from "next/router";
 import {addLesson, deleteLesson, getLessons, updateLesson} from "../../../../components/Controllers/CourseController";
 import {Button, Form, Modal} from "react-bootstrap";
 import {AssignmentModal, ContentModal, EventModal, QuizModal} from "./[slug]";
+import swal from "@sweetalert/with-react";
 
 const Index = (props) => {
     const router = useRouter();
@@ -77,13 +78,6 @@ const Index = (props) => {
                                         <td>{index + 1}</td>
                                         <td>{lesson.name}</td>
                                         <td>
-                                            {/* href={{
-                                            pathname: `/dashboard-teacher/courses/course`,
-                                            query: {
-                                                courseId: course._id,
-                                                courseName: course.name
-                                            }
-                                        }}*/}
                                             <Link
                                                 href={{
                                                     pathname: `/dashboard-teacher/courses/course/lesson/`,
@@ -94,7 +88,9 @@ const Index = (props) => {
                                                         lessonId: lesson._id
                                                     }
                                                 }}
-                                                className="primary ">Open</Link>
+                                                className="primary ">
+                                                Open
+                                            </Link>
                                         </td>
                                         <td>
                                             <Button
@@ -108,12 +104,30 @@ const Index = (props) => {
                                             <Button className={"m-1 btn-danger"} onClick={
                                                 (e) => {
                                                     e.preventDefault();
-                                                    deleteLesson(lesson._id).then(r => {
-                                                        console.log(r);
-                                                    })
-                                                    window.location.reload();
+                                                    // swal confirmation message
+                                                    swal({
+                                                        title: "Are you sure?",
+                                                        text: "You want to delete this user?",
+                                                        icon: "warning",
+                                                        dangerMode: true,
+                                                    }).then((value) => {
+                                                        switch (value) {
+                                                            case true:
+                                                                deleteLesson(lesson._id).then(r => {
+                                                                    console.log(r);
+                                                                })
+                                                                window.location.reload();
+                                                                break;
+                                                            default:
+                                                                swal.close();
+                                                        }
+
+                                                    });
+
                                                 }
-                                            }>Delete</Button>
+                                            }>
+                                                Delete
+                                            </Button>
                                         </td>
 
 
@@ -166,10 +180,19 @@ export function CreateLesson(props) {
             name: unitName,
             description: unitDescription,
         }
+
         addLesson(props.courseId, lesson).then(r => {
             console.log(r);
-            window.location.reload();
         })
+
+        props.setCreateLessonModal(false);
+
+        swal({
+            title: "Lesson Successfully created",
+            icon: "success",
+        }).then(() => {
+            window.location.reload();
+        });
 
     }
 
@@ -249,9 +272,19 @@ export function EditLesson(props) {
             name: lessonName,
             description: lessonDescription
         }).then(r => console.log(r));
-        window.location.reload();
+        // window.location.reload();
 
+
+        props.setEditLessonModal(false);
+
+        swal({
+            title: "Lesson Successfully Edited",
+            icon: "success",
+        }).then(() => {
+            window.location.reload();
+        });
     }
+
 
     return (
         <div className="">

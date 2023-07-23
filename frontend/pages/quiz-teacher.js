@@ -37,36 +37,6 @@ const QuizTeacher = (props) => {
         data = { answers: answers}
         console.log(data)
 
-        // if (correctAnswers > 1){
-        //
-        //     swal({
-        //         text: "Test Pass",
-        //         buttons: {
-        //             test: {
-        //                 text: "Ok",
-        //                 value: "test",
-        //             }
-        //         },
-        //         content: (
-        //             <div>
-        //
-        //                 <p>Test Pass</p>
-        //             </div>
-        //         )
-        //     })
-        //         .then(value => {
-        //             switch(value){
-        //                 case "test":
-        //                     // router.push("/dashboard-teacher");
-        //                     break;
-        //
-        //                 default:
-        //                     swal.close();
-        //
-        //             }
-        //         })
-
-        //}
 
         // post request will be here.
         axios.defaults.baseURL = 'http://localhost:3000';
@@ -75,9 +45,6 @@ const QuizTeacher = (props) => {
         axios.defaults.headers.post['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept';
         axios.defaults.headers.post['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS';
 
-        // const dummyData = {
-        //     "answers": ["Option01","Option01","Option01","Option01","Option01","Option01","Option01","Option01","Option01","Option01"]
-        // }
 
         try{
             const res = await axios.post('http://localhost:7000/api/v1/admission/teacher/submit/test', data,{
@@ -101,18 +68,10 @@ const QuizTeacher = (props) => {
                 })
             }
 
-            // } else {
-            //     console.log(res);
-            //     console.log("Not Registered Successfully");
-            //     // toast.success("Try Again");
-            //     // window.location.reload();
-            // }
-
 
         }catch (error) {
             console.log(error);
         }
-
 
 
     }
@@ -158,8 +117,6 @@ const QuizTeacher = (props) => {
                                 <button type="submit" className={"default-btn"}>
 
                                         <i className="flaticon-checkmark"></i>
-
-
                                     Submit
                                 </button>
 

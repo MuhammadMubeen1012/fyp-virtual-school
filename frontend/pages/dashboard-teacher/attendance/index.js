@@ -10,7 +10,6 @@ const Attendance = () => {
 
     useEffect(() => {
         getCourses().then(r => setCourses(r.courses));
-
     }, []);
 
     useEffect(() => {
@@ -32,39 +31,39 @@ const Attendance = () => {
 
                     <table>
                         <thead>
-                            <tr>
-                                <th>Serial No.</th>
-                                <th>Course Name</th>
-                                <th>View Details</th>
-                            </tr>
+                        <tr>
+                            <th>Serial No.</th>
+                            <th>Course Name</th>
+                            <th>View Details</th>
+                        </tr>
                         </thead>
 
                         <tbody>
-                            {
-                                courses.map((course, index) => {
-                                    console.log(course)
-                                    return (
-                                        <tr key={index}>
-                                            <td>{index + 1}</td>
-                                            <td>{course.name}</td>
-                                            <Link
-                                                href={{
-                                                    pathname: `/dashboard-teacher/attendance/attendance-details`,
-                                                    query: {
-                                                        courseId: course._id,
-                                                        courseName: course.name,
-                                                        classroomId:course.classroom
+                        {
+                            courses.map((course, index) => {
+                                console.log(course)
+                                return (
+                                    <tr key={index}>
+                                        <td>{index + 1}</td>
+                                        <td>{course.name}</td>
+                                        <Link
+                                            href={{
+                                                pathname: `/dashboard-teacher/attendance/attendance-details`,
+                                                query: {
+                                                    courseId: course._id,
+                                                    courseName: course.name,
+                                                    classroomId: course.classroom
 
-                                                    }
-                                                }}
-                                                className="primary"
-                                            >
-                                                Open
-                                            </Link>
-                                        </tr>
-                                    )
-                                })
-                            }
+                                                }
+                                            }}
+                                            className="primary"
+                                        >
+                                            Open
+                                        </Link>
+                                    </tr>
+                                )
+                            })
+                        }
                         </tbody>
 
                     </table>

@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import swal from "@sweetalert/with-react";
 
 const
     LoginForm = () => {
@@ -13,7 +14,6 @@ const
     const saveToCookie = (token) => {
         const cookieName = "token"
         document.cookie = `${cookieName}=${token}`
-
     }
 
 
@@ -50,8 +50,6 @@ const
                     saveToCookie(token);
 
 
-
-
                     //set token to local storage
                     localStorage.setItem('token', token);
                     localStorage.setItem('user', JSON.stringify(user));
@@ -72,6 +70,14 @@ const
                         }
                     }
                 }
+
+            }).catch(() => {
+                swal({
+                    title: "Invalid Username or Password",
+                    icon: "error",
+                }).then(() => {
+                    window.location.reload();
+                })
 
             })
 

@@ -5,17 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d9b86c9f-0b89-4563-ba11-369d16e7ec77" name="Changes" comment="delete event, assignment, quiz">
+      <change afterPath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/courses/course/add-reading-comprehension.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/controllers/admissionController.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controllers/admissionController.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/data/admissionTestData.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/data/admissionTestData.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/models/teacher.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/teacher.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/models/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/user.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/components/Admission/StudentForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/components/Admission/StudentForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/components/Admission/TeacherForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/components/Admission/TeacherForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/components/Dashboard/RightSide/RightSideStudent.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/components/Dashboard/RightSide/RightSideStudent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/components/ProfileAuthentication/LoginForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/components/ProfileAuthentication/LoginForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-student/exams/exam-details.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-student/exams/exam-details.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-student/exams/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-student/exams/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-student/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-student/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-student/results/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-student/results/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-student/results/result-details.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-student/results/result-details.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/announcements/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/announcements/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/attendance/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/attendance/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/courses/course/[slug].js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/courses/course/[slug].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/courses/course/add-quiz-questions.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/courses/course/add-quiz-questions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/courses/course/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/courses/course/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/courses/course/lesson/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/courses/course/lesson/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/courses/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/courses/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/result/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/dashboard-teacher/result/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/pages/quiz-student.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/quiz-student.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/pages/quiz-teacher.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/pages/quiz-teacher.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/pages/quiz.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,29 +91,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Momin/WebstormProjects/fyp-virtual-school/frontend/pages/dashboard-admin&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\Momin\\AppData\\Local\\JetBrains\\Toolbox\\apps\\WebStorm\\ch-0\\231.8770.64\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RESTKit.sync.cert.Ide": "true",
+    "RESTKit.sync.env.Ide": "true",
+    "RESTKit.sync.requestConfig.Ide": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/Momin/WebstormProjects/fyp-virtual-school/frontend/pages/dashboard-admin",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "yarn",
+    "ts.external.directory.path": "C:\\Users\\Momin\\AppData\\Local\\JetBrains\\Toolbox\\apps\\WebStorm\\ch-0\\231.8770.64\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mongo&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mongo"
     ]
   }
-}</component>
+}]]></component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -180,6 +194,9 @@
       <workItem from="1683994578992" duration="3711000" />
       <workItem from="1684039990841" duration="28428000" />
       <workItem from="1684150900485" duration="59532000" />
+      <workItem from="1684407178721" duration="980000" />
+      <workItem from="1685187714043" duration="1688000" />
+      <workItem from="1689919622924" duration="24016000" />
     </task>
     <task id="LOCAL-00001" summary="Done Teacher Dashboard">
       <created>1683225338573</created>

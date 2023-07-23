@@ -26,7 +26,6 @@ const Index = () => {
 
         <LayoutTeacher>
 
-
             {/*=============== Start of main ================= */}
             <main>
                 <h1>Overview</h1>
@@ -46,14 +45,13 @@ const Index = () => {
                         </thead>
 
                         <tbody>
-                        {loading ? courses.map((res, index) => {
+                        {loading ? courses?.map((res, index) => {
                             const course = res.data.course;
                             return (<tr key={index}>
                                 <td>{course.name}</td>
                                 {course.lessons ? <td>{course.lessons.length}</td> : <td>0</td>}
                                 <td>
                                     <Link
-                                        // href={`/dashboard-teacher/courses/${course._id}`}
                                         href={{
                                             pathname: `/dashboard-teacher/courses/course`,
                                             query: {
@@ -62,7 +60,7 @@ const Index = () => {
                                             }
                                         }}
                                     >
-                                        click
+                                        Open
                                     </Link>
                                 </td>
                             </tr>)
@@ -86,7 +84,7 @@ const Index = () => {
 export default Index;
 
 
-const getCourses = async () => {
+export const getCourses = async () => {
     const teacher = await getTeacher();
     const coursesLinks = teacher.courses;
 

@@ -117,9 +117,6 @@ const StudentForm = () => {
                         <li>You can't exit from Quiz while you're playing.</li>
                         <li>Each Question carry equal marks.</li>
                     </ol>
-
-
-
                 </div>
             )
         })

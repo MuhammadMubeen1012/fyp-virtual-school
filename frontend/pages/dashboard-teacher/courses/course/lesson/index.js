@@ -175,6 +175,9 @@ const Index = () => {
                     <Dropdown.Item onClick={() => setModal({item: 3, active: true})}>
                         Assignment
                     </Dropdown.Item>
+                    <Dropdown.Item onClick={() => setModal({item: 5, active: true})}>
+                        Reading Comprehension
+                    </Dropdown.Item>
                     <Dropdown.Item onClick={() => setModal({item: 4, active: true})}>
                         Quiz
                     </Dropdown.Item>
@@ -260,10 +263,16 @@ const Index = () => {
                     </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
+                    <Nav.Link eventKey="link-5" onClick={() => setEventKey(4)}>
+                        Reading Comprehension
+                    </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
                     <Nav.Link eventKey="link-4" onClick={() => setEventKey(3)}>
                         Quizes
                     </Nav.Link>
                 </Nav.Item>
+
             </Nav>
             {/* =========== Tabs End Here ================  */}
 
@@ -318,7 +327,6 @@ const Index = () => {
         {/* =================  End Of Main  ================== */}
 
 
-
     </LayoutTeacher>);
 };
 
@@ -340,7 +348,7 @@ export function ContentModal({lessonId, url, setModal}) {
                 title: "Added Successfully",
                 icon: "success",
             }).then(res => {
-                if(res){
+                if (res) {
                     window.location.href = url;
                 }
             })
@@ -401,8 +409,8 @@ export function EventModal({lessonId, setModal, url}) {
                 title: "Added Successfully",
                 icon: "success",
             }).then(res => {
-                if(res){
-                  window.location.href = url;
+                if (res) {
+                    window.location.href = url;
                 }
             })
         })
@@ -517,7 +525,7 @@ export function AssignmentModal({lessonId, url, setModal}) {
                 title: "Added Successfully",
                 icon: "success",
             }).then(res => {
-                if(res){
+                if (res) {
                     window.location.href = url;
                 }
             })
@@ -619,7 +627,7 @@ export function QuizModal({lessonId, url, setModal}) {
                 title: "Added Successfully",
                 icon: "success",
             }).then(res => {
-                if(res){
+                if (res) {
                     window.location.href = url;
                 }
             })

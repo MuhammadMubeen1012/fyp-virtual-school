@@ -4,6 +4,7 @@ import {Button, Card, Form, InputGroup, Modal, Nav} from "react-bootstrap";
 import swal from "@sweetalert/with-react";
 import {createAnnouncement, getAnnouncements} from "./announcementController";
 
+
 const Announcement = () => {
 
     const [modal, setModal] = useState(false);
@@ -92,7 +93,6 @@ const Announcement = () => {
 export default Announcement;
 
 
-
 export function AnnouncementModal({modal, setModal, data, setData}){
 
     const handleSubmit = (e) => {
@@ -113,9 +113,7 @@ export function AnnouncementModal({modal, setModal, data, setData}){
                 title: "Error",
                 icon: "error",
             });
-        })
-
-
+        });
 
     }
 

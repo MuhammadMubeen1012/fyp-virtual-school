@@ -89,7 +89,7 @@ exports.submitAndAssessStudentTest = catchAsyncError(async (req, res, next) => {
     }
   }
 
-  if (correctAnswer >= 7) {
+  if (correctAnswer >= 3) {
     //who is logged in
     const user = await User.findOne(req.user._id);
 
@@ -135,7 +135,7 @@ exports.submitAndAssessTeacherTest = catchAsyncError(async (req, res, next) => {
     }
   }
 
-  if (correctAnswer >= 1) {
+  if (correctAnswer >= 3) {
     //who is logged in
     const user = await User.findOne(req.user._id);
 
