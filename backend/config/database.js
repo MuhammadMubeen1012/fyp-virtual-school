@@ -4,7 +4,7 @@ mongoose.set("strictQuery", false);
 
 const connectToDB = async () => {
   try {
-    const con = await mongoose.connect(process.env.DB_LOCAL_URI, {
+    const con = await mongoose.connect(process.env.DB_URI, {
       dbName: "ekschoolDB",
       useNewUrlParser: true,
     });
