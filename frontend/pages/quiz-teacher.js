@@ -13,11 +13,10 @@ const QuizTeacher = (props) => {
     const router = useRouter();
     const [correctAnswers, setCorrectAnswers] = useState(0);
     const [answers, setAnswers] = useState([]);
-    const [showModal, setShowModal] = useState(false);
-    let data = {}
-    useEffect(() => {
 
-    }, [answers, correctAnswers]);
+    let data = {}
+    useEffect(() => {}, [answers, correctAnswers]);
+
 
     const handleRadio = (event, question, answer) => {
         const value = event.target.value;
@@ -31,12 +30,8 @@ const QuizTeacher = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(correctAnswers)
 
-        console.log(answers);
         data = { answers: answers}
-        console.log(data)
-
 
         // post request will be here.
         axios.defaults.baseURL = 'http://localhost:3000';
@@ -56,8 +51,6 @@ const QuizTeacher = (props) => {
             });
 
             if(res) {
-                console.log(res);
-                console.log("Registered Successfully");
                 swal({
                     title: "Registered Successfully",
                     icon: "success"
@@ -81,6 +74,7 @@ const QuizTeacher = (props) => {
         <div>
             <Navbar />
 
+
             <div className="container mtb-100">
                 <Toaster />
                 <div style={{ display: "flex", justifyContent: "center"}} className="row align-items-center justify-content-center">
@@ -89,8 +83,6 @@ const QuizTeacher = (props) => {
                         <h1 className={"mx-auto text-center"}>Teacher's Admission Quiz</h1>
 
                         <form action="" onSubmit={handleSubmit}>
-
-
                             {
                                 questions.map((question, index) => (
                                     <div className={"m-4"} key={index}>
@@ -111,37 +103,18 @@ const QuizTeacher = (props) => {
                                     </div>
                                 ))
                             }
-
                             <div  style={{ display:"flex"}} className={" justify-content-center "}>
-
                                 <button type="submit" className={"default-btn"}>
-
                                         <i className="flaticon-checkmark"></i>
                                     Submit
                                 </button>
-
                             </div>
-
                         </form>
-
-
                     </div>
-
-                    {
-                        correctAnswers > 1 && showModal ?
-                            <>
-
-                            </>
-                            :
-                            <>
-
-                            </>
-                    }
-
-
 
                 </div>
             </div>
+
 
 
         </div>

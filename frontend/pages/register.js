@@ -24,7 +24,6 @@ const ProfileAuthentication = () => {
                             <RegisterForm/>
                         </div>
 
-
                     </div>
                 </div>
             </div>

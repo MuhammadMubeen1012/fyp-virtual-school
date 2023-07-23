@@ -1,14 +1,21 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {questions} from "../data/admissionTestData";
 import Navbar from "../components/_App/Navbar";
 import axios from "axios";
 import toast from "react-hot-toast";
+import {useRouter} from "next/router";
+import Cookies from "js-cookie";
+import swal from "@sweetalert/with-react";
 
 const QuizStudent = () => {
 
 
+    const router = useRouter();
     const [correctAnswers, setCorrectAnswers] = useState(0);
     const [answers, setAnswers] = useState([]);
+
+    let data = {}
+    useEffect(() => {}, [answers, correctAnswers]);
 
     const handleRadio = (event, question, answer) => {
         const value = event.target.value;
@@ -22,10 +29,8 @@ const QuizStudent = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(correctAnswers)
 
-        console.log(answers);
-
+        data = {answers: answers}
 
         // post request will be here.
         axios.defaults.baseURL = 'http://localhost:3000';
@@ -34,21 +39,26 @@ const QuizStudent = () => {
         axios.defaults.headers.post['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept';
         axios.defaults.headers.post['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS';
 
-        const dummyData = {
-            "answers": ["Option01", "Option01", "Option01", "Option01", "Option01", "Option01", "Option01", "Option01", "Option01", "Option01"]
-        }
 
         try {
-            const res = await axios.post('http://localhost:7000/api/v1/admission/student/submit/test', dummyData, {
+            const res = await axios.post('http://localhost:7000/api/v1/admission/student/submit/test', data, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
+                    'Access-Control-Allow-Origin': '*',
+                    'Authorization': `${Cookies.get('token')}`
                 }
             });
 
-            console.log(res);
-            console.log("Registered Successfully");
-            toast.success("Registered Successfully");
+            if(res) {
+                swal({
+                    title: "Registered Successfully",
+                    icon: "success"
+                }).then(res => {
+                    if (res) {
+                        router.push("/login")
+                    }
+                });
+            }
 
         } catch (error) {
             console.log(error);

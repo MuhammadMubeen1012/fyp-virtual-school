@@ -91,7 +91,7 @@ const StudentForm = () => {
             }).then((res) => {
                 console.log(res);
                 console.log("Registered Successfully");
-                toast.success("Registered Successfully");
+                toast.success("Form Submitted Successfully");
             })
 
 

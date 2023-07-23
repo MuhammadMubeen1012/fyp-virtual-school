@@ -2,10 +2,11 @@ import React, {useState} from 'react';
 import toast, {Toaster} from "react-hot-toast";
 import axios from 'axios';
 import swal from "@sweetalert/with-react";
+import router, {useRouter} from "next/router";
 
 const RegisterForm = () => {
 
-
+    const router = useRouter();
     const [formData, setFormData] = useState({
         username: "",
         email: "",
@@ -44,6 +45,10 @@ const RegisterForm = () => {
             swal({
                 title: "Registered Successfully",
                 icon: "success"
+            }).then((value) => {
+                if(value){
+                    router.push("/login");
+                }
             })
 
         }catch (error) {
