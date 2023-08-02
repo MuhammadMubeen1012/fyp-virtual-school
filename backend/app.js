@@ -26,6 +26,7 @@ const quizSubmission = require("./routes/Classroom/quizSubmissionRoutes");
 const assignment = require("./routes/Classroom/assignmentRoutes");
 const assignmentSubmission = require("./routes/Classroom/submissionRoutes");
 const readingComprehension = require("./routes/Classroom/readingComprehensionRoutes");
+const rcSubmission = require("./routes/Classroom/rcSubmissionRoutes")
 const exam = require("./routes/Classroom/examRoutes");
 const examSubmission = require("./routes/Classroom/examSubmissionRoutes");
 const examResult = require("./routes/Classroom/examResultRoutes");
@@ -47,6 +48,7 @@ app.use("/api/v1", quizSubmission);
 app.use("/api/v1", assignment);
 app.use("/api/v1", assignmentSubmission);
 app.use("/api/v1" , readingComprehension)
+app.use("/api/v1" , rcSubmission)
 app.use("/api/v1", exam);
 app.use("/api/v1", examSubmission);
 app.use("/api/v1", examResult);
